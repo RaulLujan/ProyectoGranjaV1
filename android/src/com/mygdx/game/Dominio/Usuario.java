@@ -1,6 +1,7 @@
 package com.mygdx.game.Dominio;
 
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class Usuario {
@@ -10,5 +11,7 @@ public class Usuario {
     private String nombre, apellidos, email, telefono, login, pass;
     private GregorianCalendar fechaNacimiento;
     private Cooperativa cooperativa;
+    private HashMap<GregorianCalendar, TipoAccion> acciones;
+
 
 }
