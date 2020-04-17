@@ -13,6 +13,6 @@ public class AndroidLauncher extends AndroidApplication {
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		initialize(new MainGame(), config);
 
-		//comentario de control para git
+		//comentario de control para Git
 	}
 }
