@@ -8,5 +8,6 @@ public abstract class Infraestructura {
     private String nombre, descripcion ;
     private int mantenimientoSemanal, puntuacion;
     private List<Espacio> espacios;
+    private List<TipoAccion> accionesDisponibles;
 
 }

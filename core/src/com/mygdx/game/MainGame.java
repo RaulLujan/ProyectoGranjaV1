@@ -1,33 +1,63 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Screens.GameScreen;
+import com.mygdx.game.Screens.LoadingScreen;
+import com.mygdx.game.Screens.PreLoadingScreen;
 
-public class MainGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+public class MainGame extends Game {
+
+	private Preferences preferences;
+	private static final String PREFERENCES = "FarmPreferences";
+	private static final String HIGH_SCORE_KEY = "TopScore";
+
+	private SoundFactory soundFactory;
+
+	private Screen gameScreen, loadingScreen, preloadingScreen;
+
+
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		this.soundFactory = new SoundFactory(this);
+		this.gameScreen = new GameScreen(this);
+		this.loadingScreen = new LoadingScreen(this);
+		this.preloadingScreen = new PreLoadingScreen(this);
+
+
+
+
+
+		this.setScreen(gameScreen);
 	}
 
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+
+
+
+
+	// Guardado de preferencias
+	public void savePreferences(int scoreToave){
+		preferences = Gdx.app.getPreferences(PREFERENCES);
+
+		//se añaden las preferencias
+		preferences.putInteger(HIGH_SCORE_KEY, scoreToave);
+		preferences.flush();
+
 	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
+
+	//Obtiene las preferencias
+	public Preferences getPreferences(){
+		preferences = Gdx.app.getPreferences(PREFERENCES);
+
+
+		return preferences;
 	}
 }
