@@ -9,9 +9,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Screens.AnimalsScreen;
+import com.mygdx.game.Screens.FieldScreen;
 import com.mygdx.game.Screens.GameScreen;
 import com.mygdx.game.Screens.LoadingScreen;
+import com.mygdx.game.Screens.MenuScreen;
 import com.mygdx.game.Screens.PreLoadingScreen;
+import com.mygdx.game.Screens.ShopScreen;
+import com.mygdx.game.Screens.StorageScreen;
 
 public class MainGame extends Game {
 
@@ -21,7 +26,8 @@ public class MainGame extends Game {
 
 	private SoundFactory soundFactory;
 
-	private Screen gameScreen, loadingScreen, preloadingScreen;
+	private Screen gameScreen, loadingScreen, preloadingScreen, menuScreen, loginScreen, fieldScreen,
+		shopScreen, storageScreen, animalsScreen;
 
 
 	
@@ -31,7 +37,12 @@ public class MainGame extends Game {
 		this.gameScreen = new GameScreen(this);
 		this.loadingScreen = new LoadingScreen(this);
 		this.preloadingScreen = new PreLoadingScreen(this);
-
+		this.menuScreen = new MenuScreen(this);
+		this.loginScreen = new LoadingScreen(this);
+		this.fieldScreen = new FieldScreen(this);
+		this.shopScreen =  new ShopScreen(this);
+		this.storageScreen = new StorageScreen(this);
+		this.animalsScreen = new AnimalsScreen(this);
 
 
 
