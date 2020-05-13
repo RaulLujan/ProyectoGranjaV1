@@ -29,6 +29,7 @@ public class GameScreen extends BaseScreen{
 
     //Textures
     private Texture fieldTexture;
+    private Texture barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture;
 
     public GameScreen(MainGame game) {
         super(game);
@@ -41,8 +42,15 @@ public class GameScreen extends BaseScreen{
         stage.setDebugAll(true); // On true se renderizan los bordes verdes de los actores e imágenes
         Gdx.input.setInputProcessor(stage);
 
-
+        //Cargamos texturas
         fieldTexture = game.getAssetManager().get("badlogic.jpg");
+
+        barnTexture = game.getAssetManager().get("Barn.png");
+        chickenCoopTexture = game.getAssetManager().get("Chicken coop.png");
+        houseTexture = game.getAssetManager().get("House.png");
+        pigstyTexture = game.getAssetManager().get("Pigsty.png");
+        shopTexture = game.getAssetManager().get("Shop.png");
+        storeTexture = game.getAssetManager().get("Store.png");
 
         fieldActor = new Field(world, fieldTexture, new Vector2(1f, 1f), game.getSoundFactory());
         stage.addActor(fieldActor);

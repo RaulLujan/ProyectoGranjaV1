@@ -51,6 +51,13 @@ public class MainGame extends Game {
 		//texturas
 		assetManager.load("badlogic.jpg", Texture.class);
 
+		assetManager.load("Barn.png", Texture.class);
+		assetManager.load("Chicken coop.png", Texture.class);
+		assetManager.load("House.png", Texture.class);
+		assetManager.load("Pigsty.png", Texture.class);
+		assetManager.load("Shop.png", Texture.class);
+		assetManager.load("Store.png", Texture.class);
+
 
 		assetManager.finishLoading();
 
