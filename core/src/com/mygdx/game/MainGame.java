@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -25,6 +26,7 @@ public class MainGame extends Game {
 	private static final String HIGH_SCORE_KEY = "TopScore";
 
 	private SoundFactory soundFactory;
+	private AssetManager assetManager;
 
 	private Screen gameScreen, loadingScreen, preloadingScreen, menuScreen, loginScreen, fieldScreen,
 		shopScreen, storageScreen, animalsScreen;
@@ -44,8 +46,13 @@ public class MainGame extends Game {
 		this.storageScreen = new StorageScreen(this);
 		this.animalsScreen = new AnimalsScreen(this);
 
+		assetManager = new AssetManager();
+
+		//texturas
+		assetManager.load("badlogic.jpg", Texture.class);
 
 
+		assetManager.finishLoading();
 
 		this.setScreen(gameScreen);
 	}
@@ -70,5 +77,15 @@ public class MainGame extends Game {
 
 
 		return preferences;
+	}
+
+
+	public SoundFactory getSoundFactory() {
+		return soundFactory;
+	}
+
+
+	public AssetManager getAssetManager() {
+		return assetManager;
 	}
 }
