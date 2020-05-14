@@ -31,18 +31,18 @@ public class Field extends Actor {
         body = world.createBody(def);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.5f, 0.5f);
+        shape.setAsBox(8.5f, 5f);
         fixture = body.createFixture(shape, 5);
         fixture.setUserData("field");
         shape.dispose();
 
-        setSize(Constants.PIXELS_IN_METER, Constants.PIXELS_IN_METER);
+        setSize(17*Constants.PIXELS_IN_METER, 10*Constants.PIXELS_IN_METER);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition((body.getPosition().x - 0.5f) * Constants.PIXELS_IN_METER,
-                (body.getPosition().y - 0.5f) * Constants.PIXELS_IN_METER);
+        setPosition((body.getPosition().x - 8.5f) * Constants.PIXELS_IN_METER,
+                (body.getPosition().y - 5f) * Constants.PIXELS_IN_METER);
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
 
     }

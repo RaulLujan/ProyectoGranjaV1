@@ -31,17 +31,17 @@ public class Shop extends Actor {
         body = world.createBody(def);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(2.5f, 2.5f);
+        shape.setAsBox(3.5f, 2.5f);
         fixture = body.createFixture(shape, 5);
         fixture.setUserData("shop");
         shape.dispose();
 
-        setSize(5* Constants.PIXELS_IN_METER, 5*Constants.PIXELS_IN_METER);
+        setSize(7* Constants.PIXELS_IN_METER, 5*Constants.PIXELS_IN_METER);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition((body.getPosition().x - 2.5f) * Constants.PIXELS_IN_METER,
+        setPosition((body.getPosition().x - 3.5f) * Constants.PIXELS_IN_METER,
                 (body.getPosition().y - 2.5f) * Constants.PIXELS_IN_METER);
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
 

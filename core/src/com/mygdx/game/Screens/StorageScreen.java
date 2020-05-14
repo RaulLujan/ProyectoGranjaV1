@@ -36,7 +36,7 @@ public class StorageScreen extends BaseScreen {
     @Override
     public void render(float delta) {
         //limpieza de la pantalla
-        Gdx.gl.glClearColor(0.2f, 0.8f, 0.2f, 1f);
+        Gdx.gl.glClearColor(0.2f, 0.2f, 0.8f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //movimiento del mundo

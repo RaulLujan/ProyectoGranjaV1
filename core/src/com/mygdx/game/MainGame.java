@@ -51,12 +51,12 @@ public class MainGame extends Game {
 		//texturas
 		assetManager.load("badlogic.jpg", Texture.class);
 
-		assetManager.load("Barn.png", Texture.class);
-		assetManager.load("Chicken coop.png", Texture.class);
-		assetManager.load("House.png", Texture.class);
-		assetManager.load("Pigsty.png", Texture.class);
-		assetManager.load("Shop.png", Texture.class);
-		assetManager.load("Store.png", Texture.class);
+		assetManager.load("Textures/Barn.png", Texture.class);
+		assetManager.load("Textures/ChickenCoop.png", Texture.class);
+		assetManager.load("Textures/House.png", Texture.class);
+		assetManager.load("Textures/Pigsty.png", Texture.class);
+		assetManager.load("Textures/Shop.png", Texture.class);
+		assetManager.load("Textures/Store.png", Texture.class);
 
 
 		assetManager.finishLoading();
@@ -86,6 +86,41 @@ public class MainGame extends Game {
 		return preferences;
 	}
 
+	public Screen getGameScreen() {
+		return gameScreen;
+	}
+
+	public Screen getLoadingScreen() {
+		return loadingScreen;
+	}
+
+	public Screen getPreloadingScreen() {
+		return preloadingScreen;
+	}
+
+	public Screen getMenuScreen() {
+		return menuScreen;
+	}
+
+	public Screen getLoginScreen() {
+		return loginScreen;
+	}
+
+	public Screen getFieldScreen() {
+		return fieldScreen;
+	}
+
+	public Screen getShopScreen() {
+		return shopScreen;
+	}
+
+	public Screen getStorageScreen() {
+		return storageScreen;
+	}
+
+	public Screen getAnimalsScreen() {
+		return animalsScreen;
+	}
 
 	public SoundFactory getSoundFactory() {
 		return soundFactory;
