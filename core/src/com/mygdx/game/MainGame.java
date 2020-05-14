@@ -1,15 +1,11 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Screens.AnimalsScreen;
 import com.mygdx.game.Screens.FieldScreen;
 import com.mygdx.game.Screens.GameScreen;
@@ -57,6 +53,11 @@ public class MainGame extends Game {
 		assetManager.load("Textures/Pigsty.png", Texture.class);
 		assetManager.load("Textures/Shop.png", Texture.class);
 		assetManager.load("Textures/Store.png", Texture.class);
+        assetManager.load("Textures/Bush.png", Texture.class);
+        assetManager.load("Textures/Ground.png", Texture.class);
+        assetManager.load("Textures/Tree1.png", Texture.class);
+        assetManager.load("Textures/Tree2.png", Texture.class);
+
 
 
 		assetManager.finishLoading();

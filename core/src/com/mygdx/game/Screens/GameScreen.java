@@ -15,6 +15,7 @@ import com.mygdx.game.Actors.Home;
 import com.mygdx.game.Actors.Shop;
 import com.mygdx.game.Actors.Storage;
 import com.mygdx.game.Constants;
+import com.mygdx.game.Images.ImageRepeart;
 import com.mygdx.game.MainGame;
 
 import java.util.ArrayList;
@@ -33,9 +34,11 @@ public class GameScreen extends BaseScreen{
 
 
     //Textures
+    private Texture fieldTexture, barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture,
+    bushTexture, groundTexture, tree1Texture, tree2Texture;
 
-    private Texture fieldTexture, barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture;
-
+    //Images
+    private ImageRepeart gruondImage;
 
     public GameScreen(MainGame game) {
         super(game);
@@ -57,6 +60,12 @@ public class GameScreen extends BaseScreen{
         pigstyTexture = game.getAssetManager().get("Textures/Pigsty.png");
         shopTexture = game.getAssetManager().get("Textures/Shop.png");
         storeTexture = game.getAssetManager().get("Textures/Store.png");
+        bushTexture = game.getAssetManager().get("Textures/Bush.png");
+        groundTexture = game.getAssetManager().get("Textures/Ground.png");
+        tree1Texture = game.getAssetManager().get("Textures/Tree1.png");
+        tree2Texture = game.getAssetManager().get("Textures/Tree2.png");
+
+
 
         fieldActor = new Field(world, fieldTexture, new Vector2(10f, 5.5f), game.getSoundFactory());
         homeActor = new Home(world, houseTexture, new Vector2(26f, 15f), game.getSoundFactory());
@@ -66,6 +75,9 @@ public class GameScreen extends BaseScreen{
         shopActor = new Shop(world, shopTexture, new Vector2(26f, 3f), game.getSoundFactory());
         storageActor = new Storage(world, storeTexture, new Vector2(26f, 8.5f), game.getSoundFactory());
 
+        gruondImage = new ImageRepeart(groundTexture,-20,-10,60,40);
+
+
         stage.addActor(fieldActor);
         stage.addActor(homeActor);
         stage.addActor(chickenBuildingActor);
@@ -74,7 +86,7 @@ public class GameScreen extends BaseScreen{
 
         stage.addActor(shopActor);
         stage.addActor(storageActor);
-
+        stage.addActor(gruondImage);
 
         storageActor.addListener(new InputListener() {
             @Override
@@ -84,7 +96,6 @@ public class GameScreen extends BaseScreen{
                 game.setScreen(game.getStorageScreen());
                 //do your stuff
                 //it will work when finger is released..
-
             }
 
             public boolean touchDown(InputEvent event, float x, float y,
@@ -93,7 +104,109 @@ public class GameScreen extends BaseScreen{
                 //do your stuff it will work when u touched your actor
                 return true;
             }
+        });
 
+        cowsBuildingActor.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown=true;
+                game.setScreen(game.getAnimalsScreen());
+                //do your stuff
+                //it will work when finger is released..
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                boolean touchdown=false;
+                //do your stuff it will work when u touched your actor
+                return true;
+            }
+        });
+        chickenBuildingActor.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown=true;
+                game.setScreen(game.getAnimalsScreen());
+                //do your stuff
+                //it will work when finger is released..
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                boolean touchdown=false;
+                //do your stuff it will work when u touched your actor
+                return true;
+            }
+        });
+        pigsBuildingActor.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown=true;
+                game.setScreen(game.getAnimalsScreen());
+                //do your stuff
+                //it will work when finger is released..
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                boolean touchdown=false;
+                //do your stuff it will work when u touched your actor
+                return true;
+            }
+        });
+        homeActor.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown=true;
+                game.setScreen(game.getMenuScreen());
+                //do your stuff
+                //it will work when finger is released..
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                boolean touchdown=false;
+                //do your stuff it will work when u touched your actor
+                return true;
+            }
+        });
+        shopActor.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown=true;
+                game.setScreen(game.getShopScreen());
+                //do your stuff
+                //it will work when finger is released..
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                boolean touchdown=false;
+                //do your stuff it will work when u touched your actor
+                return true;
+            }
+        });
+        fieldActor.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown=true;
+                game.setScreen(game.getFieldScreen());
+                //do your stuff
+                //it will work when finger is released..
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                boolean touchdown=false;
+                //do your stuff it will work when u touched your actor
+                return true;
+            }
         });
 
 
@@ -129,7 +242,8 @@ public class GameScreen extends BaseScreen{
 
     @Override
     public void dispose() {
-        Texture[] allTextures = {fieldTexture, barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture};
+        Texture[] allTextures = {fieldTexture, barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture,
+                bushTexture, groundTexture, tree1Texture, tree2Texture};
         for (Texture textura : allTextures) {
             textura.dispose();
         }

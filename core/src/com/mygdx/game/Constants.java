@@ -4,10 +4,6 @@ import com.badlogic.gdx.Gdx;
 
 public class Constants {
 
-    public static final float CAMERA_ADJUST = 100f;
-
-    public static final float ACT_DISTANCE = 20f;
-
     public static final float DEVIDE_WIDTH = Gdx.graphics.getWidth();
 
     public static final float DEVICE_HEIGHT = Gdx.graphics.getHeight();
