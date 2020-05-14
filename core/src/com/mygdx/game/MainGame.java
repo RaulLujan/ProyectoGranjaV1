@@ -59,6 +59,11 @@ public class MainGame extends Game {
         assetManager.load("Textures/Tree2.png", Texture.class);
         assetManager.load("Textures/Road.png", Texture.class);
 
+        for (int i = 0; i < 21; i++) {
+            String farmer = String.format("Textures/Farmer%d.png",i);
+            assetManager.load(farmer, Texture.class);
+        }
+
 
 
 		assetManager.finishLoading();

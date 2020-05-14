@@ -19,6 +19,8 @@ import com.mygdx.game.Images.ImageRepeart;
 import com.mygdx.game.Images.ImageVerticalRepeat;
 import com.mygdx.game.MainGame;
 
+import java.util.ArrayList;
+
 public class GameScreen extends BaseScreen{
 
     private Stage stage;
@@ -35,6 +37,7 @@ public class GameScreen extends BaseScreen{
     //Textures
     private Texture fieldTexture, barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture,
     bushTexture, groundTexture, tree1Texture, tree2Texture, roadTexture;
+    private ArrayList<Texture> farmerTextures;
 
     //Images
     private ImageRepeart grondImage;
@@ -65,6 +68,12 @@ public class GameScreen extends BaseScreen{
         tree1Texture = game.getAssetManager().get("Textures/Tree1.png");
         tree2Texture = game.getAssetManager().get("Textures/Tree2.png");
         roadTexture = game.getAssetManager().get("Textures/Road.png");
+
+        farmerTextures = new ArrayList<>(21);
+        for (int i = 0; i < 21; i++) {
+            String farmer = String.format("Textures/Farmer%d.png",i);
+            farmerTextures.add((Texture) game.getAssetManager().get(farmer));
+        }
 
 
         fieldActor = new Field(world, fieldTexture, new Vector2(10f, 5.5f), game.getSoundFactory());
@@ -248,6 +257,9 @@ public class GameScreen extends BaseScreen{
                 bushTexture, groundTexture, tree1Texture, tree2Texture, roadTexture};
         for (Texture textura : allTextures) {
             textura.dispose();
+        }
+        for (int i = 0; i < 21; i++) {
+            farmerTextures.get(i).dispose();
         }
 
         stage.getBatch().dispose();
