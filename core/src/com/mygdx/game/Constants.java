@@ -13,6 +13,8 @@ public class Constants {
     //change this to get a diferent in-game scale
     public static final float PIXELS_IN_METER = DEVIDE_WIDTH / 30;
 
+    public static final float FARMER_VELOCITY = 0.7f;
+
 
 
 

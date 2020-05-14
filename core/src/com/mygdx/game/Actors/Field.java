@@ -32,7 +32,7 @@ public class Field extends Actor {
 
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(8.5f, 5f);
-        fixture = body.createFixture(shape, 5);
+        fixture = body.createFixture(shape, 0);
         fixture.setUserData("field");
         shape.dispose();
 

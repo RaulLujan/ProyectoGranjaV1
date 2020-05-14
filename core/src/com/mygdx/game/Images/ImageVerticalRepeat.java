@@ -8,7 +8,7 @@ import com.mygdx.game.Constants;
 
 public class ImageVerticalRepeat extends Image {
 
-    public ImageVerticalRepeat(Texture texture, float x, float y, int width, int height, float scale){
+    public ImageVerticalRepeat(Texture texture, float x, float y, float width, int height, float scale){
 
         texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         TextureRegion imgTextureRegion = new TextureRegion(texture);

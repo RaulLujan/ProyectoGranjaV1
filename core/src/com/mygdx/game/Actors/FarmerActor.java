@@ -12,9 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.Constants;
 import com.mygdx.game.SoundFactory;
 
+
 import java.util.List;
 
-public class GranjeroActor extends Actor {
+public class FarmerActor extends Actor {
 
     private Texture texture;
     private World world;
@@ -30,40 +31,45 @@ public class GranjeroActor extends Actor {
     private List<Texture> textures;
     private SoundFactory sounds;
 
-    public GranjeroActor(World world, List<Texture> textures, Vector2 position, SoundFactory sounds) {
+    public FarmerActor(World world, List<Texture> textures, Vector2 position, SoundFactory sounds) {
 
         this.world = world;
         this.textures = textures;
         this.sounds = sounds;
         this.estate = Estate.STOPED;
+        this.timeToBeat = 3;
         this.timeInState = 0;
+        this.animationTime = 0;
 
         BodyDef def = new BodyDef();
         def.position.set(position);
         def.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(def);
+        body.setGravityScale(0);
+
 
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.5f, 0.6f);
+        shape.setAsBox(0.45f, 0.9f);
         fixture = body.createFixture(shape, 3);
         fixture.setUserData("granjero");
         shape.dispose();
 
-        setSize(Constants.PIXELS_IN_METER, 1.2f*Constants.PIXELS_IN_METER);
+        setSize(0.9f*Constants.PIXELS_IN_METER, 1.8f*Constants.PIXELS_IN_METER);
     }
 
     @Override
     public void act(float delta) {
         this.timeInState += delta;
         this.animationTime += delta;
-
+        System.out.println("DXDXDXDXDXDXDXDXDXXDXDXDXDXDXDXDXDXDXDXDXDXEstado; "+ this.estate.toString());
         if (this.estate == Estate.STOPED){
             this.body.setLinearVelocity(0, 0f);
             //stopped animation
             if     (this.animationTime < 0.3f) { this.texture = this.textures.get(19);}
             else if(this.animationTime < 0.6f) { this.texture = this.textures.get(18);}
-            else                               { this.timeInState = 0;      }
+            else if(this.animationTime < 0.8f) { this.texture = this.textures.get(20);}
+            else                               { this.animationTime = 0;      }
 
             if (timeInState > timeToBeat ){
                 this.estate = this.getNewState();
@@ -72,9 +78,10 @@ public class GranjeroActor extends Actor {
 
         }else if (this.estate == Estate.GOING_UP){
             if (this.body.getPosition().y < this.MAX_Y){
-                this.body.setLinearVelocity(0, 1f);
+                this.body.setLinearVelocity(0, Constants.FARMER_VELOCITY);
             }else{
                 this.body.setLinearVelocity(0, 0f);
+                this.estate = this.getNewState();
             }
             //going up animation
             if     (this.animationTime < 0.2f) { this.texture = this.textures.get(8);}
@@ -82,7 +89,7 @@ public class GranjeroActor extends Actor {
             else if(this.animationTime < 0.6f) { this.texture = this.textures.get(10);}
             else if(this.animationTime < 0.8f) { this.texture = this.textures.get(11);}
 
-            else                               { this.timeInState = 0;      }
+            else                               { this.animationTime = 0;      }
 
             if (timeInState > timeToBeat ){
                 this.estate = this.getNewState();
@@ -90,9 +97,10 @@ public class GranjeroActor extends Actor {
             }
         }else if (this.estate == Estate.GOING_LEFT){
             if (this.body.getPosition().x > 1 ){
-                this.body.setLinearVelocity(-1, 1f);
+                this.body.setLinearVelocity(-Constants.FARMER_VELOCITY, 0f);
             }else{
                 this.body.setLinearVelocity(0, 0f);
+                this.estate = this.getNewState();
             }
 
             //going left animation
@@ -101,17 +109,18 @@ public class GranjeroActor extends Actor {
             else if(this.animationTime < 0.6f) { this.texture = this.textures.get(14);}
             else if(this.animationTime < 0.8f) { this.texture = this.textures.get(15);}
 
-            else                               { this.timeInState = 0;      }
+            else                               { this.animationTime = 0;      }
 
             if (timeInState > timeToBeat ){
                 this.estate = this.getNewState();
                 this.timeInState = 0;
             }
         }else if (this.estate == Estate.GOING_DOWN){
-            if (this.body.getPosition().y > 1 ){
-                this.body.setLinearVelocity(0, -1f);
+            if (this.body.getPosition().y > 2 ){
+                this.body.setLinearVelocity(0, -Constants.FARMER_VELOCITY);
             }else{
                 this.body.setLinearVelocity(0, 0f);
+                this.estate = this.getNewState();
             }
 
             //going down animation
@@ -120,7 +129,7 @@ public class GranjeroActor extends Actor {
             else if(this.animationTime < 0.6f) { this.texture = this.textures.get(2);}
             else if(this.animationTime < 0.8f) { this.texture = this.textures.get(3);}
 
-            else                               { this.timeInState = 0;      }
+            else                               { this.animationTime = 0;      }
 
             if (timeInState > timeToBeat ){
                 this.estate = this.getNewState();
@@ -128,9 +137,10 @@ public class GranjeroActor extends Actor {
             }
         }else if (this.estate == Estate.GOING_RIGHT){
             if (this.body.getPosition().x < this.MAX_X ){
-                this.body.setLinearVelocity(1, 0f);
+                this.body.setLinearVelocity(Constants.FARMER_VELOCITY, 0f);
             }else{
                 this.body.setLinearVelocity(0, 0f);
+                this.estate = this.getNewState();
             }
 
             //going right animation
@@ -139,7 +149,7 @@ public class GranjeroActor extends Actor {
             else if(this.animationTime < 0.6f) { this.texture = this.textures.get(6);}
             else if(this.animationTime < 0.8f) { this.texture = this.textures.get(7);}
 
-            else                               { this.timeInState = 0;      }
+            else                               { this.animationTime = 0;      }
 
             if (timeInState > timeToBeat ){
                 this.estate = this.getNewState();
@@ -152,7 +162,7 @@ public class GranjeroActor extends Actor {
             if     (this.animationTime < 0.2f) { this.texture = this.textures.get(16);}
             else if(this.animationTime < 0.4f) { this.texture = this.textures.get(17);}
 
-            else                               { this.timeInState = 0;      }
+            else                               { this.animationTime = 0;      }
 
             if (timeInState > timeToBeat ){
                 this.estate = this.getNewState();
@@ -167,7 +177,9 @@ public class GranjeroActor extends Actor {
     private Estate getNewState() {
         Estate newEstate;
         do{
-            int newIndex = (int) (Math.random() * 6) + 1;
+            int newIndex = (int) (Math.random() * 6 + 1);
+            System.out.print("XXXXXXXXXXXXXXXXXXXXXXXXNewindex: "+newIndex);
+
             if (newIndex == 1 ){
                 newEstate = Estate.STOPED;
             }else if (newIndex == 2 ){
@@ -181,16 +193,17 @@ public class GranjeroActor extends Actor {
             }else{
                 newEstate = Estate.ON_KEES;
             }
-        }while (this.estate != newEstate);
+        }while (this.estate == newEstate);
         timeToBeat = (float) (Math.random() * 10) + 1;
+        this.timeInState = 0;
         return newEstate;
     }
 
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition((body.getPosition().x - 0.5f) * Constants.PIXELS_IN_METER,
-                (body.getPosition().y - 0.6f) * Constants.PIXELS_IN_METER);
+        setPosition((body.getPosition().x - 0.45f) * Constants.PIXELS_IN_METER,
+                (body.getPosition().y - 0.8f) * Constants.PIXELS_IN_METER);
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
