@@ -75,9 +75,9 @@ public class GameScreen extends BaseScreen{
         shopActor = new Shop(world, shopTexture, new Vector2(26f, 3f), game.getSoundFactory());
         storageActor = new Storage(world, storeTexture, new Vector2(26f, 8.5f), game.getSoundFactory());
 
-        gruondImage = new ImageRepeart(groundTexture,-20,-10,60,40);
+        gruondImage = new ImageRepeart(groundTexture,-20,-10,60,40, 2f);
 
-
+        stage.addActor(gruondImage);
         stage.addActor(fieldActor);
         stage.addActor(homeActor);
         stage.addActor(chickenBuildingActor);
@@ -86,7 +86,7 @@ public class GameScreen extends BaseScreen{
 
         stage.addActor(shopActor);
         stage.addActor(storageActor);
-        stage.addActor(gruondImage);
+
 
         storageActor.addListener(new InputListener() {
             @Override

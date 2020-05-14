@@ -8,7 +8,7 @@ import com.mygdx.game.Constants;
 
 public class ImageRepeart extends Image {
 
-    public ImageRepeart(Texture texture, int x, int y, int width, int height){
+    public ImageRepeart(Texture texture, int x, int y, int width, int height, float scale){
 
         texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         TextureRegion imgTextureRegion = new TextureRegion(texture);
@@ -16,7 +16,7 @@ public class ImageRepeart extends Image {
 
         TextureRegionDrawable imgTextureRegionDrawable = new TextureRegionDrawable(imgTextureRegion);
         setDrawable(imgTextureRegionDrawable);
-        setSize(Constants.PIXELS_IN_METER *width,Constants.PIXELS_IN_METER*height );
+        setSize(scale*Constants.PIXELS_IN_METER *width,scale*Constants.PIXELS_IN_METER*height );
         setPosition(x * Constants.PIXELS_IN_METER, y*Constants.PIXELS_IN_METER);
     }
 }
