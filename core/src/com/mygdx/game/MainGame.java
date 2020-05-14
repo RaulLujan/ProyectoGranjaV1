@@ -57,6 +57,7 @@ public class MainGame extends Game {
         assetManager.load("Textures/Ground.png", Texture.class);
         assetManager.load("Textures/Tree1.png", Texture.class);
         assetManager.load("Textures/Tree2.png", Texture.class);
+        assetManager.load("Textures/roadTexture.png", Texture.class);
 
 
 

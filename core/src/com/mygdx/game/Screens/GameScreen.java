@@ -35,10 +35,10 @@ public class GameScreen extends BaseScreen{
 
     //Textures
     private Texture fieldTexture, barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture,
-    bushTexture, groundTexture, tree1Texture, tree2Texture;
+    bushTexture, groundTexture, tree1Texture, tree2Texture, roadTexture;
 
     //Images
-    private ImageRepeart gruondImage;
+    private ImageRepeart gruondImage, roadImage;
 
     public GameScreen(MainGame game) {
         super(game);
@@ -64,7 +64,7 @@ public class GameScreen extends BaseScreen{
         groundTexture = game.getAssetManager().get("Textures/Ground.png");
         tree1Texture = game.getAssetManager().get("Textures/Tree1.png");
         tree2Texture = game.getAssetManager().get("Textures/Tree2.png");
-
+        roadTexture = game.getAssetManager().get("Textures/Road.png");
 
 
         fieldActor = new Field(world, fieldTexture, new Vector2(10f, 5.5f), game.getSoundFactory());
@@ -76,6 +76,7 @@ public class GameScreen extends BaseScreen{
         storageActor = new Storage(world, storeTexture, new Vector2(26f, 8.5f), game.getSoundFactory());
 
         gruondImage = new ImageRepeart(groundTexture,-20,-10,60,40, 2f);
+        roadImage = new ImageRepeart(roadTexture,-20,15,4,40, 1);
 
         stage.addActor(gruondImage);
         stage.addActor(fieldActor);
@@ -243,7 +244,7 @@ public class GameScreen extends BaseScreen{
     @Override
     public void dispose() {
         Texture[] allTextures = {fieldTexture, barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture,
-                bushTexture, groundTexture, tree1Texture, tree2Texture};
+                bushTexture, groundTexture, tree1Texture, tree2Texture, roadTexture};
         for (Texture textura : allTextures) {
             textura.dispose();
         }
