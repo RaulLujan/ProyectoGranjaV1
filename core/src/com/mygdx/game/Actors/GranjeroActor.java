@@ -59,6 +59,7 @@ public class GranjeroActor extends Actor {
         this.animationTime += delta;
 
         if (this.estate == Estate.STOPED){
+            this.body.setLinearVelocity(0, 0f);
             //stopped animation
             if     (this.animationTime < 0.3f) { this.texture = this.textures.get(19);}
             else if(this.animationTime < 0.6f) { this.texture = this.textures.get(18);}
@@ -70,7 +71,11 @@ public class GranjeroActor extends Actor {
             }
 
         }else if (this.estate == Estate.GOING_UP){
-            this.body.setLinearVelocity(0, 1f);
+            if (this.body.getPosition().y < this.MAX_Y){
+                this.body.setLinearVelocity(0, 1f);
+            }else{
+                this.body.setLinearVelocity(0, 0f);
+            }
             //going up animation
             if     (this.animationTime < 0.2f) { this.texture = this.textures.get(8);}
             else if(this.animationTime < 0.4f) { this.texture = this.textures.get(9);}
@@ -84,13 +89,75 @@ public class GranjeroActor extends Actor {
                 this.timeInState = 0;
             }
         }else if (this.estate == Estate.GOING_LEFT){
-            this.body.setLinearVelocity(-1, 0f);
-        }else if (this.estate == Estate.GOING_DOWN){
-            this.body.setLinearVelocity(0, -1f);
-        }else if (this.estate == Estate.GOING_RIGHT){
-            this.body.setLinearVelocity(0, -1f);
-        }else if (this.estate == Estate.ON_KEES){
+            if (this.body.getPosition().x > 1 ){
+                this.body.setLinearVelocity(-1, 1f);
+            }else{
+                this.body.setLinearVelocity(0, 0f);
+            }
 
+            //going left animation
+            if     (this.animationTime < 0.2f) { this.texture = this.textures.get(12);}
+            else if(this.animationTime < 0.4f) { this.texture = this.textures.get(13);}
+            else if(this.animationTime < 0.6f) { this.texture = this.textures.get(14);}
+            else if(this.animationTime < 0.8f) { this.texture = this.textures.get(15);}
+
+            else                               { this.timeInState = 0;      }
+
+            if (timeInState > timeToBeat ){
+                this.estate = this.getNewState();
+                this.timeInState = 0;
+            }
+        }else if (this.estate == Estate.GOING_DOWN){
+            if (this.body.getPosition().y > 1 ){
+                this.body.setLinearVelocity(0, -1f);
+            }else{
+                this.body.setLinearVelocity(0, 0f);
+            }
+
+            //going down animation
+            if     (this.animationTime < 0.2f) { this.texture = this.textures.get(0);}
+            else if(this.animationTime < 0.4f) { this.texture = this.textures.get(1);}
+            else if(this.animationTime < 0.6f) { this.texture = this.textures.get(2);}
+            else if(this.animationTime < 0.8f) { this.texture = this.textures.get(3);}
+
+            else                               { this.timeInState = 0;      }
+
+            if (timeInState > timeToBeat ){
+                this.estate = this.getNewState();
+                this.timeInState = 0;
+            }
+        }else if (this.estate == Estate.GOING_RIGHT){
+            if (this.body.getPosition().x < this.MAX_X ){
+                this.body.setLinearVelocity(1, 0f);
+            }else{
+                this.body.setLinearVelocity(0, 0f);
+            }
+
+            //going right animation
+            if     (this.animationTime < 0.2f) { this.texture = this.textures.get(4);}
+            else if(this.animationTime < 0.4f) { this.texture = this.textures.get(5);}
+            else if(this.animationTime < 0.6f) { this.texture = this.textures.get(6);}
+            else if(this.animationTime < 0.8f) { this.texture = this.textures.get(7);}
+
+            else                               { this.timeInState = 0;      }
+
+            if (timeInState > timeToBeat ){
+                this.estate = this.getNewState();
+                this.timeInState = 0;
+            }
+        }else if (this.estate == Estate.ON_KEES){
+            this.body.setLinearVelocity(0, 0f);
+
+            //going up animation
+            if     (this.animationTime < 0.2f) { this.texture = this.textures.get(16);}
+            else if(this.animationTime < 0.4f) { this.texture = this.textures.get(17);}
+
+            else                               { this.timeInState = 0;      }
+
+            if (timeInState > timeToBeat ){
+                this.estate = this.getNewState();
+                this.timeInState = 0;
+            }
 
         }
 
@@ -115,6 +182,7 @@ public class GranjeroActor extends Actor {
                 newEstate = Estate.ON_KEES;
             }
         }while (this.estate != newEstate);
+        timeToBeat = (float) (Math.random() * 10) + 1;
         return newEstate;
     }
 

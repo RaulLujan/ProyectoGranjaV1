@@ -16,9 +16,8 @@ import com.mygdx.game.Actors.Shop;
 import com.mygdx.game.Actors.Storage;
 import com.mygdx.game.Constants;
 import com.mygdx.game.Images.ImageRepeart;
+import com.mygdx.game.Images.ImageVerticalRepeat;
 import com.mygdx.game.MainGame;
-
-import java.util.ArrayList;
 
 public class GameScreen extends BaseScreen{
 
@@ -38,7 +37,8 @@ public class GameScreen extends BaseScreen{
     bushTexture, groundTexture, tree1Texture, tree2Texture, roadTexture;
 
     //Images
-    private ImageRepeart gruondImage, roadImage;
+    private ImageRepeart grondImage;
+    private ImageVerticalRepeat roadImage;
 
     public GameScreen(MainGame game) {
         super(game);
@@ -75,10 +75,11 @@ public class GameScreen extends BaseScreen{
         shopActor = new Shop(world, shopTexture, new Vector2(26f, 3f), game.getSoundFactory());
         storageActor = new Storage(world, storeTexture, new Vector2(26f, 8.5f), game.getSoundFactory());
 
-        gruondImage = new ImageRepeart(groundTexture,-20,-10,60,40, 2f);
-        roadImage = new ImageRepeart(roadTexture,-20,15,4,40, 1);
+        grondImage = new ImageRepeart(groundTexture,-20,-10,60,40, 2f);
+        roadImage = new ImageVerticalRepeat(roadTexture,19.5f,-10,3,40, 1);
 
-        stage.addActor(gruondImage);
+        stage.addActor(grondImage);
+        stage.addActor(roadImage);
         stage.addActor(fieldActor);
         stage.addActor(homeActor);
         stage.addActor(chickenBuildingActor);
