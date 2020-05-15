@@ -45,14 +45,18 @@ public class MainGame extends Game {
 		assetManager = new AssetManager();
 
 		//texturas
-		assetManager.load("badlogic.jpg", Texture.class);
 
-		assetManager.load("Textures/Barn.png", Texture.class);
-		assetManager.load("Textures/ChickenCoop.png", Texture.class);
-		assetManager.load("Textures/House.png", Texture.class);
-		assetManager.load("Textures/Pigsty.png", Texture.class);
-		assetManager.load("Textures/Shop.png", Texture.class);
-		assetManager.load("Textures/Store.png", Texture.class);
+		assetManager.load("Textures/fieldPRO.png", Texture.class);
+		assetManager.load("Textures/truckPRO.png", Texture.class);
+
+
+
+		assetManager.load("Textures/Buildings/Barn.png", Texture.class);
+		assetManager.load("Textures/Buildings/ChickenCoop.png", Texture.class);
+		assetManager.load("Textures/Buildings/House.png", Texture.class);
+		assetManager.load("Textures/Buildings/Pigsty.png", Texture.class);
+		assetManager.load("Textures/Buildings/Shop.png", Texture.class);
+		assetManager.load("Textures/Buildings/Store.png", Texture.class);
         assetManager.load("Textures/Bush.png", Texture.class);
         assetManager.load("Textures/Ground.png", Texture.class);
         assetManager.load("Textures/Tree1.png", Texture.class);
@@ -60,7 +64,7 @@ public class MainGame extends Game {
         assetManager.load("Textures/Road.png", Texture.class);
 
         for (int i = 0; i < 21; i++) {
-            String farmer = String.format("Textures/Farmer%d.png",i);
+            String farmer = String.format("Textures/Farmer/Farmer%d.png",i);
             assetManager.load(farmer, Texture.class);
         }
 

@@ -30,12 +30,13 @@ public class AnimalsBuilding extends Actor {
         def.type = BodyDef.BodyType.StaticBody;
         body = world.createBody(def);
 
+        /*
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(2.5f, 2.5f);
         fixture = body.createFixture(shape, 5);
         fixture.setUserData("animalsBuilding");
         shape.dispose();
-
+        */
         setSize(5*Constants.PIXELS_IN_METER, 5*Constants.PIXELS_IN_METER);
     }
 

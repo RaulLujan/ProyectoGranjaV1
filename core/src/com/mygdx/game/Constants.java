@@ -15,7 +15,7 @@ public class Constants {
 
     public static final float FARMER_VELOCITY = 0.7f;
 
-
+    public static final float TRUCK_VELOCITY = 3.5f;
 
 
 

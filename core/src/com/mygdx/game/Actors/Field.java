@@ -30,12 +30,12 @@ public class Field extends Actor {
         def.type = BodyDef.BodyType.StaticBody;
         body = world.createBody(def);
 
-        PolygonShape shape = new PolygonShape();
+        /*PolygonShape shape = new PolygonShape();
         shape.setAsBox(8.5f, 5f);
         fixture = body.createFixture(shape, 0);
         fixture.setUserData("field");
         shape.dispose();
-
+        */
         setSize(17*Constants.PIXELS_IN_METER, 10*Constants.PIXELS_IN_METER);
     }
 

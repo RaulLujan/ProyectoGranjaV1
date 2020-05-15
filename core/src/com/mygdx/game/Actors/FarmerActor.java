@@ -21,10 +21,10 @@ public class FarmerActor extends Actor {
     private World world;
     private Body body;
     private Fixture fixture;
-    private enum Estate { STOPED, GOING_UP, GOING_DOWN, GOING_LEFT, GOING_RIGHT, ON_KEES};
+    private enum Estate { STOPED, GOING_UP, GOING_DOWN, GOING_LEFT, GOING_RIGHT, ON_KEES}
     private  Estate estate;
     private final float MAX_X = 16.5f;
-    private final float MAX_Y = 12;
+    private final float MAX_Y = 13;
     private float timeInState, timeToBeat, animationTime;
 
 
@@ -66,8 +66,8 @@ public class FarmerActor extends Actor {
         if (this.estate == Estate.STOPED){
             this.body.setLinearVelocity(0, 0f);
             //stopped animation
-            if     (this.animationTime < 0.3f) { this.texture = this.textures.get(19);}
-            else if(this.animationTime < 0.6f) { this.texture = this.textures.get(18);}
+            if     (this.animationTime < 0.3f) { this.texture = this.textures.get(18);}
+            else if(this.animationTime < 0.6f) { this.texture = this.textures.get(19);}
             else if(this.animationTime < 0.8f) { this.texture = this.textures.get(20);}
             else                               { this.animationTime = 0;      }
 
@@ -194,7 +194,7 @@ public class FarmerActor extends Actor {
                 newEstate = Estate.ON_KEES;
             }
         }while (this.estate == newEstate);
-        timeToBeat = (float) (Math.random() * 10) + 1;
+        this.timeToBeat = (float) (Math.random() * 10) + 1;
         this.timeInState = 0;
         return newEstate;
     }

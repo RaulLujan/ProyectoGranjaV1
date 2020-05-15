@@ -29,13 +29,13 @@ public class Shop extends Actor {
         def.position.set(position);
         def.type = BodyDef.BodyType.StaticBody;
         body = world.createBody(def);
-
+        /*
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(4f, 3f);
         fixture = body.createFixture(shape, 5);
         fixture.setUserData("shop");
         shape.dispose();
-
+        */
         setSize(8* Constants.PIXELS_IN_METER, 6*Constants.PIXELS_IN_METER);
     }
 
