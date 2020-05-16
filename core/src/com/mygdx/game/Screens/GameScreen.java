@@ -47,10 +47,16 @@ public class GameScreen extends BaseScreen{
     private ImageRepeart grondImage;
     private ImageVerticalRepeat roadImage;
 
+    //Game Parameters
+    private float timeToBeat, timeSinceLastRNDSound;
+
+
     public GameScreen(MainGame game) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, -10), true);
+        this.timeSinceLastRNDSound = 0;
+
     }
     @Override
     public void show() {
@@ -229,7 +235,7 @@ public class GameScreen extends BaseScreen{
             }
         });
 
-
+        this.timeToBeat = (float) (Math.random() * 10) + 2;
 
     }
 
@@ -246,6 +252,12 @@ public class GameScreen extends BaseScreen{
         Gdx.gl.glClearColor(0.1f, 0.6f, 0.2f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        this.timeSinceLastRNDSound += delta;
+        if ( this.timeToBeat < this.timeSinceLastRNDSound){
+            this.timeSinceLastRNDSound = 0;
+            this.timeToBeat = (float) (Math.random() * 5) + 5;
+            game.getSoundFactory().playRDNSound();
+        }
 
 
         //movimiento del mundo

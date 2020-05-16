@@ -22,6 +22,7 @@ public class TruckActor extends Actor {
     private Fixture fixture;
     private enum Estate { STOPED, RUNNING}
     private TruckActor.Estate estate;
+    private boolean isSoundPlaying;
 
     private float timeStoped, timeToBeat;
 
@@ -37,6 +38,7 @@ public class TruckActor extends Actor {
 
         this.timeStoped = 0;
         this.timeToBeat = (float) (Math.random() * 5) + 1;
+        this.isSoundPlaying = false;
 
         BodyDef def = new BodyDef();
         def.position.set(position);
@@ -64,13 +66,19 @@ public class TruckActor extends Actor {
             this.body.setLinearVelocity(0, 0);
             if(this.timeStoped > this.timeToBeat){
                 this.estate = Estate.RUNNING;
+                if (!this.isSoundPlaying){
+                    this.isSoundPlaying = true;
+                    this.sounds.playRoadSound();
+                }
             }
         }
-        if(this.body.getPosition().y < -10){
+        if(this.body.getPosition().y < -5){
             this.body.setTransform(this.body.getPosition().x, 25, 0);
             this.estate = Estate.STOPED;
+            this.isSoundPlaying = false;
+            this.sounds.stopRoadSound();
             this.timeStoped = 0;
-            this.timeToBeat = (float) (Math.random() * 15) + 15;
+            this.timeToBeat = (float) (Math.random() * 15) + 20;
 
         }
     }

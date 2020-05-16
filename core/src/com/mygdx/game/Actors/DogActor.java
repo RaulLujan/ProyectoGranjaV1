@@ -15,24 +15,25 @@ import com.mygdx.game.SoundFactory;
 
 import java.util.List;
 
-public class FarmerActor extends Actor {
+public class DogActor extends Actor {
 
     private Texture texture;
     private World world;
     private Body body;
     private Fixture fixture;
-    private enum Estate { STOPED, GOING_UP, GOING_DOWN, GOING_LEFT, GOING_RIGHT, ON_KEES}
+    private enum Estate { STOPED, GOING_UP, GOING_DOWN, GOING_LEFT, GOING_RIGHT, SLEEPING}
     private  Estate estate;
-    private final float MAX_X = 16.5f;
+    private final float MAX_X = 30;
     private final float MAX_Y = 13;
+    private final float MIN_Y = 10;
+    private final float MIN_X = 22.75f;
     private float timeInState, timeToBeat, animationTime;
-    private boolean stepping, stepingSoundPlaying;
 
 
     private List<Texture> textures;
     private SoundFactory sounds;
 
-    public FarmerActor(World world, List<Texture> textures, Vector2 position, SoundFactory sounds) {
+    public DogActor(World world, List<Texture> textures, Vector2 position, SoundFactory sounds) {
 
         this.world = world;
         this.textures = textures;
@@ -41,8 +42,7 @@ public class FarmerActor extends Actor {
         this.timeToBeat = 3;
         this.timeInState = 0;
         this.animationTime = 0;
-        this.stepping = false;
-        this.stepingSoundPlaying = false;
+
 
         BodyDef def = new BodyDef();
         def.position.set(position);
@@ -55,7 +55,7 @@ public class FarmerActor extends Actor {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(0.45f, 0.9f);
         fixture = body.createFixture(shape, 3);
-        fixture.setUserData("granjero");
+        fixture.setUserData("dog");
         shape.dispose();
 
         setSize(0.9f*Constants.PIXELS_IN_METER, 1.8f*Constants.PIXELS_IN_METER);
@@ -65,14 +65,6 @@ public class FarmerActor extends Actor {
     public void act(float delta) {
         this.timeInState += delta;
         this.animationTime += delta;
-
-        if ( stepping && !stepingSoundPlaying){
-            this.stepingSoundPlaying = true;
-            this.sounds.playStepSound();
-        }else if (!stepping && stepingSoundPlaying){
-            this.stepingSoundPlaying = false;
-            this.sounds.stopStepSound();
-        }
 
         if (this.estate == Estate.STOPED){
             this.body.setLinearVelocity(0, 0f);
@@ -89,7 +81,7 @@ public class FarmerActor extends Actor {
 
         }else if (this.estate == Estate.GOING_UP){
             if (this.body.getPosition().y < this.MAX_Y){
-                this.body.setLinearVelocity(0, Constants.FARMER_VELOCITY);
+                this.body.setLinearVelocity(0, Constants.FARMER_VELOCITY *3 );
             }else{
                 this.body.setLinearVelocity(0, 0f);
                 this.estate = this.getNewState();
@@ -107,8 +99,8 @@ public class FarmerActor extends Actor {
                 this.timeInState = 0;
             }
         }else if (this.estate == Estate.GOING_LEFT){
-            if (this.body.getPosition().x > 1 ){
-                this.body.setLinearVelocity(-Constants.FARMER_VELOCITY, 0f);
+            if (this.body.getPosition().x > MIN_X ){
+                this.body.setLinearVelocity(-Constants.FARMER_VELOCITY *3, 0f);
             }else{
                 this.body.setLinearVelocity(0, 0f);
                 this.estate = this.getNewState();
@@ -127,8 +119,8 @@ public class FarmerActor extends Actor {
                 this.timeInState = 0;
             }
         }else if (this.estate == Estate.GOING_DOWN){
-            if (this.body.getPosition().y > 2 ){
-                this.body.setLinearVelocity(0, -Constants.FARMER_VELOCITY);
+            if (this.body.getPosition().y > MIN_Y ){
+                this.body.setLinearVelocity(0, -Constants.FARMER_VELOCITY*3);
             }else{
                 this.body.setLinearVelocity(0, 0f);
                 this.estate = this.getNewState();
@@ -148,7 +140,7 @@ public class FarmerActor extends Actor {
             }
         }else if (this.estate == Estate.GOING_RIGHT){
             if (this.body.getPosition().x < this.MAX_X ){
-                this.body.setLinearVelocity(Constants.FARMER_VELOCITY, 0f);
+                this.body.setLinearVelocity(Constants.FARMER_VELOCITY*3, 0f);
             }else{
                 this.body.setLinearVelocity(0, 0f);
                 this.estate = this.getNewState();
@@ -166,7 +158,7 @@ public class FarmerActor extends Actor {
                 this.estate = this.getNewState();
                 this.timeInState = 0;
             }
-        }else if (this.estate == Estate.ON_KEES){
+        }else if (this.estate == Estate.SLEEPING){
             this.body.setLinearVelocity(0, 0f);
 
             //going up animation
@@ -187,35 +179,34 @@ public class FarmerActor extends Actor {
 
     private Estate getNewState() {
         Estate newEstate;
-        this.timeToBeat = (float) (Math.random() * 10) + 1;
         do{
             int newIndex = (int) (Math.random() * 6 + 1);
 
+
             if (newIndex == 1 ){
                 newEstate = Estate.STOPED;
-                this.stepping = false;
             }else if (newIndex == 2 ){
                 newEstate = Estate.GOING_UP;
-                this.stepping = true;
             }else if (newIndex == 3 ){
                 newEstate = Estate.GOING_LEFT;
-                this.stepping = true;
             }else if (newIndex == 4 ){
                 newEstate = Estate.GOING_DOWN;
-                this.stepping = true;
             }else if (newIndex == 5 ){
                 newEstate = Estate.GOING_RIGHT;
-                this.stepping = true;
             }else{
-                newEstate = Estate.ON_KEES;
-                this.stepping = false;
+                newEstate = Estate.SLEEPING;
             }
         }while (this.estate == newEstate);
-
-        if (newEstate == Estate.ON_KEES){
+        this.timeToBeat = (float) (Math.random() * 10) + 1;
+        this.timeInState = 0;
+        if (this.estate == Estate.STOPED){
             timeToBeat += 10;
         }
-        this.timeInState = 0;
+
+        if (this.estate == Estate.SLEEPING){
+            timeToBeat += 25;
+        }
+
         return newEstate;
     }
 

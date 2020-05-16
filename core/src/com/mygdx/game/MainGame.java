@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Screens.AnimalsScreen;
 import com.mygdx.game.Screens.FieldScreen;
@@ -31,7 +32,7 @@ public class MainGame extends Game {
 	
 	@Override
 	public void create () {
-		this.soundFactory = new SoundFactory(this);
+
 		this.gameScreen = new GameScreen(this);
 		this.loadingScreen = new LoadingScreen(this);
 		this.preloadingScreen = new PreLoadingScreen(this);
@@ -44,7 +45,7 @@ public class MainGame extends Game {
 
 		assetManager = new AssetManager();
 
-		//texturas
+		//textures
 
 		assetManager.load("Textures/fieldPRO.png", Texture.class);
 		assetManager.load("Textures/truckPRO.png", Texture.class);
@@ -64,14 +65,23 @@ public class MainGame extends Game {
         assetManager.load("Textures/Road.png", Texture.class);
 
         for (int i = 0; i < 21; i++) {
-            String farmer = String.format("Textures/Farmer/Farmer%d.png",i);
+            String farmer = String.format("Textures/Farmer/Farmer%d.png", i);
             assetManager.load(farmer, Texture.class);
         }
 
 
+        //Sounds
+		assetManager.load("Sounds/roadnoise.wav", Sound.class);
+		assetManager.load("Sounds/sandstep2.wav", Sound.class);
+
+		assetManager.load("Sounds/RNDAmbient/crow.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/Duck.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/parrot.wav", Sound.class);
+
 
 		assetManager.finishLoading();
 
+		this.soundFactory = new SoundFactory(this);
 		this.setScreen(gameScreen);
 	}
 
