@@ -48,7 +48,8 @@ public class MainGame extends Game {
 		//textures
 
 		assetManager.load("Textures/fieldPRO.png", Texture.class);
-		assetManager.load("Textures/truckPRO.png", Texture.class);
+		assetManager.load("Textures/Truck1.png", Texture.class);
+		assetManager.load("Textures/Truck2.png", Texture.class);
 
 
 
@@ -67,8 +68,9 @@ public class MainGame extends Game {
         for (int i = 0; i < 21; i++) {
             String farmer = String.format("Textures/Farmer/Farmer%d.png", i);
             assetManager.load(farmer, Texture.class);
+			String dog = String.format("Textures/Dog/Dog%d.png", i);
+			assetManager.load(dog, Texture.class);
         }
-
 
         //Sounds
 		assetManager.load("Sounds/roadnoise.wav", Sound.class);

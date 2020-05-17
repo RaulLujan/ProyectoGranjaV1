@@ -16,7 +16,7 @@ import com.mygdx.game.SoundFactory;
 import java.util.List;
 
 public class TruckActor extends Actor {
-    private Texture texture;
+    private Texture texture, texture1, texture2;
     private World world;
     private Body body;
     private Fixture fixture;
@@ -29,10 +29,12 @@ public class TruckActor extends Actor {
 
     private SoundFactory sounds;
 
-    public TruckActor(World world, Texture texture, Vector2 position, SoundFactory sounds) {
+    public TruckActor(World world, Texture texture1,Texture texture2, Vector2 position, SoundFactory sounds) {
 
         this.world = world;
-        this.texture = texture;
+        this.texture = texture1;
+        this.texture1 = texture1;
+        this.texture2 = texture2;
         this.sounds = sounds;
         this.estate = TruckActor.Estate.STOPED;
 
@@ -64,6 +66,11 @@ public class TruckActor extends Actor {
         }else if (this.estate == Estate.STOPED) {
             this.timeStoped += delta;
             this.body.setLinearVelocity(0, 0);
+            if(Math.random()+1 == 0){
+                this.texture = texture1;
+            }else{
+                this.texture = texture2;
+            }
             if(this.timeStoped > this.timeToBeat){
                 this.estate = Estate.RUNNING;
                 if (!this.isSoundPlaying){
