@@ -73,10 +73,19 @@ public class MainGame extends Game {
         //Sounds
 		assetManager.load("Sounds/roadnoise.wav", Sound.class);
 		assetManager.load("Sounds/sandstep2.wav", Sound.class);
-
 		assetManager.load("Sounds/RNDAmbient/crow.wav", Sound.class);
 		assetManager.load("Sounds/RNDAmbient/Duck.wav", Sound.class);
 		assetManager.load("Sounds/RNDAmbient/parrot.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/chicken1.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/chicken2.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/chicken3.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/chicken4.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/cow.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/cow1.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/cow2.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/pig1.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/pig2.wav", Sound.class);
+		assetManager.load("Sounds/RNDAmbient/pig3.wav", Sound.class);
 
 
 		assetManager.finishLoading();
