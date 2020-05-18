@@ -42,10 +42,11 @@ public class GameScreen extends BaseScreen{
     private DogActor dogActor;
 
 
+
     //Textures
     private Texture fieldTexture, barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture,
     bushTexture, groundTexture, tree1Texture, tree2Texture, roadTexture, truck1Texture, truck2Texture;
-    private ArrayList<Texture> farmerTextures , dogTextures;
+    private ArrayList<Texture> farmerTextures , dogTextures, chikenTextures, pigTextures, cowTextures;
 
     //Images
     private ImageRepeart grondImage;
@@ -86,11 +87,22 @@ public class GameScreen extends BaseScreen{
 
         farmerTextures = new ArrayList<>(21);
         dogTextures = new ArrayList<>(21);
+        chikenTextures = new ArrayList<>(7);
+        pigTextures = new ArrayList<>(7);
+        cowTextures = new ArrayList<>(7);
         for (int i = 0; i < 21; i++) {
             String farmer = String.format("Textures/Farmer/Farmer%d.png",i);
             farmerTextures.add((Texture) game.getAssetManager().get(farmer));
             String dog = String.format("Textures/Dog/Dog%d.png",i);
             dogTextures.add((Texture) game.getAssetManager().get(dog));
+        }
+        for (int i = 0; i < 7; i++) {
+            String chicken = String.format("Textures/Chiken/Chiken%d.png", i);
+            chikenTextures.add((Texture) game.getAssetManager().get(chicken));
+            String pig = String.format("Textures/Pig/Pig%d.png", i);
+            // pigTextures.add((Texture) game.getAssetManager().get(pig));
+            String cow = String.format("Textures/Cow/Cow%d.png", i);
+            // cowTextures.add((Texture) game.getAssetManager().get(cow));
         }
 
 
@@ -297,6 +309,11 @@ public class GameScreen extends BaseScreen{
         for (int i = 0; i < 21; i++) {
             farmerTextures.get(i).dispose();
             dogTextures.get(i).dispose();
+        }
+        for (int i = 0; i < 7; i++) {
+            chikenTextures.get(i).dispose();
+            //pigTextures.get(i).dispose();
+            //cowTextures.get(i).dispose();
         }
 
         BaseActor[] allActors = { homeActor, fieldActor, shopActor, chickenBuildingActor, pigsBuildingActor, cowsBuildingActor,

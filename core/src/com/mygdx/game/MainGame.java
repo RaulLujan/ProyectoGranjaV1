@@ -72,6 +72,15 @@ public class MainGame extends Game {
 			assetManager.load(dog, Texture.class);
         }
 
+		for (int i = 0; i < 7; i++) {
+			String chicken = String.format("Textures/Chiken/Chiken%d.png", i);
+			assetManager.load(chicken, Texture.class);
+			String pig = String.format("Textures/Pig/Pig%d.png", i);
+			//assetManager.load(pig, Texture.class);
+			String cow = String.format("Textures/Cow/Cow%d.png", i);
+			//assetManager.load(cow, Texture.class);
+		}
+
         //Sounds
 		assetManager.load("Sounds/roadnoise.wav", Sound.class);
 		assetManager.load("Sounds/sandstep2.wav", Sound.class);

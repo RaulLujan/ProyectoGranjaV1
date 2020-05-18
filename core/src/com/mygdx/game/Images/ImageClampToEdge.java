@@ -19,4 +19,5 @@ public class ImageClampToEdge extends Image {
         setSize(Constants.PIXELS_IN_METER*width ,Constants.PIXELS_IN_METER*height );
         setPosition(x * Constants.PIXELS_IN_METER, y * Constants.PIXELS_IN_METER);
     }
+
 }
