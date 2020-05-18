@@ -49,7 +49,13 @@ public class SoundFactory {
     }
     public void stopStepSound()        { step.pause();    }
 
-
+    public void stopAll(){
+        road.stop();
+        step.stop();
+        for (Sound sound: RNDAmbientSounds) {
+            sound.stop();
+        }
+    }
 
 
 }

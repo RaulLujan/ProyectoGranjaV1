@@ -31,13 +31,13 @@ public class Home extends Actor {
         def.position.set(position);
         def.type = BodyDef.BodyType.StaticBody;
         body = world.createBody(def);
-
+        /*
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(2.5f, 2.5f);
         fixture = body.createFixture(shape, 5);
         fixture.setUserData("home");
         shape.dispose();
-
+        */
         setSize(5* Constants.PIXELS_IN_METER, 5*Constants.PIXELS_IN_METER);
     }
 

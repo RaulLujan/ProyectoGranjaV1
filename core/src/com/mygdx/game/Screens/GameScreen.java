@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Actors.AnimalsBuilding;
+import com.mygdx.game.Actors.DogActor;
 import com.mygdx.game.Actors.FarmerActor;
 import com.mygdx.game.Actors.Field;
 import com.mygdx.game.Actors.Home;
@@ -36,6 +38,7 @@ public class GameScreen extends BaseScreen{
     private Storage storageActor;
     private FarmerActor farmerActor;
     private TruckActor truckActor ;
+    private DogActor dogActor;
 
 
     //Textures
@@ -60,7 +63,7 @@ public class GameScreen extends BaseScreen{
     }
     @Override
     public void show() {
-        stage.setDebugAll(true); // On true se renderizan los bordes verdes de los actores e imágenes
+        stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
         Gdx.input.setInputProcessor(stage);
 
         //Cargamos texturas
@@ -100,7 +103,7 @@ public class GameScreen extends BaseScreen{
         storageActor = new Storage(world, storeTexture, new Vector2(26f, 9f), game.getSoundFactory());
         farmerActor = new FarmerActor(world,farmerTextures,new Vector2(10, 8), game.getSoundFactory());
         truckActor = new TruckActor(world, truck1Texture,truck2Texture, new Vector2(21, 25),game.getSoundFactory());
-
+        dogActor = new DogActor(world, dogTextures, new Vector2(23,13), game.getSoundFactory());
 
 
         grondImage = new ImageRepeart(groundTexture,-20,-10,60,40, 2f);
@@ -116,6 +119,8 @@ public class GameScreen extends BaseScreen{
 
         stage.addActor(truckActor);
         stage.addActor(shopActor);
+
+        stage.addActor(dogActor); //It is important to implement before Storage
         stage.addActor(storageActor);
         stage.addActor(farmerActor);
 
@@ -126,6 +131,7 @@ public class GameScreen extends BaseScreen{
                                 int pointer, int button) {
                 boolean touchdown=true;
                 game.setScreen(game.getStorageScreen());
+                game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
             }
@@ -144,6 +150,7 @@ public class GameScreen extends BaseScreen{
                                 int pointer, int button) {
                 boolean touchdown=true;
                 game.setScreen(game.getAnimalsScreen());
+                game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
             }
@@ -161,6 +168,7 @@ public class GameScreen extends BaseScreen{
                                 int pointer, int button) {
                 boolean touchdown=true;
                 game.setScreen(game.getAnimalsScreen());
+                game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
             }
@@ -178,6 +186,7 @@ public class GameScreen extends BaseScreen{
                                 int pointer, int button) {
                 boolean touchdown=true;
                 game.setScreen(game.getAnimalsScreen());
+                game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
             }
@@ -195,6 +204,7 @@ public class GameScreen extends BaseScreen{
                                 int pointer, int button) {
                 boolean touchdown=true;
                 game.setScreen(game.getMenuScreen());
+                game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
             }
@@ -212,6 +222,7 @@ public class GameScreen extends BaseScreen{
                                 int pointer, int button) {
                 boolean touchdown=true;
                 game.setScreen(game.getShopScreen());
+                game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
             }
@@ -229,6 +240,7 @@ public class GameScreen extends BaseScreen{
                                 int pointer, int button) {
                 boolean touchdown=true;
                 game.setScreen(game.getFieldScreen());
+                game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
             }
@@ -289,6 +301,7 @@ public class GameScreen extends BaseScreen{
             farmerTextures.get(i).dispose();
             dogTextures.get(i).dispose();
         }
+        //Actor[] allActor
 
         stage.getBatch().dispose();
         stage.dispose();

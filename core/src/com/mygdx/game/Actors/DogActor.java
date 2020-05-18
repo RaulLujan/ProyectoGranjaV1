@@ -23,9 +23,9 @@ public class DogActor extends Actor {
     private Fixture fixture;
     private enum Estate { STOPED, GOING_UP, GOING_DOWN, GOING_LEFT, GOING_RIGHT, SLEEPING}
     private  Estate estate;
-    private final float MAX_X = 30;
+    private final float MAX_X = 29.5f;
     private final float MAX_Y = 13;
-    private final float MIN_Y = 10;
+    private final float MIN_Y = 9.5f;
     private final float MIN_X = 22.75f;
     private float timeInState, timeToBeat, animationTime;
 
@@ -53,12 +53,12 @@ public class DogActor extends Actor {
 
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.45f, 0.9f);
+        shape.setAsBox(0.45f, 0.6f);
         fixture = body.createFixture(shape, 3);
         fixture.setUserData("dog");
         shape.dispose();
 
-        setSize(0.9f*Constants.PIXELS_IN_METER, 1.8f*Constants.PIXELS_IN_METER);
+        setSize(0.9f*Constants.PIXELS_IN_METER, 1.2f*Constants.PIXELS_IN_METER);
     }
 
     @Override
@@ -162,8 +162,8 @@ public class DogActor extends Actor {
             this.body.setLinearVelocity(0, 0f);
 
             //going up animation
-            if     (this.animationTime < 0.2f) { this.texture = this.textures.get(16);}
-            else if(this.animationTime < 0.4f) { this.texture = this.textures.get(17);}
+            if     (this.animationTime < 0.6f) { this.texture = this.textures.get(16);}
+            else if(this.animationTime < 0.8f) { this.texture = this.textures.get(17);}
 
             else                               { this.animationTime = 0;      }
 
@@ -197,14 +197,14 @@ public class DogActor extends Actor {
                 newEstate = Estate.SLEEPING;
             }
         }while (this.estate == newEstate);
-        this.timeToBeat = (float) (Math.random() * 10) + 1;
+        this.timeToBeat = (float) (Math.random() * 1.25f) + 0.25f;
         this.timeInState = 0;
-        if (this.estate == Estate.STOPED){
+        if (newEstate == Estate.STOPED){
             timeToBeat += 10;
         }
 
-        if (this.estate == Estate.SLEEPING){
-            timeToBeat += 25;
+        if (newEstate == Estate.SLEEPING){
+            timeToBeat += 15;
         }
 
         return newEstate;
@@ -214,7 +214,7 @@ public class DogActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         setPosition((body.getPosition().x - 0.45f) * Constants.PIXELS_IN_METER,
-                (body.getPosition().y - 0.8f) * Constants.PIXELS_IN_METER);
+                (body.getPosition().y - 0.6f) * Constants.PIXELS_IN_METER);
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 

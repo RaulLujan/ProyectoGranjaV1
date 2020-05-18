@@ -66,11 +66,7 @@ public class TruckActor extends Actor {
         }else if (this.estate == Estate.STOPED) {
             this.timeStoped += delta;
             this.body.setLinearVelocity(0, 0);
-            if(Math.random()+1 == 0){
-                this.texture = texture1;
-            }else{
-                this.texture = texture2;
-            }
+
             if(this.timeStoped > this.timeToBeat){
                 this.estate = Estate.RUNNING;
                 if (!this.isSoundPlaying){
@@ -81,6 +77,12 @@ public class TruckActor extends Actor {
         }
         if(this.body.getPosition().y < -5){
             this.body.setTransform(this.body.getPosition().x, 25, 0);
+            if((int)(Math.random() * 2) == 0){
+                this.texture = texture1;
+            }else{
+                this.texture = texture2;
+            }
+
             this.estate = Estate.STOPED;
             this.isSoundPlaying = false;
             this.sounds.stopRoadSound();

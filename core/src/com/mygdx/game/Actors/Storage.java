@@ -29,13 +29,13 @@ public class Storage extends Actor {
         def.position.set(position);
         def.type = BodyDef.BodyType.StaticBody;
         body = world.createBody(def);
-
+        /*
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(3f, 3f);
         fixture = body.createFixture(shape, 5);
         fixture.setUserData("storage");
         shape.dispose();
-
+        */
         setSize(6* Constants.PIXELS_IN_METER, 6*Constants.PIXELS_IN_METER);
     }
 
