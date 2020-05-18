@@ -15,7 +15,7 @@ import com.mygdx.game.SoundFactory;
 
 import java.util.List;
 
-public class FarmerActor extends Actor {
+public class FarmerActor extends BaseActor {
 
     private Texture texture;
     private World world;

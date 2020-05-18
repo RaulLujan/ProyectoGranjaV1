@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Actors.AnimalsBuilding;
+import com.mygdx.game.Actors.BaseActor;
 import com.mygdx.game.Actors.DogActor;
 import com.mygdx.game.Actors.FarmerActor;
 import com.mygdx.game.Actors.Field;
@@ -67,7 +68,7 @@ public class GameScreen extends BaseScreen{
         Gdx.input.setInputProcessor(stage);
 
         //Cargamos texturas
-        fieldTexture = game.getAssetManager().get("Textures/fieldPRO.png");
+        fieldTexture = game.getAssetManager().get("Textures/Crop.png");
         truck1Texture = game.getAssetManager().get("Textures/Truck1.png");
         truck2Texture = game.getAssetManager().get("Textures/Truck2.png");
 
@@ -282,10 +283,6 @@ public class GameScreen extends BaseScreen{
         stage.act();
         world.step(delta, 6, 2);
 
-        //stage.getCamera().position.set(fieldActor.getX(), fieldActor.getX(), stage.getCamera().position.z);
-
-
-
         stage.draw();
 
     }
@@ -301,7 +298,12 @@ public class GameScreen extends BaseScreen{
             farmerTextures.get(i).dispose();
             dogTextures.get(i).dispose();
         }
-        //Actor[] allActor
+
+        BaseActor[] allActors = { homeActor, fieldActor, shopActor, chickenBuildingActor, pigsBuildingActor, cowsBuildingActor,
+                storageActor, farmerActor, truckActor, dogActor};
+        for (BaseActor actor : allActors){
+            actor.detach();
+        }
 
         stage.getBatch().dispose();
         stage.dispose();

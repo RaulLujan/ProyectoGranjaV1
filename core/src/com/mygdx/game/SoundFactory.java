@@ -8,6 +8,8 @@ public class SoundFactory {
 
     private Sound road, step;
     private Sound[] RNDAmbientSounds;
+    private Music mainMusic;
+
 
     public SoundFactory(MainGame game) {
 
