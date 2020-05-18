@@ -35,13 +35,13 @@ public class GameScreen extends BaseScreen{
     private AnimalsBuilding chickenBuildingActor, pigsBuildingActor, cowsBuildingActor;
     private Storage storageActor;
     private FarmerActor farmerActor;
-    private TruckActor truckActor;
+    private TruckActor truckActor ;
 
 
     //Textures
     private Texture fieldTexture, barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture,
-    bushTexture, groundTexture, tree1Texture, tree2Texture, roadTexture, truckTexture;
-    private ArrayList<Texture> farmerTextures;
+    bushTexture, groundTexture, tree1Texture, tree2Texture, roadTexture, truck1Texture, truck2Texture;
+    private ArrayList<Texture> farmerTextures , dogTextures;
 
     //Images
     private ImageRepeart grondImage;
@@ -65,7 +65,8 @@ public class GameScreen extends BaseScreen{
 
         //Cargamos texturas
         fieldTexture = game.getAssetManager().get("Textures/fieldPRO.png");
-        truckTexture = game.getAssetManager().get("Textures/truckPRO.png");
+        truck1Texture = game.getAssetManager().get("Textures/Truck1.png");
+        truck2Texture = game.getAssetManager().get("Textures/Truck2.png");
 
         barnTexture = game.getAssetManager().get("Textures/Buildings/Barn.png");
         chickenCoopTexture = game.getAssetManager().get("Textures/Buildings/ChickenCoop.png");
@@ -80,10 +81,14 @@ public class GameScreen extends BaseScreen{
         roadTexture = game.getAssetManager().get("Textures/Road.png");
 
         farmerTextures = new ArrayList<>(21);
+        dogTextures = new ArrayList<>(21);
         for (int i = 0; i < 21; i++) {
             String farmer = String.format("Textures/Farmer/Farmer%d.png",i);
             farmerTextures.add((Texture) game.getAssetManager().get(farmer));
+            String dog = String.format("Textures/Dog/Dog%d.png",i);
+            dogTextures.add((Texture) game.getAssetManager().get(dog));
         }
+
 
 
         fieldActor = new Field(world, fieldTexture, new Vector2(10f, 5.5f), game.getSoundFactory());
@@ -94,7 +99,8 @@ public class GameScreen extends BaseScreen{
         shopActor = new Shop(world, shopTexture, new Vector2(25.75f, 3f), game.getSoundFactory());
         storageActor = new Storage(world, storeTexture, new Vector2(26f, 9f), game.getSoundFactory());
         farmerActor = new FarmerActor(world,farmerTextures,new Vector2(10, 8), game.getSoundFactory());
-        truckActor = new TruckActor(world, truckTexture, new Vector2(21, 25),game.getSoundFactory());
+        truckActor = new TruckActor(world, truck1Texture,truck2Texture, new Vector2(21, 25),game.getSoundFactory());
+
 
 
         grondImage = new ImageRepeart(groundTexture,-20,-10,60,40, 2f);
@@ -281,6 +287,7 @@ public class GameScreen extends BaseScreen{
         }
         for (int i = 0; i < 21; i++) {
             farmerTextures.get(i).dispose();
+            dogTextures.get(i).dispose();
         }
 
         stage.getBatch().dispose();
