@@ -122,6 +122,12 @@ public class MainGame extends Game {
 
 	}
 
+
+	public void goBackMenuScreen(){
+		this.setScreen(gameScreen);
+	}
+
+
 	//Obtiene las preferencias
 	public Preferences getPreferences(){
 		preferences = Gdx.app.getPreferences(PREFERENCES);
