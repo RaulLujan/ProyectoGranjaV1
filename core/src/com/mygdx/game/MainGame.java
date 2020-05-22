@@ -45,8 +45,11 @@ public class MainGame extends Game {
 
 		assetManager = new AssetManager();
 
-		//textures
+		//texture for loading
+		assetManager.load("Textures/tractor.png", Texture.class);
 
+
+		//textures
 		assetManager.load("Textures/Crop.png", Texture.class);
 		assetManager.load("Textures/Truck1.png", Texture.class);
 		assetManager.load("Textures/Truck2.png", Texture.class);
@@ -71,7 +74,7 @@ public class MainGame extends Game {
 			String dog = String.format("Textures/Dog/Dog%d.png", i);
 			assetManager.load(dog, Texture.class);
         }
-
+	/*
 		for (int i = 0; i < 7; i++) {
 			String chicken = String.format("Textures/Chiken/Chiken%d.png", i);
 			assetManager.load(chicken, Texture.class);
@@ -79,7 +82,7 @@ public class MainGame extends Game {
 			//assetManager.load(pig, Texture.class);
 			String cow = String.format("Textures/Cow/Cow%d.png", i);
 			//assetManager.load(cow, Texture.class);
-		}
+		}*/
 
         //Sounds
 		assetManager.load("Sounds/roadnoise.wav", Sound.class);

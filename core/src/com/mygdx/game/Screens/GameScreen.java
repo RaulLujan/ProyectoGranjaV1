@@ -95,7 +95,7 @@ public class GameScreen extends BaseScreen{
             farmerTextures.add((Texture) game.getAssetManager().get(farmer));
             String dog = String.format("Textures/Dog/Dog%d.png",i);
             dogTextures.add((Texture) game.getAssetManager().get(dog));
-        }
+        }/*
         for (int i = 0; i < 7; i++) {
             String chicken = String.format("Textures/Chiken/Chiken%d.png", i);
             chikenTextures.add((Texture) game.getAssetManager().get(chicken));
@@ -103,7 +103,7 @@ public class GameScreen extends BaseScreen{
             // pigTextures.add((Texture) game.getAssetManager().get(pig));
             String cow = String.format("Textures/Cow/Cow%d.png", i);
             // cowTextures.add((Texture) game.getAssetManager().get(cow));
-        }
+        }*/
 
 
 
