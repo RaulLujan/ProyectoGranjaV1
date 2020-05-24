@@ -1,5 +1,6 @@
 package com.mygdx.game.Screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -143,7 +144,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                game.setScreen(game.getStorageScreen());
+                GameScreen.this.game.showStorageScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
@@ -162,7 +163,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                game.setScreen(game.getAnimalsScreen());
+                GameScreen.this.game.showAnimalsScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
@@ -180,7 +181,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                game.setScreen(game.getAnimalsScreen());
+                GameScreen.this.game.showAnimalsScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
@@ -198,7 +199,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                game.setScreen(game.getAnimalsScreen());
+                GameScreen.this.game.showAnimalsScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
@@ -216,7 +217,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                game.setScreen(game.getMenuScreen());
+                GameScreen.this.game.showMenuScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
@@ -234,7 +235,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                game.setScreen(game.getShopScreen());
+                GameScreen.this.game.showShopScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
@@ -252,7 +253,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                game.setScreen(game.getFieldScreen());
+                GameScreen.this.game.showFieldScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..

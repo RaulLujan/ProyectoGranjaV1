@@ -7,11 +7,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.Dominio.Usuario;
 import com.mygdx.game.Screens.AnimalsScreen;
 import com.mygdx.game.Screens.FieldScreen;
 import com.mygdx.game.Screens.GameScreen;
 import com.mygdx.game.Screens.LoadingScreen;
-import com.mygdx.game.Screens.MenuScreen;
+import com.mygdx.game.Screens.OptionsScreen;
 import com.mygdx.game.Screens.PreLoadingScreen;
 import com.mygdx.game.Screens.ShopScreen;
 import com.mygdx.game.Screens.StorageScreen;
@@ -28,6 +29,8 @@ public class MainGame extends Game {
 	private Screen gameScreen, loadingScreen, preloadingScreen, menuScreen, loginScreen, fieldScreen,
 		shopScreen, storageScreen, animalsScreen;
 
+	private Usuario usuario;
+
 
 	
 	@Override
@@ -36,7 +39,7 @@ public class MainGame extends Game {
 		this.gameScreen = new GameScreen(this);
 		this.loadingScreen = new LoadingScreen(this);
 		this.preloadingScreen = new PreLoadingScreen(this);
-		this.menuScreen = new MenuScreen(this);
+		this.menuScreen = new OptionsScreen(this);
 		this.loginScreen = new LoadingScreen(this);
 		this.fieldScreen = new FieldScreen(this);
 		this.shopScreen =  new ShopScreen(this);
@@ -122,8 +125,29 @@ public class MainGame extends Game {
 
 	}
 
+	public void showAnimalsScreen(){
+		this.animalsScreen = new AnimalsScreen(this);
+		this.setScreen(animalsScreen);
+	}
+	public void showFieldScreen(){
+		this.fieldScreen = new FieldScreen(this);
+		this.setScreen(fieldScreen);
+	}
+	public void showMenuScreen(){
+		this.menuScreen = new OptionsScreen(this);
+		this.setScreen(menuScreen);
+	}
+	public void showStorageScreen(){
+		this.storageScreen = new StorageScreen(this);
+		this.setScreen(storageScreen);
+	}
+	public void showShopScreen(){
+		this.shopScreen = new ShopScreen(this);
+		this.setScreen(shopScreen);
+	}
 
-	public void goBackMenuScreen(){
+	public void showGameScreen(){
+		this.gameScreen = new GameScreen(this);
 		this.setScreen(gameScreen);
 	}
 

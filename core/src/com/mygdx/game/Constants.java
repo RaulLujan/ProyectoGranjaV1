@@ -11,7 +11,7 @@ public class Constants {
     public static final float FONT_SIZE = DEVICE_HEIGHT*0.003f;
 
     //change this to get a diferent in-game scale
-    public static final float PIXELS_IN_METER = DEVIDE_WIDTH / 30;
+    public static final float PIXELS_IN_METER = (DEVIDE_WIDTH / 30) * 0.94f;
 
     public static final float FARMER_VELOCITY = 0.7f;
 
