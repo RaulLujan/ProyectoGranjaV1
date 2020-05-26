@@ -149,10 +149,10 @@ public class ShopScreen extends BaseScreen {
                 TextButton.TextButtonStyle textButtonStyle;
                 if (i == 1) {
                     text = "Compar";
-                    textButtonStyle = StyleFactory.getStyle(StyleFactory.BLUE_COLOR, StyleFactory.DARK_BLUE_COLOR);
+                    textButtonStyle = StyleFactory.BLUE_TEXT_BUTTON_STYLE();
                 } else {
                     text = "Vender";
-                    textButtonStyle = StyleFactory.getStyle(StyleFactory.ORANGE_COLOR, StyleFactory.DARK_ORANGE_COLOR);
+                    textButtonStyle = StyleFactory.ORANGE_TEXT_BUTTON_STYLE();
                 }
                 actionButton[i][j] = new TextButton(text ,skin);
                 actionButton[i][j].setStyle(textButtonStyle);

@@ -1,7 +1,7 @@
 {
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	font: {
-		file: font-export.fnt
+		file: font-export.fnt,
 	}
 	title: {
 		file: font-title-export.fnt
@@ -42,6 +42,12 @@ com.badlogic.gdx.graphics.Color: {
 		r: 0.45275591
 		g: 0.45275591
 		b: 0.45275591
+		a: 1
+	}
+	orange: {
+		r: 1
+		g: 0.6
+		b: 0.2
 		a: 1
 	}
 	white: {
@@ -104,7 +110,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 	}
 	settings: {
 		up: button-settings
-		down: button-settings-pressed
+		down: button-settings-over
 		over: button-settings-over
 		disabled: button-settings-disabled
 	}
@@ -143,6 +149,13 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 		down: toggle-off-pressed
 		over: toggle-off-over
 		checked: toggle-on
+		checkedOver: toggle-on-over
+	}
+	switch_inverse: {
+		up: toggle-on
+		down: toggle-off-pressed
+		over: toggle-off-over
+		checked: toggle-off
 		checkedOver: toggle-on-over
 	}
 	minimize: {
@@ -260,6 +273,10 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		font: font
 		fontColor: pressed
 	}
+	custom_orange: {
+		font: font
+		fontColor: orange
+	}
 	custom_grey: {
 		font: font
 		fontColor: grey
@@ -357,6 +374,13 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+	default: {
+		font: font
+		fontColor: pressed
+		background: textfield
+		cursor: black
+		selection: button-color
+	}
 	default: {
 		font: font
 		fontColor: pressed

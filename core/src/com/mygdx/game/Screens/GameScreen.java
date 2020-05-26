@@ -1,12 +1,10 @@
 package com.mygdx.game.Screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -217,7 +215,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                GameScreen.this.game.showMenuScreen();
+                GameScreen.this.game.showOptionsScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..

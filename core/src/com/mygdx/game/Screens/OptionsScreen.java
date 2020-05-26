@@ -14,12 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
 import com.mygdx.game.MainGame;
+import com.mygdx.game.StyleFactory;
 
 public class OptionsScreen extends BaseScreen {
     private Stage stage;
@@ -32,7 +34,8 @@ public class OptionsScreen extends BaseScreen {
     private Label idLabel, userLabel, farmNameTitleLabel, farmNameLabel, volumeLabel, musicLabel, effectsLabel;
     private Button musicCheckBox, effectsCheckBox;
     private Slider volumeSlider;
-
+    private TextField neighbourTextField;
+    private Button.ButtonStyle onStyle, offStyle;
 
 
     public OptionsScreen(MainGame game) {
@@ -52,22 +55,25 @@ public class OptionsScreen extends BaseScreen {
 
         idLabel = new Label("Id usuario: 123456789", skin, "required");
         userLabel = new Label("Manuel Gonzalez", skin, "required");
-        farmNameTitleLabel = new Label("Granja:", skin, "custom_green");
-        volumeLabel = new Label("Volumen", skin, "custom_green");
-        musicLabel = new Label("Musica", skin, "custom_green");
-        effectsLabel = new Label("Efectos", skin, "custom_green");
+        farmNameTitleLabel = new Label("Nombre de la granja:", skin, "custom_grey");
+        volumeLabel = new Label("Volumen", skin, "custom_grey");
+        musicLabel = new Label("Musica", skin, "custom_grey");
+        effectsLabel = new Label("Efectos", skin, "custom_grey");
         farmNameLabel = new Label("La Ponderosa", skin, "custom_blue");
-
-
         area1 = new Window("", skin,"dialog");
         area2 = new Window("", skin,"dialog");
         area3 = new Window("", skin,"dialog");
         area4 = new Window("", skin,"dialog");
 
-        musicCheckBox = new Button(skin,"switch");
-        effectsCheckBox = new Button(skin,"switch");
 
-        volumeSlider = new Slider(0,1,0.05f, false, skin,"default-horizontal");
+        effectsCheckBox = new Button(skin,"switch_inverse");
+        onStyle = effectsCheckBox.getStyle();
+        musicCheckBox = new Button(skin,"switch");
+        offStyle = musicCheckBox.getStyle();
+
+
+        volumeSlider = new Slider(0,1,0.01f, false, skin,"default-horizontal");
+        neighbourTextField = new TextField("", skin);
 
         // Tamaño de la fuente
         goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
@@ -82,6 +88,10 @@ public class OptionsScreen extends BaseScreen {
         musicLabel.setFontScale(Constants.FONT_SIZE);
         effectsLabel.setFontScale(Constants.FONT_SIZE);
 
+        TextField.TextFieldStyle textFieldStyle = neighbourTextField.getStyle();
+        textFieldStyle.font.getData().setScale(Constants.FONT_SIZE);
+        neighbourTextField.setStyle(textFieldStyle);
+
         //funcionalidades
         goBackButton.addCaptureListener(new ChangeListener() {
             @Override
@@ -89,13 +99,40 @@ public class OptionsScreen extends BaseScreen {
                 OptionsScreen.this.game.showGameScreen();
             }
         });
-
+        goMenuButton.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                OptionsScreen.this.game.showMenuScreen();
+            }
+        });
+        closeSession.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                OptionsScreen.this.game.setUserLogged(false);
+                OptionsScreen.this.game.saveUserPreferences("","");
+                OptionsScreen.this.game.showLoginScreen();
+            }
+        });
+        musicCheckBox.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                OptionsScreen.this.game.getSoundFactory().setMusic(!OptionsScreen.this.game.getSoundFactory().isMusic());
+                //save preference
+            }
+        });
+        effectsCheckBox.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                OptionsScreen.this.game.getSoundFactory().setEffects(!OptionsScreen.this.game.getSoundFactory().isEffects());
+                //save preference
+            }
+        });
 
         volumeSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //example : pbrShader.metallicValue=metallicS.getValue();
-                //Slider Code
+                OptionsScreen.this.game.getSoundFactory().setVolume(volumeSlider.getValue());
+                //save preference
             }
         });
 
@@ -117,7 +154,8 @@ public class OptionsScreen extends BaseScreen {
         effectsLabel.setSize(Constants.DEVIDE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
         musicCheckBox.setSize(Constants.DEVIDE_WIDTH *0.06f, Constants.DEVICE_HEIGHT * 0.04f);
         effectsCheckBox.setSize(Constants.DEVIDE_WIDTH *0.06f, Constants.DEVICE_HEIGHT * 0.04f);
-        //volumeSlider.setSize(Constants.DEVIDE_WIDTH *0.5f, Constants.DEVICE_HEIGHT * 0.08f);
+        volumeSlider.setSize(Constants.DEVIDE_WIDTH *0.6f, Constants.DEVICE_HEIGHT * 0.08f);
+        neighbourTextField.setSize(Constants.DEVIDE_WIDTH *0.625f, Constants.DEVICE_HEIGHT * 0.08f);
 
 
         //posiciones de los elementos
@@ -127,20 +165,21 @@ public class OptionsScreen extends BaseScreen {
         area3.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.3f);
         area4.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.1f);
         goBackButton.setPosition(Constants.DEVIDE_WIDTH * 0.59f, Constants.DEVICE_HEIGHT * 0.125f);
-        addNeighbour.setPosition(Constants.DEVIDE_WIDTH * 0.77f, Constants.DEVICE_HEIGHT * 0.525f);
+        addNeighbour.setPosition(Constants.DEVIDE_WIDTH * 0.76f, Constants.DEVICE_HEIGHT * 0.525f);
         goMenuButton.setPosition(Constants.DEVIDE_WIDTH * 0.77f, Constants.DEVICE_HEIGHT * 0.125f);
-        closeSession.setPosition(Constants.DEVIDE_WIDTH * 0.77f, Constants.DEVICE_HEIGHT * 0.725f);
+        closeSession.setPosition(Constants.DEVIDE_WIDTH * 0.76f, Constants.DEVICE_HEIGHT * 0.725f);
         idLabel.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.8875f);
         userLabel.setPosition(Constants.DEVIDE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.8875f);
-        farmNameTitleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.2f, Constants.DEVICE_HEIGHT * 0.7375f);
-        farmNameLabel.setPosition(Constants.DEVIDE_WIDTH * 0.33f, Constants.DEVICE_HEIGHT * 0.7375f);
+        farmNameTitleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.7375f);
+        farmNameLabel.setPosition(Constants.DEVIDE_WIDTH * 0.38f, Constants.DEVICE_HEIGHT * 0.7375f);
         volumeLabel.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.3375f);
-       // volumeSlider.setPosition(Constants.DEVIDE_WIDTH * 0.3f, Constants.DEVICE_HEIGHT * 0.3375f);
+        volumeSlider.setPosition(Constants.DEVIDE_WIDTH * 0.28f, Constants.DEVICE_HEIGHT * 0.3375f);
 
         musicLabel.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.1375f);
         effectsLabel.setPosition(Constants.DEVIDE_WIDTH * 0.32f, Constants.DEVICE_HEIGHT * 0.1375f);
         musicCheckBox.setPosition(Constants.DEVIDE_WIDTH * 0.20f, Constants.DEVICE_HEIGHT * 0.15125f);
         effectsCheckBox.setPosition(Constants.DEVIDE_WIDTH * 0.44f, Constants.DEVICE_HEIGHT * 0.15125f);
+        neighbourTextField.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.535f);
 
 
 
@@ -152,18 +191,15 @@ public class OptionsScreen extends BaseScreen {
         area3.setTouchable(Touchable.disabled);
         area4.setTouchable(Touchable.disabled);
         userLabel.setAlignment(Align.right);
-        volumeSlider.scaleBy(3);
+        volumeSlider.getStyle().knob.setMinHeight(Constants.DEVIDE_WIDTH * 0.02f);
+        volumeSlider.getStyle().knob.setMinWidth(Constants.DEVIDE_WIDTH * 0.02f);
+        volumeSlider.getStyle().knobDown.setMinHeight(Constants.DEVIDE_WIDTH * 0.02f);
+        volumeSlider.getStyle().knobDown.setMinWidth(Constants.DEVIDE_WIDTH * 0.02f);
 
-
-        //scaling Slider
-        Container<Slider> container=new Container<Slider>(volumeSlider);
-        container.setTransform(true);   // for enabling scaling and rotation
-        container.size(Constants.DEVIDE_WIDTH *0.5f, Constants.DEVICE_HEIGHT * 0.08f);
-        container.setOrigin(container.getWidth() / 2, container.getHeight() / 2);
-        container.setPosition(Constants.DEVIDE_WIDTH * 0.55f, Constants.DEVICE_HEIGHT * 0.3775f);
-        container.setScale(1.5f);  //scale according to your requirement
-
-
+        addNeighbour.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
+        closeSession.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
+        goMenuButton.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
+        neighbourTextField.setMessageText(" Id usuario");
 
 
 
@@ -186,8 +222,8 @@ public class OptionsScreen extends BaseScreen {
         stage.addActor(effectsLabel);
         stage.addActor(musicCheckBox);
         stage.addActor(effectsCheckBox);
-        stage.addActor(container);
-        //stage.addActor(volumeSlider);
+        stage.addActor(volumeSlider);
+        stage.addActor(neighbourTextField);
 
     }
 
@@ -197,14 +233,17 @@ public class OptionsScreen extends BaseScreen {
         stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
         Gdx.input.setInputProcessor(stage);
 
-        //se añaden funciones a cada botón
-
+        //actualizacion estados segn preferencias
+        if (this.game.getSoundFactory().isMusic()) musicCheckBox.setStyle(onStyle);
+        if (!this.game.getSoundFactory().isEffects()) effectsCheckBox.setStyle(offStyle);
+        volumeSlider.setValue(this.game.getSoundFactory().getVolume());
 
 
     }
 
     @Override
     public void hide() {
+        this.game.saveSoundPreferences();
         Gdx.input.setInputProcessor(null);
         stage.clear();
         world.dispose();

@@ -7,6 +7,22 @@ public class TipoRecurso {
     private Tipo tipo;
     private float precioMaximo, precioMinimo;
 
+    //ATAJOS A INDICES
+    public final static int MONEY      = 0;
+    public final static int WATER      = 1;
+    public final static int MEAT       = 2;
+    public final static int MILK       = 3;
+    public final static int EGG        = 4;
+    public final static int MANURE     = 5;
+    public final static int HERBIZIDE  = 6;
+    public final static int POPATO     = 7;
+    public final static int CORN       = 8;
+    public final static int STRAWBERRY = 9;
+    public final static int COW       = 10;
+    public final static int PIG       = 11;
+    public final static int CHICKEN   = 12;
+
+
 
     public TipoRecurso(int id, String nombre, Tipo tipo, float precioMaximo, float precioMinimo) {
         this.id = id;

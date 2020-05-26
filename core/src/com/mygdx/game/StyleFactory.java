@@ -25,6 +25,18 @@ public class StyleFactory {
     public static final Color GREY_BLUE_COLOR = new Color(0,0.6f,0.6f,1);
     public static final Color RED_COLOR = new Color(0.6f,0,0,1);
     public static final Color DARK_RED_COLOR = new Color(0.4f,0,0,1);
+    public static final Color WHITE_COLOR = new Color(1,1,1,1);
+
+
+
+
+    public static TextButtonStyle BLUE_TEXT_BUTTON_STYLE(){
+        return getStyle(BLUE_COLOR, DARK_BLUE_COLOR);
+    }
+
+    public static TextButtonStyle ORANGE_TEXT_BUTTON_STYLE(){
+        return getStyle(ORANGE_COLOR, DARK_ORANGE_COLOR);
+    }
 
     public static WindowStyle getStyle(Color color) {
         SpriteDrawable bgDrawble= new SpriteDrawable(new Sprite(createTexture(color)));

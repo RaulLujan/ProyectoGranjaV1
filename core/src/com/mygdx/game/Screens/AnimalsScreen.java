@@ -167,8 +167,8 @@ public class AnimalsScreen extends BaseScreen{
         areaB.setTouchable(Touchable.disabled);
         tabletop.setTouchable(Touchable.disabled);
         table.setTouchable(Touchable.disabled);
-        buyButton.setStyle(StyleFactory.getStyle(StyleFactory.BLUE_COLOR, StyleFactory.DARK_BLUE_COLOR));
-        sellButton.setStyle(StyleFactory.getStyle(StyleFactory.ORANGE_COLOR, StyleFactory.DARK_ORANGE_COLOR));
+        buyButton.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
+        sellButton.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
         cowsButton.setStyle(StyleFactory.getStyle(StyleFactory.DARK_GREY_BLUE_COLOR, StyleFactory.GREY_BLUE_COLOR));
         pigsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
         chickenButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));

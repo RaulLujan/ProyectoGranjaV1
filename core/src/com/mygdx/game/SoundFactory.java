@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
@@ -9,9 +10,11 @@ public class SoundFactory {
     private Sound road, step;
     private Sound[] RNDAmbientSounds;
     private Music mainMusic;
+    private float volume;
+    private boolean music, effects;
 
 
-    public SoundFactory(MainGame game) {
+    public SoundFactory(MainGame game, Preferences preferences) {
 
         road = game.getAssetManager().get("Sounds/roadnoise.wav");
         step = game.getAssetManager().get("Sounds/sandstep2.wav");
@@ -31,25 +34,26 @@ public class SoundFactory {
         RNDAmbientSounds[11] = game.getAssetManager().get("Sounds/RNDAmbient/pig2.wav");
         RNDAmbientSounds[12] = game.getAssetManager().get("Sounds/RNDAmbient/pig3.wav");
 
+        this.volume = preferences.getFloat(game.VOLUME_KEY, 1f);
+        this.music = preferences.getBoolean(game.MUSIC_KEY, true);
+        this.effects = preferences.getBoolean(game.EFFECTS_KEY, true);
     }
 
     public void playRDNSound(){
         int i = (int) (Math.random() * RNDAmbientSounds.length);
-        RNDAmbientSounds[i].play();
+        if (effects) RNDAmbientSounds[i].play(volume);
     }
 
 
     public void playRoadSound() {
-       road.play();
-       road.loop();
+        if (effects)road.loop(volume);
     }
     public void stopRoadSound()        { road.stop();    }
 
     public void playStepSound()        {
-        step.play(0.1f);
-        step.loop();
+        if (effects) step.loop(volume);
     }
-    public void stopStepSound()        { step.pause();    }
+    public void stopStepSound()        { step.stop();    }
 
     public void stopAll(){
         road.stop();
@@ -60,4 +64,31 @@ public class SoundFactory {
     }
 
 
+
+
+    // GETTERS & SEETERS
+
+    public float getVolume() {
+        return volume;
+    }
+
+    public void setVolume(float volume) {
+        this.volume = volume;
+    }
+
+    public boolean isMusic() {
+        return music;
+    }
+
+    public void setMusic(boolean music) {
+        this.music = music;
+    }
+
+    public boolean isEffects() {
+        return effects;
+    }
+
+    public void setEffects(boolean effects) {
+        this.effects = effects;
+    }
 }

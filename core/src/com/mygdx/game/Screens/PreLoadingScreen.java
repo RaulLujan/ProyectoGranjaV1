@@ -12,11 +12,13 @@ import com.mygdx.game.MainGame;
 public class PreLoadingScreen extends BaseScreen {
     private Stage stage;
     private World world;
+    private float timeinThisScreen;
 
     public PreLoadingScreen(MainGame game) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
+        timeinThisScreen = 0;
     }
 
     @Override
@@ -36,13 +38,16 @@ public class PreLoadingScreen extends BaseScreen {
     @Override
     public void render(float delta) {
         //limpieza de la pantalla
-        Gdx.gl.glClearColor(0.2f, 0.8f, 0.2f, 1f);
+        Gdx.gl.glClearColor(0, 0, 0, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //movimiento del mundo
         stage.act();
         world.step(delta, 6, 2);
-
+        timeinThisScreen += delta;
+        if (timeinThisScreen > 2){
+            this.game.showLoadingScreen();
+        }
 
         stage.draw();
 

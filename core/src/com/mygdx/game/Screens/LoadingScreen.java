@@ -18,6 +18,7 @@ public class LoadingScreen extends BaseScreen {
     private World world;
     private TractorActor tractorActor;
     private Texture tractorTexture;
+    private float timeinLoadingScreen;
 
     public LoadingScreen(MainGame game) {
         super(game);
@@ -28,10 +29,13 @@ public class LoadingScreen extends BaseScreen {
     @Override
     public void show() {
         stage.setDebugAll(true); // On true se renderizan los bordes verdes de los actores e imágenes
+        timeinLoadingScreen = 0;
+        tractorTexture = game.getAssetManager().get("Textures/tractor.png");
 
-        tractorTexture = game.getAssetManager().get("Textures/Buildings/tractor.png");
 
-        tractorActor = new TractorActor(world, tractorTexture, new Vector2(2,2) );
+        tractorActor = new TractorActor(world, tractorTexture, new Vector2(
+                                                            Constants.DEVIDE_WIDTH / Constants.PIXELS_IN_METER / 2,
+                                                            Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER / 2) );
         stage.addActor(tractorActor);
 
 
@@ -47,7 +51,7 @@ public class LoadingScreen extends BaseScreen {
     @Override
     public void render(float delta) {
         //limpieza de la pantalla
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+        Gdx.gl.glClearColor(0.9f,0.9f, 0.9f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //movimiento del mundo
@@ -55,7 +59,15 @@ public class LoadingScreen extends BaseScreen {
         world.step(delta, 6, 2);
 
 
+        timeinLoadingScreen += delta;
+
+        if (Gdx.input.justTouched() && this.timeinLoadingScreen > 3){
+            this.game.showMenuScreen();
+        }
+
         stage.draw();
+
+
 
     }
 

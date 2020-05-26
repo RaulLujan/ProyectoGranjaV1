@@ -19,7 +19,7 @@ public class TractorActor extends BaseActor {
     private Fixture fixture;
 
 
-    public TractorActor(World world, Texture textures, Vector2 position) {
+    public TractorActor(World world, Texture texture, Vector2 position) {
 
         this.world = world;
         this.texture = texture;
@@ -33,12 +33,12 @@ public class TractorActor extends BaseActor {
 
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.5f, 0.5f);
+        shape.setAsBox(5f, 5f);
         fixture = body.createFixture(shape, 3);
         fixture.setUserData("tractor");
         shape.dispose();
 
-        setSize(1f* Constants.PIXELS_IN_METER, 1f*Constants.PIXELS_IN_METER);
+        setSize(10f* Constants.PIXELS_IN_METER, 10f*Constants.PIXELS_IN_METER);
     }
 
     @Override
@@ -52,8 +52,8 @@ public class TractorActor extends BaseActor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition((body.getPosition().x - 0.5f) * Constants.PIXELS_IN_METER,
-                (body.getPosition().y - 0.5f) * Constants.PIXELS_IN_METER);
+        setPosition((body.getPosition().x - 5f) * Constants.PIXELS_IN_METER,
+                (body.getPosition().y - 5f) * Constants.PIXELS_IN_METER);
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 

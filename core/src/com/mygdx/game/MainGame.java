@@ -12,6 +12,8 @@ import com.mygdx.game.Screens.AnimalsScreen;
 import com.mygdx.game.Screens.FieldScreen;
 import com.mygdx.game.Screens.GameScreen;
 import com.mygdx.game.Screens.LoadingScreen;
+import com.mygdx.game.Screens.LoginScreen;
+import com.mygdx.game.Screens.MenuScreen;
 import com.mygdx.game.Screens.OptionsScreen;
 import com.mygdx.game.Screens.PreLoadingScreen;
 import com.mygdx.game.Screens.ShopScreen;
@@ -20,31 +22,29 @@ import com.mygdx.game.Screens.StorageScreen;
 public class MainGame extends Game {
 
 	private Preferences preferences;
-	private static final String PREFERENCES = "FarmPreferences";
-	private static final String HIGH_SCORE_KEY = "TopScore";
+	public final String PREFERENCES = "FarmerDayPreferences";
+    public final String LOGIN_KEY = "loginKey";
+    public final String PASS_KEY = "passKey";
+    public final String MUSIC_KEY = "musicKey";
+    public final String EFFECTS_KEY = "effectsKey";
+    public final String VOLUME_KEY = "volumeKey";
+    private boolean userLogged;
 
 	private SoundFactory soundFactory;
 	private AssetManager assetManager;
 
 	private Screen gameScreen, loadingScreen, preloadingScreen, menuScreen, loginScreen, fieldScreen,
-		shopScreen, storageScreen, animalsScreen;
+		shopScreen, storageScreen, animalsScreen, optionScreen;
 
 	private Usuario usuario;
+
 
 
 	
 	@Override
 	public void create () {
 
-		this.gameScreen = new GameScreen(this);
-		this.loadingScreen = new LoadingScreen(this);
-		this.preloadingScreen = new PreLoadingScreen(this);
-		this.menuScreen = new OptionsScreen(this);
-		this.loginScreen = new LoadingScreen(this);
-		this.fieldScreen = new FieldScreen(this);
-		this.shopScreen =  new ShopScreen(this);
-		this.storageScreen = new StorageScreen(this);
-		this.animalsScreen = new AnimalsScreen(this);
+        usuario = DomainMocker.getMockedUser();
 
 		assetManager = new AssetManager();
 
@@ -57,7 +57,7 @@ public class MainGame extends Game {
 		assetManager.load("Textures/Truck1.png", Texture.class);
 		assetManager.load("Textures/Truck2.png", Texture.class);
 
-
+		assetManager.load("Textures/BackGrounds/menuBack.jpg", Texture.class);
 
 		assetManager.load("Textures/Buildings/Barn.png", Texture.class);
 		assetManager.load("Textures/Buildings/ChickenCoop.png", Texture.class);
@@ -77,15 +77,7 @@ public class MainGame extends Game {
 			String dog = String.format("Textures/Dog/Dog%d.png", i);
 			assetManager.load(dog, Texture.class);
         }
-	/*
-		for (int i = 0; i < 7; i++) {
-			String chicken = String.format("Textures/Chiken/Chiken%d.png", i);
-			assetManager.load(chicken, Texture.class);
-			String pig = String.format("Textures/Pig/Pig%d.png", i);
-			//assetManager.load(pig, Texture.class);
-			String cow = String.format("Textures/Cow/Cow%d.png", i);
-			//assetManager.load(cow, Texture.class);
-		}*/
+
 
         //Sounds
 		assetManager.load("Sounds/roadnoise.wav", Sound.class);
@@ -103,39 +95,44 @@ public class MainGame extends Game {
 		assetManager.load("Sounds/RNDAmbient/pig1.wav", Sound.class);
 		assetManager.load("Sounds/RNDAmbient/pig2.wav", Sound.class);
 		assetManager.load("Sounds/RNDAmbient/pig3.wav", Sound.class);
-
-
 		assetManager.finishLoading();
+		this.actualizePreferences();
+		this.soundFactory = new SoundFactory(this, Gdx.app.getPreferences(PREFERENCES));
 
-		this.soundFactory = new SoundFactory(this);
-		this.setScreen(gameScreen);
+		if ( validate(preferences.getString(LOGIN_KEY, ""), preferences.getString(PASS_KEY,"")) ){
+			this.userLogged = true;
+		}else{
+			this.userLogged = false;
+		}
+
+
+		//this.userLogged = false; //only for test
+		this.preloadingScreen = new PreLoadingScreen(this);
+		this.setScreen(preloadingScreen);
 	}
 
 
-
-
-
-	// Guardado de preferencias
-	public void savePreferences(int scoreToave){
-		preferences = Gdx.app.getPreferences(PREFERENCES);
-
-		//se añaden las preferencias
-		preferences.putInteger(HIGH_SCORE_KEY, scoreToave);
-		preferences.flush();
-
-	}
 
 	public void showAnimalsScreen(){
 		this.animalsScreen = new AnimalsScreen(this);
 		this.setScreen(animalsScreen);
 	}
+
 	public void showFieldScreen(){
 		this.fieldScreen = new FieldScreen(this);
 		this.setScreen(fieldScreen);
 	}
 	public void showMenuScreen(){
-		this.menuScreen = new OptionsScreen(this);
+		this.menuScreen = new MenuScreen(this);
 		this.setScreen(menuScreen);
+	}
+	public void showLoginScreen(){
+		this.loginScreen = new LoginScreen(this);
+		this.setScreen(loginScreen);
+	}
+	public void showOptionsScreen(){
+		this.optionScreen = new OptionsScreen(this);
+		this.setScreen(optionScreen);
 	}
 	public void showStorageScreen(){
 		this.storageScreen = new StorageScreen(this);
@@ -147,18 +144,47 @@ public class MainGame extends Game {
 	}
 
 	public void showGameScreen(){
-		this.gameScreen = new GameScreen(this);
-		this.setScreen(gameScreen);
+		if (this.userLogged) {
+			this.gameScreen = new GameScreen(this);
+			this.setScreen(gameScreen);
+		}else{
+			showLoginScreen();
+		}
+	}
+	public void showLoadingScreen() {
+		this.loadingScreen = new LoadingScreen(this);
+		this.setScreen(loadingScreen);
 	}
 
+    // Guardado de preferencias
+    public void saveUserPreferences(String login, String pass) {
+        preferences = Gdx.app.getPreferences(PREFERENCES);
+        if (login != null) preferences.putString(LOGIN_KEY, login);
+        if (pass != null) preferences.putString(PASS_KEY, pass);
+		preferences.flush();
+    }
+
+    public void saveSoundPreferences(){
+        preferences = Gdx.app.getPreferences(PREFERENCES);
+        preferences.putBoolean(MUSIC_KEY, this.soundFactory.isMusic());
+        preferences.putBoolean(EFFECTS_KEY, this.soundFactory.isEffects());
+        preferences.putFloat(VOLUME_KEY, this.soundFactory.getVolume());
+
+        preferences.flush();
+
+    }
 
 	//Obtiene las preferencias
-	public Preferences getPreferences(){
+	public void actualizePreferences(){
 		preferences = Gdx.app.getPreferences(PREFERENCES);
-
-
-		return preferences;
 	}
+
+
+	public boolean validate (String login, String pass){
+
+	    return (login.equals(this.usuario.getLogin()) && pass.equals(this.usuario.getPass()));
+
+    }
 
 	public Screen getGameScreen() {
 		return gameScreen;
@@ -203,5 +229,17 @@ public class MainGame extends Game {
 
 	public AssetManager getAssetManager() {
 		return assetManager;
+	}
+
+	public Screen getOptionScreen() {
+		return optionScreen;
+	}
+
+	public boolean isUserLogged() {
+		return userLogged;
+	}
+
+	public void setUserLogged(boolean userLogged) {
+		this.userLogged = userLogged;
 	}
 }
