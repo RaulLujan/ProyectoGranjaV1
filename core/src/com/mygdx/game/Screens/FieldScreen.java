@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
+import com.mygdx.game.DialogFactory;
 import com.mygdx.game.MainGame;
 
 public class FieldScreen extends BaseScreen {
@@ -38,7 +39,7 @@ public class FieldScreen extends BaseScreen {
 
     public FieldScreen(MainGame game) {
         super(game);
-        this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
+        this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
 
@@ -111,61 +112,72 @@ public class FieldScreen extends BaseScreen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                //Plant field code
+                String mensaje ="Plantando como una fiera\n a lo bestia";
+                DialogFactory.showOkDialog(FieldScreen.this, stage, "TITULO", mensaje, 0.5f, 0.4f);
+            }
+        });
+
+        waterButton.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                //Plant field code
+                String mensaje ="Regando como una fiera\n a lo bestia";
+                DialogFactory.showOkCancelDialog(FieldScreen.this, stage, "TITULO", mensaje, 0.4f, 0.4f);
             }
         });
 
         //Tamaños de los elementos
         for (Label label: labels){
-            label.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+            label.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
         }
-        goBackButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        plantButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.08f);
-        waterButton.setSize(Constants.DEVIDE_WIDTH  * 0.04f, Constants.DEVIDE_WIDTH *0.04f);
-        manureButton.setSize(Constants.DEVIDE_WIDTH  * 0.04f, Constants.DEVIDE_WIDTH *0.04f);
-        herbicideButton.setSize(Constants.DEVIDE_WIDTH  * 0.04f, Constants.DEVIDE_WIDTH *0.04f);
+        goBackButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        plantButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.08f);
+        waterButton.setSize(Constants.DEVICE_WIDTH * 0.04f, Constants.DEVICE_WIDTH *0.04f);
+        manureButton.setSize(Constants.DEVICE_WIDTH * 0.04f, Constants.DEVICE_WIDTH *0.04f);
+        herbicideButton.setSize(Constants.DEVICE_WIDTH * 0.04f, Constants.DEVICE_WIDTH *0.04f);
 
 
-        fundsLabel.setSize(Constants.DEVIDE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
+        fundsLabel.setSize(Constants.DEVICE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
 
-        areaL.setSize(Constants.DEVIDE_WIDTH *0.45f, Constants.DEVICE_HEIGHT * 0.3f);
-        areaR.setSize(Constants.DEVIDE_WIDTH *0.45f, Constants.DEVICE_HEIGHT * 0.3f);
-        areaB.setSize(Constants.DEVIDE_WIDTH *0.8f, Constants.DEVICE_HEIGHT * 0.5f);
-        typeSelectioSP.setSize(Constants.DEVIDE_WIDTH* 0.25f, Constants.DEVICE_HEIGHT * 0.08f);
+        areaL.setSize(Constants.DEVICE_WIDTH *0.45f, Constants.DEVICE_HEIGHT * 0.3f);
+        areaR.setSize(Constants.DEVICE_WIDTH *0.45f, Constants.DEVICE_HEIGHT * 0.3f);
+        areaB.setSize(Constants.DEVICE_WIDTH *0.8f, Constants.DEVICE_HEIGHT * 0.5f);
+        typeSelectioSP.setSize(Constants.DEVICE_WIDTH * 0.25f, Constants.DEVICE_HEIGHT * 0.08f);
 
 
 
         //posiciones de los elementos
-        goBackButton.setPosition(Constants.DEVIDE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
-        fundsLabel.setPosition(Constants.DEVIDE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
-        estateTileLabel.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.71f);
-        estateLabel.setPosition(Constants.DEVIDE_WIDTH * 0.3f, Constants.DEVICE_HEIGHT * 0.71f);
-        timeTitleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.61f);
-        timeLabel.setPosition(Constants.DEVIDE_WIDTH * 0.3f, Constants.DEVICE_HEIGHT * 0.61f);
-        areaL.setPosition(Constants.DEVIDE_WIDTH * 0.049f, Constants.DEVICE_HEIGHT * 0.55f);
-        areaR.setPosition(Constants.DEVIDE_WIDTH * 0.501f, Constants.DEVICE_HEIGHT * 0.55f);
-        areaB.setPosition(Constants.DEVIDE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.03f);
-        typeSelectioSP.setPosition(Constants.DEVIDE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.71f);
-        plantButton.setPosition(Constants.DEVIDE_WIDTH * 0.7f, Constants.DEVICE_HEIGHT * 0.61f);
+        goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
+        fundsLabel.setPosition(Constants.DEVICE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
+        estateTileLabel.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.71f);
+        estateLabel.setPosition(Constants.DEVICE_WIDTH * 0.3f, Constants.DEVICE_HEIGHT * 0.71f);
+        timeTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.61f);
+        timeLabel.setPosition(Constants.DEVICE_WIDTH * 0.3f, Constants.DEVICE_HEIGHT * 0.61f);
+        areaL.setPosition(Constants.DEVICE_WIDTH * 0.049f, Constants.DEVICE_HEIGHT * 0.55f);
+        areaR.setPosition(Constants.DEVICE_WIDTH * 0.501f, Constants.DEVICE_HEIGHT * 0.55f);
+        areaB.setPosition(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.03f);
+        typeSelectioSP.setPosition(Constants.DEVICE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.71f);
+        plantButton.setPosition(Constants.DEVICE_WIDTH * 0.7f, Constants.DEVICE_HEIGHT * 0.61f);
 
-        infoTypeTipleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.44f);
-        infotypeLabel.setPosition(Constants.DEVIDE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.44f);
-        levelTitleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.34f);
-        levelLabel.setPosition(Constants.DEVIDE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.34f);
-        waterTitleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.24f);
-        waterLabel.setPosition(Constants.DEVIDE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.24f);
-        manureTitleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.14f);
-        manureLabel.setPosition(Constants.DEVIDE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.14f);
-        grassTitleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.04f);
-        grassLabel.setPosition(Constants.DEVIDE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.04f);
+        infoTypeTipleLabel.setPosition(Constants.DEVICE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.44f);
+        infotypeLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.44f);
+        levelTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.34f);
+        levelLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.34f);
+        waterTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.24f);
+        waterLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.24f);
+        manureTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.14f);
+        manureLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.14f);
+        grassTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.04f);
+        grassLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.04f);
 
-        addLabel.setPosition(Constants.DEVIDE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.42f);
-        waterQuantitylabel.setPosition(Constants.DEVIDE_WIDTH * 0.57f, Constants.DEVICE_HEIGHT * 0.28f);
-        manureQuantityLabel.setPosition(Constants.DEVIDE_WIDTH * 0.57f, Constants.DEVICE_HEIGHT * 0.19f);
-        herbizideQuantityLabel.setPosition(Constants.DEVIDE_WIDTH * 0.57f, Constants.DEVICE_HEIGHT * 0.1f);
+        addLabel.setPosition(Constants.DEVICE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.42f);
+        waterQuantitylabel.setPosition(Constants.DEVICE_WIDTH * 0.57f, Constants.DEVICE_HEIGHT * 0.28f);
+        manureQuantityLabel.setPosition(Constants.DEVICE_WIDTH * 0.57f, Constants.DEVICE_HEIGHT * 0.19f);
+        herbizideQuantityLabel.setPosition(Constants.DEVICE_WIDTH * 0.57f, Constants.DEVICE_HEIGHT * 0.1f);
 
-        waterButton.setPosition(Constants.DEVIDE_WIDTH * 0.79f, Constants.DEVICE_HEIGHT * 0.29f);
-        manureButton.setPosition(Constants.DEVIDE_WIDTH * 0.79f, Constants.DEVICE_HEIGHT * 0.2f);
-        herbicideButton.setPosition(Constants.DEVIDE_WIDTH * 0.79f, Constants.DEVICE_HEIGHT * 0.11f);
+        waterButton.setPosition(Constants.DEVICE_WIDTH * 0.79f, Constants.DEVICE_HEIGHT * 0.29f);
+        manureButton.setPosition(Constants.DEVICE_WIDTH * 0.79f, Constants.DEVICE_HEIGHT * 0.2f);
+        herbicideButton.setPosition(Constants.DEVICE_WIDTH * 0.79f, Constants.DEVICE_HEIGHT * 0.11f);
 
         //estados
         areaR.setTouchable(Touchable.disabled);
@@ -247,5 +259,17 @@ public class FieldScreen extends BaseScreen {
         stage.dispose();
         world.dispose();
 
+    }
+
+
+
+
+    public void disableAll(boolean enableDisable){
+        goBackButton.setDisabled(enableDisable);
+        typeSelectioSP.setDisabled(enableDisable);
+        plantButton.setDisabled(enableDisable);
+        waterButton.setDisabled(enableDisable);
+        manureButton.setDisabled(enableDisable);
+        herbicideButton.setDisabled(enableDisable);
     }
 }

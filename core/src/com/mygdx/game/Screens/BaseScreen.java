@@ -51,5 +51,8 @@ public abstract class BaseScreen implements Screen {
         // This method is invoked when the game closes.
     }
 
+
+    public abstract void disableAll(boolean enableDisable);
+
 }
 

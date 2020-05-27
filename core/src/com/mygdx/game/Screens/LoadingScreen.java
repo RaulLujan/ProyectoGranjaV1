@@ -22,7 +22,7 @@ public class LoadingScreen extends BaseScreen {
 
     public LoadingScreen(MainGame game) {
         super(game);
-        this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
+        this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
     }
 
@@ -34,7 +34,7 @@ public class LoadingScreen extends BaseScreen {
 
 
         tractorActor = new TractorActor(world, tractorTexture, new Vector2(
-                                                            Constants.DEVIDE_WIDTH / Constants.PIXELS_IN_METER / 2,
+                                                            Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER / 2,
                                                             Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER / 2) );
         stage.addActor(tractorActor);
 
@@ -78,6 +78,9 @@ public class LoadingScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
+
+    }
+    public void disableAll(boolean enableDisable){
 
     }
 }

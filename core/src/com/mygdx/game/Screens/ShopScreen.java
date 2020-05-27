@@ -16,8 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
+import com.mygdx.game.Dominio.Espacio;
+import com.mygdx.game.Dominio.Precio;
 import com.mygdx.game.MainGame;
 import com.mygdx.game.StyleFactory;
+
+import java.util.ArrayList;
 
 public class ShopScreen extends BaseScreen {
     private Stage stage;
@@ -37,10 +41,11 @@ public class ShopScreen extends BaseScreen {
 
     public ShopScreen(MainGame game) {
         super(game);
-        this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
+        this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
 
+        int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
@@ -49,7 +54,7 @@ public class ShopScreen extends BaseScreen {
         goBackButton = new TextButton("Volver", skin, "custom");
         areaT = new Window("", skin);
         areaB = new Window("", skin,"dialog");
-        fundsLabel = new Label("Fondos: 1.450.654 $",skin, "required");
+        fundsLabel = new Label(String.format("Fondos: %s", recursos), skin, "required");
         resourceNameHeadLabel = new Label("Recurso",skin, "white");
         pricesHeadLabel = new Label("Precios V/C",skin, "white");
         quantityHeadLabel = new Label("Cantidad",skin, "white");
@@ -74,24 +79,24 @@ public class ShopScreen extends BaseScreen {
         });
 
         //Tamaños de los elementos
-        goBackButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        areaT.setSize(Constants.DEVIDE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.08f);
-        areaB.setSize(Constants.DEVIDE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.72f);
-        fundsLabel.setSize(Constants.DEVIDE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
+        goBackButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        areaT.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.08f);
+        areaB.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.72f);
+        fundsLabel.setSize(Constants.DEVICE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
 
-        resourceNameHeadLabel.setSize(Constants.DEVIDE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
-        pricesHeadLabel.setSize(Constants.DEVIDE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
-        quantityHeadLabel.setSize(Constants.DEVIDE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
+        resourceNameHeadLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
+        pricesHeadLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
+        quantityHeadLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
 
         //posiciones de los elementos
-        goBackButton.setPosition(Constants.DEVIDE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
-        fundsLabel.setPosition(Constants.DEVIDE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
-        areaT.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.75f);
-        areaB.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.03f);
+        goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
+        fundsLabel.setPosition(Constants.DEVICE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
+        areaT.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.75f);
+        areaB.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.03f);
 
-        resourceNameHeadLabel.setPosition(Constants.DEVIDE_WIDTH * 0.09f, Constants.DEVICE_HEIGHT * 0.75f);
-        pricesHeadLabel.setPosition(Constants.DEVIDE_WIDTH * 0.24f, Constants.DEVICE_HEIGHT * 0.75f);
-        quantityHeadLabel.setPosition(Constants.DEVIDE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.75f);
+        resourceNameHeadLabel.setPosition(Constants.DEVICE_WIDTH * 0.09f, Constants.DEVICE_HEIGHT * 0.75f);
+        pricesHeadLabel.setPosition(Constants.DEVICE_WIDTH * 0.24f, Constants.DEVICE_HEIGHT * 0.75f);
+        quantityHeadLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.75f);
 
         //estados
         areaT.setStyle(StyleFactory.getStyle(StyleFactory.BLUE_COLOR));
@@ -108,14 +113,32 @@ public class ShopScreen extends BaseScreen {
         stage.addActor(pricesHeadLabel);
         stage.addActor(quantityHeadLabel);
 
+        ArrayList<Precio> prices = (ArrayList<Precio>)this.game.getUsuario().getGranja().getPrecios();
+       //ESPACIOS
+        ArrayList<Espacio> espacios = (ArrayList<Espacio>)this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios();
+
+
         //datos de la tabla
         for(int i = 0; i< rows.length;i++){
             for(int j = 0; j< rows[i].length;j++){
-                rows[i][j] = new Label("xxx",skin,"required");
+
+                if (i == 0){
+                    rows[i][j] = new Label(prices.get(j+1).getTipoRecurso().getNombre(),skin,"required");
+                }else if (i == 1){
+                    int buy = (int)prices.get(j+1).getTipoRecurso().getPrecioMinimo();
+                    int sell = (int)(prices.get(j+1).getTipoRecurso().getPrecioMinimo() * 1.1);
+                    String precioVC = String.format("%s / %s",buy,sell);
+                    rows[i][j] = new Label(precioVC,skin,"required");
+                }else{
+                    int recursos2= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
+                    rows[i][j] = new Label(String.format("%s",espacios.get(j+1).getOcupacionAactual()) ,skin,"required");
+                }
+
+
                 rows[i][j].setFontScale(Constants.FONT_SIZE);
                 rows[i][j].setAlignment(Align.center);
-                rows[i][j].setSize(Constants.DEVIDE_WIDTH * 0.11f, Constants.DEVICE_HEIGHT * 0.08f);
-                rows[i][j].setPosition(Constants.DEVIDE_WIDTH *( 0.09f + i * 0.15f ), Constants.DEVICE_HEIGHT * (0.03f + j * 0.08f));
+                rows[i][j].setSize(Constants.DEVICE_WIDTH * 0.11f, Constants.DEVICE_HEIGHT * 0.08f);
+                rows[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.09f + i * 0.15f ), Constants.DEVICE_HEIGHT * (0.03f + j * 0.08f));
                 stage.addActor(rows[i][j]);
 
             }
@@ -126,8 +149,8 @@ public class ShopScreen extends BaseScreen {
                 String type;
                 if (i == 1) type = "spinner-plus-h"; else type = "spinner-minus-h";
                 addButtons[i][j] = new Button(skin, type);
-                addButtons[i][j].setSize(Constants.DEVIDE_WIDTH * 0.03f, Constants.DEVIDE_WIDTH * 0.03f);
-                addButtons[i][j].setPosition(Constants.DEVIDE_WIDTH *( 0.55f + i * 0.1f ), Constants.DEVICE_HEIGHT * (0.04f + j * 0.08f));
+                addButtons[i][j].setSize(Constants.DEVICE_WIDTH * 0.03f, Constants.DEVICE_WIDTH * 0.03f);
+                addButtons[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.55f + i * 0.1f ), Constants.DEVICE_HEIGHT * (0.04f + j * 0.08f));
                 stage.addActor(addButtons[i][j]);
             }
         }
@@ -136,8 +159,8 @@ public class ShopScreen extends BaseScreen {
             quantityLabels[i] = new Label("000",skin,"custom_blue");
             quantityLabels[i].setFontScale(Constants.FONT_SIZE * 0.8f);
             quantityLabels[i].setAlignment(Align.center);
-            quantityLabels[i].setSize(Constants.DEVIDE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.08f);
-            quantityLabels[i].setPosition(Constants.DEVIDE_WIDTH * 0.565f, Constants.DEVICE_HEIGHT * (0.025f +i * 0.08f));
+            quantityLabels[i].setSize(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.08f);
+            quantityLabels[i].setPosition(Constants.DEVICE_WIDTH * 0.565f, Constants.DEVICE_HEIGHT * (0.025f +i * 0.08f));
             stage.addActor(quantityLabels[i]);
 
         }
@@ -157,8 +180,8 @@ public class ShopScreen extends BaseScreen {
                 actionButton[i][j] = new TextButton(text ,skin);
                 actionButton[i][j].setStyle(textButtonStyle);
                 actionButton[i][j].getLabel().setFontScale(Constants.FONT_SIZE * 0.7f);
-                actionButton[i][j].setSize(Constants.DEVIDE_WIDTH * 0.09f, Constants.DEVICE_HEIGHT * 0.06f);
-                actionButton[i][j].setPosition(Constants.DEVIDE_WIDTH *( 0.72f + i * 0.11f ), Constants.DEVICE_HEIGHT * (0.035f + j * 0.08f));
+                actionButton[i][j].setSize(Constants.DEVICE_WIDTH * 0.09f, Constants.DEVICE_HEIGHT * 0.06f);
+                actionButton[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.72f + i * 0.11f ), Constants.DEVICE_HEIGHT * (0.035f + j * 0.08f));
                 stage.addActor(actionButton[i][j]);
             }
         }
@@ -206,6 +229,9 @@ public class ShopScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
+
+    }
+    public void disableAll(boolean enableDisable){
 
     }
 }

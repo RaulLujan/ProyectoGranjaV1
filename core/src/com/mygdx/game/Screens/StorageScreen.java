@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
 import com.mygdx.game.MainGame;
@@ -38,7 +37,7 @@ public class StorageScreen extends BaseScreen {
 
     public StorageScreen(MainGame game) {
         super(game);
-        this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
+        this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
 
@@ -146,71 +145,71 @@ public class StorageScreen extends BaseScreen {
         });
 
         //Tamaños de los elementos
-        goBackButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        button1.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        button2.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        button3.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        button4.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        area1.setSize(Constants.DEVIDE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
-        area2.setSize(Constants.DEVIDE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
-        area3.setSize(Constants.DEVIDE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
-        area4.setSize(Constants.DEVIDE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
-        fundsLabel.setSize(Constants.DEVIDE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
-        depositNameLabel1.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        depositNameLabel2.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        depositNameLabel3.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        depositNameLabel4.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        quantityTitleLabel1.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        quantityTitleLabel2.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        quantityTitleLabel3.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        quantityTitleLabel4.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        quantityLabel1.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        quantityLabel2.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        quantityLabel3.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        quantityLabel4.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        resourcesTitleLabel1.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        resourcesTitleLabel2.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        resourcesTitleLabel3.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        resourcesTitleLabel4.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        resourcesLabel1.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        resourcesLabel2.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        resourcesLabel3.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        resourcesLabel4.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        goBackButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        button1.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        button2.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        button3.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        button4.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        area1.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
+        area2.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
+        area3.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
+        area4.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
+        fundsLabel.setSize(Constants.DEVICE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
+        depositNameLabel1.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        depositNameLabel2.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        depositNameLabel3.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        depositNameLabel4.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        quantityTitleLabel1.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        quantityTitleLabel2.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        quantityTitleLabel3.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        quantityTitleLabel4.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        quantityLabel1.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        quantityLabel2.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        quantityLabel3.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        quantityLabel4.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        resourcesTitleLabel1.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        resourcesTitleLabel2.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        resourcesTitleLabel3.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        resourcesTitleLabel4.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        resourcesLabel1.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        resourcesLabel2.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        resourcesLabel3.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        resourcesLabel4.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
 
 
 
 
         //posiciones de los elementos
-        goBackButton.setPosition(Constants.DEVIDE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
-        fundsLabel.setPosition(Constants.DEVIDE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
-        area1.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.66f);
-        area2.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.45f);
-        area3.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.24f);
-        area4.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.03f);
-        button1.setPosition(Constants.DEVIDE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.7f);
-        button2.setPosition(Constants.DEVIDE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.49f);
-        button3.setPosition(Constants.DEVIDE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.28f);
-        button4.setPosition(Constants.DEVIDE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.07f);
-        depositNameLabel1.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.71f);
-        depositNameLabel2.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.51f);
-        depositNameLabel3.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.29f);
-        depositNameLabel4.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.08f);
-        quantityTitleLabel1.setPosition(Constants.DEVIDE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.75f);
-        quantityTitleLabel2.setPosition(Constants.DEVIDE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.54f);
-        quantityTitleLabel3.setPosition(Constants.DEVIDE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.33f);
-        quantityTitleLabel4.setPosition(Constants.DEVIDE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.12f);
-        quantityLabel1.setPosition(Constants.DEVIDE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.75f);
-        quantityLabel2.setPosition(Constants.DEVIDE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.54f);
-        quantityLabel3.setPosition(Constants.DEVIDE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.33f);
-        quantityLabel4.setPosition(Constants.DEVIDE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.12f);
-        resourcesTitleLabel1.setPosition(Constants.DEVIDE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.68f);
-        resourcesTitleLabel2.setPosition(Constants.DEVIDE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.47f);
-        resourcesTitleLabel3.setPosition(Constants.DEVIDE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.26f);
-        resourcesTitleLabel4.setPosition(Constants.DEVIDE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.05f);
-        resourcesLabel1.setPosition(Constants.DEVIDE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.68f);
-        resourcesLabel2.setPosition(Constants.DEVIDE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.47f);
-        resourcesLabel3.setPosition(Constants.DEVIDE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.26f);
-        resourcesLabel4.setPosition(Constants.DEVIDE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.05f);
+        goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
+        fundsLabel.setPosition(Constants.DEVICE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
+        area1.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.66f);
+        area2.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.45f);
+        area3.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.24f);
+        area4.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.03f);
+        button1.setPosition(Constants.DEVICE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.7f);
+        button2.setPosition(Constants.DEVICE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.49f);
+        button3.setPosition(Constants.DEVICE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.28f);
+        button4.setPosition(Constants.DEVICE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.07f);
+        depositNameLabel1.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.71f);
+        depositNameLabel2.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.51f);
+        depositNameLabel3.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.29f);
+        depositNameLabel4.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.08f);
+        quantityTitleLabel1.setPosition(Constants.DEVICE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.75f);
+        quantityTitleLabel2.setPosition(Constants.DEVICE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.54f);
+        quantityTitleLabel3.setPosition(Constants.DEVICE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.33f);
+        quantityTitleLabel4.setPosition(Constants.DEVICE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.12f);
+        quantityLabel1.setPosition(Constants.DEVICE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.75f);
+        quantityLabel2.setPosition(Constants.DEVICE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.54f);
+        quantityLabel3.setPosition(Constants.DEVICE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.33f);
+        quantityLabel4.setPosition(Constants.DEVICE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.12f);
+        resourcesTitleLabel1.setPosition(Constants.DEVICE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.68f);
+        resourcesTitleLabel2.setPosition(Constants.DEVICE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.47f);
+        resourcesTitleLabel3.setPosition(Constants.DEVICE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.26f);
+        resourcesTitleLabel4.setPosition(Constants.DEVICE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.05f);
+        resourcesLabel1.setPosition(Constants.DEVICE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.68f);
+        resourcesLabel2.setPosition(Constants.DEVICE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.47f);
+        resourcesLabel3.setPosition(Constants.DEVICE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.26f);
+        resourcesLabel4.setPosition(Constants.DEVICE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.05f);
 
 
 
@@ -303,6 +302,9 @@ public class StorageScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
+
+    }
+    public void disableAll(boolean enableDisable){
 
     }
 }

@@ -31,7 +31,7 @@ public class MenuScreen extends BaseScreen {
 
    public MenuScreen(MainGame game) {
         super(game);
-        this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
+        this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
 
@@ -43,7 +43,7 @@ public class MenuScreen extends BaseScreen {
        // inicialización de los elementos
        goBackButton = new TextButton("Jugar", skin, "custom");
        settingButton = new Button(skin, "settings");
-       backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVIDE_WIDTH / Constants.PIXELS_IN_METER,
+       backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                                                                             Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
        titleLabel = new Label("A Farmer's Day", skin, "custom_orange");
        idLbabel = new Label("Id: 123456789", skin, "custom_grey");
@@ -70,16 +70,16 @@ public class MenuScreen extends BaseScreen {
        idLbabel.setFontScale(Constants.FONT_SIZE * 0.8f);
 
        //tamaño de los elementos
-       goBackButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-       settingButton.setSize(Constants.DEVIDE_WIDTH  * 0.05f,Constants.DEVIDE_WIDTH  * 0.05f);
-       titleLabel.setSize(Constants.DEVIDE_WIDTH  * 0.6f,Constants.DEVIDE_WIDTH  * 0.15f);
-       idLbabel.setSize(Constants.DEVIDE_WIDTH  * 0.3f,Constants.DEVIDE_WIDTH  * 0.08f);
+       goBackButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+       settingButton.setSize(Constants.DEVICE_WIDTH * 0.05f,Constants.DEVICE_WIDTH * 0.05f);
+       titleLabel.setSize(Constants.DEVICE_WIDTH * 0.6f,Constants.DEVICE_WIDTH * 0.15f);
+       idLbabel.setSize(Constants.DEVICE_WIDTH * 0.3f,Constants.DEVICE_WIDTH * 0.08f);
 
         //posición de los elementos
-       goBackButton.setPosition(Constants.DEVIDE_WIDTH * 0.425f, Constants.DEVICE_HEIGHT * 0.05f);
-       settingButton.setPosition(Constants.DEVIDE_WIDTH * 0.94f, Constants.DEVICE_HEIGHT * 0.9f);
-       titleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.2f, Constants.DEVICE_HEIGHT * 0.64f);
-       idLbabel.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.88375f);
+       goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.425f, Constants.DEVICE_HEIGHT * 0.05f);
+       settingButton.setPosition(Constants.DEVICE_WIDTH * 0.94f, Constants.DEVICE_HEIGHT * 0.9f);
+       titleLabel.setPosition(Constants.DEVICE_WIDTH * 0.2f, Constants.DEVICE_HEIGHT * 0.64f);
+       idLbabel.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.88375f);
 
 
        stage.addActor(backgroundImage);
@@ -125,6 +125,9 @@ public class MenuScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
+
+    }
+    public void disableAll(boolean enableDisable){
 
     }
 }

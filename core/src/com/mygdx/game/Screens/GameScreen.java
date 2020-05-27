@@ -57,7 +57,7 @@ public class GameScreen extends BaseScreen{
 
     public GameScreen(MainGame game) {
         super(game);
-        this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
+        this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, -10), true);
         this.timeSinceLastRNDSound = 0;
 
@@ -324,6 +324,9 @@ public class GameScreen extends BaseScreen{
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
+
+    }
+    public void disableAll(boolean enableDisable){
 
     }
 

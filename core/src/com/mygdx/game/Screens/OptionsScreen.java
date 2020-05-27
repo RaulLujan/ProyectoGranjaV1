@@ -8,8 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -40,7 +38,7 @@ public class OptionsScreen extends BaseScreen {
 
     public OptionsScreen(MainGame game) {
         super(game);
-        this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
+        this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
 
@@ -137,49 +135,49 @@ public class OptionsScreen extends BaseScreen {
         });
 
         //Tamaños de los elementos
-        goBackButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        addNeighbour.setSize(Constants.DEVIDE_WIDTH  * 0.17f, Constants.DEVICE_HEIGHT *0.10f);
-        closeSession.setSize(Constants.DEVIDE_WIDTH  * 0.17f, Constants.DEVICE_HEIGHT *0.10f);
-        goMenuButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        area1.setSize(Constants.DEVIDE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.15f);
-        area2.setSize(Constants.DEVIDE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.15f);
-        area3.setSize(Constants.DEVIDE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.15f);
-        area4.setSize(Constants.DEVIDE_WIDTH *0.5f, Constants.DEVICE_HEIGHT * 0.15f);
-        idLabel.setSize(Constants.DEVIDE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.08f);
-        userLabel.setSize(Constants.DEVIDE_WIDTH *0.35f, Constants.DEVICE_HEIGHT * 0.08f);
-        farmNameTitleLabel.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        farmNameLabel.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        volumeLabel.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
-        musicLabel.setSize(Constants.DEVIDE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
-        effectsLabel.setSize(Constants.DEVIDE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
-        musicCheckBox.setSize(Constants.DEVIDE_WIDTH *0.06f, Constants.DEVICE_HEIGHT * 0.04f);
-        effectsCheckBox.setSize(Constants.DEVIDE_WIDTH *0.06f, Constants.DEVICE_HEIGHT * 0.04f);
-        volumeSlider.setSize(Constants.DEVIDE_WIDTH *0.6f, Constants.DEVICE_HEIGHT * 0.08f);
-        neighbourTextField.setSize(Constants.DEVIDE_WIDTH *0.625f, Constants.DEVICE_HEIGHT * 0.08f);
+        goBackButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        addNeighbour.setSize(Constants.DEVICE_WIDTH * 0.17f, Constants.DEVICE_HEIGHT *0.10f);
+        closeSession.setSize(Constants.DEVICE_WIDTH * 0.17f, Constants.DEVICE_HEIGHT *0.10f);
+        goMenuButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        area1.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.15f);
+        area2.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.15f);
+        area3.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.15f);
+        area4.setSize(Constants.DEVICE_WIDTH *0.5f, Constants.DEVICE_HEIGHT * 0.15f);
+        idLabel.setSize(Constants.DEVICE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.08f);
+        userLabel.setSize(Constants.DEVICE_WIDTH *0.35f, Constants.DEVICE_HEIGHT * 0.08f);
+        farmNameTitleLabel.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        farmNameLabel.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        volumeLabel.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
+        musicLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
+        effectsLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
+        musicCheckBox.setSize(Constants.DEVICE_WIDTH *0.06f, Constants.DEVICE_HEIGHT * 0.04f);
+        effectsCheckBox.setSize(Constants.DEVICE_WIDTH *0.06f, Constants.DEVICE_HEIGHT * 0.04f);
+        volumeSlider.setSize(Constants.DEVICE_WIDTH *0.6f, Constants.DEVICE_HEIGHT * 0.08f);
+        neighbourTextField.setSize(Constants.DEVICE_WIDTH *0.625f, Constants.DEVICE_HEIGHT * 0.08f);
 
 
         //posiciones de los elementos
 
-        area1.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.7f);
-        area2.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.5f);
-        area3.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.3f);
-        area4.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.1f);
-        goBackButton.setPosition(Constants.DEVIDE_WIDTH * 0.59f, Constants.DEVICE_HEIGHT * 0.125f);
-        addNeighbour.setPosition(Constants.DEVIDE_WIDTH * 0.76f, Constants.DEVICE_HEIGHT * 0.525f);
-        goMenuButton.setPosition(Constants.DEVIDE_WIDTH * 0.77f, Constants.DEVICE_HEIGHT * 0.125f);
-        closeSession.setPosition(Constants.DEVIDE_WIDTH * 0.76f, Constants.DEVICE_HEIGHT * 0.725f);
-        idLabel.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.8875f);
-        userLabel.setPosition(Constants.DEVIDE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.8875f);
-        farmNameTitleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.7375f);
-        farmNameLabel.setPosition(Constants.DEVIDE_WIDTH * 0.38f, Constants.DEVICE_HEIGHT * 0.7375f);
-        volumeLabel.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.3375f);
-        volumeSlider.setPosition(Constants.DEVIDE_WIDTH * 0.28f, Constants.DEVICE_HEIGHT * 0.3375f);
+        area1.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.7f);
+        area2.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.5f);
+        area3.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.3f);
+        area4.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.1f);
+        goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.59f, Constants.DEVICE_HEIGHT * 0.125f);
+        addNeighbour.setPosition(Constants.DEVICE_WIDTH * 0.76f, Constants.DEVICE_HEIGHT * 0.525f);
+        goMenuButton.setPosition(Constants.DEVICE_WIDTH * 0.77f, Constants.DEVICE_HEIGHT * 0.125f);
+        closeSession.setPosition(Constants.DEVICE_WIDTH * 0.76f, Constants.DEVICE_HEIGHT * 0.725f);
+        idLabel.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.8875f);
+        userLabel.setPosition(Constants.DEVICE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.8875f);
+        farmNameTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.7375f);
+        farmNameLabel.setPosition(Constants.DEVICE_WIDTH * 0.38f, Constants.DEVICE_HEIGHT * 0.7375f);
+        volumeLabel.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.3375f);
+        volumeSlider.setPosition(Constants.DEVICE_WIDTH * 0.28f, Constants.DEVICE_HEIGHT * 0.3375f);
 
-        musicLabel.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.1375f);
-        effectsLabel.setPosition(Constants.DEVIDE_WIDTH * 0.32f, Constants.DEVICE_HEIGHT * 0.1375f);
-        musicCheckBox.setPosition(Constants.DEVIDE_WIDTH * 0.20f, Constants.DEVICE_HEIGHT * 0.15125f);
-        effectsCheckBox.setPosition(Constants.DEVIDE_WIDTH * 0.44f, Constants.DEVICE_HEIGHT * 0.15125f);
-        neighbourTextField.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.535f);
+        musicLabel.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.1375f);
+        effectsLabel.setPosition(Constants.DEVICE_WIDTH * 0.32f, Constants.DEVICE_HEIGHT * 0.1375f);
+        musicCheckBox.setPosition(Constants.DEVICE_WIDTH * 0.20f, Constants.DEVICE_HEIGHT * 0.15125f);
+        effectsCheckBox.setPosition(Constants.DEVICE_WIDTH * 0.44f, Constants.DEVICE_HEIGHT * 0.15125f);
+        neighbourTextField.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.535f);
 
 
 
@@ -191,10 +189,10 @@ public class OptionsScreen extends BaseScreen {
         area3.setTouchable(Touchable.disabled);
         area4.setTouchable(Touchable.disabled);
         userLabel.setAlignment(Align.right);
-        volumeSlider.getStyle().knob.setMinHeight(Constants.DEVIDE_WIDTH * 0.02f);
-        volumeSlider.getStyle().knob.setMinWidth(Constants.DEVIDE_WIDTH * 0.02f);
-        volumeSlider.getStyle().knobDown.setMinHeight(Constants.DEVIDE_WIDTH * 0.02f);
-        volumeSlider.getStyle().knobDown.setMinWidth(Constants.DEVIDE_WIDTH * 0.02f);
+        volumeSlider.getStyle().knob.setMinHeight(Constants.DEVICE_WIDTH * 0.02f);
+        volumeSlider.getStyle().knob.setMinWidth(Constants.DEVICE_WIDTH * 0.02f);
+        volumeSlider.getStyle().knobDown.setMinHeight(Constants.DEVICE_WIDTH * 0.02f);
+        volumeSlider.getStyle().knobDown.setMinWidth(Constants.DEVICE_WIDTH * 0.02f);
 
         addNeighbour.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
         closeSession.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
@@ -272,6 +270,9 @@ public class OptionsScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
+
+    }
+    public void disableAll(boolean enableDisable){
 
     }
 }

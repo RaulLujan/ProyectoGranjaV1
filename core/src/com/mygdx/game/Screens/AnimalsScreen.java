@@ -38,7 +38,7 @@ public class AnimalsScreen extends BaseScreen{
 
     public AnimalsScreen(MainGame game) {
         super(game);
-        this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
+        this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
         // apariencias de los skins
@@ -126,41 +126,41 @@ public class AnimalsScreen extends BaseScreen{
         });
 
         //Tamaños de los elementos
-        goBackButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        buyButton.setSize(Constants.DEVIDE_WIDTH  * 0.12f, Constants.DEVICE_HEIGHT *0.06f);
-        sellButton.setSize(Constants.DEVIDE_WIDTH  * 0.12f, Constants.DEVICE_HEIGHT *0.06f);
-        fundsLabel.setSize(Constants.DEVIDE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
-        capacityLabel.setSize(Constants.DEVIDE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
-        advertLabel.setSize(Constants.DEVIDE_WIDTH *0.6f, Constants.DEVICE_HEIGHT * 0.10f);
-        cowsButton.setSize(Constants.DEVIDE_WIDTH *0.3f, Constants.DEVICE_HEIGHT * 0.13f);
-        chickenButton.setSize(Constants.DEVIDE_WIDTH *0.3f, Constants.DEVICE_HEIGHT * 0.13f);
-        pigsButton.setSize(Constants.DEVIDE_WIDTH *0.3f, Constants.DEVICE_HEIGHT * 0.13f);
-        areaB.setSize(Constants.DEVIDE_WIDTH *0.88f, Constants.DEVICE_HEIGHT * 0.7f);
-        table.setSize(Constants.DEVIDE_WIDTH *0.69f, Constants.DEVICE_HEIGHT * 0.44f);
-        tabletop.setSize(Constants.DEVIDE_WIDTH *0.69f, Constants.DEVICE_HEIGHT * 0.08f);
-        reproduceSwitchButton.setSize(Constants.DEVIDE_WIDTH *0.06f, Constants.DEVICE_HEIGHT * 0.04f);
-        nameHeadLabel.setSize(Constants.DEVIDE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
-        typeHeadLabel.setSize(Constants.DEVIDE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
-        dateHeadLabel.setSize(Constants.DEVIDE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
+        goBackButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        buyButton.setSize(Constants.DEVICE_WIDTH * 0.12f, Constants.DEVICE_HEIGHT *0.06f);
+        sellButton.setSize(Constants.DEVICE_WIDTH * 0.12f, Constants.DEVICE_HEIGHT *0.06f);
+        fundsLabel.setSize(Constants.DEVICE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
+        capacityLabel.setSize(Constants.DEVICE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
+        advertLabel.setSize(Constants.DEVICE_WIDTH *0.6f, Constants.DEVICE_HEIGHT * 0.10f);
+        cowsButton.setSize(Constants.DEVICE_WIDTH *0.3f, Constants.DEVICE_HEIGHT * 0.13f);
+        chickenButton.setSize(Constants.DEVICE_WIDTH *0.3f, Constants.DEVICE_HEIGHT * 0.13f);
+        pigsButton.setSize(Constants.DEVICE_WIDTH *0.3f, Constants.DEVICE_HEIGHT * 0.13f);
+        areaB.setSize(Constants.DEVICE_WIDTH *0.88f, Constants.DEVICE_HEIGHT * 0.7f);
+        table.setSize(Constants.DEVICE_WIDTH *0.69f, Constants.DEVICE_HEIGHT * 0.44f);
+        tabletop.setSize(Constants.DEVICE_WIDTH *0.69f, Constants.DEVICE_HEIGHT * 0.08f);
+        reproduceSwitchButton.setSize(Constants.DEVICE_WIDTH *0.06f, Constants.DEVICE_HEIGHT * 0.04f);
+        nameHeadLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
+        typeHeadLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
+        dateHeadLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
 
 
         //posiciones de los elementos
-        goBackButton.setPosition(Constants.DEVIDE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
-        fundsLabel.setPosition(Constants.DEVIDE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
-        cowsButton.setPosition(Constants.DEVIDE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.72f);
-        pigsButton.setPosition(Constants.DEVIDE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.72f);
-        chickenButton.setPosition(Constants.DEVIDE_WIDTH * 0.65f, Constants.DEVICE_HEIGHT * 0.72f);
-        areaB.setPosition(Constants.DEVIDE_WIDTH * 0.06f, Constants.DEVICE_HEIGHT * 0.03f);
-        tabletop.setPosition(Constants.DEVIDE_WIDTH * 0.08f, Constants.DEVICE_HEIGHT * 0.45f);
-        table.setPosition(Constants.DEVIDE_WIDTH * 0.08f, Constants.DEVICE_HEIGHT * 0.03f);
-        capacityLabel.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.61f);
-        advertLabel.setPosition(Constants.DEVIDE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.53f);
-        buyButton.setPosition(Constants.DEVIDE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.63f);
-        sellButton.setPosition(Constants.DEVIDE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.63f);
-        reproduceSwitchButton.setPosition(Constants.DEVIDE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.555f);
-        nameHeadLabel.setPosition(Constants.DEVIDE_WIDTH * 0.16f, Constants.DEVICE_HEIGHT * 0.45f);
-        typeHeadLabel.setPosition(Constants.DEVIDE_WIDTH * 0.36f, Constants.DEVICE_HEIGHT * 0.45f);
-        dateHeadLabel.setPosition(Constants.DEVIDE_WIDTH * 0.52f, Constants.DEVICE_HEIGHT * 0.45f);
+        goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
+        fundsLabel.setPosition(Constants.DEVICE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
+        cowsButton.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.72f);
+        pigsButton.setPosition(Constants.DEVICE_WIDTH * 0.35f, Constants.DEVICE_HEIGHT * 0.72f);
+        chickenButton.setPosition(Constants.DEVICE_WIDTH * 0.65f, Constants.DEVICE_HEIGHT * 0.72f);
+        areaB.setPosition(Constants.DEVICE_WIDTH * 0.06f, Constants.DEVICE_HEIGHT * 0.03f);
+        tabletop.setPosition(Constants.DEVICE_WIDTH * 0.08f, Constants.DEVICE_HEIGHT * 0.45f);
+        table.setPosition(Constants.DEVICE_WIDTH * 0.08f, Constants.DEVICE_HEIGHT * 0.03f);
+        capacityLabel.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.61f);
+        advertLabel.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.53f);
+        buyButton.setPosition(Constants.DEVICE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.63f);
+        sellButton.setPosition(Constants.DEVICE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.63f);
+        reproduceSwitchButton.setPosition(Constants.DEVICE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.555f);
+        nameHeadLabel.setPosition(Constants.DEVICE_WIDTH * 0.16f, Constants.DEVICE_HEIGHT * 0.45f);
+        typeHeadLabel.setPosition(Constants.DEVICE_WIDTH * 0.36f, Constants.DEVICE_HEIGHT * 0.45f);
+        dateHeadLabel.setPosition(Constants.DEVICE_WIDTH * 0.52f, Constants.DEVICE_HEIGHT * 0.45f);
 
 
         //estados
@@ -200,8 +200,8 @@ public class AnimalsScreen extends BaseScreen{
                 rows[i][j] = new Label("xxx",skin,"required");
                 rows[i][j].setFontScale(Constants.FONT_SIZE * 0.8f );
                 rows[i][j].setAlignment(Align.center);
-                rows[i][j].setSize(Constants.DEVIDE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT * 0.08f);
-                rows[i][j].setPosition(Constants.DEVIDE_WIDTH *( 0.12f + i * 0.2f ), Constants.DEVICE_HEIGHT * (0.04f + j * 0.08f));
+                rows[i][j].setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT * 0.08f);
+                rows[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.12f + i * 0.2f ), Constants.DEVICE_HEIGHT * (0.04f + j * 0.08f));
                 stage.addActor(rows[i][j]);
             }
 
@@ -211,11 +211,11 @@ public class AnimalsScreen extends BaseScreen{
             checkBoxes[i] = new CheckBox("", skin);
             buttons[i] = new TextButton("Sacrificar",skin);
             buttons[i].getLabel().setFontScale(Constants.FONT_SIZE * 0.7f);
-            checkBoxes[i].getCells().get(0).size(Constants.DEVIDE_WIDTH * 0.025f, Constants.DEVIDE_WIDTH * 0.025f);
+            checkBoxes[i].getCells().get(0).size(Constants.DEVICE_WIDTH * 0.025f, Constants.DEVICE_WIDTH * 0.025f);
             checkBoxes[i].getImage().setScaling(Scaling.fit);
-            buttons[i].setSize(Constants.DEVIDE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.06f);
-            checkBoxes[i].setPosition(Constants.DEVIDE_WIDTH *( 0.12f ), Constants.DEVICE_HEIGHT * (0.07f + i * 0.08f));
-            buttons[i].setPosition(Constants.DEVIDE_WIDTH *( 0.78f ), Constants.DEVICE_HEIGHT * (0.045f + i * 0.08f));
+            buttons[i].setSize(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.06f);
+            checkBoxes[i].setPosition(Constants.DEVICE_WIDTH *( 0.12f ), Constants.DEVICE_HEIGHT * (0.07f + i * 0.08f));
+            buttons[i].setPosition(Constants.DEVICE_WIDTH *( 0.78f ), Constants.DEVICE_HEIGHT * (0.045f + i * 0.08f));
             buttons[i].setStyle(StyleFactory.getStyle(StyleFactory.RED_COLOR, StyleFactory.DARK_RED_COLOR));
             stage.addActor(checkBoxes[i]);
             stage.addActor(buttons[i]);
@@ -262,6 +262,11 @@ public class AnimalsScreen extends BaseScreen{
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
+
+    }
+
+
+    public void disableAll(boolean enableDisable){
 
     }
 }

@@ -33,7 +33,7 @@ public class LoginScreen extends BaseScreen {
 
     public LoginScreen(MainGame game) {
         super(game);
-        this.stage = new Stage(new FitViewport(Constants.DEVIDE_WIDTH, Constants.DEVICE_HEIGHT));
+        this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
 
@@ -88,26 +88,26 @@ public class LoginScreen extends BaseScreen {
 
 
         //Tamaños de los elementos
-        goBackButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        loginButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        registerButton.setSize(Constants.DEVIDE_WIDTH  * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        areaT.setSize(Constants.DEVIDE_WIDTH *0.5f, Constants.DEVICE_HEIGHT * 0.75f);
-        nameTitleLabel.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.10f);
-        passTitleLabel.setSize(Constants.DEVIDE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.1f);
-        nameTextField.setSize(Constants.DEVIDE_WIDTH *0.38f, Constants.DEVICE_HEIGHT * 0.1f);
-        passTextField.setSize(Constants.DEVIDE_WIDTH *0.38f, Constants.DEVICE_HEIGHT * 0.1f);
+        goBackButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        loginButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        registerButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+        areaT.setSize(Constants.DEVICE_WIDTH *0.5f, Constants.DEVICE_HEIGHT * 0.75f);
+        nameTitleLabel.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.10f);
+        passTitleLabel.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.1f);
+        nameTextField.setSize(Constants.DEVICE_WIDTH *0.38f, Constants.DEVICE_HEIGHT * 0.1f);
+        passTextField.setSize(Constants.DEVICE_WIDTH *0.38f, Constants.DEVICE_HEIGHT * 0.1f);
 
 
         //posiciones de los elementos
-        goBackButton.setPosition(Constants.DEVIDE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
-        nameTitleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.7f);
-        areaT.setPosition(Constants.DEVIDE_WIDTH * 0.25f, Constants.DEVICE_HEIGHT * 0.10f);
+        goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
+        nameTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.7f);
+        areaT.setPosition(Constants.DEVICE_WIDTH * 0.25f, Constants.DEVICE_HEIGHT * 0.10f);
 
-        passTitleLabel.setPosition(Constants.DEVIDE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.45f);
-        nameTextField.setPosition(Constants.DEVIDE_WIDTH * 0.31f, Constants.DEVICE_HEIGHT * 0.575f);
-        passTextField.setPosition(Constants.DEVIDE_WIDTH * 0.31f, Constants.DEVICE_HEIGHT * 0.325f);
-        loginButton.setPosition(Constants.DEVIDE_WIDTH * 0.32f, Constants.DEVICE_HEIGHT * 0.15f);
-        registerButton.setPosition(Constants.DEVIDE_WIDTH * 0.53f, Constants.DEVICE_HEIGHT * 0.15f);
+        passTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.45f);
+        nameTextField.setPosition(Constants.DEVICE_WIDTH * 0.31f, Constants.DEVICE_HEIGHT * 0.575f);
+        passTextField.setPosition(Constants.DEVICE_WIDTH * 0.31f, Constants.DEVICE_HEIGHT * 0.325f);
+        loginButton.setPosition(Constants.DEVICE_WIDTH * 0.32f, Constants.DEVICE_HEIGHT * 0.15f);
+        registerButton.setPosition(Constants.DEVICE_WIDTH * 0.53f, Constants.DEVICE_HEIGHT * 0.15f);
 
         //estados
         areaT.setTouchable(Touchable.disabled);
@@ -172,6 +172,9 @@ public class LoginScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
+
+    }
+    public void disableAll(boolean enableDisable){
 
     }
 }

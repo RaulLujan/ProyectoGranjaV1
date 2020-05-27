@@ -242,4 +242,12 @@ public class MainGame extends Game {
 	public void setUserLogged(boolean userLogged) {
 		this.userLogged = userLogged;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

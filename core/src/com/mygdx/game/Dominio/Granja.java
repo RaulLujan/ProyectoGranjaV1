@@ -9,8 +9,7 @@ public class Granja {
     private Usuario usuario;
     private String nombre;
     private List<Infraestructura>  infraestructuras;
-    private HashMap<Float, TipoRecurso> precioRecursos;
-
+    private List<Precio> precios;
 
 
     public Granja(int id, Usuario usuario, String nombre) {
@@ -51,11 +50,11 @@ public class Granja {
         this.infraestructuras = infraestructuras;
     }
 
-    public HashMap<Float, TipoRecurso> getPrecioRecursos() {
-        return precioRecursos;
+    public List<Precio> getPrecios() {
+        return precios;
     }
 
-    public void setPrecioRecursos(HashMap<Float, TipoRecurso> precioRecursos) {
-        this.precioRecursos = precioRecursos;
+    public void setPrecios(List<Precio> precios) {
+        this.precios = precios;
     }
 }
