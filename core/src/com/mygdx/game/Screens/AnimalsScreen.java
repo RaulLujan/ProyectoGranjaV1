@@ -35,14 +35,19 @@ public class AnimalsScreen extends BaseScreen{
     private Label[] [] rows;
     private CheckBox[] checkBoxes;
     private TextButton[] buttons;
+    private AnimalType animalType;
+    private enum AnimalType {COW, PIG, CHICKEN}
 
     public AnimalsScreen(MainGame game) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
+        this.animalType = AnimalType.COW;
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+
+        int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
 
         // inicialización de los elementos
         goBackButton = new TextButton("Volver", skin, "custom");
@@ -55,7 +60,7 @@ public class AnimalsScreen extends BaseScreen{
         chickenButton = new TextButton("Gallinas", skin);
         buyButton = new TextButton("Comprar", skin);
         sellButton = new TextButton("Vender", skin, "custom");
-        fundsLabel = new Label("Fondos: 1.450.654 $",skin, "required");
+        fundsLabel = new Label(String.format("Fondos: %s", recursos),skin, "required");
         capacityLabel = new Label("Ocupacion del corral  4 / 5 ", skin, "custom_grey");
         advertLabel = new Label("Permitir a las la reproduccion automatica de los animales", skin, "custom_grey");
         nameHeadLabel = new Label("Nombre", skin, "white");
@@ -267,6 +272,9 @@ public class AnimalsScreen extends BaseScreen{
 
 
     public void disableAll(boolean enableDisable){
+
+    }
+    public void actions(int actionIndex){
 
     }
 }

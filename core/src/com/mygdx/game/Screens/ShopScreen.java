@@ -151,6 +151,18 @@ public class ShopScreen extends BaseScreen {
                 addButtons[i][j] = new Button(skin, type);
                 addButtons[i][j].setSize(Constants.DEVICE_WIDTH * 0.03f, Constants.DEVICE_WIDTH * 0.03f);
                 addButtons[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.55f + i * 0.1f ), Constants.DEVICE_HEIGHT * (0.04f + j * 0.08f));
+
+                //funcionalidades
+                addButtons[i][j].addCaptureListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        //if 1 or 2
+                    }
+                });
+
+
+
+
                 stage.addActor(addButtons[i][j]);
             }
         }
@@ -232,6 +244,9 @@ public class ShopScreen extends BaseScreen {
 
     }
     public void disableAll(boolean enableDisable){
+
+    }
+    public void actions(int actionIndex){
 
     }
 }

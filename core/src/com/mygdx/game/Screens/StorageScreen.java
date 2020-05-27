@@ -40,6 +40,7 @@ public class StorageScreen extends BaseScreen {
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
+        int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
 
 
 
@@ -56,7 +57,7 @@ public class StorageScreen extends BaseScreen {
         area2 = new Window("", skin,"dialog");
         area3 = new Window("", skin,"dialog");
         area4 = new Window("", skin,"dialog");
-        fundsLabel = new Label("Fondos: 1.450.654 $",skin, "required");
+        fundsLabel = new Label(String.format("Fondos: %s", recursos),skin, "required");
         depositNameLabel1 = new Label("Deposito de Agua",skin, "custom_green");
         depositNameLabel2 = new Label("Camara frigorifica",skin, "custom_green");
         depositNameLabel3 = new Label("Almacen general",skin, "custom_green");
@@ -307,4 +308,8 @@ public class StorageScreen extends BaseScreen {
     public void disableAll(boolean enableDisable){
 
     }
+    public void actions(int actionIndex){
+
+    }
+
 }

@@ -43,6 +43,7 @@ public class FieldScreen extends BaseScreen {
         this.world = new World(new Vector2(0, 0), true);
 
 
+        int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
 
 
 
@@ -65,7 +66,7 @@ public class FieldScreen extends BaseScreen {
         areaB = new Window("", skin,"dialog");
         areaR = new Window("", skin,"dialog");
 
-        fundsLabel = new Label("Fondos: 1.450.654 $",skin, "required");
+        fundsLabel = new Label(String.format("Fondos: %s", recursos),skin, "required");
         estateTileLabel = new Label("Estado: ",skin, "required");
         estateLabel = new Label("creciendo",skin, "custom_gold");
         timeTitleLabel = new Label("Tiempo restante: ",skin, "required");
@@ -122,7 +123,7 @@ public class FieldScreen extends BaseScreen {
             public void changed(ChangeEvent event, Actor actor) {
                 //Plant field code
                 String mensaje ="Regando como una fiera\n a lo bestia";
-                DialogFactory.showOkCancelDialog(FieldScreen.this, stage, "TITULO", mensaje, 0.4f, 0.4f);
+                DialogFactory.showOkCancelDialog(FieldScreen.this, stage, "TITULO", mensaje, 0.4f, 0.4f, null, null);
             }
         });
 
@@ -271,5 +272,8 @@ public class FieldScreen extends BaseScreen {
         waterButton.setDisabled(enableDisable);
         manureButton.setDisabled(enableDisable);
         herbicideButton.setDisabled(enableDisable);
+    }
+    public void actions(int actionIndex){
+
     }
 }

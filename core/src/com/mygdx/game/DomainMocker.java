@@ -15,6 +15,7 @@ public class DomainMocker {
     public static Usuario getMockedUser(){
         Usuario user = new Usuario(1,"Paco", "aaa");
         user.setPass("1234");
+        user.setApellidos("Gomez Lopez");
         user.setGranja(new Granja(1,user, "Super Granja"));
         ArrayList<TipoRecurso> resources = getAllResorurcesList();
         ArrayList<Precio> precios= new ArrayList<>();

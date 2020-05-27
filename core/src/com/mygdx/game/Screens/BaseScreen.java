@@ -53,6 +53,6 @@ public abstract class BaseScreen implements Screen {
 
 
     public abstract void disableAll(boolean enableDisable);
-
+    public abstract void actions(int actionIndex);
 }
 

@@ -25,7 +25,7 @@ public class MenuScreen extends BaseScreen {
     private TextButton goBackButton;
     private Button settingButton;
     private ImageClampToEdge backgroundImage;
-    private Label titleLabel, idLbabel;
+    private Label idLbabel;
     private Skin skin;
     private Texture backgroundTexture;
 
@@ -38,15 +38,14 @@ public class MenuScreen extends BaseScreen {
 
        // apariencias de los skins
        this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
-       backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/menuBack.jpg");
+       backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/menuBack.png");
 
        // inicialización de los elementos
        goBackButton = new TextButton("Jugar", skin, "custom");
        settingButton = new Button(skin, "settings");
        backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                                                                             Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
-       titleLabel = new Label("A Farmer's Day", skin, "custom_orange");
-       idLbabel = new Label("Id: 123456789", skin, "custom_grey");
+       idLbabel = new Label(String.format("Id: 00%s", this.game.getUsuario().getId()), skin, "custom_grey");
 
 
        //funcionalidades
@@ -66,26 +65,22 @@ public class MenuScreen extends BaseScreen {
 
        //tmaño de las fuentes
        goBackButton.getLabel().setFontScale(Constants.FONT_SIZE);
-       titleLabel.setFontScale(Constants.FONT_SIZE * 3);
        idLbabel.setFontScale(Constants.FONT_SIZE * 0.8f);
 
        //tamaño de los elementos
        goBackButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
        settingButton.setSize(Constants.DEVICE_WIDTH * 0.05f,Constants.DEVICE_WIDTH * 0.05f);
-       titleLabel.setSize(Constants.DEVICE_WIDTH * 0.6f,Constants.DEVICE_WIDTH * 0.15f);
        idLbabel.setSize(Constants.DEVICE_WIDTH * 0.3f,Constants.DEVICE_WIDTH * 0.08f);
 
         //posición de los elementos
        goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.425f, Constants.DEVICE_HEIGHT * 0.05f);
        settingButton.setPosition(Constants.DEVICE_WIDTH * 0.94f, Constants.DEVICE_HEIGHT * 0.9f);
-       titleLabel.setPosition(Constants.DEVICE_WIDTH * 0.2f, Constants.DEVICE_HEIGHT * 0.64f);
        idLbabel.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.88375f);
 
 
        stage.addActor(backgroundImage);
        stage.addActor(goBackButton);
        stage.addActor(settingButton);
-       stage.addActor(titleLabel);
        stage.addActor(idLbabel);
 
    }
@@ -128,6 +123,9 @@ public class MenuScreen extends BaseScreen {
 
     }
     public void disableAll(boolean enableDisable){
+
+    }
+    public void actions(int actionIndex){
 
     }
 }

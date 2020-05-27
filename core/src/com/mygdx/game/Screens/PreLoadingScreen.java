@@ -63,4 +63,7 @@ public class PreLoadingScreen extends BaseScreen {
     public void disableAll(boolean enableDisable){
 
     }
+    public void actions(int actionIndex){
+
+    }
 }

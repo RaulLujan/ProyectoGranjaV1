@@ -6,19 +6,25 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.mygdx.game.Actors.TractorActor;
+import com.mygdx.game.Actors.SpiningIconActor;
 import com.mygdx.game.Constants;
 import com.mygdx.game.MainGame;
+
 
 public class LoadingScreen extends BaseScreen {
 
 
     private Stage stage;
     private World world;
-    private TractorActor tractorActor;
+    private SpiningIconActor tractorActor;
     private Texture tractorTexture;
     private float timeinLoadingScreen;
+    private Label chargingLabel;
+    private Skin skin;
 
     public LoadingScreen(MainGame game) {
         super(game);
@@ -28,15 +34,24 @@ public class LoadingScreen extends BaseScreen {
 
     @Override
     public void show() {
-        stage.setDebugAll(true); // On true se renderizan los bordes verdes de los actores e imágenes
+        stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
         timeinLoadingScreen = 0;
+
+        this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+
         tractorTexture = game.getAssetManager().get("Textures/tractor.png");
 
 
-        tractorActor = new TractorActor(world, tractorTexture, new Vector2(
+        tractorActor = new SpiningIconActor(world, tractorTexture, new Vector2(
                                                             Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER / 2,
                                                             Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER / 2) );
         stage.addActor(tractorActor);
+        chargingLabel = new Label("Cargando: 50%", skin, "custom_blue");
+        chargingLabel.setFontScale(Constants.FONT_SIZE);
+        chargingLabel.setSize(Constants.DEVICE_WIDTH * 0.2f, Constants.DEVICE_HEIGHT * 0.1f);
+        chargingLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.15f);
+        chargingLabel.setAlignment(Align.center);
+        stage.addActor(chargingLabel);
 
 
     }
@@ -81,6 +96,9 @@ public class LoadingScreen extends BaseScreen {
 
     }
     public void disableAll(boolean enableDisable){
+
+    }
+    public void actions(int actionIndex){
 
     }
 }

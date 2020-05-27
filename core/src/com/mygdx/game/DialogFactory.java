@@ -14,7 +14,10 @@ import com.mygdx.game.Screens.BaseScreen;
 
 public class DialogFactory {
 
-    public static void showOkDialog(final BaseScreen screen, Stage stage, String title, String messaje, Float width, Float height){
+    public static void showOkDialog(final BaseScreen screen,
+                                    Stage stage, String title,
+                                    String messaje, Float width,
+                                    Float height){
         screen.disableAll(true);
         Skin skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
 
@@ -70,7 +73,13 @@ public class DialogFactory {
     }
 
 
-    public static void showOkCancelDialog(final BaseScreen screen, Stage stage, String title, String messaje, Float width, Float height){
+    public static void showOkCancelDialog(final BaseScreen screen,
+                                          Stage stage, String title,
+                                          String messaje,
+                                          Float width,
+                                          Float height,
+                                          final Integer okAction,
+                                          final Integer cancelAction){
         screen.disableAll(true);
         Skin skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
 
@@ -131,6 +140,7 @@ public class DialogFactory {
                 textLabel.remove();
                 titleLabel.remove();
                 screen.disableAll(false);
+                if (okAction != null)screen.actions(okAction);
             }
         });
 
@@ -144,6 +154,7 @@ public class DialogFactory {
                 textLabel.remove();
                 titleLabel.remove();
                 screen.disableAll(false);
+                if(cancelAction != null) screen.actions(cancelAction);
             }
         });
     }

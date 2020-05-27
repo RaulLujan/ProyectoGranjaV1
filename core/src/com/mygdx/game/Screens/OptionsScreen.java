@@ -42,6 +42,7 @@ public class OptionsScreen extends BaseScreen {
         this.world = new World(new Vector2(0, 0), true);
 
 
+
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
 
@@ -51,13 +52,13 @@ public class OptionsScreen extends BaseScreen {
         addNeighbour = new TextButton("Buscar vecino", skin);
         closeSession = new TextButton("Cerrar sesion", skin);
 
-        idLabel = new Label("Id usuario: 123456789", skin, "required");
-        userLabel = new Label("Manuel Gonzalez", skin, "required");
+        idLabel = new Label(String.format("Id: 000%s", this.game.getUsuario().getId()), skin, "required");
+        userLabel = new Label(String.format("%s %s", this.game.getUsuario().getNombre(), this.game.getUsuario().getApellidos() ), skin, "required");
         farmNameTitleLabel = new Label("Nombre de la granja:", skin, "custom_grey");
         volumeLabel = new Label("Volumen", skin, "custom_grey");
         musicLabel = new Label("Musica", skin, "custom_grey");
         effectsLabel = new Label("Efectos", skin, "custom_grey");
-        farmNameLabel = new Label("La Ponderosa", skin, "custom_blue");
+        farmNameLabel = new Label(this.game.getUsuario().getGranja().getNombre(), skin, "custom_blue");
         area1 = new Window("", skin,"dialog");
         area2 = new Window("", skin,"dialog");
         area3 = new Window("", skin,"dialog");
@@ -273,6 +274,9 @@ public class OptionsScreen extends BaseScreen {
 
     }
     public void disableAll(boolean enableDisable){
+
+    }
+    public void actions(int actionIndex){
 
     }
 }

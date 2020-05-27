@@ -10,19 +10,26 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Constants;
 
+import java.util.List;
 
-public class TractorActor extends BaseActor {
+
+public class SpiningIconActor extends BaseActor {
 
     private Texture texture;
+    private List<Texture> textures;
     private World world;
     private Body body;
     private Fixture fixture;
+    private float fullAnimationTIme, changing;
 
 
-    public TractorActor(World world, Texture texture, Vector2 position) {
+
+    public SpiningIconActor(World world, Texture texture, Vector2 position) {
 
         this.world = world;
         this.texture = texture;
+        fullAnimationTIme = 2f;
+        changing = 0f;
 
         BodyDef def = new BodyDef();
         def.position.set(position);
@@ -44,10 +51,19 @@ public class TractorActor extends BaseActor {
     @Override
     public void act(float delta) {
 
-
+        //control de la animación en función de delta
+        /*
+        changing = changing + delta;
+        if ( changing < 0.15f)      texture = textures.get(0);
+        else if ( changing < 0.3f)  texture = textures.get(1);
+        else if ( changing < 0.45f) texture = textures.get(2);
+        else if ( changing < 0.6f)  texture = textures.get(3);
+        else if ( changing < 0.75f) texture = textures.get(4);
+        else if ( changing < 0.9f)  texture = textures.get(5);
+        else changing = 0;
+        */
 
     }
-
 
 
     @Override

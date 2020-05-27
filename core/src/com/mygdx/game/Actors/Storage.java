@@ -12,6 +12,7 @@ import com.mygdx.game.SoundFactory;
 public class Storage extends BaseActor {
 
     private Texture texture;
+
     private World world;
     private Body body;
 
