@@ -18,6 +18,7 @@ import com.mygdx.game.Screens.OptionsScreen;
 import com.mygdx.game.Screens.PreLoadingScreen;
 import com.mygdx.game.Screens.ShopScreen;
 import com.mygdx.game.Screens.StorageScreen;
+import com.mygdx.game.control.UserController;
 
 public class MainGame extends Game {
 
@@ -37,6 +38,7 @@ public class MainGame extends Game {
 		shopScreen, storageScreen, animalsScreen, optionScreen;
 
 	private Usuario usuario;
+	private UserController userController;
 
 
 
@@ -45,6 +47,7 @@ public class MainGame extends Game {
 	public void create () {
 
         usuario = DomainMocker.getMockedUser();
+        userController = new UserController(usuario);
 
 		assetManager = new AssetManager();
 
@@ -249,5 +252,13 @@ public class MainGame extends Game {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public UserController getUserController() {
+		return userController;
+	}
+
+	public void setUserController(UserController userController) {
+		this.userController = userController;
 	}
 }

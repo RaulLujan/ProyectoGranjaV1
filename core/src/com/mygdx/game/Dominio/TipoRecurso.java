@@ -15,7 +15,7 @@ public class TipoRecurso {
     public final static int EGG        = 4;
     public final static int MANURE     = 5;
     public final static int HERBIZIDE  = 6;
-    public final static int POPATO     = 7;
+    public final static int POTATO     = 7;
     public final static int CORN       = 8;
     public final static int STRAWBERRY = 9;
     public final static int COW       = 10;

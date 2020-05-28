@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.mygdx.game.Dominio.Animal;
 import com.mygdx.game.Dominio.Espacio;
 import com.mygdx.game.Dominio.Estructura;
 import com.mygdx.game.Dominio.Granja;
@@ -8,7 +9,7 @@ import com.mygdx.game.Dominio.Precio;
 import com.mygdx.game.Dominio.TipoRecurso;
 import com.mygdx.game.Dominio.Usuario;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.GregorianCalendar;
 
 public class DomainMocker {
 
@@ -28,14 +29,14 @@ public class DomainMocker {
 
         ArrayList<Espacio> espacios = new ArrayList<>();
 
-        espacios.add(TipoRecurso.MONEY,new Espacio(TipoRecurso.MONEY, null,1500000, resources.get(TipoRecurso.MONEY), null));
+        espacios.add(TipoRecurso.MONEY,new Espacio(TipoRecurso.MONEY, null,250000, resources.get(TipoRecurso.MONEY), null));
         espacios.add(TipoRecurso.WATER,new Espacio(TipoRecurso.WATER, 50000,10000, resources.get(TipoRecurso.WATER), null));
         espacios.add(TipoRecurso.MEAT,new Espacio(TipoRecurso.MEAT, 20000,0, resources.get(TipoRecurso.MEAT), null));
         espacios.add(TipoRecurso.MILK,new Espacio(TipoRecurso.MILK, 20000,0, resources.get(TipoRecurso.MILK), null));
         espacios.add(TipoRecurso.EGG,new Espacio(TipoRecurso.EGG, 20000,0, resources.get(TipoRecurso.EGG), null));
         espacios.add(TipoRecurso.MANURE,new Espacio(TipoRecurso.MANURE, 50000,1, resources.get(TipoRecurso.MANURE), null));
         espacios.add(TipoRecurso.HERBIZIDE,new Espacio(TipoRecurso.HERBIZIDE, 50000,0, resources.get(TipoRecurso.HERBIZIDE), null));
-        espacios.add(TipoRecurso.POPATO,new Espacio(TipoRecurso.POPATO, 30000,0, resources.get(TipoRecurso.POPATO), null));
+        espacios.add(TipoRecurso.POTATO,new Espacio(TipoRecurso.POTATO, 30000,0, resources.get(TipoRecurso.POTATO), null));
         espacios.add(TipoRecurso.CORN,new Espacio(TipoRecurso.CORN, 30000,500, resources.get(TipoRecurso.CORN), null));
         espacios.add(TipoRecurso.STRAWBERRY,new Espacio(TipoRecurso.STRAWBERRY, 30000,0, resources.get(TipoRecurso.STRAWBERRY), null));
         espacios.add(TipoRecurso.COW,new Espacio(TipoRecurso.COW, 5,0, resources.get(TipoRecurso.COW), null));
@@ -45,6 +46,8 @@ public class DomainMocker {
         user.getGranja().setInfraestructuras(new ArrayList<Infraestructura>());
 
         Estructura almacen = new Estructura();
+        espacios.get(TipoRecurso.COW).setAnimales(new ArrayList<Animal>());
+        espacios.get(TipoRecurso.COW).getAnimales().add(new Animal(0,"Florinda", new GregorianCalendar(), resources.get(TipoRecurso.COW)));
         almacen.setEspacios(espacios);
         user.getGranja().getInfraestructuras().add(almacen);
 
@@ -61,7 +64,7 @@ public class DomainMocker {
         recursos.add(TipoRecurso.EGG,new TipoRecurso(TipoRecurso.EGG, "Huevos",             TipoRecurso.Tipo.MATERIAL, 500,45));
         recursos.add(TipoRecurso.MANURE,new TipoRecurso(TipoRecurso.MANURE, "Abono",           TipoRecurso.Tipo.MATERIAL, 100,25));
         recursos.add(TipoRecurso.HERBIZIDE,new TipoRecurso(TipoRecurso.HERBIZIDE, "Herbicida",    TipoRecurso.Tipo.MATERIAL, 500,164));
-        recursos.add(TipoRecurso.POPATO,new TipoRecurso(TipoRecurso.POPATO, "Papata",          TipoRecurso.Tipo.MATERIAL, 500,91));
+        recursos.add(TipoRecurso.POTATO,new TipoRecurso(TipoRecurso.POTATO, "Papata",          TipoRecurso.Tipo.MATERIAL, 500,91));
         recursos.add(TipoRecurso.CORN,new TipoRecurso(TipoRecurso.CORN, "Maiz",              TipoRecurso.Tipo.MATERIAL, 500,75));
         recursos.add(TipoRecurso.STRAWBERRY,new TipoRecurso(TipoRecurso.STRAWBERRY, "Fresa",       TipoRecurso.Tipo.MATERIAL, 500,75));
         recursos.add(TipoRecurso.COW,new TipoRecurso(TipoRecurso.COW, "Vaca",               TipoRecurso.Tipo.MATERIAL, 1000,500));

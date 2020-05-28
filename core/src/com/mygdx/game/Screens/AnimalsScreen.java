@@ -18,8 +18,13 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
+import com.mygdx.game.Dominio.Animal;
+import com.mygdx.game.Dominio.Espacio;
+import com.mygdx.game.Dominio.TipoRecurso;
 import com.mygdx.game.MainGame;
 import com.mygdx.game.StyleFactory;
+
+import java.util.ArrayList;
 
 public class AnimalsScreen extends BaseScreen{
 
@@ -35,15 +40,14 @@ public class AnimalsScreen extends BaseScreen{
     private Label[] [] rows;
     private CheckBox[] checkBoxes;
     private TextButton[] buttons;
-    private AnimalType animalType;
-    private enum AnimalType {COW, PIG, CHICKEN}
+    private int selectedAnimalType;
 
     public AnimalsScreen(MainGame game) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
-        this.animalType = AnimalType.COW;
+        this.selectedAnimalType = TipoRecurso.COW;
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
 
@@ -96,18 +100,30 @@ public class AnimalsScreen extends BaseScreen{
         cowsButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                cowsButton.setStyle(StyleFactory.getStyle(StyleFactory.DARK_GREY_BLUE_COLOR, StyleFactory.GREY_BLUE_COLOR));
+                pigsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
+                chickenButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
+                AnimalsScreen.this.selectedAnimalType = TipoRecurso.COW;
                //cows code
             }
         });
         pigsButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                pigsButton.setStyle(StyleFactory.getStyle(StyleFactory.DARK_GREY_BLUE_COLOR, StyleFactory.GREY_BLUE_COLOR));
+                cowsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
+                chickenButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
+                AnimalsScreen.this.selectedAnimalType = TipoRecurso.PIG;
                //pigsCode
             }
         });
         chickenButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                chickenButton.setStyle(StyleFactory.getStyle(StyleFactory.DARK_GREY_BLUE_COLOR, StyleFactory.GREY_BLUE_COLOR));
+                pigsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
+                cowsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
+                AnimalsScreen.this.selectedAnimalType = TipoRecurso.CHICKEN;
                //chickencode
             }
         });
@@ -200,17 +216,8 @@ public class AnimalsScreen extends BaseScreen{
 
 
         //datos de la tabla
-        for(int i = 0; i< rows.length;i++){
-            for(int j = 0; j< rows[i].length;j++){
-                rows[i][j] = new Label("xxx",skin,"required");
-                rows[i][j].setFontScale(Constants.FONT_SIZE * 0.8f );
-                rows[i][j].setAlignment(Align.center);
-                rows[i][j].setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT * 0.08f);
-                rows[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.12f + i * 0.2f ), Constants.DEVICE_HEIGHT * (0.04f + j * 0.08f));
-                stage.addActor(rows[i][j]);
-            }
+        fillTableData();
 
-        }
         //checkboxses & buttons
         for(int i = 0; i< checkBoxes.length;i++){
             checkBoxes[i] = new CheckBox("", skin);
@@ -219,12 +226,45 @@ public class AnimalsScreen extends BaseScreen{
             checkBoxes[i].getCells().get(0).size(Constants.DEVICE_WIDTH * 0.025f, Constants.DEVICE_WIDTH * 0.025f);
             checkBoxes[i].getImage().setScaling(Scaling.fit);
             buttons[i].setSize(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.06f);
-            checkBoxes[i].setPosition(Constants.DEVICE_WIDTH *( 0.12f ), Constants.DEVICE_HEIGHT * (0.07f + i * 0.08f));
-            buttons[i].setPosition(Constants.DEVICE_WIDTH *( 0.78f ), Constants.DEVICE_HEIGHT * (0.045f + i * 0.08f));
+            checkBoxes[i].setPosition(Constants.DEVICE_WIDTH *( 0.12f ), Constants.DEVICE_HEIGHT * (0.395f - i * 0.08f));
+            buttons[i].setPosition(Constants.DEVICE_WIDTH *( 0.78f ), Constants.DEVICE_HEIGHT * (0.365f - i * 0.08f));
             buttons[i].setStyle(StyleFactory.getStyle(StyleFactory.RED_COLOR, StyleFactory.DARK_RED_COLOR));
             stage.addActor(checkBoxes[i]);
             stage.addActor(buttons[i]);
         }
+    }
+
+    private void fillTableData() {
+
+        ArrayList<Animal> animals =
+                (ArrayList<Animal>) this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(this.selectedAnimalType).getAnimales();
+
+       for(int i = 0; i< rows.length;i++){
+            for(int j = 0; j< animals.size();j++){
+
+                    String texto = "xxx";
+                    if (i == 0 ){
+                        texto = animals.get(j).getNombre();
+                    }
+                    else if (i == 1 ){
+                        texto = "animal joven"; //create animalcontroller, give back text based on age
+                    }
+                    else{
+                        texto = "AAA"; //animals.get(j).getFechaNacimiento().toString();
+                    }
+
+                    rows[i][j] = new Label(texto, skin, "required");
+                    rows[i][j].setFontScale(Constants.FONT_SIZE * 0.8f);
+                    rows[i][j].setAlignment(Align.center);
+                    rows[i][j].setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT * 0.08f);
+                    rows[i][j].setPosition(Constants.DEVICE_WIDTH * (0.12f + i * 0.2f), Constants.DEVICE_HEIGHT * (0.36f - j * 0.08f));
+                    stage.addActor(rows[i][j]);
+
+            }
+
+
+        }
+       //disable the rest
     }
 
 
@@ -272,6 +312,18 @@ public class AnimalsScreen extends BaseScreen{
 
 
     public void disableAll(boolean enableDisable){
+        goBackButton.setDisabled(enableDisable);
+        cowsButton.setDisabled(enableDisable);
+        pigsButton.setDisabled(enableDisable);
+        chickenButton.setDisabled(enableDisable);
+        buyButton.setDisabled(enableDisable);
+        sellButton.setDisabled(enableDisable);
+        reproduceSwitchButton.setDisabled(enableDisable);
+        for (int i = 0; i < 5; i++){
+            checkBoxes[i].setDisabled(enableDisable);
+            buttons[i].setDisabled(enableDisable);
+        }
+
 
     }
     public void actions(int actionIndex){

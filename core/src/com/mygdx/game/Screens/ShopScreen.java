@@ -20,6 +20,7 @@ import com.mygdx.game.Dominio.Espacio;
 import com.mygdx.game.Dominio.Precio;
 import com.mygdx.game.MainGame;
 import com.mygdx.game.StyleFactory;
+import com.mygdx.game.control.EspacioController;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,9 @@ public class ShopScreen extends BaseScreen {
     private Button[][] addButtons;
     private Label [] quantityLabels;
     private TextButton[][] actionButton;
+    private EspacioController espacioController;
+    private ArrayList<Precio> prices;
+    ArrayList<Espacio> espacios;
 
 
 
@@ -44,7 +48,7 @@ public class ShopScreen extends BaseScreen {
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
-
+        espacioController = new EspacioController(this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios());
         int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
 
         // apariencias de los skins
@@ -113,9 +117,9 @@ public class ShopScreen extends BaseScreen {
         stage.addActor(pricesHeadLabel);
         stage.addActor(quantityHeadLabel);
 
-        ArrayList<Precio> prices = (ArrayList<Precio>)this.game.getUsuario().getGranja().getPrecios();
+        prices = (ArrayList<Precio>)this.game.getUsuario().getGranja().getPrecios();
        //ESPACIOS
-        ArrayList<Espacio> espacios = (ArrayList<Espacio>)this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios();
+        espacios = (ArrayList<Espacio>)this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios();
 
 
         //datos de la tabla
@@ -130,7 +134,6 @@ public class ShopScreen extends BaseScreen {
                     String precioVC = String.format("%s / %s",buy,sell);
                     rows[i][j] = new Label(precioVC,skin,"required");
                 }else{
-                    int recursos2= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
                     rows[i][j] = new Label(String.format("%s",espacios.get(j+1).getOcupacionAactual()) ,skin,"required");
                 }
 
@@ -158,14 +161,10 @@ public class ShopScreen extends BaseScreen {
                 addButtons[i][j].addCaptureListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        if (finalI == 0) addTo(quantityLabels[finalJ],1);
-                        else addTo(quantityLabels[finalJ], -1);
+                        if (finalI == 0) addTo(quantityLabels[finalJ],-10);
+                        else addTo(quantityLabels[finalJ], 10);
                     }
                 });
-
-
-
-
                 stage.addActor(addButtons[i][j]);
             }
         }
@@ -197,6 +196,31 @@ public class ShopScreen extends BaseScreen {
                 actionButton[i][j].getLabel().setFontScale(Constants.FONT_SIZE * 0.7f);
                 actionButton[i][j].setSize(Constants.DEVICE_WIDTH * 0.09f, Constants.DEVICE_HEIGHT * 0.06f);
                 actionButton[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.72f + i * 0.11f ), Constants.DEVICE_HEIGHT * (0.035f + j * 0.08f));
+
+                //funcionalidades
+                final int finalI = i;
+                final int finalJ = j;
+                actionButton[i][j].addCaptureListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        int quantity = Integer.parseInt(quantityLabels[finalJ].getText().toString());
+                        int buyMoney = (int)prices.get(finalJ+1).getTipoRecurso().getPrecioMinimo();
+                        int sellMoney = (int)(prices.get(finalJ+1).getTipoRecurso().getPrecioMinimo() * 1.1);
+                        if (finalI == 0) {
+                            espacioController.putForMoney(finalJ+1, -quantity, -buyMoney * quantity);
+                        }
+                        else {
+                            espacioController.putForMoney(finalJ+1, quantity, sellMoney * quantity);
+                        }
+                        quantityLabels[finalJ].setText("000");
+                        fundsLabel.setText(String.format("Fondos: %s",
+                                ShopScreen.this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual()));
+                        rows[2][finalJ].setText(espacios.get(finalJ+1).getOcupacionAactual());
+                        ShopScreen.this.game.getUserController().saveUser();
+                    }
+                });
+
+
                 stage.addActor(actionButton[i][j]);
             }
         }
@@ -205,7 +229,8 @@ public class ShopScreen extends BaseScreen {
     private void addTo(Label label, int quantity){
         int actual = Integer.parseInt(label.getText().toString());
         int result = actual + quantity;
-        if (result < 0) label.setText(result);
+        if (result > 0) label.setText(result);
+        else label.setText(0);
     }
 
 
@@ -255,7 +280,13 @@ public class ShopScreen extends BaseScreen {
 
     }
     public void disableAll(boolean enableDisable){
-
+        goBackButton.setDisabled(enableDisable);
+        for (int i = 0; i < 9; i++){
+            addButtons[0][i].setDisabled(enableDisable);
+            addButtons[1][i].setDisabled(enableDisable);
+            actionButton[0][i].setDisabled(enableDisable);
+            actionButton[1][i].setDisabled(enableDisable);
+        }
     }
     public void actions(int actionIndex){
 

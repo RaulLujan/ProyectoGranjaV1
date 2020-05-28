@@ -15,4 +15,36 @@ public class Animal {
         this.fechaNacimiento = fechaNacimiento;
         this.tipoAnimal = tipoAnimal;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public GregorianCalendar getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(GregorianCalendar fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public TipoRecurso getTipoAnimal() {
+        return tipoAnimal;
+    }
+
+    public void setTipoAnimal(TipoRecurso tipoAnimal) {
+        this.tipoAnimal = tipoAnimal;
+    }
 }

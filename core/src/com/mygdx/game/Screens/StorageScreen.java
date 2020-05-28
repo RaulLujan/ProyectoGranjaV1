@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
+import com.mygdx.game.DialogFactory;
+import com.mygdx.game.Dominio.TipoRecurso;
 import com.mygdx.game.MainGame;
 import com.mygdx.game.StyleFactory;
 
@@ -66,10 +68,18 @@ public class StorageScreen extends BaseScreen {
         quantityTitleLabel2 = new Label("Capacidad",skin, "required");
         quantityTitleLabel3 = new Label("Capacidad",skin, "required");
         quantityTitleLabel4 = new Label("Capacidad",skin, "required");
-        quantityLabel1 = new Label("50.000",skin, "custom_blue");
-        quantityLabel2 = new Label("10.000",skin, "custom_blue");
-        quantityLabel3 = new Label("50.000",skin, "custom_blue");
-        quantityLabel4 = new Label("30.000",skin, "custom_blue");
+        int capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.WATER).getCapacidadMaxima();
+        String capacityString = String.format("%s", capacity);
+        quantityLabel1 = new Label( capacityString, skin, "custom_blue");
+        capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MEAT).getCapacidadMaxima();
+        capacityString = String.format("%s", capacity);
+        quantityLabel2 = new Label(capacityString,skin, "custom_blue");
+        capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MANURE).getCapacidadMaxima();
+        capacityString = String.format("%s", capacity);
+        quantityLabel3 = new Label(capacityString,skin, "custom_blue");
+        capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.CORN).getCapacidadMaxima();
+        capacityString = String.format("%s", capacity);
+        quantityLabel4 = new Label(capacityString,skin, "custom_blue");
         resourcesTitleLabel1 = new Label("Recursos",skin, "required");
         resourcesTitleLabel2 = new Label("Recursos",skin, "required");
         resourcesTitleLabel3 = new Label("Recursos",skin, "required");
@@ -123,25 +133,33 @@ public class StorageScreen extends BaseScreen {
         button1.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //expand storage
+                String titulo = "Expandir deposito de agua";
+                String messaje = "¿Desea expandir el deposito\n por 100.000 F. ?\nla capacidad aumentara\nen 10.000 litros";
+                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.40f,0.39f, 1, null);
             }
         });
         button2.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //expand storage
+                String titulo = "Expandir camara frigorifica";
+                String messaje = "¿Desea expandir la camara frigorifica\npor 100.000 F. ?\nla capacidad aumentara\nen 2.000 litros";
+                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.4f,0.39f, 2, null);
             }
         });
         button3.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //expand storage
+                String titulo = "Expandir almacen general";
+                String messaje = "¿Desea expandir el deposito\npor 100.000 F. ?\nla capacidad aumentara\nen 10.000 litros";
+                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.4f,0.39f, 3, null);
             }
         });
         button4.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //expand storage
+                String titulo = "Expandir granero";
+                String messaje = "¿Desea expandir el granero\npor 100.000 F. ?\nla capacidad aumentara\nen 6.000 litros";
+                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.4f,0.39f, 4, null);
             }
         });
 
@@ -306,10 +324,49 @@ public class StorageScreen extends BaseScreen {
 
     }
     public void disableAll(boolean enableDisable){
+        goBackButton.setDisabled(enableDisable);
+        button1.setDisabled(enableDisable);
+        button2.setDisabled(enableDisable);
+        button3.setDisabled(enableDisable);
+        button4.setDisabled(enableDisable);
 
     }
     public void actions(int actionIndex){
+        int resources = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MONEY).getOcupacionAactual();
+        if (resources < 100000){
+            DialogFactory.showOkDialog(this, stage, "No hay fondos", "No dispone de los 100.000 F\n necesarios para la expansion", 0.4f, 0.35f);
+            return;
+        }
+        this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MONEY).setOcupacionAactual(resources - 100000);
+        int capacity;
+        switch (actionIndex){
+            case 1:
+                capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.WATER).getCapacidadMaxima();
+                this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.WATER).setCapacidadMaxima(capacity + 10000);
+                break;
+            case 2:
+                capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MEAT).getCapacidadMaxima();
+                this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MEAT).setCapacidadMaxima(capacity + 2000);
+                this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MILK).setCapacidadMaxima(capacity + 2000);
+                this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.EGG).setCapacidadMaxima(capacity + 2000);
+                break;
+            case 3:
+                capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MEAT).getCapacidadMaxima();
+                this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.HERBIZIDE).setCapacidadMaxima(capacity + 10000);
+                this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MANURE).setCapacidadMaxima(capacity + 10000);
+                break;
+            case 4:
+                capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.CORN).getCapacidadMaxima();
+                this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.CORN).setCapacidadMaxima(capacity + 6000);
+                this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.STRAWBERRY).setCapacidadMaxima(capacity + 6000);
+                this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.POTATO).setCapacidadMaxima(capacity + 6000);
+                break;
+            default:
 
+        }
+        this.game.getUserController().saveUser();
+        this.game.showStorageScreen();
     }
+
 
 }

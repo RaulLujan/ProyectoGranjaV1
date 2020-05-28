@@ -115,6 +115,8 @@ public class LoginScreen extends BaseScreen {
         passTitleLabel.setAlignment(Align.center);
         nameTextField.setMessageText("  Usuario");
         passTextField.setMessageText("  Passworld");
+        passTextField.setPasswordMode(true);
+        passTextField.setPasswordCharacter('*');
         registerButton.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
 
         //Se añaden los elementos
