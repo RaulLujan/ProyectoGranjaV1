@@ -1,8 +1,11 @@
 package com.mygdx.game.control;
 
+import com.mygdx.game.DomainMocker;
+import com.mygdx.game.Dominio.Animal;
 import com.mygdx.game.Dominio.Espacio;
 import com.mygdx.game.Dominio.TipoRecurso;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class EspacioController {
@@ -45,5 +48,23 @@ public class EspacioController {
         int ocupation = espacios.get(reourceIndex).getOcupacionAactual();
         espacios.get(reourceIndex).setOcupacionAactual(0);
         return ocupation;
+    }
+    public boolean addAnimal(int reourceIndex){
+        if(reourceIndex == TipoRecurso.COW || reourceIndex == TipoRecurso.PIG || reourceIndex == TipoRecurso.CHICKEN){
+            if(espacios.get(reourceIndex).getCapacidadMaxima() > espacios.get(reourceIndex).getAnimales().size()){
+               espacios.get(reourceIndex).getAnimales().add(new Animal(
+                       espacios.get(reourceIndex).getAnimales().size(),
+                       "Paquita",
+                       new GregorianCalendar(),
+                       DomainMocker.getAllResorurcesList().get(reourceIndex)));
+               return true;
+            }
+
+        }
+        return false;
+    }
+
+    public void removeAnimal (int resourceIndez, int animalIndex){
+        espacios.get(resourceIndez).getAnimales().remove(animalIndex);
     }
 }

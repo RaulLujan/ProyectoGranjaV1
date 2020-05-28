@@ -153,10 +153,13 @@ public class ShopScreen extends BaseScreen {
                 addButtons[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.55f + i * 0.1f ), Constants.DEVICE_HEIGHT * (0.04f + j * 0.08f));
 
                 //funcionalidades
+                final int finalI = i;
+                final int finalJ = j;
                 addButtons[i][j].addCaptureListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        //if 1 or 2
+                        if (finalI == 0) addTo(quantityLabels[finalJ],1);
+                        else addTo(quantityLabels[finalJ], -1);
                     }
                 });
 
@@ -198,6 +201,14 @@ public class ShopScreen extends BaseScreen {
             }
         }
     }
+
+    private void addTo(Label label, int quantity){
+        int actual = Integer.parseInt(label.getText().toString());
+        int result = actual + quantity;
+        if (result < 0) label.setText(result);
+    }
+
+
 
 
     @Override
