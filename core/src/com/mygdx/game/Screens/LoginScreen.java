@@ -2,6 +2,7 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
+import com.mygdx.game.Images.ImageClampToEdge;
 import com.mygdx.game.MainGame;
 import com.mygdx.game.StyleFactory;
 
@@ -29,6 +31,8 @@ public class LoginScreen extends BaseScreen {
     private Window areaT;
     private Label nameTitleLabel, passTitleLabel;
     private TextField nameTextField, passTextField;
+    private ImageClampToEdge backgroundImage;
+    private Texture backgroundTexture;
 
 
     public LoginScreen(MainGame game) {
@@ -39,6 +43,10 @@ public class LoginScreen extends BaseScreen {
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+
+        backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/loginBack.jpg");
+        backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
+                Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
         // inicialización de los elementos
         goBackButton = new TextButton("Volver", skin, "custom");
@@ -120,6 +128,7 @@ public class LoginScreen extends BaseScreen {
         registerButton.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
 
         //Se añaden los elementos
+        stage.addActor(backgroundImage);
         stage.addActor(goBackButton);
 
         stage.addActor(areaT);

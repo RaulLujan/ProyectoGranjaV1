@@ -61,6 +61,12 @@ public class MainGame extends Game {
 		assetManager.load("Textures/Truck2.png", Texture.class);
 
 		assetManager.load("Textures/BackGrounds/menuBack.png", Texture.class);
+		assetManager.load("Textures/BackGrounds/animalBack.jpg", Texture.class);
+		assetManager.load("Textures/BackGrounds/fieldBack.jpg", Texture.class);
+		assetManager.load("Textures/BackGrounds/loginBack.jpg", Texture.class);
+		assetManager.load("Textures/BackGrounds/optionBack.jpg", Texture.class);
+		assetManager.load("Textures/BackGrounds/shopBack.jpg", Texture.class);
+		assetManager.load("Textures/BackGrounds/storageBack.jpg", Texture.class);
 
 		assetManager.load("Textures/Buildings/Barn.png", Texture.class);
 		assetManager.load("Textures/Buildings/ChickenCoop.png", Texture.class);

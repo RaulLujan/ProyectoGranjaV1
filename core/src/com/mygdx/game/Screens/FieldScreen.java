@@ -2,6 +2,7 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
 import com.mygdx.game.DialogFactory;
+import com.mygdx.game.Images.ImageClampToEdge;
 import com.mygdx.game.MainGame;
 
 public class FieldScreen extends BaseScreen {
@@ -35,6 +37,8 @@ public class FieldScreen extends BaseScreen {
             manureTitleLabel, manureLabel, grassTitleLabel, grassLabel, addLabel, waterQuantitylabel, manureQuantityLabel,
             herbizideQuantityLabel;
     private SelectBox<String> typeSelectioSP;
+    private ImageClampToEdge backgroundImage;
+    private Texture backgroundTexture;
 
 
     public FieldScreen(MainGame game) {
@@ -51,6 +55,10 @@ public class FieldScreen extends BaseScreen {
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+
+        backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/fieldBack.jpg");
+        backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
+                Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
 
 
@@ -185,6 +193,8 @@ public class FieldScreen extends BaseScreen {
         areaL.setTouchable(Touchable.disabled);
         areaB.setTouchable(Touchable.disabled);
 
+
+
         estateTileLabel.setAlignment(Align.right);
         timeTitleLabel.setAlignment(Align.right);
         typeSelectioSP.setItems("Patatas", "Maiz", "Trigo");
@@ -201,6 +211,7 @@ public class FieldScreen extends BaseScreen {
 
 
         //Se añaden los elementos
+        stage.addActor(backgroundImage);
         stage.addActor(goBackButton);
 
         stage.addActor(areaR);

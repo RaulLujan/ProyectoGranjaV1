@@ -5,7 +5,7 @@ public class TipoRecurso {
     private int id;
     private String nombre, descripcion;
     private Tipo tipo;
-    private float precioMaximo, precioMinimo;
+    private int precioMaximo, precioMinimo;
 
     //ATAJOS A INDICES
     public final static int MONEY      = 0;
@@ -24,7 +24,7 @@ public class TipoRecurso {
 
 
 
-    public TipoRecurso(int id, String nombre, Tipo tipo, float precioMaximo, float precioMinimo) {
+    public TipoRecurso(int id, String nombre, Tipo tipo, int precioMaximo, int precioMinimo) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -67,19 +67,19 @@ public class TipoRecurso {
         this.tipo = tipo;
     }
 
-    public float getPrecioMaximo() {
+    public int getPrecioMaximo() {
         return precioMaximo;
     }
 
-    public void setPrecioMaximo(float precioMaximo) {
+    public void setPrecioMaximo(int precioMaximo) {
         this.precioMaximo = precioMaximo;
     }
 
-    public float getPrecioMinimo() {
+    public int getPrecioMinimo() {
         return precioMinimo;
     }
 
-    public void setPrecioMinimo(float precioMinimo) {
+    public void setPrecioMinimo(int precioMinimo) {
         this.precioMinimo = precioMinimo;
     }
 }

@@ -21,8 +21,14 @@ public class EspacioController {
     public boolean putIn(int reourceIndex, int quantity){
 
         int ocupation = espacios.get(reourceIndex).getOcupacionAactual();
-        int capacidad = espacios.get(reourceIndex).getCapacidadMaxima();
-        if (capacidad >= ocupation + quantity && ocupation + quantity >=0){
+        int capacidad = 0;
+        boolean unlimited = false;
+        if (espacios.get(reourceIndex).getCapacidadMaxima() != null){
+            capacidad = espacios.get(reourceIndex).getCapacidadMaxima();
+        }else{
+            unlimited = true;
+        }
+        if (( unlimited && ocupation + quantity >=0 ) || (capacidad >= ocupation + quantity && ocupation + quantity >=0) ){
             espacios.get(reourceIndex).setOcupacionAactual(ocupation + quantity);
             return true;
         }

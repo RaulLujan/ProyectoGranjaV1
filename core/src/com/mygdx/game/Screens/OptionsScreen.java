@@ -2,6 +2,7 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
+import com.mygdx.game.Images.ImageClampToEdge;
 import com.mygdx.game.MainGame;
 import com.mygdx.game.StyleFactory;
 
@@ -34,6 +36,8 @@ public class OptionsScreen extends BaseScreen {
     private Slider volumeSlider;
     private TextField neighbourTextField;
     private Button.ButtonStyle onStyle, offStyle;
+    private ImageClampToEdge backgroundImage;
+    private Texture backgroundTexture;
 
 
     public OptionsScreen(MainGame game) {
@@ -47,6 +51,10 @@ public class OptionsScreen extends BaseScreen {
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
 
         // inicialización de los elementos
+
+        backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/optionBack.jpg");
+        backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
+                Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
         goBackButton = new TextButton("Al Juego", skin, "custom");
         goMenuButton = new TextButton("Menu", skin);
         addNeighbour = new TextButton("Buscar vecino", skin);
@@ -140,10 +148,10 @@ public class OptionsScreen extends BaseScreen {
         addNeighbour.setSize(Constants.DEVICE_WIDTH * 0.17f, Constants.DEVICE_HEIGHT *0.10f);
         closeSession.setSize(Constants.DEVICE_WIDTH * 0.17f, Constants.DEVICE_HEIGHT *0.10f);
         goMenuButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        area1.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.15f);
-        area2.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.15f);
-        area3.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.15f);
-        area4.setSize(Constants.DEVICE_WIDTH *0.5f, Constants.DEVICE_HEIGHT * 0.15f);
+        area1.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.19f);
+        area2.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.19f);
+        area3.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.19f);
+        area4.setSize(Constants.DEVICE_WIDTH *0.5f, Constants.DEVICE_HEIGHT * 0.19f);
         idLabel.setSize(Constants.DEVICE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.08f);
         userLabel.setSize(Constants.DEVICE_WIDTH *0.35f, Constants.DEVICE_HEIGHT * 0.08f);
         farmNameTitleLabel.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
@@ -159,10 +167,10 @@ public class OptionsScreen extends BaseScreen {
 
         //posiciones de los elementos
 
-        area1.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.7f);
-        area2.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.5f);
-        area3.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.3f);
-        area4.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.1f);
+        area1.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.68f);
+        area2.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.48f);
+        area3.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.28f);
+        area4.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.08f);
         goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.59f, Constants.DEVICE_HEIGHT * 0.125f);
         addNeighbour.setPosition(Constants.DEVICE_WIDTH * 0.76f, Constants.DEVICE_HEIGHT * 0.525f);
         goMenuButton.setPosition(Constants.DEVICE_WIDTH * 0.77f, Constants.DEVICE_HEIGHT * 0.125f);
@@ -204,6 +212,7 @@ public class OptionsScreen extends BaseScreen {
 
 
         //Se añaden los elementos
+        stage.addActor(backgroundImage);
         stage.addActor(area2);
         stage.addActor(area1);
         stage.addActor(area3);

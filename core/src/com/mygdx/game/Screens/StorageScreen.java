@@ -2,6 +2,7 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
 import com.mygdx.game.DialogFactory;
 import com.mygdx.game.Dominio.TipoRecurso;
+import com.mygdx.game.Images.ImageClampToEdge;
 import com.mygdx.game.MainGame;
 import com.mygdx.game.StyleFactory;
 
@@ -32,7 +34,8 @@ public class StorageScreen extends BaseScreen {
     private Label depositNameLabel2, quantityTitleLabel2, quantityLabel2, resourcesTitleLabel2, resourcesLabel2;
     private Label depositNameLabel3, quantityTitleLabel3, quantityLabel3, resourcesTitleLabel3, resourcesLabel3;
     private Label depositNameLabel4, quantityTitleLabel4, quantityLabel4, resourcesTitleLabel4, resourcesLabel4;
-
+    private ImageClampToEdge backgroundImage;
+    private Texture backgroundTexture;
 
 
 
@@ -48,6 +51,10 @@ public class StorageScreen extends BaseScreen {
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+
+        backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/storageBack.jpg");
+        backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
+                Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
         // inicialización de los elementos
         goBackButton = new TextButton("Volver", skin, "custom");
@@ -169,10 +176,10 @@ public class StorageScreen extends BaseScreen {
         button2.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
         button3.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
         button4.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
-        area1.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
-        area2.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
-        area3.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
-        area4.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.18f);
+        area1.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.19f);
+        area2.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.19f);
+        area3.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.19f);
+        area4.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.19f);
         fundsLabel.setSize(Constants.DEVICE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
         depositNameLabel1.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
         depositNameLabel2.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
@@ -201,10 +208,10 @@ public class StorageScreen extends BaseScreen {
         //posiciones de los elementos
         goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
         fundsLabel.setPosition(Constants.DEVICE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
-        area1.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.66f);
-        area2.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.45f);
-        area3.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.24f);
-        area4.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.03f);
+        area1.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.655f);
+        area2.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.445f);
+        area3.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.235f);
+        area4.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.025f);
         button1.setPosition(Constants.DEVICE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.7f);
         button2.setPosition(Constants.DEVICE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.49f);
         button3.setPosition(Constants.DEVICE_WIDTH * 0.75f, Constants.DEVICE_HEIGHT * 0.28f);
@@ -237,12 +244,13 @@ public class StorageScreen extends BaseScreen {
         area2.setTouchable(Touchable.disabled);
         area3.setTouchable(Touchable.disabled);
         area4.setTouchable(Touchable.disabled);
-        button1.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
-        button2.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
-        button3.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
-        button4.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
+        button1.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
+        button2.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
+        button3.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
+        button4.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
 
         //Se añaden los elementos
+        stage.addActor(backgroundImage);
         stage.addActor(goBackButton);
 
         stage.addActor(area1);

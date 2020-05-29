@@ -2,6 +2,7 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
 import com.mygdx.game.Dominio.Espacio;
 import com.mygdx.game.Dominio.Precio;
+import com.mygdx.game.Images.ImageClampToEdge;
 import com.mygdx.game.MainGame;
 import com.mygdx.game.StyleFactory;
 import com.mygdx.game.control.EspacioController;
@@ -40,6 +42,8 @@ public class ShopScreen extends BaseScreen {
     private EspacioController espacioController;
     private ArrayList<Precio> prices;
     ArrayList<Espacio> espacios;
+    private ImageClampToEdge backgroundImage;
+    private Texture backgroundTexture;
 
 
 
@@ -53,6 +57,10 @@ public class ShopScreen extends BaseScreen {
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+
+        backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/shopBack.jpg");
+        backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
+                Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
         // inicialización de los elementos
         goBackButton = new TextButton("Volver", skin, "custom");
@@ -108,6 +116,7 @@ public class ShopScreen extends BaseScreen {
         areaB.setTouchable(Touchable.disabled);
 
         //Se añaden los elementos
+        stage.addActor(backgroundImage);
         stage.addActor(goBackButton);
 
         stage.addActor(areaB);

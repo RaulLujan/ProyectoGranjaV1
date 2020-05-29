@@ -8,6 +8,8 @@ import com.mygdx.game.Dominio.Infraestructura;
 import com.mygdx.game.Dominio.Precio;
 import com.mygdx.game.Dominio.TipoRecurso;
 import com.mygdx.game.Dominio.Usuario;
+import com.mygdx.game.control.AnimalController;
+
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -29,7 +31,7 @@ public class DomainMocker {
 
         ArrayList<Espacio> espacios = new ArrayList<>();
 
-        espacios.add(TipoRecurso.MONEY,new Espacio(TipoRecurso.MONEY, null,250000, resources.get(TipoRecurso.MONEY), null));
+        espacios.add(TipoRecurso.MONEY,new Espacio(TipoRecurso.MONEY, null,150000, resources.get(TipoRecurso.MONEY), null));
         espacios.add(TipoRecurso.WATER,new Espacio(TipoRecurso.WATER, 50000,10000, resources.get(TipoRecurso.WATER), null));
         espacios.add(TipoRecurso.MEAT,new Espacio(TipoRecurso.MEAT, 20000,0, resources.get(TipoRecurso.MEAT), null));
         espacios.add(TipoRecurso.MILK,new Espacio(TipoRecurso.MILK, 20000,0, resources.get(TipoRecurso.MILK), null));
@@ -47,7 +49,9 @@ public class DomainMocker {
 
         Estructura almacen = new Estructura();
         espacios.get(TipoRecurso.COW).setAnimales(new ArrayList<Animal>());
-        espacios.get(TipoRecurso.COW).getAnimales().add(new Animal(0,"Florinda", new GregorianCalendar(), resources.get(TipoRecurso.COW)));
+        espacios.get(TipoRecurso.PIG).setAnimales(new ArrayList<Animal>());
+        espacios.get(TipoRecurso.CHICKEN).setAnimales(new ArrayList<Animal>());
+        espacios.get(TipoRecurso.COW).getAnimales().add(new Animal(0, AnimalController.getRNDName(), new GregorianCalendar(), resources.get(TipoRecurso.COW)));
         almacen.setEspacios(espacios);
         user.getGranja().getInfraestructuras().add(almacen);
 

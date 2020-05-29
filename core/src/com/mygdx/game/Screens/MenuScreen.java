@@ -16,13 +16,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
 import com.mygdx.game.Images.ImageClampToEdge;
 import com.mygdx.game.MainGame;
+import com.mygdx.game.StyleFactory;
 
 public class MenuScreen extends BaseScreen {
 
 
     private Stage stage;
     private World world;
-    private TextButton goBackButton;
+    private TextButton playButton;
     private Button settingButton;
     private ImageClampToEdge backgroundImage;
     private Label idLbabel;
@@ -38,18 +39,19 @@ public class MenuScreen extends BaseScreen {
 
        // apariencias de los skins
        this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
-       backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/menuBack.png");
+
 
        // inicialización de los elementos
-       goBackButton = new TextButton("Jugar", skin, "custom");
+       playButton = new TextButton("Jugar", skin , "custom");
        settingButton = new Button(skin, "settings");
+       backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/menuBack.png");
        backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                                                                             Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
        idLbabel = new Label(String.format("Id: 00%s", this.game.getUsuario().getId()), skin, "custom_grey");
 
 
        //funcionalidades
-       goBackButton.addCaptureListener(new ChangeListener() {
+       playButton.addCaptureListener(new ChangeListener() {
            @Override
            public void changed(ChangeEvent event, Actor actor) {
                MenuScreen.this.game.showGameScreen();
@@ -64,22 +66,22 @@ public class MenuScreen extends BaseScreen {
        });
 
        //tmaño de las fuentes
-       goBackButton.getLabel().setFontScale(Constants.FONT_SIZE);
+       playButton.getLabel().setFontScale(Constants.FONT_SIZE);
        idLbabel.setFontScale(Constants.FONT_SIZE * 0.8f);
 
        //tamaño de los elementos
-       goBackButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
+       playButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
        settingButton.setSize(Constants.DEVICE_WIDTH * 0.05f,Constants.DEVICE_WIDTH * 0.05f);
        idLbabel.setSize(Constants.DEVICE_WIDTH * 0.3f,Constants.DEVICE_WIDTH * 0.08f);
 
         //posición de los elementos
-       goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.425f, Constants.DEVICE_HEIGHT * 0.05f);
+       playButton.setPosition(Constants.DEVICE_WIDTH * 0.425f, Constants.DEVICE_HEIGHT * 0.05f);
        settingButton.setPosition(Constants.DEVICE_WIDTH * 0.94f, Constants.DEVICE_HEIGHT * 0.9f);
        idLbabel.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.88375f);
 
 
        stage.addActor(backgroundImage);
-       stage.addActor(goBackButton);
+       stage.addActor(playButton);
        stage.addActor(settingButton);
        stage.addActor(idLbabel);
 

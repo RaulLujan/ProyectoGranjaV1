@@ -4,9 +4,9 @@ public class Precio {
 
     private int id;
     private TipoRecurso tipoRecurso;
-    private float precio;
+    private int precio;
 
-    public Precio(int id, TipoRecurso tipoRecurso, float precio) {
+    public Precio(int id, TipoRecurso tipoRecurso, int precio) {
         this.id = id;
         this.tipoRecurso = tipoRecurso;
         this.precio = precio;
@@ -28,11 +28,11 @@ public class Precio {
         this.tipoRecurso = tipoRecurso;
     }
 
-    public float getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 }
