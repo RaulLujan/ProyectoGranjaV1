@@ -15,11 +15,13 @@ public class AnimalsBuilding extends BaseActor {
     private World world;
     private Body body;
     private SoundFactory sounds;
+    private int animalType;
 
-    public AnimalsBuilding(World world, Texture texture, Vector2 position, SoundFactory sounds){
+    public AnimalsBuilding(World world, Texture texture, Vector2 position, SoundFactory sounds, int animalType){
         this.world = world;
         this.texture = texture;
         this.sounds = sounds;
+        this.animalType = animalType;
 
         BodyDef def = new BodyDef();
         def.position.set(position);
@@ -40,4 +42,7 @@ public class AnimalsBuilding extends BaseActor {
         world.destroyBody(body);
     }
 
+    public int getAnimalType() {
+        return animalType;
+    }
 }

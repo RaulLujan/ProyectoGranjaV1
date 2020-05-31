@@ -1,6 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -27,7 +28,7 @@ public class OptionsScreen extends BaseScreen {
     private Stage stage;
     private World world;
 
-    private Skin skin;
+    private Skin skin, glassSkin;
 
     private TextButton goBackButton, goMenuButton, addNeighbour, closeSession;
     private Window area1, area2, area3, area4;
@@ -49,24 +50,26 @@ public class OptionsScreen extends BaseScreen {
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+        this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
 
         // inicialización de los elementos
 
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/optionBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
-        goBackButton = new TextButton("Al Juego", skin, "custom");
-        goMenuButton = new TextButton("Menu", skin);
-        addNeighbour = new TextButton("Buscar vecino", skin);
-        closeSession = new TextButton("Cerrar sesion", skin);
+        goBackButton = new TextButton("Al Juego", glassSkin);
+        goMenuButton = new TextButton("Menu", glassSkin);
+        addNeighbour = new TextButton("Buscar vecino", glassSkin);
+        closeSession = new TextButton("Cerrar sesion", glassSkin);
 
-        idLabel = new Label(String.format("Id: 000%s", this.game.getUsuario().getId()), skin, "required");
-        userLabel = new Label(String.format("%s %s", this.game.getUsuario().getNombre(), this.game.getUsuario().getApellidos() ), skin, "required");
-        farmNameTitleLabel = new Label("Nombre de la granja:", skin, "custom_grey");
-        volumeLabel = new Label("Volumen", skin, "custom_grey");
-        musicLabel = new Label("Musica", skin, "custom_grey");
-        effectsLabel = new Label("Efectos", skin, "custom_grey");
-        farmNameLabel = new Label(this.game.getUsuario().getGranja().getNombre(), skin, "custom_blue");
+        idLabel = new Label(String.format("Id: 00000%s", this.game.getUsuario().getId()), glassSkin, "black");
+        userLabel = new Label(String.format("%s %s", this.game.getUsuario().getNombre(), this.game.getUsuario().getApellidos() ), glassSkin, "black");
+
+        farmNameTitleLabel = new Label("Nombre de la granja:", glassSkin, "black");
+        volumeLabel = new Label("Volumen", glassSkin, "black");
+        musicLabel = new Label("Musica", glassSkin, "black");
+        effectsLabel = new Label("Efectos", glassSkin, "black");
+        farmNameLabel = new Label(this.game.getUsuario().getGranja().getNombre(), glassSkin, "blue");
         area1 = new Window("", skin,"dialog");
         area2 = new Window("", skin,"dialog");
         area3 = new Window("", skin,"dialog");
@@ -79,21 +82,22 @@ public class OptionsScreen extends BaseScreen {
         offStyle = musicCheckBox.getStyle();
 
 
-        volumeSlider = new Slider(0,1,0.01f, false, skin,"default-horizontal");
-        neighbourTextField = new TextField("", skin);
+        volumeSlider = new Slider(0,1,0.01f, false, glassSkin,"default-horizontal");
+        neighbourTextField = new TextField("", glassSkin);
 
         // Tamaño de la fuente
-        goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
-        goMenuButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
-        addNeighbour.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
-        closeSession.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
-        idLabel.setFontScale(Constants.FONT_SIZE);
-        userLabel.setFontScale(Constants.FONT_SIZE);
-        farmNameTitleLabel.setFontScale(Constants.FONT_SIZE);
-        farmNameLabel.setFontScale(Constants.FONT_SIZE);
-        volumeLabel.setFontScale(Constants.FONT_SIZE);
-        musicLabel.setFontScale(Constants.FONT_SIZE);
-        effectsLabel.setFontScale(Constants.FONT_SIZE);
+        closeSession.getLabel().setFontScale(closeSession.getLabel().getFontScaleX()*0.7f);
+        addNeighbour.getLabel().setFontScale(addNeighbour.getLabel().getFontScaleX()*0.7f);
+        goMenuButton.getLabel().setFontScale(goMenuButton.getLabel().getFontScaleX()*0.8f);
+        goBackButton.getLabel().setFontScale(goBackButton.getLabel().getFontScaleX()*0.8f);
+
+        idLabel.setFontScale(Constants.FONT_SIZE * 0.85f);
+        userLabel.setFontScale(Constants.FONT_SIZE * 0.85f);
+        farmNameTitleLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
+        farmNameLabel.setFontScale(Constants.FONT_SIZE* 0.8f);
+        volumeLabel.setFontScale(Constants.FONT_SIZE* 0.8f);
+        musicLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
+        effectsLabel.setFontScale(Constants.FONT_SIZE*  0.8f);
 
         TextField.TextFieldStyle textFieldStyle = neighbourTextField.getStyle();
         textFieldStyle.font.getData().setScale(Constants.FONT_SIZE);
@@ -192,21 +196,24 @@ public class OptionsScreen extends BaseScreen {
 
 
         //estados
-
+        goBackButton.setColor(Color.GREEN);
+        goMenuButton.setColor(Color.ROYAL);
         area1.setTouchable(Touchable.disabled);
         area2.setTouchable(Touchable.disabled);
         area3.setTouchable(Touchable.disabled);
         area4.setTouchable(Touchable.disabled);
         userLabel.setAlignment(Align.right);
-        volumeSlider.getStyle().knob.setMinHeight(Constants.DEVICE_WIDTH * 0.02f);
-        volumeSlider.getStyle().knob.setMinWidth(Constants.DEVICE_WIDTH * 0.02f);
-        volumeSlider.getStyle().knobDown.setMinHeight(Constants.DEVICE_WIDTH * 0.02f);
-        volumeSlider.getStyle().knobDown.setMinWidth(Constants.DEVICE_WIDTH * 0.02f);
+        area1.setColor(1,1,1,0.9f);
+        area2.setColor(1,1,1,0.9f);
+        area3.setColor(1,1,1,0.9f);
+        area4.setColor(1,1,1,0.9f);
 
-        addNeighbour.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
-        closeSession.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
-        goMenuButton.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
         neighbourTextField.setMessageText(" Id usuario");
+        if (!this.game.isUserLogged()){
+            idLabel.setText("");
+            userLabel.setText("");
+
+        }
 
 
 

@@ -27,14 +27,20 @@ com.badlogic.gdx.graphics.Color: {
 		a: 1
 	}
 	gold: {
-		r: 0.80314960
-		g: 0.60236220
+		r: 0.8
+		g: 0.6
 		b: 0
 		a: 1
 	}
 	blue: {
-		r: 0.30314961
-		g: 0.65354331
+		r: 0.3
+		g: 0.65
+		b: 1
+		a: 1
+	}
+	blueDark: {
+		r: 0.3
+		g: 0.5
 		b: 1
 		a: 1
 	}
@@ -260,6 +266,10 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	title-white: {
 		font: title
 		fontColor: white
+	}
+	custom_dark_blue: {
+		font: font
+		fontColor: blueDark
 	}
 	custom_blue: {
 		font: font

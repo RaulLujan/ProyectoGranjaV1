@@ -7,6 +7,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.Dominio.Campo;
+import com.mygdx.game.Dominio.Infraestructura;
 import com.mygdx.game.Dominio.Usuario;
 import com.mygdx.game.Screens.AnimalsScreen;
 import com.mygdx.game.Screens.FieldScreen;
@@ -18,6 +20,7 @@ import com.mygdx.game.Screens.OptionsScreen;
 import com.mygdx.game.Screens.PreLoadingScreen;
 import com.mygdx.game.Screens.ShopScreen;
 import com.mygdx.game.Screens.StorageScreen;
+import com.mygdx.game.control.FieldController;
 import com.mygdx.game.control.UserController;
 
 public class MainGame extends Game {
@@ -32,13 +35,14 @@ public class MainGame extends Game {
     private boolean userLogged;
 
 	private SoundFactory soundFactory;
-	private AssetManager assetManager;
+	private AssetManager miniAssetManager, assetManager;
 
 	private Screen gameScreen, loadingScreen, preloadingScreen, menuScreen, loginScreen, fieldScreen,
 		shopScreen, storageScreen, animalsScreen, optionScreen;
 
 	private Usuario usuario;
 	private UserController userController;
+	private FieldController fieldController;
 
 
 
@@ -49,11 +53,12 @@ public class MainGame extends Game {
         usuario = DomainMocker.getMockedUser();
         userController = new UserController(usuario);
 
+		miniAssetManager = new AssetManager();
 		assetManager = new AssetManager();
 
 		//texture for loading
-		assetManager.load("Textures/tractor.png", Texture.class);
 
+		miniAssetManager.load("Textures/tractor.png", Texture.class);
 
 		//textures
 		assetManager.load("Textures/Crop.png", Texture.class);
@@ -104,26 +109,31 @@ public class MainGame extends Game {
 		assetManager.load("Sounds/RNDAmbient/pig1.wav", Sound.class);
 		assetManager.load("Sounds/RNDAmbient/pig2.wav", Sound.class);
 		assetManager.load("Sounds/RNDAmbient/pig3.wav", Sound.class);
-		assetManager.finishLoading();
+
+		this.preloadingScreen = new PreLoadingScreen(this);
+		this.setScreen(preloadingScreen);
+
+
+
+
+	}
+
+	public void finishLoading() {
 		this.actualizePreferences();
 		this.soundFactory = new SoundFactory(this, Gdx.app.getPreferences(PREFERENCES));
+
 
 		if ( validate(preferences.getString(LOGIN_KEY, ""), preferences.getString(PASS_KEY,"")) ){
 			this.userLogged = true;
 		}else{
 			this.userLogged = false;
 		}
-
-
-		//this.userLogged = false; //only for test
-		this.preloadingScreen = new PreLoadingScreen(this);
-		this.setScreen(preloadingScreen);
+		this.fieldController = new FieldController((Campo)usuario.getGranja().getInfraestructuras().get(Infraestructura.FIELD));
 	}
 
 
-
-	public void showAnimalsScreen(){
-		this.animalsScreen = new AnimalsScreen(this);
+	public void showAnimalsScreen(int animalType){
+		this.animalsScreen = new AnimalsScreen(this, animalType);
 		this.setScreen(animalsScreen);
 	}
 
@@ -266,5 +276,21 @@ public class MainGame extends Game {
 
 	public void setUserController(UserController userController) {
 		this.userController = userController;
+	}
+
+	public AssetManager getMiniAssetManager() {
+		return miniAssetManager;
+	}
+
+	public void setMiniAssetManager(AssetManager miniAssetManager) {
+		this.miniAssetManager = miniAssetManager;
+	}
+
+	public FieldController getFieldController() {
+		return fieldController;
+	}
+
+	public void setFieldController(FieldController fieldController) {
+		this.fieldController = fieldController;
 	}
 }

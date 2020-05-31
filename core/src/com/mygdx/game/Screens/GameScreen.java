@@ -19,6 +19,7 @@ import com.mygdx.game.Actors.Shop;
 import com.mygdx.game.Actors.Storage;
 import com.mygdx.game.Actors.TruckActor;
 import com.mygdx.game.Constants;
+import com.mygdx.game.Dominio.TipoRecurso;
 import com.mygdx.game.Images.ImageRepeart;
 import com.mygdx.game.Images.ImageVerticalRepeat;
 import com.mygdx.game.MainGame;
@@ -108,9 +109,9 @@ public class GameScreen extends BaseScreen{
 
         fieldActor = new Field(world, fieldTexture, new Vector2(10f, 5.5f), game.getSoundFactory());
         homeActor = new Home(world, houseTexture, new Vector2(26f, 15f), game.getSoundFactory());
-        chickenBuildingActor = new AnimalsBuilding(world, chickenCoopTexture, new Vector2(16f, 15f), game.getSoundFactory());
-        pigsBuildingActor = new AnimalsBuilding(world, pigstyTexture, new Vector2(10f, 15f), game.getSoundFactory());
-        cowsBuildingActor = new AnimalsBuilding(world, barnTexture, new Vector2(4f, 15f), game.getSoundFactory());
+        chickenBuildingActor = new AnimalsBuilding(world, chickenCoopTexture, new Vector2(16f, 15f), game.getSoundFactory(), TipoRecurso.CHICKEN);
+        pigsBuildingActor = new AnimalsBuilding(world, pigstyTexture, new Vector2(10f, 15f), game.getSoundFactory(), TipoRecurso.PIG);
+        cowsBuildingActor = new AnimalsBuilding(world, barnTexture, new Vector2(4f, 15f), game.getSoundFactory(), TipoRecurso.COW);
         shopActor = new Shop(world, shopTexture, new Vector2(25.75f, 3f), game.getSoundFactory());
         storageActor = new Storage(world, storeTexture, new Vector2(26f, 9f), game.getSoundFactory());
         farmerActor = new FarmerActor(world,farmerTextures,new Vector2(10, 8), game.getSoundFactory());
@@ -161,7 +162,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                GameScreen.this.game.showAnimalsScreen();
+                GameScreen.this.game.showAnimalsScreen(cowsBuildingActor.getAnimalType());
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
@@ -179,7 +180,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                GameScreen.this.game.showAnimalsScreen();
+                GameScreen.this.game.showAnimalsScreen(chickenBuildingActor.getAnimalType());
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..
@@ -197,7 +198,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
-                GameScreen.this.game.showAnimalsScreen();
+                GameScreen.this.game.showAnimalsScreen(pigsBuildingActor.getAnimalType());
                 game.getSoundFactory().stopAll();
                 //do your stuff
                 //it will work when finger is released..

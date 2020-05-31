@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.mygdx.game.Dominio.Animal;
+import com.mygdx.game.Dominio.Campo;
 import com.mygdx.game.Dominio.Espacio;
 import com.mygdx.game.Dominio.Estructura;
 import com.mygdx.game.Dominio.Granja;
@@ -53,7 +54,9 @@ public class DomainMocker {
         espacios.get(TipoRecurso.CHICKEN).setAnimales(new ArrayList<Animal>());
         espacios.get(TipoRecurso.COW).getAnimales().add(new Animal(0, AnimalController.getRNDName(), new GregorianCalendar(), resources.get(TipoRecurso.COW)));
         almacen.setEspacios(espacios);
-        user.getGranja().getInfraestructuras().add(almacen);
+        user.getGranja().getInfraestructuras().add(Infraestructura.STORAGE, almacen);
+        user.getGranja().getInfraestructuras().add(Infraestructura.FIELD, new Campo());
+
 
         return user;
     }

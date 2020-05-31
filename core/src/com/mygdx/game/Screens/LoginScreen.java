@@ -1,6 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -25,7 +26,7 @@ public class LoginScreen extends BaseScreen {
     private Stage stage;
     private World world;
 
-    private Skin skin;
+    private Skin glassSkin, skin;
 
     private TextButton goBackButton, loginButton, registerButton;
     private Window areaT;
@@ -43,27 +44,29 @@ public class LoginScreen extends BaseScreen {
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+        this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
 
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/loginBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
         // inicialización de los elementos
-        goBackButton = new TextButton("Volver", skin, "custom");
-        loginButton = new TextButton("Entrar", skin, "custom");
-        registerButton = new TextButton("Registrar", skin);
+        goBackButton = new TextButton("Volver", glassSkin);
+        loginButton = new TextButton("Entrar", glassSkin);
+        registerButton = new TextButton("Registrar", glassSkin);
         areaT = new Window("", skin, "dialog");
-        nameTitleLabel = new Label("Usuario",skin, "required");
-        passTitleLabel = new Label("Passworld",skin, "required");
-        nameTextField = new TextField("", skin);
-        passTextField = new TextField("", skin);
+        nameTitleLabel = new Label("Usuario", glassSkin, "black");
+        passTitleLabel = new Label("Passworld", glassSkin, "black");
+        nameTextField = new TextField("", glassSkin);
+        passTextField = new TextField("", glassSkin);
 
 
 
         // Tamaño de la fuente
-        goBackButton.getLabel().setFontScale(Constants.FONT_SIZE);
-        loginButton.getLabel().setFontScale(Constants.FONT_SIZE);
-        registerButton.getLabel().setFontScale(Constants.FONT_SIZE);
+        goBackButton.getLabel().setFontScale(goBackButton.getLabel().getFontScaleX()*0.8f);
+        loginButton.getLabel().setFontScale(loginButton.getLabel().getFontScaleX()*0.8f);
+        registerButton.getLabel().setFontScale(registerButton.getLabel().getFontScaleX()*0.8f);
+
         nameTitleLabel.setFontScale(Constants.FONT_SIZE);
         passTitleLabel.setFontScale(Constants.FONT_SIZE);
 
@@ -125,7 +128,9 @@ public class LoginScreen extends BaseScreen {
         passTextField.setMessageText("  Passworld");
         passTextField.setPasswordMode(true);
         passTextField.setPasswordCharacter('*');
-        registerButton.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
+        goBackButton.setColor(Color.GREEN);
+        registerButton.setColor(Color.PURPLE);
+        areaT.setColor(1,1,1,0.85f);
 
         //Se añaden los elementos
         stage.addActor(backgroundImage);

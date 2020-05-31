@@ -1,6 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -30,7 +31,7 @@ public class ShopScreen extends BaseScreen {
     private Stage stage;
     private World world;
 
-    private Skin skin;
+    private Skin skin, glassSkin;
 
     private TextButton goBackButton;
     private Window areaT, areaB;
@@ -53,34 +54,36 @@ public class ShopScreen extends BaseScreen {
         this.world = new World(new Vector2(0, 0), true);
 
         espacioController = new EspacioController(this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios());
+        prices = (ArrayList<Precio>)this.game.getUsuario().getGranja().getPrecios();
         int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+        this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
 
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/shopBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
         // inicialización de los elementos
-        goBackButton = new TextButton("Volver", skin, "custom");
+        goBackButton = new TextButton("Volver", glassSkin);
         areaT = new Window("", skin);
         areaB = new Window("", skin,"dialog");
-        fundsLabel = new Label(String.format("Fondos: %s", recursos), skin, "required");
-        resourceNameHeadLabel = new Label("Recurso",skin, "white");
-        pricesHeadLabel = new Label("Precios V/C",skin, "white");
-        quantityHeadLabel = new Label("Cantidad",skin, "white");
+        fundsLabel = new Label(String.format("Fondos: %s", recursos), glassSkin, "black");
+        resourceNameHeadLabel = new Label("Recurso",glassSkin);
+        pricesHeadLabel = new Label("Precios V/C",glassSkin);
+        quantityHeadLabel = new Label("Cantidad",glassSkin);
         rows = new Label[3][9];
         addButtons = new Button[2][rows[0].length];
         quantityLabels = new Label[rows[0].length];
         actionButton = new TextButton[2][rows[0].length];
 
         // Tamaño de la fuente
-        goBackButton.getLabel().setFontScale(Constants.FONT_SIZE);
-        fundsLabel.setFontScale(Constants.FONT_SIZE);
-        resourceNameHeadLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
-        pricesHeadLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
-        quantityHeadLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
+        goBackButton.getLabel().setFontScale(goBackButton.getLabel().getFontScaleX()*0.8f);
+        fundsLabel.setFontScale(Constants.FONT_SIZE* 0.8f);
+        resourceNameHeadLabel.setFontScale(Constants.FONT_SIZE * 0.7f);
+        pricesHeadLabel.setFontScale(Constants.FONT_SIZE * 0.7f);
+        quantityHeadLabel.setFontScale(Constants.FONT_SIZE * 0.7f);
 
         //funcionalidades
         goBackButton.addCaptureListener(new ChangeListener() {
@@ -114,6 +117,9 @@ public class ShopScreen extends BaseScreen {
         areaT.setStyle(StyleFactory.getStyle(StyleFactory.BLUE_COLOR));
         areaT.setTouchable(Touchable.disabled);
         areaB.setTouchable(Touchable.disabled);
+        goBackButton.setColor(Color.GREEN);
+        areaB.setColor(1f,1f,1f,0.85f);
+        areaT.setColor(1f,1f,1f,0.9f);
 
         //Se añaden los elementos
         stage.addActor(backgroundImage);
@@ -126,7 +132,7 @@ public class ShopScreen extends BaseScreen {
         stage.addActor(pricesHeadLabel);
         stage.addActor(quantityHeadLabel);
 
-        prices = (ArrayList<Precio>)this.game.getUsuario().getGranja().getPrecios();
+
        //ESPACIOS
         espacios = (ArrayList<Espacio>)this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios();
 
@@ -136,18 +142,18 @@ public class ShopScreen extends BaseScreen {
             for(int j = 0; j< rows[i].length;j++){
 
                 if (i == 0){
-                    rows[i][j] = new Label(prices.get(j+1).getTipoRecurso().getNombre(),skin,"required");
+                    rows[i][j] = new Label(prices.get(j+1).getTipoRecurso().getNombre(),glassSkin,"black");
                 }else if (i == 1){
                     int buy = (int)prices.get(j+1).getTipoRecurso().getPrecioMinimo();
                     int sell = (int)(prices.get(j+1).getTipoRecurso().getPrecioMinimo() * 1.1);
                     String precioVC = String.format("%s / %s",buy,sell);
-                    rows[i][j] = new Label(precioVC,skin,"required");
+                    rows[i][j] = new Label(precioVC,glassSkin,"black");
                 }else{
-                    rows[i][j] = new Label(String.format("%s",espacios.get(j+1).getOcupacionAactual()) ,skin,"required");
+                    rows[i][j] = new Label(String.format("%s",espacios.get(j+1).getOcupacionAactual()) ,glassSkin,"black");
                 }
 
 
-                rows[i][j].setFontScale(Constants.FONT_SIZE);
+                rows[i][j].setFontScale(Constants.FONT_SIZE * 0.8f);
                 rows[i][j].setAlignment(Align.center);
                 rows[i][j].setSize(Constants.DEVICE_WIDTH * 0.11f, Constants.DEVICE_HEIGHT * 0.08f);
                 rows[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.09f + i * 0.15f ), Constants.DEVICE_HEIGHT * (0.03f + j * 0.08f));
@@ -161,8 +167,8 @@ public class ShopScreen extends BaseScreen {
                 String type;
                 if (i == 1) type = "spinner-plus-h"; else type = "spinner-minus-h";
                 addButtons[i][j] = new Button(skin, type);
-                addButtons[i][j].setSize(Constants.DEVICE_WIDTH * 0.03f, Constants.DEVICE_WIDTH * 0.03f);
-                addButtons[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.55f + i * 0.1f ), Constants.DEVICE_HEIGHT * (0.04f + j * 0.08f));
+                addButtons[i][j].setSize(Constants.DEVICE_WIDTH * 0.04f, Constants.DEVICE_WIDTH * 0.03f);
+                addButtons[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.54f + i * 0.1f ), Constants.DEVICE_HEIGHT * (0.04f + j * 0.08f));
 
                 //funcionalidades
                 final int finalI = i;
@@ -179,11 +185,11 @@ public class ShopScreen extends BaseScreen {
         }
         //cantidades a  comprar & vender
         for(int i = 0; i< quantityLabels.length;i++){
-            quantityLabels[i] = new Label("000",skin,"custom_blue");
-            quantityLabels[i].setFontScale(Constants.FONT_SIZE * 0.8f);
+            quantityLabels[i] = new Label("000",glassSkin,"blue");
+            quantityLabels[i].setFontScale(Constants.FONT_SIZE * 0.7f);
             quantityLabels[i].setAlignment(Align.center);
             quantityLabels[i].setSize(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.08f);
-            quantityLabels[i].setPosition(Constants.DEVICE_WIDTH * 0.565f, Constants.DEVICE_HEIGHT * (0.025f +i * 0.08f));
+            quantityLabels[i].setPosition(Constants.DEVICE_WIDTH * 0.56f, Constants.DEVICE_HEIGHT * (0.025f +i * 0.08f));
             stage.addActor(quantityLabels[i]);
 
         }
@@ -192,19 +198,19 @@ public class ShopScreen extends BaseScreen {
         for(int i = 0; i< actionButton.length; i++) {
             for (int j = 0; j < actionButton[i].length; j++) {
                 String text;
-                TextButton.TextButtonStyle textButtonStyle;
                 if (i == 1) {
                     text = "Compar";
-                    textButtonStyle = StyleFactory.BLUE_TEXT_BUTTON_STYLE();
+                    actionButton[i][j] = new TextButton(text ,glassSkin, "small");
                 } else {
                     text = "Vender";
-                    textButtonStyle = StyleFactory.ORANGE_TEXT_BUTTON_STYLE();
+                    actionButton[i][j] = new TextButton(text ,glassSkin, "small");
+                    actionButton[i][j].setColor(Color.PURPLE);
                 }
-                actionButton[i][j] = new TextButton(text ,skin);
-                actionButton[i][j].setStyle(textButtonStyle);
-                actionButton[i][j].getLabel().setFontScale(Constants.FONT_SIZE * 0.7f);
-                actionButton[i][j].setSize(Constants.DEVICE_WIDTH * 0.09f, Constants.DEVICE_HEIGHT * 0.06f);
-                actionButton[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.72f + i * 0.11f ), Constants.DEVICE_HEIGHT * (0.035f + j * 0.08f));
+
+                actionButton[i][j].getLabel().setFontScale(Constants.FONT_SIZE * 0.6f);
+
+                actionButton[i][j].setSize(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.06f);
+                actionButton[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.71f + i * 0.125f ), Constants.DEVICE_HEIGHT * (0.036f + j * 0.08f));
 
                 //funcionalidades
                 final int finalI = i;

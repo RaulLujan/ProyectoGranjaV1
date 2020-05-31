@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -22,9 +23,10 @@ public class LoadingScreen extends BaseScreen {
     private World world;
     private SpiningIconActor tractorActor;
     private Texture tractorTexture;
-    private float timeinLoadingScreen;
     private Label chargingLabel;
     private Skin skin;
+    private ProgressBar progressBar;
+
 
     public LoadingScreen(MainGame game) {
         super(game);
@@ -35,23 +37,27 @@ public class LoadingScreen extends BaseScreen {
     @Override
     public void show() {
         stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
-        timeinLoadingScreen = 0;
 
-        this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+        this.skin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
 
-        tractorTexture = game.getAssetManager().get("Textures/tractor.png");
+        tractorTexture = game.getMiniAssetManager().get("Textures/tractor.png");
 
 
         tractorActor = new SpiningIconActor(world, tractorTexture, new Vector2(
                                                             Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER / 2,
                                                             Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER / 2) );
         stage.addActor(tractorActor);
-        chargingLabel = new Label("Cargando: 50%", skin, "custom_blue");
-        chargingLabel.setFontScale(Constants.FONT_SIZE);
+        progressBar = new ProgressBar(0f,100f,1f,false,skin,"default-horizontal");
+        progressBar.setSize(Constants.DEVICE_WIDTH * 0.5f, Constants.DEVICE_HEIGHT * 0.1f);
+        progressBar.setPosition(Constants.DEVICE_WIDTH * 0.25f, Constants.DEVICE_HEIGHT * 0.10f);
+        stage.addActor(progressBar);
+        chargingLabel = new Label("", skin, "black");
+        chargingLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
         chargingLabel.setSize(Constants.DEVICE_WIDTH * 0.2f, Constants.DEVICE_HEIGHT * 0.1f);
         chargingLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.15f);
         chargingLabel.setAlignment(Align.center);
         stage.addActor(chargingLabel);
+
 
 
     }
@@ -74,11 +80,14 @@ public class LoadingScreen extends BaseScreen {
         world.step(delta, 6, 2);
 
 
-        timeinLoadingScreen += delta;
-
-        if (Gdx.input.justTouched() && this.timeinLoadingScreen > 3){
-            this.game.showMenuScreen();
-        }
+       if (game.getAssetManager().update()){
+            game.finishLoading();
+            game.showMenuScreen();
+       }else{
+            int progress = (int)(game.getAssetManager().getProgress() * 100);
+            chargingLabel.setText(String.format("Loading: %s%s", progress,"%"));
+            progressBar.setValue(progress);
+       }
 
         stage.draw();
 

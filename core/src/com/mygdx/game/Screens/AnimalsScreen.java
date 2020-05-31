@@ -1,6 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -40,7 +41,7 @@ public class AnimalsScreen extends BaseScreen{
     private Stage stage;
     private World world;
 
-    private Skin skin;
+    private Skin skin, glassSkin;
 
     private TextButton goBackButton, cowsButton, pigsButton, chickenButton, buyButton, sellButton;
     private Window areaB, table, tabletop;
@@ -58,12 +59,12 @@ public class AnimalsScreen extends BaseScreen{
     private ImageClampToEdge backgroundImage;
     private Texture backgroundTexture;
 
-    public AnimalsScreen(MainGame game) {
+    public AnimalsScreen(MainGame game, int animalType) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
 
-        this.selectedAnimalType = TipoRecurso.COW;
+        this.selectedAnimalType = animalType;
         espacioController = new EspacioController(this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios());
         animals = (ArrayList<Animal>)this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(this.selectedAnimalType).getAnimales();
         prices = (ArrayList<Precio>)this.game.getUsuario().getGranja().getPrecios();
@@ -71,6 +72,7 @@ public class AnimalsScreen extends BaseScreen{
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+        this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
 
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/animalBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
@@ -79,22 +81,22 @@ public class AnimalsScreen extends BaseScreen{
         int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
 
         // inicialización de los elementos
-        goBackButton = new TextButton("Volver", skin, "custom");
-        cowsButton = new TextButton("Vacas", skin);
+        goBackButton = new TextButton("Volver", glassSkin);
         reproduceSwitchButton = new Button(skin,"switch");
         areaB = new Window("", skin,"dialog");
         tabletop = new Window("", skin);
         table = new Window("", skin, "dialog");
-        pigsButton = new TextButton("Cerdos", skin);
-        chickenButton = new TextButton("Gallinas", skin);
-        buyButton = new TextButton("Comprar", skin);
-        sellButton = new TextButton("Vender", skin, "custom");
-        fundsLabel = new Label(String.format("Fondos: %s", recursos),skin, "required");
-        capacityLabel = new Label("", skin, "custom_grey");
-        advertLabel = new Label("Permitir a las la reproduccion automatica de los animales", skin, "custom_grey");
-        nameHeadLabel = new Label("Nombre", skin, "white");
-        typeHeadLabel = new Label("Tipo", skin, "white");
-        dateHeadLabel = new Label("Fecha nacimiento", skin, "white");
+        cowsButton = new TextButton("Vacas", glassSkin);
+        pigsButton = new TextButton("Cerdos", glassSkin);
+        chickenButton = new TextButton("Gallinas", glassSkin);
+        buyButton = new TextButton("Comprar", glassSkin, "small");
+        sellButton = new TextButton("Vender", glassSkin, "small");
+        fundsLabel = new Label(String.format("Fondos: %s", recursos), glassSkin, "black");
+        capacityLabel = new Label("", glassSkin, "blue");
+        advertLabel = new Label("Permitir a las la reproduccion automatica de los animales", glassSkin, "blue");
+        nameHeadLabel = new Label("Nombre", glassSkin);
+        typeHeadLabel = new Label("Tipo", glassSkin);
+        dateHeadLabel = new Label("Fecha nacimiento", glassSkin);
 
         rows = new Label[3][5];
         checkBoxes = new CheckBox[rows[0].length];
@@ -102,18 +104,18 @@ public class AnimalsScreen extends BaseScreen{
 
 
         // Tamaño de la fuente
-        goBackButton.getLabel().setFontScale(Constants.FONT_SIZE);
+        goBackButton.getLabel().setFontScale(goBackButton.getLabel().getFontScaleX()*0.8f);
         fundsLabel.setFontScale(Constants.FONT_SIZE);
         cowsButton.getLabel().setFontScale(Constants.FONT_SIZE);
         pigsButton.getLabel().setFontScale(Constants.FONT_SIZE);
         chickenButton.getLabel().setFontScale(Constants.FONT_SIZE);
-        buyButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
-        sellButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
-        capacityLabel.setFontScale(Constants.FONT_SIZE);
-        advertLabel.setFontScale(Constants.FONT_SIZE);
-        nameHeadLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
-        typeHeadLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
-        dateHeadLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
+        buyButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.65f);
+        sellButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.65f);
+        capacityLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
+        advertLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
+        nameHeadLabel.setFontScale(Constants.FONT_SIZE * 0.65f);
+        typeHeadLabel.setFontScale(Constants.FONT_SIZE * 0.65f);
+        dateHeadLabel.setFontScale(Constants.FONT_SIZE * 0.65f);
 
         //funcionalidades
         goBackButton.addCaptureListener(new ChangeListener() {
@@ -164,7 +166,7 @@ public class AnimalsScreen extends BaseScreen{
                             "Comprar",
                             String.format("El nuevo animal le costara %s\nDesea completar la compra?", price),
                             0.4f,
-                            0.35f,
+                            0.38f,
                             3,
                             null);
 
@@ -190,12 +192,14 @@ public class AnimalsScreen extends BaseScreen{
                         names = String.format( "%s, %s", names, animals.get(i).getNombre());
                     }
                 }
-                names = names.substring(1);
+
+
                 if(atLeastOneIsChecked){
+                    names = names.substring(1);
                     DialogFactory.showOkCancelDialog(AnimalsScreen.this, stage,
                             "Vender",
                             String.format("Quieres vender a:\n%s\npor %s F ?", names, totalPrice),
-                            0.55f,
+                            0.58f,
                             0.35f,
                             4,
                             5);
@@ -253,15 +257,31 @@ public class AnimalsScreen extends BaseScreen{
         dateHeadLabel.setPosition(Constants.DEVICE_WIDTH * 0.52f, Constants.DEVICE_HEIGHT * 0.45f);
 
         //estados
+        goBackButton.setColor(Color.GREEN);
         areaB.setTouchable(Touchable.disabled);
         tabletop.setTouchable(Touchable.disabled);
         table.setTouchable(Touchable.disabled);
-        buyButton.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
-        sellButton.setStyle(StyleFactory.ORANGE_TEXT_BUTTON_STYLE());
-        cowsButton.setStyle(StyleFactory.getStyle(StyleFactory.DARK_GREY_BLUE_COLOR, StyleFactory.GREY_BLUE_COLOR));
+        cowsButton.getLabel().setFontScale(cowsButton.getLabel().getFontScaleX() * 0.8f);
+        pigsButton.getLabel().setFontScale(pigsButton.getLabel().getFontScaleX() * 0.8f);
+        chickenButton.getLabel().setFontScale(chickenButton.getLabel().getFontScaleX() * 0.8f);
+
+        sellButton.setColor(Color.PURPLE);
+
+
         pigsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
+        cowsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
         chickenButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
+
+        Button selectedButton;
+        if (selectedAnimalType == TipoRecurso.COW) selectedButton = cowsButton;
+        else if (selectedAnimalType == TipoRecurso.PIG) selectedButton = pigsButton;
+        else selectedButton = chickenButton;
+        selectedButton.setStyle(StyleFactory.getStyle(StyleFactory.DARK_GREY_BLUE_COLOR, StyleFactory.GREY_BLUE_COLOR));
+
         tabletop.setStyle(StyleFactory.getStyle(StyleFactory.BLUE_COLOR));
+        areaB.setColor(1,1,1,0.85f);
+        table.setColor(1,1,1,0.09f);
+        tabletop.setColor(1,1,1,0.9f);
 
         //Se añaden los elementos
         stage.addActor(backgroundImage);
@@ -283,16 +303,18 @@ public class AnimalsScreen extends BaseScreen{
         stage.addActor(dateHeadLabel);
 
         //checkboxses & buttons
+        Color miColor = new Color(0.698f,0f,0f,0.8f);
         for(int i = 0; i< checkBoxes.length;i++){
             checkBoxes[i] = new CheckBox("", skin);
-            buttons[i] = new TextButton("Sacrificar",skin);
-            buttons[i].getLabel().setFontScale(Constants.FONT_SIZE * 0.7f);
+            buttons[i] = new TextButton("Sacrificar",glassSkin, "small");
+            buttons[i].getLabel().setFontScale(Constants.FONT_SIZE * 0.55f);
             checkBoxes[i].getCells().get(0).size(Constants.DEVICE_WIDTH * 0.025f, Constants.DEVICE_WIDTH * 0.025f);
             checkBoxes[i].getImage().setScaling(Scaling.fit);
             buttons[i].setSize(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.06f);
             checkBoxes[i].setPosition(Constants.DEVICE_WIDTH *( 0.12f ), Constants.DEVICE_HEIGHT * (0.395f - i * 0.08f));
             buttons[i].setPosition(Constants.DEVICE_WIDTH *( 0.805f ), Constants.DEVICE_HEIGHT * (0.365f - i * 0.08f));
-            buttons[i].setStyle(StyleFactory.getStyle(StyleFactory.RED_COLOR, StyleFactory.DARK_RED_COLOR));
+            buttons[i].setColor(miColor);
+
             final Integer finalI = i;
 
             buttons[i].addCaptureListener(new ChangeListener() {
@@ -321,8 +343,8 @@ public class AnimalsScreen extends BaseScreen{
         }
         for(int i = 0; i< rows.length;i++) {
             for (int j = 0; j < rows[0].length; j++) {
-                rows[i][j] = new Label("", skin, "required");
-                rows[i][j].setFontScale(Constants.FONT_SIZE * 0.8f);
+                rows[i][j] = new Label("", glassSkin, "black");
+                rows[i][j].setFontScale(Constants.FONT_SIZE * 0.65f);
                 rows[i][j].setAlignment(Align.center);
                 rows[i][j].setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT * 0.08f);
                 rows[i][j].setPosition(Constants.DEVICE_WIDTH * (0.12f + i * 0.2f), Constants.DEVICE_HEIGHT * (0.36f - j * 0.08f));
@@ -347,7 +369,7 @@ public class AnimalsScreen extends BaseScreen{
                     } else if (i == 1) {
                         texto = "animal joven"; //create animalcontroller, give back text based on age
                     } else {
-                        texto = String.format("%s / %s / %s",gc.get(5),gc.get(2),gc.get(1));
+                        texto = String.format("%s / %s / %s",gc.get(5),gc.get(2)+1,gc.get(1));
                     }
                 }else {
                     texto = "";

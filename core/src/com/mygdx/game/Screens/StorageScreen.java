@@ -1,6 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -25,7 +26,7 @@ public class StorageScreen extends BaseScreen {
     private Stage stage;
     private World world;
 
-    private Skin skin;
+    private Skin skin, glassSkin;
 
     private TextButton goBackButton, button1, button2, button3, button4;
     private Window area1, area2, area3, area4;
@@ -51,82 +52,83 @@ public class StorageScreen extends BaseScreen {
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+        this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
 
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/storageBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
         // inicialización de los elementos
-        goBackButton = new TextButton("Volver", skin, "custom");
-        button1 = new TextButton("Expandir", skin);
-        button2 = new TextButton("Expandir", skin);
-        button3 = new TextButton("Expandir", skin);
-        button4 = new TextButton("Expandir", skin);
+        goBackButton = new TextButton("Volver", glassSkin);
+        button1 = new TextButton("Expandir", glassSkin);
+        button2 = new TextButton("Expandir", glassSkin);
+        button3 = new TextButton("Expandir", glassSkin);
+        button4 = new TextButton("Expandir", glassSkin);
         area1 = new Window("", skin,"dialog");
         area2 = new Window("", skin,"dialog");
         area3 = new Window("", skin,"dialog");
         area4 = new Window("", skin,"dialog");
-        fundsLabel = new Label(String.format("Fondos: %s", recursos),skin, "required");
-        depositNameLabel1 = new Label("Deposito de Agua",skin, "custom_green");
-        depositNameLabel2 = new Label("Camara frigorifica",skin, "custom_green");
-        depositNameLabel3 = new Label("Almacen general",skin, "custom_green");
-        depositNameLabel4 = new Label("Granero",skin, "custom_green");
-        quantityTitleLabel1 = new Label("Capacidad",skin, "required");
-        quantityTitleLabel2 = new Label("Capacidad",skin, "required");
-        quantityTitleLabel3 = new Label("Capacidad",skin, "required");
-        quantityTitleLabel4 = new Label("Capacidad",skin, "required");
+        fundsLabel = new Label(String.format("Fondos: %s", recursos),glassSkin, "black");
+        depositNameLabel1 = new Label("Deposito de Agua",glassSkin, "black");
+        depositNameLabel2 = new Label("Camara frigorifica",glassSkin, "black");
+        depositNameLabel3 = new Label("Almacen general",glassSkin, "black");
+        depositNameLabel4 = new Label("Granero",glassSkin, "black");
+        quantityTitleLabel1 = new Label("Capacidad",glassSkin, "black");
+        quantityTitleLabel2 = new Label("Capacidad",glassSkin, "black");
+        quantityTitleLabel3 = new Label("Capacidad",glassSkin, "black");
+        quantityTitleLabel4 = new Label("Capacidad",glassSkin, "black");
         int capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.WATER).getCapacidadMaxima();
         String capacityString = String.format("%s", capacity);
-        quantityLabel1 = new Label( capacityString, skin, "custom_blue");
+        quantityLabel1 = new Label( capacityString, glassSkin, "blue");
         capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MEAT).getCapacidadMaxima();
         capacityString = String.format("%s", capacity);
-        quantityLabel2 = new Label(capacityString,skin, "custom_blue");
+        quantityLabel2 = new Label(capacityString,glassSkin, "blue");
         capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MANURE).getCapacidadMaxima();
         capacityString = String.format("%s", capacity);
-        quantityLabel3 = new Label(capacityString,skin, "custom_blue");
+        quantityLabel3 = new Label(capacityString,glassSkin, "blue");
         capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.CORN).getCapacidadMaxima();
         capacityString = String.format("%s", capacity);
-        quantityLabel4 = new Label(capacityString,skin, "custom_blue");
-        resourcesTitleLabel1 = new Label("Recursos",skin, "required");
-        resourcesTitleLabel2 = new Label("Recursos",skin, "required");
-        resourcesTitleLabel3 = new Label("Recursos",skin, "required");
-        resourcesTitleLabel4 = new Label("Recursos",skin, "required");
-        resourcesLabel1 = new Label("Agua",skin, "custom_blue");
-        resourcesLabel2 = new Label("Carne, Huevos, Leche",skin, "custom_blue");
-        resourcesLabel3 = new Label("Abono, Herbicida",skin, "custom_blue");
-        resourcesLabel4 = new Label("Maiz, Fresas, Patatas",skin, "custom_blue");
+        quantityLabel4 = new Label(capacityString,glassSkin, "blue");
+        resourcesTitleLabel1 = new Label("Recursos",glassSkin, "black");
+        resourcesTitleLabel2 = new Label("Recursos",glassSkin, "black");
+        resourcesTitleLabel3 = new Label("Recursos",glassSkin, "black");
+        resourcesTitleLabel4 = new Label("Recursos",glassSkin, "black");
+        resourcesLabel1 = new Label("Agua",glassSkin, "blue");
+        resourcesLabel2 = new Label("Carne, Huevos, Leche",glassSkin, "blue");
+        resourcesLabel3 = new Label("Abono, Herbicida",glassSkin, "blue");
+        resourcesLabel4 = new Label("Maiz, Fresas, Patatas",glassSkin, "blue");
 
 
 
 
 
         // Tamaño de la fuente
-        goBackButton.getLabel().setFontScale(Constants.FONT_SIZE);
-        button1.getLabel().setFontScale(Constants.FONT_SIZE);
-        button2.getLabel().setFontScale(Constants.FONT_SIZE);
-        button3.getLabel().setFontScale(Constants.FONT_SIZE);
-        button4.getLabel().setFontScale(Constants.FONT_SIZE);
+        goBackButton.getLabel().setFontScale(goBackButton.getLabel().getFontScaleX()*0.8f);
+        button1.getLabel().setFontScale(button1.getLabel().getFontScaleX()*0.8f);
+        button2.getLabel().setFontScale(button2.getLabel().getFontScaleX()*0.8f);
+        button3.getLabel().setFontScale(button3.getLabel().getFontScaleX()*0.8f);
+        button4.getLabel().setFontScale(button4.getLabel().getFontScaleX()*0.8f);
         fundsLabel.setFontScale(Constants.FONT_SIZE);
-        depositNameLabel1.setFontScale(Constants.FONT_SIZE);
-        depositNameLabel2.setFontScale(Constants.FONT_SIZE);
-        depositNameLabel3.setFontScale(Constants.FONT_SIZE);
-        depositNameLabel4.setFontScale(Constants.FONT_SIZE);
-        quantityTitleLabel1.setFontScale(Constants.FONT_SIZE * 0.8f);
-        quantityTitleLabel2.setFontScale(Constants.FONT_SIZE * 0.8f);
-        quantityTitleLabel3.setFontScale(Constants.FONT_SIZE * 0.8f);
-        quantityTitleLabel4.setFontScale(Constants.FONT_SIZE * 0.8f);
+        depositNameLabel1.setFontScale(Constants.FONT_SIZE * 0.75f);
+        depositNameLabel2.setFontScale(Constants.FONT_SIZE* 0.75f);
+        depositNameLabel3.setFontScale(Constants.FONT_SIZE* 0.75f);
+        depositNameLabel4.setFontScale(Constants.FONT_SIZE* 0.75f);
+        quantityTitleLabel1.setFontScale(Constants.FONT_SIZE * 0.6f);
+        quantityTitleLabel2.setFontScale(Constants.FONT_SIZE * 0.6f);
+        quantityTitleLabel3.setFontScale(Constants.FONT_SIZE * 0.6f);
+        quantityTitleLabel4.setFontScale(Constants.FONT_SIZE * 0.6f);
         quantityLabel1.setFontScale(Constants.FONT_SIZE * 0.8f);
         quantityLabel2.setFontScale(Constants.FONT_SIZE * 0.8f);
         quantityLabel3.setFontScale(Constants.FONT_SIZE * 0.8f);
         quantityLabel4.setFontScale(Constants.FONT_SIZE * 0.8f);
-        resourcesTitleLabel1.setFontScale(Constants.FONT_SIZE * 0.8f);
-        resourcesTitleLabel2.setFontScale(Constants.FONT_SIZE * 0.8f);
-        resourcesTitleLabel3.setFontScale(Constants.FONT_SIZE * 0.8f);
-        resourcesTitleLabel4.setFontScale(Constants.FONT_SIZE * 0.8f);
-        resourcesLabel1.setFontScale(Constants.FONT_SIZE * 0.8f);
-        resourcesLabel2.setFontScale(Constants.FONT_SIZE * 0.8f);
-        resourcesLabel3.setFontScale(Constants.FONT_SIZE * 0.8f);
-        resourcesLabel4.setFontScale(Constants.FONT_SIZE * 0.8f);
+        resourcesTitleLabel1.setFontScale(Constants.FONT_SIZE * 0.6f);
+        resourcesTitleLabel2.setFontScale(Constants.FONT_SIZE * 0.6f);
+        resourcesTitleLabel3.setFontScale(Constants.FONT_SIZE * 0.6f);
+        resourcesTitleLabel4.setFontScale(Constants.FONT_SIZE * 0.6f);
+        resourcesLabel1.setFontScale(Constants.FONT_SIZE * 0.6f);
+        resourcesLabel2.setFontScale(Constants.FONT_SIZE * 0.6f);
+        resourcesLabel3.setFontScale(Constants.FONT_SIZE * 0.6f);
+        resourcesLabel4.setFontScale(Constants.FONT_SIZE * 0.6f);
 
 
 
@@ -142,7 +144,7 @@ public class StorageScreen extends BaseScreen {
             public void changed(ChangeEvent event, Actor actor) {
                 String titulo = "Expandir deposito de agua";
                 String messaje = "¿Desea expandir el deposito\n por 100.000 F. ?\nla capacidad aumentara\nen 10.000 litros";
-                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.40f,0.39f, 1, null);
+                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.5f,0.39f, 1, null);
             }
         });
         button2.addCaptureListener(new ChangeListener() {
@@ -150,7 +152,7 @@ public class StorageScreen extends BaseScreen {
             public void changed(ChangeEvent event, Actor actor) {
                 String titulo = "Expandir camara frigorifica";
                 String messaje = "¿Desea expandir la camara frigorifica\npor 100.000 F. ?\nla capacidad aumentara\nen 2.000 litros";
-                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.4f,0.39f, 2, null);
+                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.5f,0.39f, 2, null);
             }
         });
         button3.addCaptureListener(new ChangeListener() {
@@ -158,7 +160,7 @@ public class StorageScreen extends BaseScreen {
             public void changed(ChangeEvent event, Actor actor) {
                 String titulo = "Expandir almacen general";
                 String messaje = "¿Desea expandir el deposito\npor 100.000 F. ?\nla capacidad aumentara\nen 10.000 litros";
-                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.4f,0.39f, 3, null);
+                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.5f,0.39f, 3, null);
             }
         });
         button4.addCaptureListener(new ChangeListener() {
@@ -166,7 +168,7 @@ public class StorageScreen extends BaseScreen {
             public void changed(ChangeEvent event, Actor actor) {
                 String titulo = "Expandir granero";
                 String messaje = "¿Desea expandir el granero\npor 100.000 F. ?\nla capacidad aumentara\nen 6.000 litros";
-                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.4f,0.39f, 4, null);
+                DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.5f,0.39f, 4, null);
             }
         });
 
@@ -244,10 +246,12 @@ public class StorageScreen extends BaseScreen {
         area2.setTouchable(Touchable.disabled);
         area3.setTouchable(Touchable.disabled);
         area4.setTouchable(Touchable.disabled);
-        button1.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
-        button2.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
-        button3.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
-        button4.setStyle(StyleFactory.BLUE_TEXT_BUTTON_STYLE());
+        goBackButton.setColor(Color.GREEN);
+        area1.setColor(1,1,1,0.9f);
+        area2.setColor(1,1,1,0.9f);
+        area3.setColor(1,1,1,0.9f);
+        area4.setColor(1,1,1,0.9f);
+
 
         //Se añaden los elementos
         stage.addActor(backgroundImage);

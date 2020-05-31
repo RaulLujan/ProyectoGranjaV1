@@ -1,7 +1,9 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -12,13 +14,15 @@ import com.mygdx.game.MainGame;
 public class PreLoadingScreen extends BaseScreen {
     private Stage stage;
     private World world;
-    private float timeinThisScreen;
 
     public PreLoadingScreen(MainGame game) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
-        timeinThisScreen = 0;
+
+
+
+
     }
 
     @Override
@@ -44,9 +48,8 @@ public class PreLoadingScreen extends BaseScreen {
         //movimiento del mundo
         stage.act();
         world.step(delta, 6, 2);
-        timeinThisScreen += delta;
-        if (timeinThisScreen > 2){
-            this.game.showLoadingScreen();
+        if (game.getMiniAssetManager().update()){
+            game.showLoadingScreen();
         }
 
         stage.draw();

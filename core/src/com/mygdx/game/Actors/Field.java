@@ -21,6 +21,7 @@ public class Field extends BaseActor {
         this.texture = texture;
         this.sounds = sounds;
 
+
         BodyDef def = new BodyDef();
         def.position.set(position);
         def.type = BodyDef.BodyType.StaticBody;
@@ -46,4 +47,40 @@ public class Field extends BaseActor {
     public void detach() {
         world.destroyBody(body);
     }
+
+
+    //SETTER & GETTER
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public void setTexture(Texture texture) {
+        this.texture = texture;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
+    }
+
+    public SoundFactory getSounds() {
+        return sounds;
+    }
+
+    public void setSounds(SoundFactory sounds) {
+        this.sounds = sounds;
+    }
+
+
 }
