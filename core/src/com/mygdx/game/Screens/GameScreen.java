@@ -20,6 +20,7 @@ import com.mygdx.game.Actors.Storage;
 import com.mygdx.game.Actors.TruckActor;
 import com.mygdx.game.Constants;
 import com.mygdx.game.Dominio.TipoRecurso;
+import com.mygdx.game.Images.ImageClampToEdge;
 import com.mygdx.game.Images.ImageRepeart;
 import com.mygdx.game.Images.ImageVerticalRepeat;
 import com.mygdx.game.MainGame;
@@ -51,6 +52,7 @@ public class GameScreen extends BaseScreen{
     //Images
     private ImageRepeart grondImage;
     private ImageVerticalRepeat roadImage;
+    private ImageClampToEdge tree1, tree2, tree3;
 
     //Game Parameters
     private float timeToBeat, timeSinceLastRNDSound;
