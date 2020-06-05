@@ -1,14 +1,14 @@
 package com.mygdx.game;
 
-import com.mygdx.game.Dominio.Animal;
-import com.mygdx.game.Dominio.Campo;
-import com.mygdx.game.Dominio.Espacio;
-import com.mygdx.game.Dominio.Estructura;
-import com.mygdx.game.Dominio.Granja;
-import com.mygdx.game.Dominio.Infraestructura;
-import com.mygdx.game.Dominio.Precio;
-import com.mygdx.game.Dominio.TipoRecurso;
-import com.mygdx.game.Dominio.Usuario;
+import com.mygdx.game.dominio.Animal;
+import com.mygdx.game.dominio.Campo;
+import com.mygdx.game.dominio.Espacio;
+import com.mygdx.game.dominio.Estructura;
+import com.mygdx.game.dominio.Granja;
+import com.mygdx.game.dominio.Infraestructura;
+import com.mygdx.game.dominio.Precio;
+import com.mygdx.game.dominio.TipoRecurso;
+import com.mygdx.game.dominio.Usuario;
 import com.mygdx.game.control.AnimalController;
 
 import java.util.ArrayList;

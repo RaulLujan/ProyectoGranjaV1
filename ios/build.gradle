@@ -17,3 +17,14 @@ robovm {
 }
 
 eclipse.project.name = appName + "-ios"
+
+task fixIML {
+	def imlFile = file('ios.iml')
+	def iml = new XmlParser().parse(imlFile)
+	iml.component.facet.each { facet ->
+		def type = facet.@type
+		if (type == 'android-gradle' || type == 'java-gradle')
+			facet.parent().remove(facet)
+	}
+	new XmlNodePrinter(new PrintWriter(new FileWriter(imlFile))).print(iml)
+}

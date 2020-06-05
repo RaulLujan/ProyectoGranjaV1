@@ -1,6 +1,6 @@
 package com.mygdx.game.control;
 
-import com.mygdx.game.Dominio.Usuario;
+import com.mygdx.game.dominio.Usuario;
 
 public class UserController {
 

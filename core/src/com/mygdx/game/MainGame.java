@@ -5,23 +5,25 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.Dominio.Campo;
-import com.mygdx.game.Dominio.Infraestructura;
-import com.mygdx.game.Dominio.Usuario;
-import com.mygdx.game.Screens.AnimalsScreen;
-import com.mygdx.game.Screens.FieldScreen;
-import com.mygdx.game.Screens.GameScreen;
-import com.mygdx.game.Screens.LoadingScreen;
-import com.mygdx.game.Screens.LoginScreen;
-import com.mygdx.game.Screens.MenuScreen;
-import com.mygdx.game.Screens.OptionsScreen;
-import com.mygdx.game.Screens.PreLoadingScreen;
-import com.mygdx.game.Screens.ShopScreen;
-import com.mygdx.game.Screens.StorageScreen;
+import com.mygdx.game.dominio.Campo;
+import com.mygdx.game.dominio.Infraestructura;
+import com.mygdx.game.dominio.Usuario;
+import com.mygdx.game.screens.AnimalsScreen;
+import com.mygdx.game.screens.FieldScreen;
+import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.LoadingScreen;
+import com.mygdx.game.screens.LoginScreen;
+import com.mygdx.game.screens.MenuScreen;
+import com.mygdx.game.screens.OptionsScreen;
+import com.mygdx.game.screens.PreLoadingScreen;
+import com.mygdx.game.screens.ShopScreen;
+import com.mygdx.game.screens.StorageScreen;
 import com.mygdx.game.control.FieldController;
 import com.mygdx.game.control.UserController;
+import com.mygdx.game.factories.SoundFactory;
 
 public class MainGame extends Game {
 
@@ -109,6 +111,10 @@ public class MainGame extends Game {
 		assetManager.load("Sounds/RNDAmbient/pig1.wav", Sound.class);
 		assetManager.load("Sounds/RNDAmbient/pig2.wav", Sound.class);
 		assetManager.load("Sounds/RNDAmbient/pig3.wav", Sound.class);
+
+		//Music
+		assetManager.load("Sounds/Music/game.mp3", Music.class);
+		assetManager.load("Sounds/Music/intro.mp3", Music.class);
 
 		this.preloadingScreen = new PreLoadingScreen(this);
 		this.setScreen(preloadingScreen);

@@ -1,7 +1,7 @@
 package com.mygdx.game.control;
 
-import com.mygdx.game.Dominio.Campo;
-import com.mygdx.game.Dominio.TipoRecurso;
+import com.mygdx.game.dominio.Campo;
+import com.mygdx.game.dominio.TipoRecurso;
 import java.util.GregorianCalendar;
 
 public class FieldController {
@@ -42,7 +42,7 @@ public class FieldController {
             this.field.setPlanted(true);
             this.field.setPlantedResourceType(resourceType);
             this.field.setTimeFieldWasPlanted(new GregorianCalendar());
-            this.production = 750;
+            this.production = 950;
             this.field.setNeedsWater(false);
             this.field.setNeedsManure(false);
             this.field.setNeedsHerbizide(false);
@@ -95,16 +95,16 @@ public class FieldController {
 
     public void waterField(){
         this.field.setNeedsWater(false);
-        this.production += 250;
+        this.production += 295;
     }
     public void manureToField(){
         this.field.setNeedsManure(false);
-        this.production += 200;
+        this.production += 340;
 
     }
     public void herbicideToField(){
         this.field.setNeedsHerbizide(false);
-        this.production += 100;
+        this.production += 180;
     }
     public int getWaterQuantity(int resourceType){
         int neededWater = 0;

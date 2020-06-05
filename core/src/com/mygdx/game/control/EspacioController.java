@@ -1,9 +1,9 @@
 package com.mygdx.game.control;
 
 import com.mygdx.game.DomainMocker;
-import com.mygdx.game.Dominio.Animal;
-import com.mygdx.game.Dominio.Espacio;
-import com.mygdx.game.Dominio.TipoRecurso;
+import com.mygdx.game.dominio.Animal;
+import com.mygdx.game.dominio.Espacio;
+import com.mygdx.game.dominio.TipoRecurso;
 
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -18,7 +18,7 @@ public class EspacioController {
     }
 
 
-    public boolean putIn(int reourceIndex, int quantity){
+    public boolean put(int reourceIndex, int quantity){
 
         int ocupation = espacios.get(reourceIndex).getOcupacionAactual();
         int capacidad = 0;
@@ -28,16 +28,18 @@ public class EspacioController {
         }else{
             unlimited = true;
         }
-        if (( unlimited && ocupation + quantity >=0 ) || (capacidad >= ocupation + quantity && ocupation + quantity >=0) ){
+        if (( unlimited && ocupation + quantity >=0 ) ||
+                (capacidad >= ocupation + quantity && ocupation + quantity >=0) ){
             espacios.get(reourceIndex).setOcupacionAactual(ocupation + quantity);
             return true;
         }
         return false ;
     }
+
     public boolean putForMoney(int reourceIndex, int quantity, int money){
         int moneyOwned = espacios.get(TipoRecurso.MONEY).getOcupacionAactual();
         if (moneyOwned >= money){
-            if (putIn(reourceIndex, quantity)){
+            if (put(reourceIndex, quantity)){
                 espacios.get(TipoRecurso.MONEY).setOcupacionAactual(moneyOwned-money);
                 return true;
             }
