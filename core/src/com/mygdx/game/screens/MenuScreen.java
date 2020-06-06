@@ -42,12 +42,12 @@ public class MenuScreen extends BaseScreen {
 
 
        // inicialización de los elementos
-       playButton = new TextButton("Jugar", glassSkin, "default");
+       playButton = new TextButton("Jugar", glassSkin, "big");
        settingButton = new Button(skin, "settings");
        backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/menuBack.png");
        backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                                                                             Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
-       idLabel = new Label(String.format("Id: 0000%s", this.game.getUsuario().getId()), glassSkin, "black");
+       idLabel = new Label(String.format("Id: 0000%s", this.game.getUsuario().getId()), glassSkin, "big");
 
 
        //funcionalidades
@@ -66,8 +66,8 @@ public class MenuScreen extends BaseScreen {
        });
 
        //tmaño de las fuentes
-       playButton.getLabel().setFontScale(Constants.FONT_SIZE* 0.2f);
-       idLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
+       playButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.4f);
+       idLabel.setFontScale(Constants.FONT_SIZE * 0.25f);
 
        //tamaño de los elementos
        playButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);

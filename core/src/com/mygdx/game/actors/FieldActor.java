@@ -7,7 +7,11 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Constants;
+import com.mygdx.game.dominio.Campo;
+import com.mygdx.game.dominio.TipoRecurso;
 import com.mygdx.game.factories.SoundFactory;
+
+import java.util.List;
 
 public class FieldActor extends BaseActor {
 
@@ -15,11 +19,16 @@ public class FieldActor extends BaseActor {
     private World world;
     private Body body;
     private SoundFactory sounds;
+    private List<Texture> textures;
+    private Campo field;
 
-    public FieldActor(World world, Texture texture, Vector2 position, SoundFactory sounds){
+    public FieldActor(World world, List<Texture> textures, Vector2 position, SoundFactory sounds, Campo field){
         this.world = world;
-        this.texture = texture;
+        this.textures = textures;
         this.sounds = sounds;
+        this.texture = textures.get(0);
+        this.field = field;
+
 
 
         BodyDef def = new BodyDef();
@@ -28,6 +37,7 @@ public class FieldActor extends BaseActor {
         body = world.createBody(def);
 
         setSize(17*Constants.PIXELS_IN_METER, 10*Constants.PIXELS_IN_METER);
+
     }
 
     @Override
@@ -40,6 +50,14 @@ public class FieldActor extends BaseActor {
 
     @Override
     public void act(float delta) {
+        int textureIndex = field.getStage();
+        if (field.getPlantedResourceType() != null) {
+            if (field.getPlantedResourceType() == TipoRecurso.POTATO) textureIndex += 8;
+            else if (field.getPlantedResourceType() == TipoRecurso.STRAWBERRY) textureIndex += 4;
+
+        }
+        texture = textures.get(textureIndex);
+        //texture = textures.get(field.getStage());
 
     }
 

@@ -82,8 +82,8 @@ public class FieldScreen extends BaseScreen {
 
 
         // inicialización de los elementos
-        goBackButton = new TextButton("Volver", glassySkim);
-        plantButton= new TextButton("Plantar", glassySkim, "small");
+        goBackButton = new TextButton("Volver", glassySkim, "big");
+        plantButton= new TextButton("Plantar", glassySkim, "big");
 
         waterButton = new Button(skin,"new_custom");
         manureButton = new Button(skin,"new_custom");
@@ -93,40 +93,43 @@ public class FieldScreen extends BaseScreen {
         areaB = new Window("", skin,"dialog");
         areaR = new Window("", skin,"dialog");
 
-        fundsLabel = new Label(String.format("Fondos: %s", recursos),     glassySkim, "black");
-        estateTileLabel = new Label("Estado: ",                         glassySkim, "black");
-        estateLabel = new Label("",                                     glassySkim, "gold");
-        timeTitleLabel = new Label("Tiempo restante: ",                 glassySkim, "black");
-        timeLabel = new Label("",                                       glassySkim, "gold");
-        infotypeLabel = new Label("",                                   glassySkim, "blue");
-        infoTypeTipleLabel = new Label("Tipo de Cultivo:",              glassySkim, "black");
-        levelTitleLabel = new Label("Nivel de crecimiento",             glassySkim, "black");
-        levelLabel = new Label("",                                      glassySkim, "blue");
-        waterTitleLabel = new Label("Necesita riego:",                  glassySkim, "black");
-        waterLabel = new Label("",                                      glassySkim, "blue");
-        manureTitleLabel = new Label("Necesita abono:",                 glassySkim, "black");
-        manureLabel = new Label("",                                     glassySkim, "blue");
-        grassTitleLabel = new Label("Malas hierbas",                    glassySkim, "black");
-        grassLabel = new Label("",                                      glassySkim, "blue");
-        addLabel = new Label("Usar en el campo:",                       glassySkim, "black");
-        waterQuantitylabel = new Label("",                              glassySkim, "black");
-        manureQuantityLabel = new Label("",                             glassySkim, "black");
-        herbizideQuantityLabel = new Label("",                          glassySkim, "black");
+        fundsLabel = new Label(String.format("Fondos: %s", recursos),     glassySkim, "big");
+        estateTileLabel = new Label("Estado: ",                         glassySkim, "big");
+        estateLabel = new Label("",                                     glassySkim, "big-gold");
+        timeTitleLabel = new Label("Tiempo restante: ",                 glassySkim, "big");
+        timeLabel = new Label("",                                       glassySkim, "big-gold");
+        infotypeLabel = new Label("",                                   glassySkim, "big-blue");
+        infoTypeTipleLabel = new Label("Tipo de Cultivo:",              glassySkim, "big");
+        levelTitleLabel = new Label("Nivel de crecimiento",             glassySkim, "big");
+        levelLabel = new Label("",                                      glassySkim, "big-blue");
+        waterTitleLabel = new Label("Necesita riego:",                  glassySkim, "big");
+        waterLabel = new Label("",                                      glassySkim, "big-blue");
+        manureTitleLabel = new Label("Necesita abono:",                 glassySkim, "big");
+        manureLabel = new Label("",                                     glassySkim, "big-blue");
+        grassTitleLabel = new Label("Malas hierbas",                    glassySkim, "big");
+        grassLabel = new Label("",                                      glassySkim, "big-blue");
+        addLabel = new Label("Usar en el campo:",                       glassySkim, "big");
+        waterQuantitylabel = new Label("",                              glassySkim, "big");
+        manureQuantityLabel = new Label("",                             glassySkim, "big");
+        herbizideQuantityLabel = new Label("",                          glassySkim, "big");
 
         typeSelectioSP = new SelectBox<>(glassySkim);
 
 
         // Tamaño de la fuente
-        goBackButton.getLabel().setFontScale(goBackButton.getLabel().getFontScaleX() * 0.8f);
-        plantButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
-        typeSelectioSP.getStyle().listStyle.font.getData().scale(Constants.FONT_SIZE * 0.55f);
+        goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
+        plantButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.25f);
+
         Label[] labels = { fundsLabel, estateTileLabel, estateLabel, timeTitleLabel, timeLabel, infoTypeTipleLabel, infotypeLabel ,
                             levelTitleLabel, levelLabel, waterTitleLabel, waterLabel, manureTitleLabel, manureLabel, grassTitleLabel,
                             grassLabel, addLabel, waterQuantitylabel, manureQuantityLabel, herbizideQuantityLabel};
         for (Label label: labels){
-            label.setFontScale(Constants.FONT_SIZE * 0.8f);
+            label.setFontScale(Constants.FONT_SIZE * 0.25f);
         }
-        typeSelectioSP.setScale(1.2f);
+        //typeSelectioSP.setScale(2f);
+        typeSelectioSP.getStyle().listStyle.font = glassySkim.getFont("font-big");
+        typeSelectioSP.getStyle().listStyle.font.getData().scale(Constants.FONT_SIZE * 0.2f);
+        typeSelectioSP.getStyle().font.getData().setScale(0.6f);
 
         //funcionalidades
         goBackButton.addCaptureListener(new ChangeListener() {

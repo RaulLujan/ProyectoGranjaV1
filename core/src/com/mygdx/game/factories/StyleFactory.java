@@ -41,7 +41,7 @@ public class StyleFactory {
     public static TextButtonStyle getStyle(Color colorUp, Color colorDown) {
         SpriteDrawable bgDrawbleUp = new SpriteDrawable(new Sprite(createTexture(colorUp)));
         SpriteDrawable bgDrawbleDown = new SpriteDrawable(new Sprite(createTexture(colorDown)));
-        TextButtonStyle textButtonStyle = new TextButtonStyle(bgDrawbleUp, bgDrawbleDown, bgDrawbleUp, skin.getFont("font"));
+        TextButtonStyle textButtonStyle = new TextButtonStyle(bgDrawbleUp, bgDrawbleDown, bgDrawbleUp, skin.getFont("font-big"));
         return textButtonStyle;
     }
 

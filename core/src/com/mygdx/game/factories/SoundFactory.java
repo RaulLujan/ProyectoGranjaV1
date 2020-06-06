@@ -11,7 +11,7 @@ public class SoundFactory {
     private Sound road, step;
     private Sound[] RNDAmbientSounds;
     private Music introMusic, gameMusic;
-    private float volume;
+    private float musicVolume, effectsVolume;
     private boolean music, effects;
 
 
@@ -37,21 +37,22 @@ public class SoundFactory {
         RNDAmbientSounds[11] = game.getAssetManager().get("Sounds/RNDAmbient/pig2.wav");
         RNDAmbientSounds[12] = game.getAssetManager().get("Sounds/RNDAmbient/pig3.wav");
 
-        this.volume = preferences.getFloat(game.VOLUME_KEY, 0.8f);
+        this.musicVolume = preferences.getFloat(game.MUSIC_VOLUME_KEY, 0.6f);
+        this.effectsVolume = preferences.getFloat(game.EFFECTS_VOLUME_KEY, 0.6f);
         this.music = preferences.getBoolean(game.MUSIC_KEY, true);
         this.effects = preferences.getBoolean(game.EFFECTS_KEY, true);
     }
 
     public void playRDNSound(){
         int i = (int) (Math.random() * RNDAmbientSounds.length);
-        if (effects) RNDAmbientSounds[i].play(volume);
+        if (effects) RNDAmbientSounds[i].play(effectsVolume);
     }
 
     public void playIntroMusic(){
         gameMusic.stop();
         if (music){
             introMusic.setLooping(true);
-            introMusic.setVolume(volume);
+            introMusic.setVolume(musicVolume);
             introMusic.play();
         }else{
             introMusic.stop();
@@ -62,7 +63,7 @@ public class SoundFactory {
         introMusic.stop();
         if (music){
             gameMusic.setLooping(true);
-            gameMusic.setVolume(volume);
+            gameMusic.setVolume(musicVolume);
             gameMusic.play();
         }else{
             gameMusic.stop();
@@ -74,12 +75,12 @@ public class SoundFactory {
     public void stopIntroMusic(){ introMusic.stop();}
 
     public void playRoadSound() {
-        if (effects)road.loop(volume);
+        if (effects)road.loop(effectsVolume);
     }
     public void stopRoadSound()        { road.stop();    }
 
     public void playStepSound()        {
-        if (effects) step.loop(volume);
+        if (effects) step.loop(effectsVolume);
     }
     public void stopStepSound()        { step.stop();    }
 
@@ -97,12 +98,12 @@ public class SoundFactory {
 
     // GETTERS & SEETERS
 
-    public float getVolume() {
-        return volume;
+    public float getMusicVolume() {
+        return musicVolume;
     }
 
-    public void setVolume(float volume) {
-        this.volume = volume;
+    public void setMusicVolume(float musicVolume) {
+        this.musicVolume = musicVolume;
     }
 
     public boolean isMusic() {
@@ -119,5 +120,13 @@ public class SoundFactory {
 
     public void setEffects(boolean effects) {
         this.effects = effects;
+    }
+
+    public float getEffectsVolume() {
+        return effectsVolume;
+    }
+
+    public void setEffectsVolume(float effectsVolume) {
+        this.effectsVolume = effectsVolume;
     }
 }

@@ -101,7 +101,19 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		font: font
 	}
 	big: {
-		font: font-big
+		font: font-big,
+		fontColor: black
+	}
+	big-blue: {
+		font: font-big,
+		fontColor: dark-cyan
+	},
+	big-gold: {
+		font: font-big,
+		fontColor: gold
+	},
+	big-white: {
+		font: font-big,
 	}
 	blue: {
 		font: font
@@ -158,7 +170,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
 	default: {
-		font: font
+		font: font-big
 		fontColor: dark-cyan
 		background: select-box
 		scrollStyle: scroll
@@ -189,6 +201,11 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		up: button
 		down: button-down
 	}
+	big: {
+		font: font-big
+		up: button-small
+		down: button-small-down
+	}
 	small: {
 		font: font
 		up: button-small
@@ -197,7 +214,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {
-		font: font
+		font: font-big
 		fontColor: black
 		background: textfield
 		cursor: black

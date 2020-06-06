@@ -29,7 +29,7 @@ public class LoginScreen extends BaseScreen {
 
     private TextButton goBackButton, loginButton, registerButton;
     private Window areaT;
-    private Label nameTitleLabel, passTitleLabel;
+    private Label nameTitleLabel, passTitleLabel, failLabel;
     private TextField nameTextField, passTextField;
     private ImageClampToEdge backgroundImage;
     private Texture backgroundTexture;
@@ -50,28 +50,30 @@ public class LoginScreen extends BaseScreen {
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
         // inicialización de los elementos
-        goBackButton = new TextButton("Volver", glassSkin);
-        loginButton = new TextButton("Entrar", glassSkin);
-        registerButton = new TextButton("Registrar", glassSkin);
+        goBackButton = new TextButton("Volver", glassSkin, "big");
+        loginButton = new TextButton("Entrar", glassSkin, "big");
+        registerButton = new TextButton("Registrar", glassSkin, "big");
         areaT = new Window("", skin, "dialog");
-        nameTitleLabel = new Label("Usuario", glassSkin, "black");
-        passTitleLabel = new Label("Passworld", glassSkin, "black");
+        nameTitleLabel = new Label("Usuario", glassSkin, "big");
+        passTitleLabel = new Label("Passworld", glassSkin, "big");
+        failLabel = new Label("Usuario y/o pass incorrectos.", glassSkin, "blue");
         nameTextField = new TextField("", glassSkin);
         passTextField = new TextField("", glassSkin);
 
 
 
         // Tamaño de la fuente
-        goBackButton.getLabel().setFontScale(goBackButton.getLabel().getFontScaleX()*0.8f);
-        loginButton.getLabel().setFontScale(loginButton.getLabel().getFontScaleX()*0.8f);
-        registerButton.getLabel().setFontScale(registerButton.getLabel().getFontScaleX()*0.8f);
+        goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
+        loginButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.28f);
+        registerButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.28f);
 
-        nameTitleLabel.setFontScale(Constants.FONT_SIZE);
-        passTitleLabel.setFontScale(Constants.FONT_SIZE);
+        nameTitleLabel.setFontScale(Constants.FONT_SIZE * 0.35f);
+        passTitleLabel.setFontScale(Constants.FONT_SIZE * 0.35f);
+        failLabel.setFontScale(Constants.FONT_SIZE * 0.6f);
 
 
         TextField.TextFieldStyle textFieldStyle = nameTextField.getStyle();
-        textFieldStyle.font.getData().setScale(Constants.FONT_SIZE);
+        textFieldStyle.font.getData().setScale(Constants.FONT_SIZE * 0.33f);
         nameTextField.setStyle(textFieldStyle);
         passTextField.setStyle(textFieldStyle);
 
@@ -90,9 +92,12 @@ public class LoginScreen extends BaseScreen {
                 if(LoginScreen.this.game.validate(nameTextField.getText(), passTextField.getText())){
                     LoginScreen.this.game.setUserLogged(true);
                     LoginScreen.this.game.saveUserPreferences(nameTextField.getText(), passTextField.getText());
+                    LoginScreen.this.game.showGameScreen();
+                }else {
+                    LoginScreen.this.game.setLoginFailed(true);
+                    LoginScreen.this.game.showLoginScreen();
+
                 }
-                LoginScreen.this.game.showGameScreen();
-               // nameTextField.setText(LoginScreen.this.game.validate(nameTextField.getText(), passTextField.getText())+"");
             }
         });
 
@@ -104,6 +109,7 @@ public class LoginScreen extends BaseScreen {
         areaT.setSize(Constants.DEVICE_WIDTH *0.5f, Constants.DEVICE_HEIGHT * 0.75f);
         nameTitleLabel.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.10f);
         passTitleLabel.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.1f);
+        failLabel.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.1f);
         nameTextField.setSize(Constants.DEVICE_WIDTH *0.38f, Constants.DEVICE_HEIGHT * 0.1f);
         passTextField.setSize(Constants.DEVICE_WIDTH *0.38f, Constants.DEVICE_HEIGHT * 0.1f);
 
@@ -116,6 +122,7 @@ public class LoginScreen extends BaseScreen {
         passTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.45f);
         nameTextField.setPosition(Constants.DEVICE_WIDTH * 0.31f, Constants.DEVICE_HEIGHT * 0.575f);
         passTextField.setPosition(Constants.DEVICE_WIDTH * 0.31f, Constants.DEVICE_HEIGHT * 0.325f);
+        failLabel.setPosition(Constants.DEVICE_WIDTH * 0.37f, Constants.DEVICE_HEIGHT * 0.24f);
         loginButton.setPosition(Constants.DEVICE_WIDTH * 0.32f, Constants.DEVICE_HEIGHT * 0.15f);
         registerButton.setPosition(Constants.DEVICE_WIDTH * 0.53f, Constants.DEVICE_HEIGHT * 0.15f);
 
@@ -127,6 +134,7 @@ public class LoginScreen extends BaseScreen {
         passTextField.setMessageText("  Passworld");
         passTextField.setPasswordMode(true);
         passTextField.setPasswordCharacter('*');
+        failLabel.setVisible(this.game.isLoginFailed());
         goBackButton.setColor(Color.GREEN);
         registerButton.setColor(Color.PURPLE);
         areaT.setColor(1,1,1,0.85f);
@@ -142,6 +150,7 @@ public class LoginScreen extends BaseScreen {
         stage.addActor(passTextField);
         stage.addActor(loginButton);
         stage.addActor(registerButton);
+        stage.addActor(failLabel);
 
 
 
@@ -162,6 +171,7 @@ public class LoginScreen extends BaseScreen {
         Gdx.input.setInputProcessor(null);
         stage.clear();
         world.dispose();
+        LoginScreen.this.game.setLoginFailed(false);
     }
 
 
@@ -188,11 +198,16 @@ public class LoginScreen extends BaseScreen {
         stage.dispose();
         world.dispose();
 
+
     }
     public void disableAll(boolean enableDisable){
 
     }
     public void actions(int actionIndex){
 
+    }
+
+    public Label getFailLabel() {
+        return failLabel;
     }
 }

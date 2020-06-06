@@ -58,76 +58,76 @@ public class StorageScreen extends BaseScreen {
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
         // inicialización de los elementos
-        goBackButton = new TextButton("Volver", glassSkin);
-        button1 = new TextButton("Expandir", glassSkin);
-        button2 = new TextButton("Expandir", glassSkin);
-        button3 = new TextButton("Expandir", glassSkin);
-        button4 = new TextButton("Expandir", glassSkin);
+        goBackButton = new TextButton("Volver", glassSkin, "big");
+        button1 = new TextButton("Expandir", glassSkin, "big");
+        button2 = new TextButton("Expandir", glassSkin, "big");
+        button3 = new TextButton("Expandir", glassSkin, "big");
+        button4 = new TextButton("Expandir", glassSkin, "big");
         area1 = new Window("", skin,"dialog");
         area2 = new Window("", skin,"dialog");
         area3 = new Window("", skin,"dialog");
         area4 = new Window("", skin,"dialog");
-        fundsLabel = new Label(String.format("Fondos: %s", recursos),glassSkin, "black");
-        depositNameLabel1 = new Label("Deposito de Agua",glassSkin, "black");
-        depositNameLabel2 = new Label("Camara frigorifica",glassSkin, "black");
-        depositNameLabel3 = new Label("Almacen general",glassSkin, "black");
-        depositNameLabel4 = new Label("Granero",glassSkin, "black");
-        quantityTitleLabel1 = new Label("Capacidad",glassSkin, "black");
-        quantityTitleLabel2 = new Label("Capacidad",glassSkin, "black");
-        quantityTitleLabel3 = new Label("Capacidad",glassSkin, "black");
-        quantityTitleLabel4 = new Label("Capacidad",glassSkin, "black");
+        fundsLabel = new Label(String.format("Fondos: %s", recursos),glassSkin, "big");
+        depositNameLabel1 = new Label("Deposito de Agua",glassSkin, "big");
+        depositNameLabel2 = new Label("Camara frigorifica",glassSkin, "big");
+        depositNameLabel3 = new Label("Almacen general",glassSkin, "big");
+        depositNameLabel4 = new Label("Granero",glassSkin, "big");
+        quantityTitleLabel1 = new Label("Capacidad",glassSkin, "big");
+        quantityTitleLabel2 = new Label("Capacidad",glassSkin, "big");
+        quantityTitleLabel3 = new Label("Capacidad",glassSkin, "big");
+        quantityTitleLabel4 = new Label("Capacidad",glassSkin, "big");
         int capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.WATER).getCapacidadMaxima();
         String capacityString = String.format("%s", capacity);
-        quantityLabel1 = new Label( capacityString, glassSkin, "blue");
+        quantityLabel1 = new Label( capacityString, glassSkin, "big-blue");
         capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MEAT).getCapacidadMaxima();
         capacityString = String.format("%s", capacity);
-        quantityLabel2 = new Label(capacityString,glassSkin, "blue");
+        quantityLabel2 = new Label(capacityString,glassSkin, "big-blue");
         capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MANURE).getCapacidadMaxima();
         capacityString = String.format("%s", capacity);
-        quantityLabel3 = new Label(capacityString,glassSkin, "blue");
+        quantityLabel3 = new Label(capacityString,glassSkin, "big-blue");
         capacity = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.CORN).getCapacidadMaxima();
         capacityString = String.format("%s", capacity);
-        quantityLabel4 = new Label(capacityString,glassSkin, "blue");
-        resourcesTitleLabel1 = new Label("Recursos",glassSkin, "black");
-        resourcesTitleLabel2 = new Label("Recursos",glassSkin, "black");
-        resourcesTitleLabel3 = new Label("Recursos",glassSkin, "black");
-        resourcesTitleLabel4 = new Label("Recursos",glassSkin, "black");
-        resourcesLabel1 = new Label("Agua",glassSkin, "blue");
-        resourcesLabel2 = new Label("Carne, Huevos, Leche",glassSkin, "blue");
-        resourcesLabel3 = new Label("Abono, Herbicida",glassSkin, "blue");
-        resourcesLabel4 = new Label("Maiz, Fresas, Patatas",glassSkin, "blue");
+        quantityLabel4 = new Label(capacityString,glassSkin, "big-blue");
+        resourcesTitleLabel1 = new Label("Recursos",glassSkin, "big");
+        resourcesTitleLabel2 = new Label("Recursos",glassSkin, "big");
+        resourcesTitleLabel3 = new Label("Recursos",glassSkin, "big");
+        resourcesTitleLabel4 = new Label("Recursos",glassSkin, "big");
+        resourcesLabel1 = new Label("Agua",glassSkin, "big-blue");
+        resourcesLabel2 = new Label("Carne, Huevos, Leche",glassSkin, "big-blue");
+        resourcesLabel3 = new Label("Abono, Herbicida",glassSkin, "big-blue");
+        resourcesLabel4 = new Label("Maiz, Fresas, Patatas",glassSkin, "big-blue");
 
 
 
 
 
         // Tamaño de la fuente
-        goBackButton.getLabel().setFontScale(goBackButton.getLabel().getFontScaleX()*0.8f);
-        button1.getLabel().setFontScale(button1.getLabel().getFontScaleX()*0.8f);
-        button2.getLabel().setFontScale(button2.getLabel().getFontScaleX()*0.8f);
-        button3.getLabel().setFontScale(button3.getLabel().getFontScaleX()*0.8f);
-        button4.getLabel().setFontScale(button4.getLabel().getFontScaleX()*0.8f);
-        fundsLabel.setFontScale(Constants.FONT_SIZE);
-        depositNameLabel1.setFontScale(Constants.FONT_SIZE * 0.75f);
-        depositNameLabel2.setFontScale(Constants.FONT_SIZE* 0.75f);
-        depositNameLabel3.setFontScale(Constants.FONT_SIZE* 0.75f);
-        depositNameLabel4.setFontScale(Constants.FONT_SIZE* 0.75f);
-        quantityTitleLabel1.setFontScale(Constants.FONT_SIZE * 0.6f);
-        quantityTitleLabel2.setFontScale(Constants.FONT_SIZE * 0.6f);
-        quantityTitleLabel3.setFontScale(Constants.FONT_SIZE * 0.6f);
-        quantityTitleLabel4.setFontScale(Constants.FONT_SIZE * 0.6f);
-        quantityLabel1.setFontScale(Constants.FONT_SIZE * 0.8f);
-        quantityLabel2.setFontScale(Constants.FONT_SIZE * 0.8f);
-        quantityLabel3.setFontScale(Constants.FONT_SIZE * 0.8f);
-        quantityLabel4.setFontScale(Constants.FONT_SIZE * 0.8f);
-        resourcesTitleLabel1.setFontScale(Constants.FONT_SIZE * 0.6f);
-        resourcesTitleLabel2.setFontScale(Constants.FONT_SIZE * 0.6f);
-        resourcesTitleLabel3.setFontScale(Constants.FONT_SIZE * 0.6f);
-        resourcesTitleLabel4.setFontScale(Constants.FONT_SIZE * 0.6f);
-        resourcesLabel1.setFontScale(Constants.FONT_SIZE * 0.6f);
-        resourcesLabel2.setFontScale(Constants.FONT_SIZE * 0.6f);
-        resourcesLabel3.setFontScale(Constants.FONT_SIZE * 0.6f);
-        resourcesLabel4.setFontScale(Constants.FONT_SIZE * 0.6f);
+        goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.35f);
+        button1.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
+        button2.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
+        button3.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
+        button4.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
+        fundsLabel.setFontScale(Constants.FONT_SIZE * 0.25f);
+        depositNameLabel1.setFontScale(Constants.FONT_SIZE * 0.27f);
+        depositNameLabel2.setFontScale(Constants.FONT_SIZE* 0.27f);
+        depositNameLabel3.setFontScale(Constants.FONT_SIZE* 0.27f);
+        depositNameLabel4.setFontScale(Constants.FONT_SIZE* 0.27f);
+        quantityTitleLabel1.setFontScale(Constants.FONT_SIZE * 0.2f);
+        quantityTitleLabel2.setFontScale(Constants.FONT_SIZE * 0.2f);
+        quantityTitleLabel3.setFontScale(Constants.FONT_SIZE * 0.2f);
+        quantityTitleLabel4.setFontScale(Constants.FONT_SIZE * 0.2f);
+        quantityLabel1.setFontScale(Constants.FONT_SIZE * 0.25f);
+        quantityLabel2.setFontScale(Constants.FONT_SIZE * 0.25f);
+        quantityLabel3.setFontScale(Constants.FONT_SIZE * 0.25f);
+        quantityLabel4.setFontScale(Constants.FONT_SIZE * 0.25f);
+        resourcesTitleLabel1.setFontScale(Constants.FONT_SIZE * 0.2f);
+        resourcesTitleLabel2.setFontScale(Constants.FONT_SIZE * 0.2f);
+        resourcesTitleLabel3.setFontScale(Constants.FONT_SIZE * 0.2f);
+        resourcesTitleLabel4.setFontScale(Constants.FONT_SIZE * 0.2f);
+        resourcesLabel1.setFontScale(Constants.FONT_SIZE * 0.2f);
+        resourcesLabel2.setFontScale(Constants.FONT_SIZE * 0.2f);
+        resourcesLabel3.setFontScale(Constants.FONT_SIZE * 0.2f);
+        resourcesLabel4.setFontScale(Constants.FONT_SIZE * 0.2f);
 
 
 

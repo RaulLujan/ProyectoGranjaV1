@@ -32,8 +32,8 @@ public class DialogFactory {
         stage.addActor(window);
 
         //boton de conformación
-        final TextButton textButton= new TextButton("Aceptar", skin, "small");
-        textButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
+        final TextButton textButton= new TextButton("Aceptar", skin, "big");
+        textButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.25f);
         textButton.setSize(Constants.DEVICE_WIDTH * 0.12f, Constants.DEVICE_HEIGHT * 0.08f);
         textButton.setPosition(Constants.DEVICE_WIDTH / 2 - Constants.DEVICE_WIDTH * 0.06f,
                 Constants.DEVICE_HEIGHT /2 - Constants.DEVICE_HEIGHT * (height/2) + Constants.DEVICE_HEIGHT* 0.04f);
@@ -41,8 +41,8 @@ public class DialogFactory {
         stage.addActor(textButton);
 
         //titulo
-        final Label titleLabel = new Label(title, skin, "black");
-        titleLabel.setFontScale(Constants.FONT_SIZE);
+        final Label titleLabel = new Label(title, skin, "big");
+        titleLabel.setFontScale(Constants.FONT_SIZE * 0.25f);
         titleLabel.setSize(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.08f);
         titleLabel.setAlignment(Align.center);
         titleLabel.setPosition(Constants.DEVICE_WIDTH / 2 - Constants.DEVICE_WIDTH * 0.05f,
@@ -50,8 +50,8 @@ public class DialogFactory {
         stage.addActor(titleLabel);
 
 
-        final Label textLabel = new Label(messaje, skin, "blue");
-        textLabel.setFontScale(Constants.FONT_SIZE* 0.7f);
+        final Label textLabel = new Label(messaje, skin, "big-blue");
+        textLabel.setFontScale(Constants.FONT_SIZE* 0.2f);
         textLabel.setSize(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.08f);
         textLabel.setAlignment(Align.center);
         textLabel.setPosition(Constants.DEVICE_WIDTH / 2 - Constants.DEVICE_WIDTH * 0.05f,
@@ -96,8 +96,8 @@ public class DialogFactory {
         stage.addActor(window);
 
         //boton de conformación
-        final TextButton okButton= new TextButton("Aceptar", skin, "small");
-        okButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
+        final TextButton okButton= new TextButton("Aceptar", skin, "big");
+        okButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.25f);
         okButton.setSize(Constants.DEVICE_WIDTH * 0.125f, Constants.DEVICE_HEIGHT * 0.08f);
         okButton.setPosition(Constants.DEVICE_WIDTH / 2 - Constants.DEVICE_WIDTH * 0.135f,
                 Constants.DEVICE_HEIGHT /2 - Constants.DEVICE_HEIGHT * (height/2) + Constants.DEVICE_HEIGHT* 0.04f);
@@ -105,8 +105,8 @@ public class DialogFactory {
         stage.addActor(okButton);
 
         //boton de cancelación
-        final TextButton cancelButton = new TextButton("Cancelar", skin, "small");
-        cancelButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.8f);
+        final TextButton cancelButton = new TextButton("Cancelar", skin, "big");
+        cancelButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.25f);
 
         cancelButton.setSize(Constants.DEVICE_WIDTH * 0.125f, Constants.DEVICE_HEIGHT * 0.08f);
         cancelButton.setPosition(Constants.DEVICE_WIDTH / 2 + Constants.DEVICE_WIDTH * 0.035f,
@@ -115,8 +115,8 @@ public class DialogFactory {
         stage.addActor(cancelButton);
 
         //titulo
-        final Label titleLabel = new Label(title, skin, "black");
-        titleLabel.setFontScale(Constants.FONT_SIZE);
+        final Label titleLabel = new Label(title, skin, "big");
+        titleLabel.setFontScale(Constants.FONT_SIZE * 0.3f);
         titleLabel.setSize(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.08f);
         titleLabel.setAlignment(Align.center);
         titleLabel.setPosition(Constants.DEVICE_WIDTH / 2 - Constants.DEVICE_WIDTH * 0.05f,
@@ -124,8 +124,8 @@ public class DialogFactory {
         stage.addActor(titleLabel);
 
 
-        final Label textLabel = new Label(message, skin, "blue");
-        textLabel.setFontScale(Constants.FONT_SIZE* 0.7f);
+        final Label textLabel = new Label(message, skin, "big-blue");
+        textLabel.setFontScale(Constants.FONT_SIZE* 0.22f);
         textLabel.setSize(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.08f);
         textLabel.setAlignment(Align.center);
         textLabel.setPosition(Constants.DEVICE_WIDTH / 2 - Constants.DEVICE_WIDTH * 0.05f,

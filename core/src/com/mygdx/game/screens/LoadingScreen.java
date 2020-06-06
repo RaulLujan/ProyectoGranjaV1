@@ -15,6 +15,8 @@ import com.mygdx.game.actors.SpiningIconActor;
 import com.mygdx.game.Constants;
 import com.mygdx.game.MainGame;
 
+import java.util.ArrayList;
+
 
 public class LoadingScreen extends BaseScreen {
 
@@ -23,6 +25,7 @@ public class LoadingScreen extends BaseScreen {
     private World world;
     private SpiningIconActor tractorActor;
     private Texture tractorTexture;
+    private ArrayList<Texture> tractorTextures;
     private Label chargingLabel;
     private Skin skin;
     private ProgressBar progressBar;
@@ -41,9 +44,16 @@ public class LoadingScreen extends BaseScreen {
         this.skin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
 
         tractorTexture = game.getMiniAssetManager().get("Textures/tractor.png");
+        tractorTextures = new ArrayList<>();
+        for (int i = 0; i < 16; i++) {
+            String tractor = String.format("Textures/tractor/Tractor%d.png", i);
+
+            tractorTextures.add((Texture) game.getMiniAssetManager().get(tractor));
+
+        }
 
 
-        tractorActor = new SpiningIconActor(world, tractorTexture, new Vector2(
+        tractorActor = new SpiningIconActor(world, tractorTextures, new Vector2(
                                                             Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER / 2,
                                                             Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER / 2) );
         stage.addActor(tractorActor);
@@ -51,8 +61,8 @@ public class LoadingScreen extends BaseScreen {
         progressBar.setSize(Constants.DEVICE_WIDTH * 0.5f, Constants.DEVICE_HEIGHT * 0.1f);
         progressBar.setPosition(Constants.DEVICE_WIDTH * 0.25f, Constants.DEVICE_HEIGHT * 0.10f);
         stage.addActor(progressBar);
-        chargingLabel = new Label("", skin, "black");
-        chargingLabel.setFontScale(Constants.FONT_SIZE * 0.8f);
+        chargingLabel = new Label("", skin, "big");
+        chargingLabel.setFontScale(Constants.FONT_SIZE * 0.25f);
         chargingLabel.setSize(Constants.DEVICE_WIDTH * 0.2f, Constants.DEVICE_HEIGHT * 0.1f);
         chargingLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.15f);
         chargingLabel.setAlignment(Align.center);
@@ -81,8 +91,8 @@ public class LoadingScreen extends BaseScreen {
 
 
        if (game.getAssetManager().update()){
-            game.finishLoading();
-            game.showMenuScreen();
+           game.finishLoading();
+           game.showMenuScreen();
        }else{
             int progress = (int)(game.getAssetManager().getProgress() * 100);
             chargingLabel.setText(String.format("Loading: %s%s", progress,"%"));

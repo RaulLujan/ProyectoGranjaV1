@@ -66,24 +66,24 @@ public class ShopScreen extends BaseScreen {
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
         // inicialización de los elementos
-        goBackButton = new TextButton("Volver", glassSkin);
+        goBackButton = new TextButton("Volver", glassSkin, "big");
         areaT = new Window("", skin);
         areaB = new Window("", skin,"dialog");
-        fundsLabel = new Label(String.format("Fondos: %s", recursos), glassSkin, "black");
-        resourceNameHeadLabel = new Label("Recurso",glassSkin);
-        pricesHeadLabel = new Label("Precios V/C",glassSkin);
-        quantityHeadLabel = new Label("Cantidad",glassSkin);
+        fundsLabel = new Label(String.format("Fondos: %s", recursos), glassSkin, "big");
+        resourceNameHeadLabel = new Label("Recurso",glassSkin, "big-white");
+        pricesHeadLabel = new Label("Precios V/C",glassSkin, "big-white");
+        quantityHeadLabel = new Label("Cantidad",glassSkin, "big-white");
         rows = new Label[3][9];
         addButtons = new Button[2][rows[0].length];
         quantityLabels = new Label[rows[0].length];
         actionButton = new TextButton[2][rows[0].length];
 
         // Tamaño de la fuente
-        goBackButton.getLabel().setFontScale(goBackButton.getLabel().getFontScaleX()*0.8f);
-        fundsLabel.setFontScale(Constants.FONT_SIZE* 0.8f);
-        resourceNameHeadLabel.setFontScale(Constants.FONT_SIZE * 0.7f);
-        pricesHeadLabel.setFontScale(Constants.FONT_SIZE * 0.7f);
-        quantityHeadLabel.setFontScale(Constants.FONT_SIZE * 0.7f);
+        goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
+        fundsLabel.setFontScale(Constants.FONT_SIZE* 0.25f);
+        resourceNameHeadLabel.setFontScale(Constants.FONT_SIZE * 0.24f);
+        pricesHeadLabel.setFontScale(Constants.FONT_SIZE * 0.24f);
+        quantityHeadLabel.setFontScale(Constants.FONT_SIZE * 0.24f);
 
         //funcionalidades
         goBackButton.addCaptureListener(new ChangeListener() {
@@ -142,18 +142,18 @@ public class ShopScreen extends BaseScreen {
             for(int j = 0; j< rows[i].length;j++){
 
                 if (i == 0){
-                    rows[i][j] = new Label(prices.get(j+1).getTipoRecurso().getNombre(),glassSkin,"black");
+                    rows[i][j] = new Label(prices.get(j+1).getTipoRecurso().getNombre(),glassSkin,"big");
                 }else if (i == 1){
                     int buy = (int)prices.get(j+1).getTipoRecurso().getPrecioMinimo();
                     int sell = (int)(prices.get(j+1).getTipoRecurso().getPrecioMinimo() * 1.1);
                     String precioVC = String.format("%s / %s",buy,sell);
-                    rows[i][j] = new Label(precioVC,glassSkin,"black");
+                    rows[i][j] = new Label(precioVC,glassSkin,"big");
                 }else{
-                    rows[i][j] = new Label(String.format("%s",espacios.get(j+1).getOcupacionAactual()) ,glassSkin,"black");
+                    rows[i][j] = new Label(String.format("%s",espacios.get(j+1).getOcupacionAactual()) ,glassSkin,"big");
                 }
 
 
-                rows[i][j].setFontScale(Constants.FONT_SIZE * 0.8f);
+                rows[i][j].setFontScale(Constants.FONT_SIZE * 0.22f);
                 rows[i][j].setAlignment(Align.center);
                 rows[i][j].setSize(Constants.DEVICE_WIDTH * 0.11f, Constants.DEVICE_HEIGHT * 0.08f);
                 rows[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.09f + i * 0.15f ), Constants.DEVICE_HEIGHT * (0.03f + j * 0.08f));
@@ -185,8 +185,8 @@ public class ShopScreen extends BaseScreen {
         }
         //cantidades a  comprar & vender
         for(int i = 0; i< quantityLabels.length;i++){
-            quantityLabels[i] = new Label("000",glassSkin,"blue");
-            quantityLabels[i].setFontScale(Constants.FONT_SIZE * 0.7f);
+            quantityLabels[i] = new Label("000",glassSkin,"big-blue");
+            quantityLabels[i].setFontScale(Constants.FONT_SIZE * 0.22f);
             quantityLabels[i].setAlignment(Align.center);
             quantityLabels[i].setSize(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.08f);
             quantityLabels[i].setPosition(Constants.DEVICE_WIDTH * 0.56f, Constants.DEVICE_HEIGHT * (0.025f +i * 0.08f));

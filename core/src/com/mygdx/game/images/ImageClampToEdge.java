@@ -9,7 +9,7 @@ import com.mygdx.game.Constants;
 
 public class ImageClampToEdge extends Image {
 
-    public ImageClampToEdge(Texture texture, int x, int y,float width,float height){
+    public ImageClampToEdge(Texture texture, float x, float y,float width,float height){
         texture.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
         TextureRegion imgTextureRegion = new TextureRegion(texture);
         imgTextureRegion.setRegion(0,0,texture.getWidth(),texture.getHeight());

@@ -11,9 +11,11 @@ public class FieldController {
     private int production = 0;
     private long totalGrowDurationInMillis;
    // private final long CORN_GROW_MILLIS =  2 * 24 * 60 * 60 *1000;
-    private final long CORN_GROW_MILLIS =  30 *1000;//(30 segs )
-    private final long POTATO_GROW_MILLIS =  (long)(1.5f * 24 * 60 * 60 *1000);
-    private final long STRAWBERRY_GROW_MILLIS =  (long)(1.2f * 24 * 60 * 60 *1000);
+    private final long CORN_GROW_MILLIS =  30 * 1000;//(30 segs )
+    //private final long POTATO_GROW_MILLIS =  (long)(1.5f * 24 * 60 * 60 *1000);
+    private final long POTATO_GROW_MILLIS =  5 * 60 * 1000;
+    //private final long STRAWBERRY_GROW_MILLIS =  (long)(1.2f * 24 * 60 * 60 *1000);
+    private final long STRAWBERRY_GROW_MILLIS =  40 * 1000;
 
 
     public FieldController(Campo field){

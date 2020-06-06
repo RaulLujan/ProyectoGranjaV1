@@ -33,8 +33,9 @@ public class MainGame extends Game {
     public final String PASS_KEY = "passKey";
     public final String MUSIC_KEY = "musicKey";
     public final String EFFECTS_KEY = "effectsKey";
-    public final String VOLUME_KEY = "volumeKey";
-    private boolean userLogged;
+    public final String MUSIC_VOLUME_KEY = "musicVolumeKey";
+    public final String EFFECTS_VOLUME_KEY = "effectsVolumeKey";
+    private boolean userLogged, loginFailed;
 
 	private SoundFactory soundFactory;
 	private AssetManager miniAssetManager, assetManager;
@@ -57,15 +58,44 @@ public class MainGame extends Game {
 
 		miniAssetManager = new AssetManager();
 		assetManager = new AssetManager();
+		loginFailed = false;
 
 		//texture for loading
 
 		miniAssetManager.load("Textures/tractor.png", Texture.class);
+		for (int i = 0; i < 16; i++) {
+			String tractor = String.format("Textures/tractor/Tractor%d.png", i);
+			miniAssetManager.load(tractor, Texture.class);
+		}
 
 		//textures
-		assetManager.load("Textures/Crop.png", Texture.class);
+		assetManager.load("Textures/field/empty.png", Texture.class);
+		assetManager.load("Textures/field/Corn1.png", Texture.class);
+		assetManager.load("Textures/field/Corn2.png", Texture.class);
+		assetManager.load("Textures/field/Corn3.png", Texture.class);
+		assetManager.load("Textures/field/Corn4.png", Texture.class);
+		assetManager.load("Textures/field/Strawberry1.png", Texture.class);
+		assetManager.load("Textures/field/Strawberry2.png", Texture.class);
+		assetManager.load("Textures/field/Strawberry3.png", Texture.class);
+		assetManager.load("Textures/field/Strawberry4.png", Texture.class);
 		assetManager.load("Textures/Truck1.png", Texture.class);
 		assetManager.load("Textures/Truck2.png", Texture.class);
+		assetManager.load("Textures/Mailbox.png", Texture.class);
+		assetManager.load("Textures/bike.png", Texture.class);
+		assetManager.load("Textures/Tree3.png", Texture.class);
+		assetManager.load("Textures/drinker.png", Texture.class);
+		assetManager.load("Textures/flower1.png", Texture.class);
+		assetManager.load("Textures/flower2.png", Texture.class);
+		assetManager.load("Textures/flower3.png", Texture.class);
+		assetManager.load("Textures/flowerpot1.png", Texture.class);
+		assetManager.load("Textures/rock1.png", Texture.class);
+		assetManager.load("Textures/rock2.png", Texture.class);
+		assetManager.load("Textures/stone1.png", Texture.class);
+		assetManager.load("Textures/stone2.png", Texture.class);
+		assetManager.load("Textures/Scarecrow.png", Texture.class);
+		assetManager.load("Textures/rotengrass1.png", Texture.class);
+		assetManager.load("Textures/rotengrass2.png", Texture.class);
+		assetManager.load("Textures/rotengrass3.png", Texture.class);
 
 		assetManager.load("Textures/BackGrounds/menuBack.png", Texture.class);
 		assetManager.load("Textures/BackGrounds/animalBack.jpg", Texture.class);
@@ -82,10 +112,14 @@ public class MainGame extends Game {
 		assetManager.load("Textures/Buildings/Shop.png", Texture.class);
 		assetManager.load("Textures/Buildings/Store.png", Texture.class);
         assetManager.load("Textures/Bush.png", Texture.class);
+        assetManager.load("Textures/bush2.png", Texture.class);
         assetManager.load("Textures/Ground.png", Texture.class);
         assetManager.load("Textures/Tree1.png", Texture.class);
         assetManager.load("Textures/Tree2.png", Texture.class);
         assetManager.load("Textures/Road.png", Texture.class);
+        assetManager.load("Textures/WoodPath.png", Texture.class);
+        assetManager.load("Textures/WoodPath2.png", Texture.class);
+        assetManager.load("Textures/WoodPath3.png", Texture.class);
 
         for (int i = 0; i < 21; i++) {
             String farmer = String.format("Textures/Farmer/Farmer%d.png", i);
@@ -93,6 +127,10 @@ public class MainGame extends Game {
 			String dog = String.format("Textures/Dog/Dog%d.png", i);
 			assetManager.load(dog, Texture.class);
         }
+		for (int i = 0; i < 4; i++) {
+			String chicken = String.format("Textures/Chicken/Chiken%d.png", i);
+			assetManager.load(chicken, Texture.class);
+		}
 
 
         //Sounds
@@ -193,7 +231,8 @@ public class MainGame extends Game {
         preferences = Gdx.app.getPreferences(PREFERENCES);
         preferences.putBoolean(MUSIC_KEY, this.soundFactory.isMusic());
         preferences.putBoolean(EFFECTS_KEY, this.soundFactory.isEffects());
-        preferences.putFloat(VOLUME_KEY, this.soundFactory.getVolume());
+        preferences.putFloat(MUSIC_VOLUME_KEY, this.soundFactory.getMusicVolume());
+        preferences.putFloat(EFFECTS_VOLUME_KEY, this.soundFactory.getEffectsVolume());
 
         preferences.flush();
 
@@ -298,5 +337,13 @@ public class MainGame extends Game {
 
 	public void setFieldController(FieldController fieldController) {
 		this.fieldController = fieldController;
+	}
+
+	public boolean isLoginFailed() {
+		return loginFailed;
+	}
+
+	public void setLoginFailed(boolean loginFailed) {
+		this.loginFailed = loginFailed;
 	}
 }
