@@ -15,7 +15,7 @@ public class FieldController {
     //private final long POTATO_GROW_MILLIS =  (long)(1.5f * 24 * 60 * 60 *1000);
     private final long POTATO_GROW_MILLIS =  5 * 60 * 1000;
     //private final long STRAWBERRY_GROW_MILLIS =  (long)(1.2f * 24 * 60 * 60 *1000);
-    private final long STRAWBERRY_GROW_MILLIS =  40 * 1000;
+    private final long STRAWBERRY_GROW_MILLIS =  60 * 1000;
 
 
     public FieldController(Campo field){

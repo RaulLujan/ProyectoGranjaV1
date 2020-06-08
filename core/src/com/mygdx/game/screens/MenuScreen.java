@@ -54,6 +54,7 @@ public class MenuScreen extends BaseScreen {
        playButton.addCaptureListener(new ChangeListener() {
            @Override
            public void changed(ChangeEvent event, Actor actor) {
+               MenuScreen.this.game.getSoundFactory().playPickUp();
                MenuScreen.this.game.showGameScreen();
            }
        });
@@ -61,6 +62,7 @@ public class MenuScreen extends BaseScreen {
        settingButton.addCaptureListener(new ChangeListener() {
            @Override
            public void changed(ChangeEvent event, Actor actor) {
+               MenuScreen.this.game.getSoundFactory().playPickUp();
                MenuScreen.this.game.showOptionsScreen();
            }
        });

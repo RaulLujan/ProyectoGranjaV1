@@ -19,7 +19,7 @@ public class TruckActor extends BaseActor {
     private Fixture fixture;
     private enum Estate { STOPED, RUNNING}
     private TruckActor.Estate estate;
-    private boolean isSoundPlaying;
+    private boolean isSoundPlaying, justTouched, hornPlayed;
 
     private float timeStoped, timeToBeat;
 
@@ -38,6 +38,8 @@ public class TruckActor extends BaseActor {
         this.timeStoped = 0;
         this.timeToBeat = (float) (Math.random() * 5) + 1;
         this.isSoundPlaying = false;
+        this.justTouched = false;
+        this.hornPlayed = false;
 
         BodyDef def = new BodyDef();
         def.position.set(position);
@@ -47,17 +49,25 @@ public class TruckActor extends BaseActor {
 
 
 
-        PolygonShape shape = new PolygonShape();
+        /*PolygonShape shape = new PolygonShape();
         shape.setAsBox(1f, 2f);
         fixture = body.createFixture(shape, 3);
         fixture.setUserData("truck");
-        shape.dispose();
+        shape.dispose();*/
 
-        setSize(2*Constants.PIXELS_IN_METER, 4*Constants.PIXELS_IN_METER);
+        setSize(2*Constants.PIXELS_IN_METER, 4 * Constants.PIXELS_IN_METER);
     }
 
     @Override
     public void act(float delta) {
+
+        if(justTouched && !hornPlayed){
+            justTouched = false;
+            sounds.playCar();
+            hornPlayed = true;
+        }else{
+            justTouched = false;
+        }
         if (this.estate == Estate.RUNNING) {
             this.body.setLinearVelocity(0, -Constants.TRUCK_VELOCITY);
         }else if (this.estate == Estate.STOPED) {
@@ -84,6 +94,7 @@ public class TruckActor extends BaseActor {
             this.isSoundPlaying = false;
             this.sounds.stopRoadSound();
             this.timeStoped = 0;
+            this.hornPlayed = false;
             this.timeToBeat = (float) (Math.random() * 15) + 20;
 
         }
@@ -101,5 +112,11 @@ public class TruckActor extends BaseActor {
         world.destroyBody(body);
     }
 
+    public boolean isJustTouched() {
+        return justTouched;
+    }
 
+    public void setJustTouched(boolean justTouched) {
+        this.justTouched = justTouched;
+    }
 }

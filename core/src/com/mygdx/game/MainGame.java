@@ -62,7 +62,7 @@ public class MainGame extends Game {
 
 		//texture for loading
 
-		miniAssetManager.load("Textures/tractor.png", Texture.class);
+
 		for (int i = 0; i < 16; i++) {
 			String tractor = String.format("Textures/tractor/Tractor%d.png", i);
 			miniAssetManager.load(tractor, Texture.class);
@@ -78,24 +78,28 @@ public class MainGame extends Game {
 		assetManager.load("Textures/field/Strawberry2.png", Texture.class);
 		assetManager.load("Textures/field/Strawberry3.png", Texture.class);
 		assetManager.load("Textures/field/Strawberry4.png", Texture.class);
+		assetManager.load("Textures/field/Potato1.png", Texture.class);
+		assetManager.load("Textures/field/Potato2.png", Texture.class);
+		assetManager.load("Textures/field/Potato3.png", Texture.class);
+		assetManager.load("Textures/field/Potato4.png", Texture.class);
 		assetManager.load("Textures/Truck1.png", Texture.class);
 		assetManager.load("Textures/Truck2.png", Texture.class);
-		assetManager.load("Textures/Mailbox.png", Texture.class);
-		assetManager.load("Textures/bike.png", Texture.class);
-		assetManager.load("Textures/Tree3.png", Texture.class);
-		assetManager.load("Textures/drinker.png", Texture.class);
-		assetManager.load("Textures/flower1.png", Texture.class);
-		assetManager.load("Textures/flower2.png", Texture.class);
-		assetManager.load("Textures/flower3.png", Texture.class);
-		assetManager.load("Textures/flowerpot1.png", Texture.class);
-		assetManager.load("Textures/rock1.png", Texture.class);
-		assetManager.load("Textures/rock2.png", Texture.class);
-		assetManager.load("Textures/stone1.png", Texture.class);
-		assetManager.load("Textures/stone2.png", Texture.class);
-		assetManager.load("Textures/Scarecrow.png", Texture.class);
-		assetManager.load("Textures/rotengrass1.png", Texture.class);
-		assetManager.load("Textures/rotengrass2.png", Texture.class);
-		assetManager.load("Textures/rotengrass3.png", Texture.class);
+		assetManager.load("Textures/decorations/Mailbox.png", Texture.class);
+		assetManager.load("Textures/decorations/bike.png", Texture.class);
+		assetManager.load("Textures/decorations/Tree3.png", Texture.class);
+		assetManager.load("Textures/decorations/drinker.png", Texture.class);
+		assetManager.load("Textures/decorations/flower1.png", Texture.class);
+		assetManager.load("Textures/decorations/flower2.png", Texture.class);
+		assetManager.load("Textures/decorations/flower3.png", Texture.class);
+		assetManager.load("Textures/decorations/flowerpot1.png", Texture.class);
+		assetManager.load("Textures/decorations/rock1.png", Texture.class);
+		assetManager.load("Textures/decorations/rock2.png", Texture.class);
+		assetManager.load("Textures/decorations/stone1.png", Texture.class);
+		assetManager.load("Textures/decorations/stone2.png", Texture.class);
+		assetManager.load("Textures/decorations/Scarecrow.png", Texture.class);
+		assetManager.load("Textures/decorations/rotengrass1.png", Texture.class);
+		assetManager.load("Textures/decorations/rotengrass2.png", Texture.class);
+		assetManager.load("Textures/decorations/rotengrass3.png", Texture.class);
 
 		assetManager.load("Textures/BackGrounds/menuBack.png", Texture.class);
 		assetManager.load("Textures/BackGrounds/animalBack.jpg", Texture.class);
@@ -111,15 +115,47 @@ public class MainGame extends Game {
 		assetManager.load("Textures/Buildings/Pigsty.png", Texture.class);
 		assetManager.load("Textures/Buildings/Shop.png", Texture.class);
 		assetManager.load("Textures/Buildings/Store.png", Texture.class);
-        assetManager.load("Textures/Bush.png", Texture.class);
-        assetManager.load("Textures/bush2.png", Texture.class);
+        assetManager.load("Textures/decorations/Bush.png", Texture.class);
+        assetManager.load("Textures/decorations/bush2.png", Texture.class);
         assetManager.load("Textures/Ground.png", Texture.class);
-        assetManager.load("Textures/Tree1.png", Texture.class);
-        assetManager.load("Textures/Tree2.png", Texture.class);
+        assetManager.load("Textures/decorations/Tree1.png", Texture.class);
+        assetManager.load("Textures/decorations/Tree2.png", Texture.class);
         assetManager.load("Textures/Road.png", Texture.class);
-        assetManager.load("Textures/WoodPath.png", Texture.class);
-        assetManager.load("Textures/WoodPath2.png", Texture.class);
-        assetManager.load("Textures/WoodPath3.png", Texture.class);
+        assetManager.load("Textures/decorations/WoodPath.png", Texture.class);
+        assetManager.load("Textures/decorations/WoodPath2.png", Texture.class);
+        assetManager.load("Textures/decorations/WoodPath3.png", Texture.class);
+        assetManager.load("Textures/Dialog/Dialog1.png", Texture.class);
+        assetManager.load("Textures/Dialog/Dialog2.png", Texture.class);
+        assetManager.load("Textures/Dialog/Dialog3.png", Texture.class);
+        assetManager.load("Textures/Dialog/Dialog4.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogChicken1B.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogChicken2B.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogChicken3B.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogChicken4B.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogPig1.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogPig2.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogPig3.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogPig4.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCow1.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCow2.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCow3.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCow4.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogNut1.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogNut2.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogNut3.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogNut4.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogBox1.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogBox2.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogBox3.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogBox4.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCrop1.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCrop2.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCrop3.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCrop4.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCoin1.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCoin2.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCoin3.png", Texture.class);
+        assetManager.load("Textures/Dialog/DialogCoin4.png", Texture.class);
 
         for (int i = 0; i < 21; i++) {
             String farmer = String.format("Textures/Farmer/Farmer%d.png", i);
@@ -127,10 +163,7 @@ public class MainGame extends Game {
 			String dog = String.format("Textures/Dog/Dog%d.png", i);
 			assetManager.load(dog, Texture.class);
         }
-		for (int i = 0; i < 4; i++) {
-			String chicken = String.format("Textures/Chicken/Chiken%d.png", i);
-			assetManager.load(chicken, Texture.class);
-		}
+
 
 
         //Sounds
@@ -149,6 +182,16 @@ public class MainGame extends Game {
 		assetManager.load("Sounds/RNDAmbient/pig1.wav", Sound.class);
 		assetManager.load("Sounds/RNDAmbient/pig2.wav", Sound.class);
 		assetManager.load("Sounds/RNDAmbient/pig3.wav", Sound.class);
+		assetManager.load("Sounds/UISounds/bigDeSelect.wav", Sound.class);
+		assetManager.load("Sounds/UISounds/bigSelect.wav", Sound.class);
+		assetManager.load("Sounds/UISounds/coins.wav", Sound.class);
+		assetManager.load("Sounds/UISounds/pickUpItem.wav", Sound.class);
+		assetManager.load("Sounds/UISounds/questcomplete.wav", Sound.class);
+		assetManager.load("Sounds/UISounds/select.wav", Sound.class);
+		assetManager.load("Sounds/UISounds/smallSelect.wav", Sound.class);
+		assetManager.load("Sounds/dog.wav", Sound.class);
+		assetManager.load("Sounds/carHorn.mp3", Sound.class);
+		assetManager.load("Sounds/man.wav", Sound.class);
 
 		//Music
 		assetManager.load("Sounds/Music/game.mp3", Music.class);

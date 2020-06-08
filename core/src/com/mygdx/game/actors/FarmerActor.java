@@ -24,14 +24,14 @@ public class FarmerActor extends BaseActor {
     private  Estate estate;
     private final float MAX_X = 16.5f;
     private final float MAX_Y = 13;
-    private float timeInState, timeToBeat, animationTime;
-    private boolean stepping, stepingSoundPlaying;
+    private float timeInState, timeToBeat, animationTime, timeSinceLastSound;
+    private boolean stepping, stepingSoundPlaying, justTouched;
 
 
     private List<Texture> textures;
     private SoundFactory sounds;
 
-    public FarmerActor(World world, List<Texture> textures, Vector2 position, SoundFactory sounds) {
+    public FarmerActor(World world, List<Texture> textures, SoundFactory sounds) {
 
         this.world = world;
         this.textures = textures;
@@ -42,6 +42,14 @@ public class FarmerActor extends BaseActor {
         this.animationTime = 0;
         this.stepping = false;
         this.stepingSoundPlaying = false;
+        this.justTouched = false;
+        this.timeSinceLastSound = 3;
+
+
+        float x =(float)(Math.random() * (MAX_X -1)) +1;
+        float y =(float)(Math.random() * (MAX_Y-1)) +1;
+        Vector2 position = new Vector2(x, y);
+
 
         BodyDef def = new BodyDef();
         def.position.set(position);
@@ -64,6 +72,16 @@ public class FarmerActor extends BaseActor {
     public void act(float delta) {
         this.timeInState += delta;
         this.animationTime += delta;
+        this.timeSinceLastSound += delta;
+
+
+        if (justTouched && timeSinceLastSound > 3){
+            timeSinceLastSound = 0;
+            justTouched = false;
+            sounds.playMan();
+        }else {
+            justTouched = false;
+        }
 
         if ( stepping && !stepingSoundPlaying){
             this.stepingSoundPlaying = true;
@@ -231,5 +249,19 @@ public class FarmerActor extends BaseActor {
         world.destroyBody(body);
     }
 
+    public float getTimeToBeat() {
+        return timeToBeat;
+    }
 
+    public void setTimeToBeat(float timeToBeat) {
+        this.timeToBeat = timeToBeat;
+    }
+
+    public boolean isJustTouched() {
+        return justTouched;
+    }
+
+    public void setJustTouched(boolean justTouched) {
+        this.justTouched = justTouched;
+    }
 }

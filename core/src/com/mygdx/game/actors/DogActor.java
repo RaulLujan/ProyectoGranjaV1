@@ -22,17 +22,18 @@ public class DogActor extends BaseActor {
     private Fixture fixture;
     private enum Estate { STOPED, GOING_UP, GOING_DOWN, GOING_LEFT, GOING_RIGHT, SLEEPING}
     private  Estate estate;
-    private final float MAX_X = 29.5f;
+    private final float MAX_X = 29f;
     private final float MAX_Y = 13;
     private final float MIN_Y = 9.5f;
     private final float MIN_X = 22.75f;
-    private float timeInState, timeToBeat, animationTime;
+    private float timeInState, timeToBeat, animationTime, timeSinceLastSound;
+    private boolean justTouched;
 
 
     private List<Texture> textures;
     private SoundFactory sounds;
 
-    public DogActor(World world, List<Texture> textures, Vector2 position, SoundFactory sounds) {
+    public DogActor(World world, List<Texture> textures, SoundFactory sounds) {
 
         this.world = world;
         this.textures = textures;
@@ -41,7 +42,13 @@ public class DogActor extends BaseActor {
         this.timeToBeat = 3;
         this.timeInState = 0;
         this.animationTime = 0;
+        this.justTouched = false;
+        this.timeSinceLastSound = 3;
 
+
+        float x =(float)(Math.random() * (MAX_X -MIN_X)) + MIN_X;
+        float y =(float)(Math.random() * (MAX_Y-MIN_Y)) + MIN_Y;
+        Vector2 position = new Vector2(x, y);
 
         BodyDef def = new BodyDef();
         def.position.set(position);
@@ -51,11 +58,11 @@ public class DogActor extends BaseActor {
 
 
 
-        PolygonShape shape = new PolygonShape();
+        /*PolygonShape shape = new PolygonShape();
         shape.setAsBox(0.45f, 0.6f);
         fixture = body.createFixture(shape, 3);
         fixture.setUserData("dog");
-        shape.dispose();
+        shape.dispose();*/
 
         setSize(0.9f*Constants.PIXELS_IN_METER, 1.2f*Constants.PIXELS_IN_METER);
     }
@@ -64,6 +71,15 @@ public class DogActor extends BaseActor {
     public void act(float delta) {
         this.timeInState += delta;
         this.animationTime += delta;
+        this.timeSinceLastSound += delta;
+
+        if (justTouched && timeSinceLastSound > 3){
+            timeSinceLastSound = 0;
+            justTouched = false;
+            sounds.playDog();
+        }else {
+            justTouched = false;
+        }
 
         if (this.estate == Estate.STOPED){
             this.body.setLinearVelocity(0, 0f);
@@ -222,5 +238,19 @@ public class DogActor extends BaseActor {
         world.destroyBody(body);
     }
 
+    public float getTimeToBeat() {
+        return timeToBeat;
+    }
 
+    public void setTimeToBeat(float timeToBeat) {
+        this.timeToBeat = timeToBeat;
+    }
+
+    public boolean isJustTouched() {
+        return justTouched;
+    }
+
+    public void setJustTouched(boolean justTouched) {
+        this.justTouched = justTouched;
+    }
 }

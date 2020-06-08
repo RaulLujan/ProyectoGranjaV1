@@ -20,7 +20,7 @@ public class DomainMocker {
         Usuario user = new Usuario(1,"Paco", "aaa");
         user.setPass("1234");
         user.setApellidos("Gomez Lopez");
-        user.setGranja(new Granja(1,user, "Super Granja"));
+        user.setGranja(new Granja(1,user, "My Super big Farm"));
         ArrayList<TipoRecurso> resources = getAllResorurcesList();
         ArrayList<Precio> precios= new ArrayList<>();
 

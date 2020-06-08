@@ -20,16 +20,24 @@ public class PulseActor extends BaseActor {
     private World world;
     private Body body;
     private Fixture fixture;
-    private float fullAnimationTIme, changing;
+    private float fullAnimationTIme, changing, change;
+    private int cicles;
+    private boolean onlyForward;
 
 
 
-    public PulseActor(World world, List<Texture> textures, Vector2 position) {
+
+    public PulseActor(World world, List<Texture> textures, Vector2 position, boolean onlyForward) {
 
         this.world = world;
         this.textures = textures;
+        this.onlyForward = onlyForward;
         fullAnimationTIme = 2f;
-        changing = 0f;
+        cicles = 180;
+
+        change = 0.2f;
+        changing = (float) (Math.random() * change * cicles);
+
 
 
         BodyDef def = new BodyDef();
@@ -41,12 +49,12 @@ public class PulseActor extends BaseActor {
 
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1f, 1f);
+        shape.setAsBox(0.75f, 0.75f);
         fixture = body.createFixture(shape, 3);
         fixture.setUserData("tractor");
         shape.dispose();
 
-        setSize(2 * Constants.PIXELS_IN_METER, 2 * Constants.PIXELS_IN_METER);
+        setSize(1.5f * Constants.PIXELS_IN_METER, 1.5f * Constants.PIXELS_IN_METER);
     }
 
     @Override
@@ -56,19 +64,56 @@ public class PulseActor extends BaseActor {
 
         changing = changing + delta;
 
-        if ( changing < 1)      texture = textures.get(2);
-        else if ( changing < 1.15f)  texture = textures.get(1);
-        else if ( changing <  1.55f) texture = textures.get(3);
+        if (!onlyForward) {
+            if (changing < change) {
+                this.setVisible(true);
+                texture = textures.get(0);
+            } else if (changing < change * 2) texture = textures.get(1);
+            else if (changing < change * 3) texture = textures.get(2);
+            else if (changing < change * 4) texture = textures.get(3);
+            else if (changing < change * 5) texture = textures.get(4);
+            else if (changing < change * 6) texture = textures.get(5);
+            else if (changing < change * 7) texture = textures.get(6);
+            else if (changing < change * 8) texture = textures.get(7);
+            else if (changing < change * 9) texture = textures.get(6);
+            else if (changing < change * 10) texture = textures.get(5);
+            else if (changing < change * 11) texture = textures.get(4);
+            else if (changing < change * 12) texture = textures.get(3);
+            else if (changing < change * 13) texture = textures.get(2);
+            else if (changing < change * 14) texture = textures.get(1);
+            else if (changing < change * 15) texture = textures.get(0);
+            else if (changing < change * cicles) this.setVisible(false);
 
-        else changing = 0;
+
+            else changing = 0;
+        }else {
+            if (changing < change) {
+                this.setVisible(true);
+                texture = textures.get(0);
+            } else if (changing < change * 2) texture = textures.get(1);
+            else if (changing < change * 3) texture = textures.get(2);
+            else if (changing < change * 4) texture = textures.get(3);
+            else if (changing < change * 5) texture = textures.get(4);
+            else if (changing < change * 6) texture = textures.get(5);
+            else if (changing < change * 8) texture = textures.get(6);
+            else if (changing < change * 10) texture = textures.get(7);
+
+            else if (changing < change * 12) texture = textures.get(3);
+            else if (changing < change * 13) texture = textures.get(2);
+            else if (changing < change * 14) texture = textures.get(1);
+            else if (changing < change * 15) texture = textures.get(0);
+            else if (changing < change * cicles) this.setVisible(false);
+            else changing = 0;
+        }
+
 
     }
 
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition((body.getPosition().x - 1) * Constants.PIXELS_IN_METER,
-                (body.getPosition().y - 1) * Constants.PIXELS_IN_METER);
+        setPosition((body.getPosition().x - 0.75f) * Constants.PIXELS_IN_METER,
+                (body.getPosition().y - 0.75f) * Constants.PIXELS_IN_METER);
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 

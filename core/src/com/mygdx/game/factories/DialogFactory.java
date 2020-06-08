@@ -23,15 +23,16 @@ public class DialogFactory {
         screen.disableAll(true);
         Skin skin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
         Skin skin2 = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+        final SoundFactory soundFactory = screen.getGame().getSoundFactory();
 
-        //Cuerpo de la ventana
+        //mian window
         final Window window = new Window("", skin2, "dialog");
         window.setSize(Constants.DEVICE_WIDTH * width, Constants.DEVICE_HEIGHT * height);
         window.setPosition(Constants.DEVICE_WIDTH / 2 - (Constants.DEVICE_WIDTH * width / 2), Constants.DEVICE_HEIGHT / 2- (Constants.DEVICE_HEIGHT * height / 2));
         window.setTouchable(Touchable.disabled);
         stage.addActor(window);
 
-        //boton de conformación
+        //ok button
         final TextButton textButton= new TextButton("Aceptar", skin, "big");
         textButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.25f);
         textButton.setSize(Constants.DEVICE_WIDTH * 0.12f, Constants.DEVICE_HEIGHT * 0.08f);
@@ -40,7 +41,7 @@ public class DialogFactory {
         textButton.setColor(Color.PURPLE);
         stage.addActor(textButton);
 
-        //titulo
+        //tittle
         final Label titleLabel = new Label(title, skin, "big");
         titleLabel.setFontScale(Constants.FONT_SIZE * 0.25f);
         titleLabel.setSize(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.08f);
@@ -61,10 +62,11 @@ public class DialogFactory {
 
 
 
-        //funcionalidades
+        //funcionalities
         textButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                soundFactory.playSelect2();
                //DIMISS ALL
                 textButton.remove();
                 window.remove();
@@ -87,15 +89,16 @@ public class DialogFactory {
         screen.disableAll(true);
         Skin skin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
         Skin skin2 = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
+        final SoundFactory soundFactory = screen.getGame().getSoundFactory();
 
-        //Cuerpo de la ventana
+        //Main window
         final Window window = new Window("", skin2, "dialog");
         window.setSize(Constants.DEVICE_WIDTH * width, Constants.DEVICE_HEIGHT * height);
         window.setPosition(Constants.DEVICE_WIDTH / 2 - (Constants.DEVICE_WIDTH * width / 2), Constants.DEVICE_HEIGHT / 2- (Constants.DEVICE_HEIGHT * height / 2));
         window.setTouchable(Touchable.disabled);
         stage.addActor(window);
 
-        //boton de conformación
+        //Ok button
         final TextButton okButton= new TextButton("Aceptar", skin, "big");
         okButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.25f);
         okButton.setSize(Constants.DEVICE_WIDTH * 0.125f, Constants.DEVICE_HEIGHT * 0.08f);
@@ -104,7 +107,7 @@ public class DialogFactory {
 
         stage.addActor(okButton);
 
-        //boton de cancelación
+        //Cancel button
         final TextButton cancelButton = new TextButton("Cancelar", skin, "big");
         cancelButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.25f);
 
@@ -114,7 +117,7 @@ public class DialogFactory {
         cancelButton.setColor(Color.PURPLE);
         stage.addActor(cancelButton);
 
-        //titulo
+        //tittle
         final Label titleLabel = new Label(title, skin, "big");
         titleLabel.setFontScale(Constants.FONT_SIZE * 0.3f);
         titleLabel.setSize(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.08f);
@@ -135,10 +138,11 @@ public class DialogFactory {
 
 
 
-        //funcionalidades
+        //funcionalities
         okButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                soundFactory.playSelect2();
                 //DIMISS ALL
                 okButton.remove();
                 cancelButton.remove();
@@ -153,6 +157,7 @@ public class DialogFactory {
         cancelButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                soundFactory.playSelect2();
                 //DIMISS ALL
                 okButton.remove();
                 cancelButton.remove();

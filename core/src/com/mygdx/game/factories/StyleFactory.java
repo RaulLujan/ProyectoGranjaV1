@@ -17,7 +17,6 @@ public class StyleFactory {
 
 
 
-    public final static Color PRESSED_COLOR = new Color(0.07450981f,0.24705882f,0.21960784f,1);
     public final static Color BLUE_COLOR = new Color(0.30314961f,0.65354331f,1,1);
     public final static Color DARK_BLUE_COLOR = new Color(0,0.30314961f,0.60236220f,1);
     public static final Color ORANGE_COLOR = new Color(1,0.60236220f,0.2f,1);

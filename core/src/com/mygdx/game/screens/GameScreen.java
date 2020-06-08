@@ -44,7 +44,8 @@ public class GameScreen extends BaseScreen{
     private FarmerActor farmerActor;
     private TruckActor truckActor ;
     private DogActor dogActor;
-    private PulseActor chickenPulseActor ;
+    private PulseActor chickenPulseActor, pigPulseActor, cowPulseActor,
+            homePulseActor, storagePulseActor, fieldPulseActor, shopPulseActor ;
 
 
 
@@ -53,8 +54,9 @@ public class GameScreen extends BaseScreen{
         bushTexture, groundTexture, tree1Texture, tree2Texture, tree3Texture,roadTexture, truck1Texture, truck2Texture,
         mailboxTexture, bikeTexture, drikerTexture, flower1Texture, flower2Texture, flowerPotTexture, rock1Texture,
         rock2Texture, stone1Texture, stone2Texture, flower3Texture, scareCrowTexture, rottenGrass1Texture, rottenGrass2Texture,
-        rottenGrass3Texture, bush2Texture, woodPathTexture1, woodPathTexture2, woodPathTexture3;
-    private ArrayList<Texture> farmerTextures , dogTextures, chikenTextures, fieldTextures, pigTextures, cowTextures;
+        rottenGrass3Texture, bush2Texture, woodPathTexture1, woodPathTexture2, woodPathTexture3 ;
+    private ArrayList<Texture> farmerTextures , dogTextures, chikenTextures, fieldTextures, pigTextures, cowTextures,
+            homeTextures, shopTextures, storageTextures, fieldPulseTextures;
 
     //Images
     private ImageRepeart grondImage;
@@ -90,31 +92,32 @@ public class GameScreen extends BaseScreen{
         pigstyTexture = game.getAssetManager().get("Textures/Buildings/Pigsty.png");
         shopTexture = game.getAssetManager().get("Textures/Buildings/Shop.png");
         storeTexture = game.getAssetManager().get("Textures/Buildings/Store.png");
-        bushTexture = game.getAssetManager().get("Textures/Bush.png");
-        bush2Texture = game.getAssetManager().get("Textures/bush2.png");
+        bushTexture = game.getAssetManager().get("Textures/decorations/Bush.png");
+        bush2Texture = game.getAssetManager().get("Textures/decorations/bush2.png");
         groundTexture = game.getAssetManager().get("Textures/Ground.png");
-        tree1Texture = game.getAssetManager().get("Textures/Tree1.png");
-        tree2Texture = game.getAssetManager().get("Textures/Tree2.png");
-        tree3Texture = game.getAssetManager().get("Textures/Tree3.png");
+        tree1Texture = game.getAssetManager().get("Textures/decorations/Tree1.png");
+        tree2Texture = game.getAssetManager().get("Textures/decorations/Tree2.png");
+        tree3Texture = game.getAssetManager().get("Textures/decorations/Tree3.png");
         roadTexture = game.getAssetManager().get("Textures/Road.png");
-        mailboxTexture = game.getAssetManager().get("Textures/Mailbox.png");
-        bikeTexture = game.getAssetManager().get("Textures/bike.png");
-        flowerPotTexture = game.getAssetManager().get("Textures/flowerpot1.png");
-        drikerTexture = game.getAssetManager().get("Textures/drinker.png");
-        flower1Texture = game.getAssetManager().get("Textures/flower1.png");
-        flower2Texture = game.getAssetManager().get("Textures/flower2.png");
-        flower3Texture = game.getAssetManager().get("Textures/flower3.png");
-        rock1Texture = game.getAssetManager().get("Textures/rock1.png");
-        rock2Texture = game.getAssetManager().get("Textures/rock2.png");
-        stone1Texture = game.getAssetManager().get("Textures/stone1.png");
-        stone2Texture = game.getAssetManager().get("Textures/stone2.png");
-        scareCrowTexture = game.getAssetManager().get("Textures/Scarecrow.png");
-        rottenGrass1Texture = game.getAssetManager().get("Textures/rotengrass1.png");
-        rottenGrass2Texture = game.getAssetManager().get("Textures/rotengrass2.png");
-        rottenGrass3Texture = game.getAssetManager().get("Textures/rotengrass3.png");
-        woodPathTexture1 = game.getAssetManager().get("Textures/WoodPath.png");
-        woodPathTexture2 = game.getAssetManager().get("Textures/WoodPath2.png");
-        woodPathTexture3 = game.getAssetManager().get("Textures/WoodPath3.png");
+        mailboxTexture = game.getAssetManager().get("Textures/decorations/Mailbox.png");
+        bikeTexture = game.getAssetManager().get("Textures/decorations/bike.png");
+        flowerPotTexture = game.getAssetManager().get("Textures/decorations/flowerpot1.png");
+        drikerTexture = game.getAssetManager().get("Textures/decorations/drinker.png");
+        flower1Texture = game.getAssetManager().get("Textures/decorations/flower1.png");
+        flower2Texture = game.getAssetManager().get("Textures/decorations/flower2.png");
+        flower3Texture = game.getAssetManager().get("Textures/decorations/flower3.png");
+        rock1Texture = game.getAssetManager().get("Textures/decorations/rock1.png");
+        rock2Texture = game.getAssetManager().get("Textures/decorations/rock2.png");
+        stone1Texture = game.getAssetManager().get("Textures/decorations/stone1.png");
+        stone2Texture = game.getAssetManager().get("Textures/decorations/stone2.png");
+        scareCrowTexture = game.getAssetManager().get("Textures/decorations/Scarecrow.png");
+        rottenGrass1Texture = game.getAssetManager().get("Textures/decorations/rotengrass1.png");
+        rottenGrass2Texture = game.getAssetManager().get("Textures/decorations/rotengrass2.png");
+        rottenGrass3Texture = game.getAssetManager().get("Textures/decorations/rotengrass3.png");
+        woodPathTexture1 = game.getAssetManager().get("Textures/decorations/WoodPath.png");
+        woodPathTexture2 = game.getAssetManager().get("Textures/decorations/WoodPath2.png");
+        woodPathTexture3 = game.getAssetManager().get("Textures/decorations/WoodPath3.png");
+
 
 
         farmerTextures = new ArrayList<>(21);
@@ -123,6 +126,11 @@ public class GameScreen extends BaseScreen{
         pigTextures = new ArrayList<>(7);
         cowTextures = new ArrayList<>(7);
         fieldTextures = new ArrayList<>();
+        homeTextures = new ArrayList<>();
+        storageTextures = new ArrayList<>();
+        shopTextures = new ArrayList<>();
+        fieldPulseTextures = new ArrayList<>();
+
         for (int i = 0; i < 21; i++) {
             String farmer = String.format("Textures/Farmer/Farmer%d.png",i);
             farmerTextures.add((Texture) game.getAssetManager().get(farmer));
@@ -138,19 +146,73 @@ public class GameScreen extends BaseScreen{
         fieldTextures.add((Texture)game.getAssetManager().get("Textures/field/Strawberry2.png"));
         fieldTextures.add((Texture)game.getAssetManager().get("Textures/field/Strawberry3.png"));
         fieldTextures.add((Texture)game.getAssetManager().get("Textures/field/Strawberry4.png"));
+        fieldTextures.add((Texture)game.getAssetManager().get("Textures/field/Potato1.png"));
+        fieldTextures.add((Texture)game.getAssetManager().get("Textures/field/Potato2.png"));
+        fieldTextures.add((Texture)game.getAssetManager().get("Textures/field/Potato3.png"));
+        fieldTextures.add((Texture)game.getAssetManager().get("Textures/field/Potato4.png"));
 
+        chikenTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog1.png"));
+        chikenTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog2.png"));
+        chikenTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog3.png"));
+        chikenTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog4.png"));
+        chikenTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogChicken1B.png"));
+        chikenTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogChicken2B.png"));
+        chikenTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogChicken3B.png"));
+        chikenTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogChicken4B.png"));
 
+        pigTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog1.png"));
+        pigTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog2.png"));
+        pigTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog3.png"));
+        pigTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog4.png"));
+        pigTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogPig1.png"));
+        pigTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogPig2.png"));
+        pigTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogPig3.png"));
+        pigTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogPig4.png"));
 
-        for (int i = 0; i < 4; i++) {
-            String chicken = String.format("Textures/Chicken/Chiken%d.png", i);
-            chikenTextures.add((Texture) game.getAssetManager().get(chicken));
-           /* String pig = String.format("Textures/Pig/Pig%d.png", i);
-            // pigTextures.add((Texture) game.getAssetManager().get(pig));
-            String cow = String.format("Textures/Cow/Cow%d.png", i);
-            // cowTextures.add((Texture) game.getAssetManager().get(cow));
+        cowTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog1.png"));
+        cowTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog2.png"));
+        cowTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog3.png"));
+        cowTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog4.png"));
+        cowTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCow1.png"));
+        cowTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCow2.png"));
+        cowTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCow3.png"));
+        cowTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCow4.png"));
 
-            */
-        }
+        homeTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog1.png"));
+        homeTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog2.png"));
+        homeTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog3.png"));
+        homeTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog4.png"));
+        homeTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogNut1.png"));
+        homeTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogNut2.png"));
+        homeTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogNut3.png"));
+        homeTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogNut4.png"));
+
+        storageTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog1.png"));
+        storageTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog2.png"));
+        storageTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog3.png"));
+        storageTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog4.png"));
+        storageTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogBox1.png"));
+        storageTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogBox2.png"));
+        storageTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogBox3.png"));
+        storageTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogBox4.png"));
+
+        fieldPulseTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog1.png"));
+        fieldPulseTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog2.png"));
+        fieldPulseTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog3.png"));
+        fieldPulseTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog4.png"));
+        fieldPulseTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCrop1.png"));
+        fieldPulseTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCrop2.png"));
+        fieldPulseTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCrop3.png"));
+        fieldPulseTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCrop4.png"));
+
+        shopTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog1.png"));
+        shopTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog2.png"));
+        shopTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog3.png"));
+        shopTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/Dialog4.png"));
+        shopTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCoin1.png"));
+        shopTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCoin2.png"));
+        shopTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCoin3.png"));
+        shopTextures.add((Texture)game.getAssetManager().get("Textures/Dialog/DialogCoin4.png"));
 
         Campo field = (Campo)this.game.getUsuario().getGranja().getInfraestructuras().get(Infraestructura.FIELD);
 
@@ -161,10 +223,17 @@ public class GameScreen extends BaseScreen{
         cowsBuildingActor = new AnimalsBuildingActor(world, barnTexture, new Vector2(4f, 15f), game.getSoundFactory(), TipoRecurso.COW);
         shopActor = new ShopActor(world, shopTexture, new Vector2(25.75f, 3f), game.getSoundFactory());
         storageActor = new StorageActor(world, storeTexture, new Vector2(26f, 9f), game.getSoundFactory());
-        farmerActor = new FarmerActor(world,farmerTextures,new Vector2(10, 8), game.getSoundFactory());
+        farmerActor = new FarmerActor(world,farmerTextures, game.getSoundFactory());
         truckActor = new TruckActor(world, truck1Texture,truck2Texture, new Vector2(21, 25), game.getSoundFactory());
-        dogActor = new DogActor(world, dogTextures, new Vector2(23,13), game.getSoundFactory());
-        chickenPulseActor = new PulseActor(world, chikenTextures, new Vector2(15f, 15.5f) );
+        dogActor = new DogActor(world, dogTextures, game.getSoundFactory());
+        chickenPulseActor = new PulseActor(world, chikenTextures, new Vector2(16.5f, 16f), false );
+        pigPulseActor = new PulseActor(world, pigTextures, new Vector2(10.5f, 16f),false );
+        cowPulseActor = new PulseActor(world, cowTextures, new Vector2(5.5f, 16f), false );
+        homePulseActor = new PulseActor(world, homeTextures, new Vector2(28.25f, 16f), false );
+        storagePulseActor = new PulseActor(world, storageTextures, new Vector2(26.6f, 9f), true );
+        fieldPulseActor = new PulseActor(world, fieldPulseTextures, new Vector2(18.9f, 7.45f), true );
+        shopPulseActor = new PulseActor(world, shopTextures, new Vector2(25.85f, 4.75f), false );
+
 
         grondImage = new ImageRepeart(groundTexture,-20,-10,60,40, 2f);
         roadImage = new ImageClampToEdge(roadTexture,19.25f,-3,3.5f,25f);
@@ -187,7 +256,7 @@ public class GameScreen extends BaseScreen{
         decorations.add(new ImageClampToEdge(bush2Texture, 13f, 12.125f, 1f, 1f));
         decorations.add(new ImageClampToEdge(bush2Texture, 0.5f, 0.5f, 1f, 1f));
         decorations.add(new ImageClampToEdge(bushTexture, 27.3f, 5.5f, 1f, 1f));
-        decorations.add(new ImageClampToEdge(mailboxTexture, 28.5f, 12.5f, 0.5f, 1.2f));
+        decorations.add(new ImageClampToEdge(mailboxTexture, 29.25f, 12.5f, 0.5f, 1.2f));
         decorations.add(new ImageClampToEdge(bikeTexture, 22.4f, 16.65f, 2f, 1.2f));
         decorations.add(new ImageClampToEdge(flowerPotTexture, 8.75f, 12.2f, 0.75f, 1f));
         decorations.add(new ImageClampToEdge(flower1Texture, 0.5f, 5f, 0.5f, 0.5f));
@@ -200,17 +269,19 @@ public class GameScreen extends BaseScreen{
         decorations.add(new ImageClampToEdge(rock1Texture, 0.1f, 3f, 1f, 1f));
         decorations.add(new ImageClampToEdge(rock2Texture, 29.5f, 0.5f, 1f, 1f));
         decorations.add(new ImageClampToEdge(stone1Texture, 18.3f, 4f, 0.5f, 0.5f));
-        decorations.add(new ImageClampToEdge(stone1Texture, 18.7f, 15f, 0.6f, 0.5f));
+        decorations.add(new ImageClampToEdge(stone2Texture, 18.7f, 15f, 0.6f, 0.5f));
         decorations.add(new ImageClampToEdge(stone2Texture, 5f, 10.2f, 0.7f, 0.7f));
-        decorations.add(new ImageClampToEdge(stone2Texture, 11f, 10.2f, 0.7f, 0.7f));
+        decorations.add(new ImageClampToEdge(stone1Texture, 11f, 10.2f, 0.5f, 0.5f));
         decorations.add(new ImageClampToEdge(stone2Texture, 29f, 8f, 0.7f, 0.7f));
         decorations.add(new ImageClampToEdge(drikerTexture, 16.5f, 12.1f, 1.2f, 0.7f));
-        decorations.add(new ImageClampToEdge(scareCrowTexture, 18.5f, 5f, 0.85f, 1.7f));
+        ImageClampToEdge scareCrow = new ImageClampToEdge(scareCrowTexture, 18.5f, 5f, 0.85f, 1.7f);
+        decorations.add(scareCrow);
         decorations.add(new ImageClampToEdge(rottenGrass1Texture, 1f, 9f, 0.5f, 0.5f));
         decorations.add(new ImageClampToEdge(rottenGrass2Texture, 7f, 13.2f, 0.5f, 0.5f));
         decorations.add(new ImageClampToEdge(rottenGrass3Texture, 26f, 6f, 0.5f, 0.5f));
         decorations.add(new ImageClampToEdge(rottenGrass2Texture, 6f, 0.1f, 0.5f, 0.5f));
         decorations.add(new ImageClampToEdge(rottenGrass3Texture, 17.8f, 0.4f, 0.5f, 0.5f));
+
         roads.add(new ImageClampToEdge(woodPathTexture1, 22.5f, 11f, 4.9f, 0.7f));
         roads.add(new ImageClampToEdge(woodPathTexture1, 14.50f, 11f, 4.9f, 0.7f));
         roads.add(new ImageClampToEdge(woodPathTexture1, 9.6f, 11f, 4.9f, 0.7f));
@@ -253,7 +324,13 @@ public class GameScreen extends BaseScreen{
             stage.addActor(bush);
         }
         stage.addActor(farmerActor);
-       // stage.addActor(chickenPulseActor);
+        stage.addActor(chickenPulseActor);
+        stage.addActor(pigPulseActor);
+        stage.addActor(cowPulseActor);
+        stage.addActor(homePulseActor);
+        stage.addActor(storagePulseActor);
+        stage.addActor(fieldPulseActor);
+        stage.addActor(shopPulseActor);
 
         this.game.getSoundFactory().playGameMusic();
 
@@ -262,10 +339,10 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
+                game.getSoundFactory().playPickUp();
                 GameScreen.this.game.showStorageScreen();
                 game.getSoundFactory().stopAll();
-                //do your stuff
-                //it will work when finger is released..
+
             }
 
             public boolean touchDown(InputEvent event, float x, float y,
@@ -281,6 +358,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
+                game.getSoundFactory().playPickUp();
                 GameScreen.this.game.showAnimalsScreen(cowsBuildingActor.getAnimalType());
                 game.getSoundFactory().stopAll();
                 //do your stuff
@@ -299,6 +377,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
+                game.getSoundFactory().playPickUp();
                 GameScreen.this.game.showAnimalsScreen(chickenBuildingActor.getAnimalType());
                 game.getSoundFactory().stopAll();
                 //do your stuff
@@ -317,6 +396,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
+                game.getSoundFactory().playPickUp();
                 GameScreen.this.game.showAnimalsScreen(pigsBuildingActor.getAnimalType());
                 game.getSoundFactory().stopAll();
                 //do your stuff
@@ -335,6 +415,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
+                game.getSoundFactory().playPickUp();
                 GameScreen.this.game.showOptionsScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
@@ -353,6 +434,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
+                game.getSoundFactory().playPickUp();
                 GameScreen.this.game.showShopScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
@@ -371,6 +453,7 @@ public class GameScreen extends BaseScreen{
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
+                game.getSoundFactory().playPickUp();
                 GameScreen.this.game.showFieldScreen();
                 game.getSoundFactory().stopAll();
                 //do your stuff
@@ -384,6 +467,83 @@ public class GameScreen extends BaseScreen{
                 return true;
             }
         });
+        scareCrow.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown=true;
+                game.getSoundFactory().playPickUp();
+                GameScreen.this.game.showFieldScreen();
+                game.getSoundFactory().stopAll();
+                //do your stuff
+                //it will work when finger is released..
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                boolean touchdown=false;
+                //do your stuff it will work when u touched your actor
+                return true;
+            }
+        });
+
+
+        farmerActor.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown=true;
+                farmerActor.setTimeToBeat(0);
+                farmerActor.setJustTouched(true);
+
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                boolean touchdown=false;
+                //do your stuff it will work when u touched your actor
+
+                return true;
+            }
+        });
+        dogActor.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown=true;
+                dogActor.setTimeToBeat(0);
+                dogActor.setJustTouched(true);
+
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                boolean touchdown=false;
+                //do your stuff it will work when u touched your actor
+
+                return true;
+            }
+        });
+
+        truckActor.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown=true;
+                truckActor.setJustTouched(true);
+
+
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                boolean touchdown=false;
+                //do your stuff it will work when u touched your actor
+
+                return true;
+            }
+        });
+
 
         this.timeToBeat = (float) (Math.random() * 10) + 2;
 
@@ -409,7 +569,7 @@ public class GameScreen extends BaseScreen{
             this.timeToBeat = (float) (Math.random() * 5) + 5;
             game.getSoundFactory().playRDNSound();
         }
-        //solo controla el estado del campo cada segundo , ahorrando muchos recursos
+        //Field state is controlled only once in a second, saving many resources
         if (timeSinceLastFieldControl > 1){
             this.game.getFieldController().controlField();
         }
@@ -425,26 +585,39 @@ public class GameScreen extends BaseScreen{
 
     @Override
     public void dispose() {
-        Texture[] allTextures = { barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture,
-                bushTexture, groundTexture, tree1Texture, tree2Texture, roadTexture};
-        for (Texture textura : allTextures) {
-            textura.dispose();
+        Texture[] allTextures = {barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture,
+                bushTexture, groundTexture, tree1Texture, tree2Texture, tree3Texture,roadTexture, truck1Texture, truck2Texture,
+                mailboxTexture, bikeTexture, drikerTexture, flower1Texture, flower2Texture, flowerPotTexture, rock1Texture,
+                rock2Texture, stone1Texture, stone2Texture, flower3Texture, scareCrowTexture, rottenGrass1Texture, rottenGrass2Texture,
+                rottenGrass3Texture, bush2Texture, woodPathTexture1, woodPathTexture2, woodPathTexture3 };
+        for (Texture texture : allTextures) {
+            texture.dispose();
         }
+        for (Texture texture : fieldTextures) {
+            texture.dispose();
+        }
+
         for (int i = 0; i < 21; i++) {
             farmerTextures.get(i).dispose();
             dogTextures.get(i).dispose();
         }
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             chikenTextures.get(i).dispose();
-            //pigTextures.get(i).dispose();
-            //cowTextures.get(i).dispose();
+            pigTextures.get(i).dispose();
+            cowTextures.get(i).dispose();
+            //homeTextures.get(i).dispose();
+            //shopTextures.get(i).dispose();
+            //storageTextures.get(i).dispose();
+            //fieldDialogTextures.get(i).dispose();
         }
 
         BaseActor[] allActors = { homeActor, fieldActor, shopActor, chickenBuildingActor, pigsBuildingActor, cowsBuildingActor,
-                storageActor, farmerActor, truckActor, dogActor};
+                storageActor, farmerActor, truckActor, dogActor, chickenPulseActor, pigPulseActor, cowPulseActor,
+                homePulseActor, storagePulseActor, fieldPulseActor, shopPulseActor };
         for (BaseActor actor : allActors){
             actor.detach();
         }
+
 
         stage.getBatch().dispose();
         stage.dispose();

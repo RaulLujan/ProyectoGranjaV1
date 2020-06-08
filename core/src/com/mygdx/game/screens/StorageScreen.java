@@ -135,12 +135,14 @@ public class StorageScreen extends BaseScreen {
         goBackButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                StorageScreen.this.game.getSoundFactory().playPickUp();
                 StorageScreen.this.game.showGameScreen();
             }
         });
         button1.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                StorageScreen.this.game.getSoundFactory().playSelect2();
                 String titulo = "Expandir deposito de agua";
                 String messaje = "¿Desea expandir el deposito\n por 100.000 F. ?\nla capacidad aumentara\nen 10.000 litros";
                 DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.5f,0.39f, 1, null);
@@ -149,6 +151,7 @@ public class StorageScreen extends BaseScreen {
         button2.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                StorageScreen.this.game.getSoundFactory().playSelect2();
                 String titulo = "Expandir camara frigorifica";
                 String messaje = "¿Desea expandir la camara frigorifica\npor 100.000 F. ?\nla capacidad aumentara\nen 2.000 litros";
                 DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.5f,0.39f, 2, null);
@@ -157,6 +160,7 @@ public class StorageScreen extends BaseScreen {
         button3.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                StorageScreen.this.game.getSoundFactory().playSelect2();
                 String titulo = "Expandir almacen general";
                 String messaje = "¿Desea expandir el deposito\npor 100.000 F. ?\nla capacidad aumentara\nen 10.000 litros";
                 DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.5f,0.39f, 3, null);
@@ -165,6 +169,7 @@ public class StorageScreen extends BaseScreen {
         button4.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                StorageScreen.this.game.getSoundFactory().playSelect2();
                 String titulo = "Expandir granero";
                 String messaje = "¿Desea expandir el granero\npor 100.000 F. ?\nla capacidad aumentara\nen 6.000 litros";
                 DialogFactory.showOkCancelDialog(StorageScreen.this, stage, titulo, messaje, 0.5f,0.39f, 4, null);

@@ -108,18 +108,22 @@ public class OptionsScreen extends BaseScreen {
         goBackButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                OptionsScreen.this.game.getSoundFactory().playPickUp();
                 OptionsScreen.this.game.showGameScreen();
+
             }
         });
         goMenuButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                OptionsScreen.this.game.getSoundFactory().playPickUp();
                 OptionsScreen.this.game.showMenuScreen();
             }
         });
         closeSession.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                OptionsScreen.this.game.getSoundFactory().playPickUp();
                 OptionsScreen.this.game.setUserLogged(false);
                 OptionsScreen.this.game.saveUserPreferences("","");
                 OptionsScreen.this.game.showLoginScreen();
@@ -128,6 +132,7 @@ public class OptionsScreen extends BaseScreen {
         musicCheckBox.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                OptionsScreen.this.game.getSoundFactory().playSelect2();
                 OptionsScreen.this.game.getSoundFactory().setMusic(!OptionsScreen.this.game.getSoundFactory().isMusic());
                 //save preference
             }
@@ -135,6 +140,7 @@ public class OptionsScreen extends BaseScreen {
         effectsCheckBox.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                OptionsScreen.this.game.getSoundFactory().playSelect2();
                 OptionsScreen.this.game.getSoundFactory().setEffects(!OptionsScreen.this.game.getSoundFactory().isEffects());
                 //save preference
             }

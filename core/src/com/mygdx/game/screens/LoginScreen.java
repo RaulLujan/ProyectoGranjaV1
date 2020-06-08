@@ -90,14 +90,22 @@ public class LoginScreen extends BaseScreen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(LoginScreen.this.game.validate(nameTextField.getText(), passTextField.getText())){
+                    LoginScreen.this.game.getSoundFactory().playPickUp();
                     LoginScreen.this.game.setUserLogged(true);
                     LoginScreen.this.game.saveUserPreferences(nameTextField.getText(), passTextField.getText());
                     LoginScreen.this.game.showGameScreen();
                 }else {
+                    LoginScreen.this.game.getSoundFactory().playDeSelect();
                     LoginScreen.this.game.setLoginFailed(true);
                     LoginScreen.this.game.showLoginScreen();
 
                 }
+            }
+        });
+        registerButton.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                LoginScreen.this.game.getSoundFactory().playDeSelect();
             }
         });
 

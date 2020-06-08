@@ -24,7 +24,6 @@ public class LoadingScreen extends BaseScreen {
     private Stage stage;
     private World world;
     private SpiningIconActor tractorActor;
-    private Texture tractorTexture;
     private ArrayList<Texture> tractorTextures;
     private Label chargingLabel;
     private Skin skin;
@@ -43,7 +42,7 @@ public class LoadingScreen extends BaseScreen {
 
         this.skin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
 
-        tractorTexture = game.getMiniAssetManager().get("Textures/tractor.png");
+
         tractorTextures = new ArrayList<>();
         for (int i = 0; i < 16; i++) {
             String tractor = String.format("Textures/tractor/Tractor%d.png", i);
@@ -107,7 +106,6 @@ public class LoadingScreen extends BaseScreen {
 
     @Override
     public void dispose() {
-        tractorTexture.dispose();
         tractorActor.detach();
         stage.getBatch().dispose();
         stage.dispose();

@@ -40,7 +40,7 @@ public class AnimalsScreen extends BaseScreen{
     private Stage stage;
     private World world;
 
-    private Skin skin, glassSkin;
+    private Skin skin, glassSkin, holoSkin;
 
     private TextButton goBackButton, cowsButton, pigsButton, chickenButton, buyButton, sellButton;
     private Window areaB, table, tabletop;
@@ -54,7 +54,7 @@ public class AnimalsScreen extends BaseScreen{
     private Integer animalToSacrifice ,meatKgInSacrifice;
     private EspacioController espacioController;
     private ArrayList<Precio> prices;
-    ArrayList<Espacio> espacios;
+    private ArrayList<Espacio> espacios;
     private ImageClampToEdge backgroundImage;
     private Texture backgroundTexture;
 
@@ -72,6 +72,7 @@ public class AnimalsScreen extends BaseScreen{
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
         this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
+        this.holoSkin = new Skin(Gdx.files.internal("skins.holo/uiskin.json"));
 
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/animalBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
@@ -120,12 +121,14 @@ public class AnimalsScreen extends BaseScreen{
         goBackButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AnimalsScreen.this.game.getSoundFactory().playPickUp();
                 AnimalsScreen.this.game.showGameScreen();
             }
         });
         cowsButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AnimalsScreen.this.game.getSoundFactory().playPickUp();
                 cowsButton.setStyle(StyleFactory.getStyle(StyleFactory.DARK_GREY_BLUE_COLOR, StyleFactory.GREY_BLUE_COLOR));
                 pigsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
                 chickenButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
@@ -137,6 +140,7 @@ public class AnimalsScreen extends BaseScreen{
         pigsButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AnimalsScreen.this.game.getSoundFactory().playPickUp();
                 pigsButton.setStyle(StyleFactory.getStyle(StyleFactory.DARK_GREY_BLUE_COLOR, StyleFactory.GREY_BLUE_COLOR));
                 cowsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
                 chickenButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
@@ -148,6 +152,7 @@ public class AnimalsScreen extends BaseScreen{
         chickenButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AnimalsScreen.this.game.getSoundFactory().playPickUp();
                 chickenButton.setStyle(StyleFactory.getStyle(StyleFactory.DARK_GREY_BLUE_COLOR, StyleFactory.GREY_BLUE_COLOR));
                 pigsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
                 cowsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
@@ -159,7 +164,9 @@ public class AnimalsScreen extends BaseScreen{
         buyButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AnimalsScreen.this.game.getSoundFactory().playCoins();
                 if (animals.size() < 5) {
+
                     int price = (int)(prices.get(selectedAnimalType).getPrecio() * 1.1f);
                     DialogFactory.showOkCancelDialog(AnimalsScreen.this, stage,
                             "Comprar",
@@ -181,6 +188,7 @@ public class AnimalsScreen extends BaseScreen{
         sellButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AnimalsScreen.this.game.getSoundFactory().playSelect2();
                 String names = "";
                 int totalPrice = 0;
                 boolean atLeastOneIsChecked = false;
@@ -205,7 +213,7 @@ public class AnimalsScreen extends BaseScreen{
                 }else{
                     DialogFactory.showOkDialog(AnimalsScreen.this, stage,
                             "Error",
-                            String.format("No hay animales seleccionados!"),
+                            "No hay animales seleccionados!",
                             0.4f,
                             0.35f);
                 }
@@ -215,6 +223,7 @@ public class AnimalsScreen extends BaseScreen{
         reproduceSwitchButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                AnimalsScreen.this.game.getSoundFactory().playSelect2();
                 //swich reproduction code
             }
         });
@@ -305,23 +314,34 @@ public class AnimalsScreen extends BaseScreen{
         //checkboxses & buttons
         Color miColor = new Color(0.698f,0f,0f,0.8f);
         for(int i = 0; i< checkBoxes.length;i++){
-            checkBoxes[i] = new CheckBox("", skin);
+            checkBoxes[i] = new CheckBox("", holoSkin);
             buttons[i] = new TextButton("Sacrificar",glassSkin, "small");
             buttons[i].getLabel().setFontScale(Constants.FONT_SIZE * 0.55f);
-            checkBoxes[i].getCells().get(0).size(Constants.DEVICE_WIDTH * 0.025f, Constants.DEVICE_WIDTH * 0.025f);
-            checkBoxes[i].getImage().setScaling(Scaling.fit);
             buttons[i].setSize(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.06f);
-            checkBoxes[i].setPosition(Constants.DEVICE_WIDTH *( 0.12f ), Constants.DEVICE_HEIGHT * (0.395f - i * 0.08f));
+            checkBoxes[i].setSize(Constants.DEVICE_WIDTH * 0.035f, Constants.DEVICE_WIDTH * 0.035f);
+            checkBoxes[i].setPosition(Constants.DEVICE_WIDTH *( 0.10f ), Constants.DEVICE_HEIGHT * (0.365f - i * 0.08f));
             buttons[i].setPosition(Constants.DEVICE_WIDTH *( 0.805f ), Constants.DEVICE_HEIGHT * (0.365f - i * 0.08f));
             buttons[i].setColor(miColor);
 
             final Integer finalI = i;
+            checkBoxes[i].addCaptureListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+
+                    if(checkBoxes[finalI].isChecked()){
+                        AnimalsScreen.this.game.getSoundFactory().playDeSelect();
+                    }else{
+                        AnimalsScreen.this.game.getSoundFactory().playSelect();
+                    }
+                    //swich reproduction code
+                }
+            });
 
             buttons[i].addCaptureListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     animalToSacrifice = finalI;
-
+                    AnimalsScreen.this.game.getSoundFactory().playSelect2();
                     if(animals.get(finalI).getTipoAnimal().getId() == TipoRecurso.COW) meatKgInSacrifice = 300;
                     else if(animals.get(finalI).getTipoAnimal().getId() == TipoRecurso.PIG) meatKgInSacrifice = 150;
                     else meatKgInSacrifice = 2;
@@ -346,8 +366,8 @@ public class AnimalsScreen extends BaseScreen{
                 rows[i][j] = new Label("", glassSkin, "big");
                 rows[i][j].setFontScale(Constants.FONT_SIZE * 0.22f);
                 rows[i][j].setAlignment(Align.center);
-                rows[i][j].setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT * 0.08f);
-                rows[i][j].setPosition(Constants.DEVICE_WIDTH * (0.12f + i * 0.2f), Constants.DEVICE_HEIGHT * (0.36f - j * 0.08f));
+                rows[i][j].setSize(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.08f);
+                rows[i][j].setPosition(Constants.DEVICE_WIDTH * (0.145f + i * 0.2f), Constants.DEVICE_HEIGHT * (0.36f - j * 0.08f));
                 stage.addActor(rows[i][j]);
             }
         }

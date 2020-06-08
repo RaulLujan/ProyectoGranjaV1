@@ -42,7 +42,7 @@ public class ShopScreen extends BaseScreen {
     private TextButton[][] actionButton;
     private EspacioController espacioController;
     private ArrayList<Precio> prices;
-    ArrayList<Espacio> espacios;
+    private ArrayList<Espacio> espacios;
     private ImageClampToEdge backgroundImage;
     private Texture backgroundTexture;
 
@@ -89,6 +89,7 @@ public class ShopScreen extends BaseScreen {
         goBackButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                ShopScreen.this.game.getSoundFactory().playPickUp();
                 ShopScreen.this.game.showGameScreen();
             }
         });
@@ -144,7 +145,7 @@ public class ShopScreen extends BaseScreen {
                 if (i == 0){
                     rows[i][j] = new Label(prices.get(j+1).getTipoRecurso().getNombre(),glassSkin,"big");
                 }else if (i == 1){
-                    int buy = (int)prices.get(j+1).getTipoRecurso().getPrecioMinimo();
+                    int buy = prices.get(j+1).getTipoRecurso().getPrecioMinimo();
                     int sell = (int)(prices.get(j+1).getTipoRecurso().getPrecioMinimo() * 1.1);
                     String precioVC = String.format("%s / %s",buy,sell);
                     rows[i][j] = new Label(precioVC,glassSkin,"big");
@@ -176,6 +177,7 @@ public class ShopScreen extends BaseScreen {
                 addButtons[i][j].addCaptureListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
+                        ShopScreen.this.game.getSoundFactory().playSelect3();
                         if (finalI == 0) addTo(quantityLabels[finalJ],-10);
                         else addTo(quantityLabels[finalJ], 10);
                     }
@@ -188,8 +190,8 @@ public class ShopScreen extends BaseScreen {
             quantityLabels[i] = new Label("000",glassSkin,"big-blue");
             quantityLabels[i].setFontScale(Constants.FONT_SIZE * 0.22f);
             quantityLabels[i].setAlignment(Align.center);
-            quantityLabels[i].setSize(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.08f);
-            quantityLabels[i].setPosition(Constants.DEVICE_WIDTH * 0.56f, Constants.DEVICE_HEIGHT * (0.025f +i * 0.08f));
+            quantityLabels[i].setSize(Constants.DEVICE_WIDTH * 0.04f, Constants.DEVICE_HEIGHT * 0.08f);
+            quantityLabels[i].setPosition(Constants.DEVICE_WIDTH * 0.59f, Constants.DEVICE_HEIGHT * (0.025f +i * 0.08f));
             stage.addActor(quantityLabels[i]);
 
         }
@@ -218,8 +220,9 @@ public class ShopScreen extends BaseScreen {
                 actionButton[i][j].addCaptureListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
+                        ShopScreen.this.game.getSoundFactory().playSelect2();
                         int quantity = Integer.parseInt(quantityLabels[finalJ].getText().toString());
-                        int buyMoney = (int)prices.get(finalJ+1).getTipoRecurso().getPrecioMinimo();
+                        int buyMoney = prices.get(finalJ+1).getTipoRecurso().getPrecioMinimo();
                         int sellMoney = (int)(prices.get(finalJ+1).getTipoRecurso().getPrecioMinimo() * 1.1);
                         if (finalI == 0) {
                             espacioController.putForMoney(finalJ+1, -quantity, -buyMoney * quantity);

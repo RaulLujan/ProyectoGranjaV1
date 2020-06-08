@@ -135,6 +135,7 @@ public class FieldScreen extends BaseScreen {
         goBackButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                FieldScreen.this.game.getSoundFactory().playPickUp();
                 FieldScreen.this.game.showGameScreen();
             }
         });
@@ -143,6 +144,7 @@ public class FieldScreen extends BaseScreen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                //Plant field code
+                FieldScreen.this.game.getSoundFactory().playSelect2();
                 String cropSelected = typeSelectioSP.getList().getSelected();
                 String mensaje = String.format("Plantar el campo con %s?\nEsta accion consumira\n500 %s", cropSelected, cropSelected);
                 DialogFactory.showOkCancelDialog(
@@ -159,7 +161,7 @@ public class FieldScreen extends BaseScreen {
         waterButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
+                FieldScreen.this.game.getSoundFactory().playSelect2();
                 DialogFactory.showOkCancelDialog(
                         FieldScreen.this, stage,
                         "Regar",
@@ -173,6 +175,7 @@ public class FieldScreen extends BaseScreen {
         manureButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                FieldScreen.this.game.getSoundFactory().playSelect2();
                 DialogFactory.showOkCancelDialog(
                         FieldScreen.this, stage,
                         "Abonar",
@@ -186,6 +189,7 @@ public class FieldScreen extends BaseScreen {
         herbicideButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                FieldScreen.this.game.getSoundFactory().playSelect2();
                 DialogFactory.showOkCancelDialog(
                         FieldScreen.this, stage,
                         "Quitar malas hierbas",
@@ -194,6 +198,13 @@ public class FieldScreen extends BaseScreen {
                         0.4f,
                         0.4f,
                         4, null);
+            }
+        });
+        typeSelectioSP.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                FieldScreen.this.game.getSoundFactory().playSelect3();
+
             }
         });
 
@@ -280,11 +291,9 @@ public class FieldScreen extends BaseScreen {
         //Se añaden los elementos
         stage.addActor(backgroundImage);
         stage.addActor(goBackButton);
-
         stage.addActor(areaR);
         stage.addActor(areaB);
         stage.addActor(areaL);
-
         stage.addActor(typeSelectioSP);
         stage.addActor(plantButton);
 
@@ -302,10 +311,6 @@ public class FieldScreen extends BaseScreen {
     public void show() {
         stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
         Gdx.input.setInputProcessor(stage);
-
-        //se añaden funciones a cada botón
-
-
 
     }
 
@@ -418,7 +423,7 @@ public class FieldScreen extends BaseScreen {
 
 
             infotypeLabel.setText(DomainMocker.getAllResorurcesList().get(field.getPlantedResourceType()).getNombre());
-            int quantity = 0;
+            int quantity;
             if (field.isNeedsWater()) {
                 waterLabel.setText("Si");
                 waterButton.setDisabled(false);
@@ -481,6 +486,7 @@ public class FieldScreen extends BaseScreen {
         switch (actionIndex) {
             case 1:
                 //plant action
+                this.firstTimeToGet = true;
                 int selectedCrop;
                 if (typeSelectioSP.getList().getSelected().equals("Patata")) selectedCrop = TipoRecurso.POTATO;
                 else if (typeSelectioSP.getList().getSelected().equals("Fresa")) selectedCrop = TipoRecurso.STRAWBERRY;
@@ -542,6 +548,7 @@ public class FieldScreen extends BaseScreen {
                 break;
             case 5:
                 // recoger campo
+                this.game.getSoundFactory().playComplete();
                 if(espacioController.put(field.getPlantedResourceType(), fieldController.getProduction())){
                     DialogFactory.showOkDialog(this, stage,
                             "Cosecha lista",
@@ -560,6 +567,7 @@ public class FieldScreen extends BaseScreen {
                             0.5f,
                             0.4f);
                 }
+
                 break;
 
             default:

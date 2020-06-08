@@ -36,7 +36,7 @@ public class FieldActor extends BaseActor {
         def.type = BodyDef.BodyType.StaticBody;
         body = world.createBody(def);
 
-        setSize(17*Constants.PIXELS_IN_METER, 10*Constants.PIXELS_IN_METER);
+        setSize(17 * Constants.PIXELS_IN_METER, 10 * Constants.PIXELS_IN_METER);
 
     }
 
@@ -57,7 +57,7 @@ public class FieldActor extends BaseActor {
 
         }
         texture = textures.get(textureIndex);
-        //texture = textures.get(field.getStage());
+
 
     }
 
