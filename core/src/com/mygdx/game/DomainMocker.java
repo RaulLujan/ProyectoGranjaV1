@@ -71,7 +71,7 @@ public class DomainMocker {
         recursos.add(TipoRecurso.EGG,new TipoRecurso(TipoRecurso.EGG, "Huevos",             TipoRecurso.Tipo.MATERIAL, 500,45));
         recursos.add(TipoRecurso.MANURE,new TipoRecurso(TipoRecurso.MANURE, "Abono",           TipoRecurso.Tipo.MATERIAL, 100,25));
         recursos.add(TipoRecurso.HERBIZIDE,new TipoRecurso(TipoRecurso.HERBIZIDE, "Herbicida",    TipoRecurso.Tipo.MATERIAL, 500,164));
-        recursos.add(TipoRecurso.POTATO,new TipoRecurso(TipoRecurso.POTATO, "Papata",          TipoRecurso.Tipo.MATERIAL, 500,91));
+        recursos.add(TipoRecurso.POTATO,new TipoRecurso(TipoRecurso.POTATO, "Patata",          TipoRecurso.Tipo.MATERIAL, 500,91));
         recursos.add(TipoRecurso.CORN,new TipoRecurso(TipoRecurso.CORN, "Maiz",              TipoRecurso.Tipo.MATERIAL, 500,75));
         recursos.add(TipoRecurso.STRAWBERRY,new TipoRecurso(TipoRecurso.STRAWBERRY, "Fresa",       TipoRecurso.Tipo.MATERIAL, 500,75));
         recursos.add(TipoRecurso.COW,new TipoRecurso(TipoRecurso.COW, "Vaca",               TipoRecurso.Tipo.MATERIAL, 1000,500));

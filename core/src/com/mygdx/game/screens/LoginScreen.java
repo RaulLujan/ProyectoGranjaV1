@@ -78,6 +78,8 @@ public class LoginScreen extends BaseScreen {
         passTextField.setStyle(textFieldStyle);
 
 
+
+
         //funcionalidades
         goBackButton.addCaptureListener(new ChangeListener() {
             @Override

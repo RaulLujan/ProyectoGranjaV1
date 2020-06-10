@@ -178,8 +178,17 @@ public class ShopScreen extends BaseScreen {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
                         ShopScreen.this.game.getSoundFactory().playSelect3();
-                        if (finalI == 0) addTo(quantityLabels[finalJ],-10);
-                        else addTo(quantityLabels[finalJ], 10);
+                        int actualQuantity = Integer.parseInt(quantityLabels[finalJ].getText().toString());
+                        if (finalI == 0) {
+                            if (actualQuantity < 101 ) addTo(quantityLabels[finalJ],-10);
+                            else if (actualQuantity < 501 ) addTo(quantityLabels[finalJ],-50);
+                            else addTo(quantityLabels[finalJ],-100);
+                        }
+                        else {
+                            if (actualQuantity < 100 ) addTo(quantityLabels[finalJ],10);
+                            else if (actualQuantity < 500 ) addTo(quantityLabels[finalJ],50);
+                            else addTo(quantityLabels[finalJ],100);
+                        }
                     }
                 });
                 stage.addActor(addButtons[i][j]);
