@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
+import com.mygdx.game.dao.UserDao;
 import com.mygdx.game.images.ImageClampToEdge;
 import com.mygdx.game.MainGame;
 
@@ -28,6 +29,9 @@ public class MenuScreen extends BaseScreen {
     private Label idLabel;
     private Skin skin, glassSkin;
     private Texture backgroundTexture;
+
+
+    private UserDao userDao;
 
    public MenuScreen(MainGame game) {
         super(game);
@@ -93,6 +97,17 @@ public class MenuScreen extends BaseScreen {
        stage.addActor(idLabel);
 
        this.game.getSoundFactory().playIntroMusic();
+
+
+       userDao = new UserDao();
+
+       if (userDao.userExists("pepe", "1234")){
+           idLabel.setText("VIIIIIVEEEEE");
+       }else {
+           idLabel.setText("ESTA MUERTO");
+       }
+
+
 
    }
 
