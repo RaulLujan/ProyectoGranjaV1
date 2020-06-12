@@ -145,8 +145,8 @@ public class ShopScreen extends BaseScreen {
                 if (i == 0){
                     rows[i][j] = new Label(prices.get(j+1).getTipoRecurso().getNombre(),glassSkin,"big");
                 }else if (i == 1){
-                    int buy = prices.get(j+1).getTipoRecurso().getPrecioMinimo();
-                    int sell = (int)(prices.get(j+1).getTipoRecurso().getPrecioMinimo() * 1.1);
+                    int buy = prices.get(j+1).getPrecio();
+                    int sell = (int)(prices.get(j+1).getPrecio() * 1.1);
                     String precioVC = String.format("%s / %s",buy,sell);
                     rows[i][j] = new Label(precioVC,glassSkin,"big");
                 }else{
@@ -182,12 +182,16 @@ public class ShopScreen extends BaseScreen {
                         if (finalI == 0) {
                             if (actualQuantity < 101 ) addTo(quantityLabels[finalJ],-10);
                             else if (actualQuantity < 501 ) addTo(quantityLabels[finalJ],-50);
-                            else addTo(quantityLabels[finalJ],-100);
+                            else if (actualQuantity < 2001 ) addTo(quantityLabels[finalJ],-100);
+                            else if (actualQuantity < 5001 ) addTo(quantityLabels[finalJ],-500);
+                            else addTo(quantityLabels[finalJ],-2000);
                         }
                         else {
                             if (actualQuantity < 100 ) addTo(quantityLabels[finalJ],10);
                             else if (actualQuantity < 500 ) addTo(quantityLabels[finalJ],50);
-                            else addTo(quantityLabels[finalJ],100);
+                            else if (actualQuantity < 2000 ) addTo(quantityLabels[finalJ],100);
+                            else if (actualQuantity < 5000 ) addTo(quantityLabels[finalJ],500);
+                            else addTo(quantityLabels[finalJ],2000);
                         }
                     }
                 });
@@ -231,8 +235,8 @@ public class ShopScreen extends BaseScreen {
                     public void changed(ChangeEvent event, Actor actor) {
                         ShopScreen.this.game.getSoundFactory().playSelect2();
                         int quantity = Integer.parseInt(quantityLabels[finalJ].getText().toString());
-                        int buyMoney = prices.get(finalJ+1).getTipoRecurso().getPrecioMinimo();
-                        int sellMoney = (int)(prices.get(finalJ+1).getTipoRecurso().getPrecioMinimo() * 1.1);
+                        int buyMoney = prices.get(finalJ+1).getPrecio();
+                        int sellMoney = (int)(prices.get(finalJ+1).getPrecio() * 1.1);
                         if (finalI == 0) {
                             espacioController.putForMoney(finalJ+1, -quantity, -buyMoney * quantity);
                         }

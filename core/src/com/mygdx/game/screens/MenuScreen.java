@@ -98,15 +98,15 @@ public class MenuScreen extends BaseScreen {
 
        this.game.getSoundFactory().playIntroMusic();
 
-
+/*
+       //TEST
        userDao = new UserDao();
-
-       if (userDao.userExists("pepe", "1234")){
+       if (userDao.userExists("pepe", "1234")){ //JR
            idLabel.setText("VIIIIIVEEEEE");
        }else {
            idLabel.setText("ESTA MUERTO");
        }
-
+*/
 
 
    }

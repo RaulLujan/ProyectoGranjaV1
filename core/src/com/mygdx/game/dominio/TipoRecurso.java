@@ -5,6 +5,7 @@ public class TipoRecurso {
     private int id;
     private String nombre, descripcion;
     private Tipo tipo;
+    private int resourceindex;
     private int precioMaximo, precioMinimo;
 
     //ATAJOS A INDICES
@@ -24,12 +25,13 @@ public class TipoRecurso {
 
 
 
-    public TipoRecurso(int id, String nombre, Tipo tipo, int precioMaximo, int precioMinimo) {
+    public TipoRecurso(int id, String nombre, Tipo tipo, int precioMaximo, int precioMinimo, int resourceindex) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.precioMaximo = precioMaximo;
         this.precioMinimo = precioMinimo;
+        this.resourceindex = resourceindex;
     }
 
     public enum Tipo { MATERIAL, HERRAMIENTA, ANIMAL}; // a revisar mas tarde
@@ -81,5 +83,13 @@ public class TipoRecurso {
 
     public void setPrecioMinimo(int precioMinimo) {
         this.precioMinimo = precioMinimo;
+    }
+
+    public int getResourceindex() {
+        return resourceindex;
+    }
+
+    public void setResourceindex(int resourceindex) {
+        this.resourceindex = resourceindex;
     }
 }

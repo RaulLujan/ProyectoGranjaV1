@@ -13,7 +13,7 @@ public class FieldController {
    // private final long CORN_GROW_MILLIS =  2 * 24 * 60 * 60 *1000;
     private final long CORN_GROW_MILLIS =  30 * 1000;//(30 segs )
     //private final long POTATO_GROW_MILLIS =  (long)(1.5f * 24 * 60 * 60 *1000);
-    private final long POTATO_GROW_MILLIS =  5 * 60 * 1000;
+    private final long POTATO_GROW_MILLIS =  10 * 60 * 1000;
     //private final long STRAWBERRY_GROW_MILLIS =  (long)(1.2f * 24 * 60 * 60 *1000);
     private final long STRAWBERRY_GROW_MILLIS =  60 * 1000;
 
@@ -35,7 +35,22 @@ public class FieldController {
 
     }
 
-
+    public void plant(int resourceType, GregorianCalendar gregorianCalendar){
+        if (resourceType == TipoRecurso.CORN || resourceType == TipoRecurso.STRAWBERRY || resourceType == TipoRecurso.POTATO){
+            //plant
+            this.field.setStage(1);
+            this.field.setPlanted(true);
+            this.field.setPlantedResourceType(resourceType);
+            this.field.setTimeFieldWasPlanted(gregorianCalendar);
+            this.production = 950;
+            this.field.setNeedsWater(false);
+            this.field.setNeedsManure(false);
+            this.field.setNeedsHerbizide(false);
+            if(resourceType == TipoRecurso.CORN) this.totalGrowDurationInMillis = CORN_GROW_MILLIS;
+            else if(resourceType == TipoRecurso.POTATO) this.totalGrowDurationInMillis = POTATO_GROW_MILLIS;
+            else if(resourceType == TipoRecurso.STRAWBERRY) this.totalGrowDurationInMillis = STRAWBERRY_GROW_MILLIS;
+        }
+    }
 
     public void plant(int resourceType){
         if (resourceType == TipoRecurso.CORN || resourceType == TipoRecurso.STRAWBERRY || resourceType == TipoRecurso.POTATO){
@@ -53,6 +68,7 @@ public class FieldController {
             else if(resourceType == TipoRecurso.STRAWBERRY) this.totalGrowDurationInMillis = STRAWBERRY_GROW_MILLIS;
 
         }
+
     }
     public long getRestingTime(){
         long timeTranscurredInMillis = new GregorianCalendar().getTimeInMillis() -field.getTimeFieldWasPlanted().getTimeInMillis();
@@ -144,5 +160,14 @@ public class FieldController {
 
     public void setTotalGrowDurationInMillis(long totalGrowDurationInMillis) {
         this.totalGrowDurationInMillis = totalGrowDurationInMillis;
+    }
+
+
+    public Campo getField() {
+        return field;
+    }
+
+    public void setField(Campo field) {
+        this.field = field;
     }
 }

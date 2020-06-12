@@ -54,6 +54,7 @@ public class MainGame extends Game {
 	public void create () {
 
         usuario = DomainMocker.getMockedUser();
+        fieldController = new FieldController(new Campo());
         userController = new UserController(usuario);
 
 		miniAssetManager = new AssetManager();
@@ -211,11 +212,13 @@ public class MainGame extends Game {
 
 
 		if ( validate(preferences.getString(LOGIN_KEY, ""), preferences.getString(PASS_KEY,"")) ){
+			this.usuario = userController.getAndSetUser(preferences.getString(LOGIN_KEY), preferences.getString(PASS_KEY) , fieldController);
 			this.userLogged = true;
 		}else{
 			this.userLogged = false;
 		}
-		this.fieldController = new FieldController((Campo)usuario.getGranja().getInfraestructuras().get(Infraestructura.FIELD));
+		//this.fieldController = new FieldController((Campo)usuario.getGranja().getInfraestructuras().get(Infraestructura.FIELD));
+		//FIELDCONTROLER FROM DAO
 	}
 
 
@@ -289,7 +292,7 @@ public class MainGame extends Game {
 
 	public boolean validate (String login, String pass){
 
-	    return (login.equals(this.usuario.getLogin()) && pass.equals(this.usuario.getPass()));
+	    return (userController.validateUser(login, pass));
 
     }
 
@@ -388,5 +391,10 @@ public class MainGame extends Game {
 
 	public void setLoginFailed(boolean loginFailed) {
 		this.loginFailed = loginFailed;
+	}
+
+	public void setUser(String login, String pass) {
+		this.usuario = userController.getAndSetUser(login, pass, fieldController);
+
 	}
 }

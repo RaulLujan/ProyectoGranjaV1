@@ -92,6 +92,8 @@ public class LoginScreen extends BaseScreen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(LoginScreen.this.game.validate(nameTextField.getText(), passTextField.getText())){
+                    LoginScreen.this.game.setUser(nameTextField.getText(), passTextField.getText());
+                    LoginScreen.this.game.getUserController().getAndSetUser(nameTextField.getText(), passTextField.getText(), LoginScreen.this.game.getFieldController());
                     LoginScreen.this.game.getSoundFactory().playPickUp();
                     LoginScreen.this.game.setUserLogged(true);
                     LoginScreen.this.game.saveUserPreferences(nameTextField.getText(), passTextField.getText());

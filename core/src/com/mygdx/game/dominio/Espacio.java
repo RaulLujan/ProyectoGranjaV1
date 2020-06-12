@@ -8,6 +8,7 @@ public class Espacio {
     private int ocupacionAactual;
     private Integer capacidadMaxima ;
     private TipoRecurso recurso;
+
     private List<Animal> animales;
 
     public Espacio(int id, Integer capacidadMaxima, int ocupacionAactual, TipoRecurso recurso, List<Animal> animales) {

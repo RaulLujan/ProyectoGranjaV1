@@ -5,6 +5,7 @@ public class Precio {
     private int id;
     private TipoRecurso tipoRecurso;
     private int precio;
+    private Granja granja;
 
     public Precio(int id, TipoRecurso tipoRecurso, int precio) {
         this.id = id;

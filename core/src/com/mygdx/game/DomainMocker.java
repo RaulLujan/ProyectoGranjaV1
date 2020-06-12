@@ -64,19 +64,19 @@ public class DomainMocker {
 
     public static ArrayList<TipoRecurso> getAllResorurcesList(){
         ArrayList<TipoRecurso> recursos = new ArrayList<>();
-        recursos.add(TipoRecurso.MONEY,new TipoRecurso(TipoRecurso.MONEY,     "Dinero",       TipoRecurso.Tipo.MATERIAL, 1,1));
-        recursos.add(TipoRecurso.WATER,new TipoRecurso(TipoRecurso.WATER, "Agua",             TipoRecurso.Tipo.MATERIAL, 10,11));
-        recursos.add(TipoRecurso.MEAT,new TipoRecurso(TipoRecurso.MEAT, "Carne",             TipoRecurso.Tipo.MATERIAL, 500,90));
-        recursos.add(TipoRecurso.MILK,new TipoRecurso(TipoRecurso.MILK, "Leche",             TipoRecurso.Tipo.MATERIAL, 500,88));
-        recursos.add(TipoRecurso.EGG,new TipoRecurso(TipoRecurso.EGG, "Huevos",             TipoRecurso.Tipo.MATERIAL, 500,45));
-        recursos.add(TipoRecurso.MANURE,new TipoRecurso(TipoRecurso.MANURE, "Abono",           TipoRecurso.Tipo.MATERIAL, 100,25));
-        recursos.add(TipoRecurso.HERBIZIDE,new TipoRecurso(TipoRecurso.HERBIZIDE, "Herbicida",    TipoRecurso.Tipo.MATERIAL, 500,164));
-        recursos.add(TipoRecurso.POTATO,new TipoRecurso(TipoRecurso.POTATO, "Patata",          TipoRecurso.Tipo.MATERIAL, 500,91));
-        recursos.add(TipoRecurso.CORN,new TipoRecurso(TipoRecurso.CORN, "Maiz",              TipoRecurso.Tipo.MATERIAL, 500,75));
-        recursos.add(TipoRecurso.STRAWBERRY,new TipoRecurso(TipoRecurso.STRAWBERRY, "Fresa",       TipoRecurso.Tipo.MATERIAL, 500,75));
-        recursos.add(TipoRecurso.COW,new TipoRecurso(TipoRecurso.COW, "Vaca",               TipoRecurso.Tipo.MATERIAL, 1000,500));
-        recursos.add(TipoRecurso.PIG,new TipoRecurso(TipoRecurso.PIG, "Cerdo",              TipoRecurso.Tipo.MATERIAL, 750,350));
-        recursos.add(TipoRecurso.CHICKEN,new TipoRecurso(TipoRecurso.CHICKEN, "Gallina",        TipoRecurso.Tipo.MATERIAL, 500,150));
+        recursos.add(TipoRecurso.MONEY,new TipoRecurso(TipoRecurso.MONEY,     "Dinero",       TipoRecurso.Tipo.MATERIAL, 1,1, TipoRecurso.MONEY));
+        recursos.add(TipoRecurso.WATER,new TipoRecurso(TipoRecurso.WATER, "Agua",             TipoRecurso.Tipo.MATERIAL, 10,11, TipoRecurso.WATER));
+        recursos.add(TipoRecurso.MEAT,new TipoRecurso(TipoRecurso.MEAT, "Carne",             TipoRecurso.Tipo.MATERIAL, 500,90, TipoRecurso.MEAT));
+        recursos.add(TipoRecurso.MILK,new TipoRecurso(TipoRecurso.MILK, "Leche",             TipoRecurso.Tipo.MATERIAL, 500,88, TipoRecurso.MILK));
+        recursos.add(TipoRecurso.EGG,new TipoRecurso(TipoRecurso.EGG, "Huevos",             TipoRecurso.Tipo.MATERIAL, 500,45, TipoRecurso.EGG));
+        recursos.add(TipoRecurso.MANURE,new TipoRecurso(TipoRecurso.MANURE, "Abono",           TipoRecurso.Tipo.MATERIAL, 100,25, TipoRecurso.MANURE));
+        recursos.add(TipoRecurso.HERBIZIDE,new TipoRecurso(TipoRecurso.HERBIZIDE, "Herbicida",    TipoRecurso.Tipo.MATERIAL, 500,164, TipoRecurso.HERBIZIDE));
+        recursos.add(TipoRecurso.POTATO,new TipoRecurso(TipoRecurso.POTATO, "Patata",          TipoRecurso.Tipo.MATERIAL, 500,91, TipoRecurso.POTATO));
+        recursos.add(TipoRecurso.CORN,new TipoRecurso(TipoRecurso.CORN, "Maiz",              TipoRecurso.Tipo.MATERIAL, 500,75, TipoRecurso.CORN));
+        recursos.add(TipoRecurso.STRAWBERRY,new TipoRecurso(TipoRecurso.STRAWBERRY, "Fresa",       TipoRecurso.Tipo.MATERIAL, 500,75, TipoRecurso.STRAWBERRY));
+        recursos.add(TipoRecurso.COW,new TipoRecurso(TipoRecurso.COW, "Vaca",               TipoRecurso.Tipo.MATERIAL, 1000,500, TipoRecurso.COW));
+        recursos.add(TipoRecurso.PIG,new TipoRecurso(TipoRecurso.PIG, "Cerdo",              TipoRecurso.Tipo.MATERIAL, 750,350, TipoRecurso.PIG));
+        recursos.add(TipoRecurso.CHICKEN,new TipoRecurso(TipoRecurso.CHICKEN, "Gallina",        TipoRecurso.Tipo.MATERIAL, 500,150, TipoRecurso.CHICKEN));
 
         return recursos;
     }
