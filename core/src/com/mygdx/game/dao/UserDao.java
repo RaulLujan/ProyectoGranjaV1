@@ -24,6 +24,7 @@ import java.util.GregorianCalendar;
 public class UserDao {
 
     //final static String ip = "25.90.160.61"; // himachi
+    //final static String ip = "88.148.59.247"; // himachi
     final static String ip = "localhost";
     final static String port = "3306";
     final static String dataBase = "BGranja";
@@ -171,7 +172,7 @@ public class UserDao {
                     Date nacimiento = rs.getDate("Fecha_Nacimiento");
                     GregorianCalendar calendar = new GregorianCalendar();
                     calendar.setTime(nacimiento);
-                    espacios.get(TipoRecurso.COW).getAnimales().add(new Animal(
+                    espacios.get(TipoRecurso.PIG).getAnimales().add(new Animal(
                             rs.getInt("Id"),
                             rs.getString("Nombre"),
                             calendar,
@@ -190,7 +191,7 @@ public class UserDao {
                             rs.getInt("Id"),
                             rs.getString("Nombre"),
                             calendar,
-                            resources.get(TipoRecurso.PIG)
+                            resources.get(TipoRecurso.CHICKEN)
                 ));}
                 almacen.setEspacios(espacios);
                 usuario.getGranja().getInfraestructuras().add(Infraestructura.STORAGE, almacen);
@@ -229,6 +230,14 @@ public class UserDao {
         ResultSet rs;
         PreparedStatement pst;
 
+
+        int ocupation = usuario.getGranja().getInfraestructuras().get(Infraestructura.STORAGE).getEspacios().get(TipoRecurso.COW).getAnimales().size();
+        usuario.getGranja().getInfraestructuras().get(Infraestructura.STORAGE).getEspacios().get(TipoRecurso.COW).setOcupacionAactual(ocupation);
+        ocupation = usuario.getGranja().getInfraestructuras().get(Infraestructura.STORAGE).getEspacios().get(TipoRecurso.PIG).getAnimales().size();
+        usuario.getGranja().getInfraestructuras().get(Infraestructura.STORAGE).getEspacios().get(TipoRecurso.PIG).setOcupacionAactual(ocupation);
+        ocupation = usuario.getGranja().getInfraestructuras().get(Infraestructura.STORAGE).getEspacios().get(TipoRecurso.CHICKEN).getAnimales().size();
+        usuario.getGranja().getInfraestructuras().get(Infraestructura.STORAGE).getEspacios().get(TipoRecurso.CHICKEN).setOcupacionAactual(ocupation);
+
         try {
             conexionMySQL = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + dataBase, user, DBpass);
             int cowSpaceId = 0, pigpaceId = 0, chickenSpaceId = 0;
@@ -253,11 +262,21 @@ public class UserDao {
             pst.executeUpdate();
 
             // save animals
+            //get max value
+            pst = conexionMySQL.prepareStatement(" select MAX(Id) from tanimales");
+            pst.executeQuery();
+            rs = pst.getResultSet();
+            int maxAnimalId;
+            if (rs.next()) {
+                maxAnimalId = rs.getInt(1);
+            }else{
+                maxAnimalId = 1;
+            }
 
             //Cows
             for (Animal animal: usuario.getGranja().getInfraestructuras().get(Infraestructura.STORAGE).getEspacios().get(TipoRecurso.COW).getAnimales()) {
                 pst = conexionMySQL.prepareStatement("INSERT INTO TAnimales VALUES (?,?,?,?,?)");
-                pst.setInt(1, animal.getId());
+                pst.setInt(1, ++maxAnimalId);
                 pst.setString(2, animal.getNombre());
                 pst.setDate(3, new Date(animal.getFechaNacimiento().getTimeInMillis()));
                 pst.setInt(4,TipoRecurso.COW);
@@ -267,21 +286,21 @@ public class UserDao {
             //Pigs
             for (Animal animal: usuario.getGranja().getInfraestructuras().get(Infraestructura.STORAGE).getEspacios().get(TipoRecurso.PIG).getAnimales()) {
                 pst = conexionMySQL.prepareStatement("INSERT INTO TAnimales VALUES (?,?,?,?,?)");
-                pst.setInt(1, animal.getId());
+                pst.setInt(1, ++maxAnimalId);
                 pst.setString(2, animal.getNombre());
                 pst.setDate(3, new Date(animal.getFechaNacimiento().getTimeInMillis()));
                 pst.setInt(4,TipoRecurso.PIG);
-                pst.setInt(5,cowSpaceId);
+                pst.setInt(5,pigpaceId);
                 pst.executeUpdate();
             }
             //Chickens
             for (Animal animal: usuario.getGranja().getInfraestructuras().get(Infraestructura.STORAGE).getEspacios().get(TipoRecurso.CHICKEN).getAnimales()) {
                 pst = conexionMySQL.prepareStatement("INSERT INTO TAnimales VALUES (?,?,?,?,?)");
-                pst.setInt(1, animal.getId());
+                pst.setInt(1, ++maxAnimalId);
                 pst.setString(2, animal.getNombre());
                 pst.setDate(3, new Date(animal.getFechaNacimiento().getTimeInMillis()));
                 pst.setInt(4,TipoRecurso.CHICKEN);
-                pst.setInt(5,cowSpaceId);
+                pst.setInt(5,chickenSpaceId);
                 pst.executeUpdate();
             }
 
