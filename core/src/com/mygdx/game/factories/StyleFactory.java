@@ -15,8 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class StyleFactory {
 
-
-
     public final static Color BLUE_COLOR = new Color(0.30314961f,0.65354331f,1,1);
     public final static Color DARK_BLUE_COLOR = new Color(0,0.30314961f,0.60236220f,1);
     public static final Color ORANGE_COLOR = new Color(1,0.60236220f,0.2f,1);
@@ -26,10 +24,7 @@ public class StyleFactory {
     public static final Color RED_COLOR = new Color(0.6f,0,0,1);
     public static final Color DARK_RED_COLOR = new Color(0.4f,0,0,1);
     public static final Color WHITE_COLOR = new Color(1,1,1,1);
-
-
-   public static final Skin skin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
-
+    public static final Skin skin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
 
     public static WindowStyle getStyle(Color color) {
         SpriteDrawable bgDrawble= new SpriteDrawable(new Sprite(createTexture(color)));
@@ -53,6 +48,4 @@ public class StyleFactory {
         Texture pixmaptexture = new Texture(pixmap);
         return pixmaptexture;
     }
-
-
 }

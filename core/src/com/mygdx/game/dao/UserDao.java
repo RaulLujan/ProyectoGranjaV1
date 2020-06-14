@@ -23,9 +23,8 @@ import java.util.GregorianCalendar;
 
 public class UserDao {
 
-    //final static String ip = "25.90.160.61"; // himachi
-    //final static String ip = "88.148.59.247"; // himachi
-    final static String ip = "localhost";
+    final static String ip = "25.90.160.61";
+    //final static String ip = "localhost";
     final static String port = "3306";
     final static String dataBase = "BGranja";
     final static String user = "root";
@@ -323,68 +322,6 @@ public class UserDao {
         }catch (Exception e){
            e.printStackTrace();
         }
-
-
         return false;
     }
-
-/*
-    public Pelicula consulta(int id) {
-        Pelicula peli = null;
-        ResultSet rs;
-        PreparedStatement ps1;
-
-        try {
-            Connection con = DriverManager.getConnection(url, usuario, password);
-
-            ps1 = con.prepareStatement("SELECT * FROM TPelicula WHERE IdPelicula = ?;");
-            ps1.setInt(1, id);
-            ps1.executeQuery();
-            rs = ps1.getResultSet();
-            if (!rs.next())
-                return null;
-
-            peli = new Pelicula(id, rs.getInt("IdDirector"), rs.getInt("Anyo"), rs.getString("Titulo"),
-                    rs.getString("Descripcion"));
-            con.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return peli;
-    }
-    */
-
-/*
-
-    class PeliculaDAO {
-
-        private static String url = "jdbc:mysql://localhost:3306/Bservicios";
-        private static String usuario = "root";
-        private static String password = "root";
-
-        public boolean alta(Pelicula p) {
-
-            try {
-
-                Connection con = DriverManager.getConnection(url, usuario, password);
-                PreparedStatement pst = con.prepareStatement("INSERT INTO TPeliculas VALUES(null,?,?,?,?)");
-
-                pst.setInt(1, p.getIdDirector());
-                pst.setInt(2, p.getAnyo());
-                pst.setString(3, p.getTitulo());
-                pst.setString(4, p.getDescripcion());
-
-                pst.executeUpdate();
-                con.close();
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                return false;
-            }
-            return true;
-        }
-
-*/
-
-
 }

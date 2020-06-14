@@ -24,9 +24,7 @@ import com.mygdx.game.MainGame;
 public class LoginScreen extends BaseScreen {
     private Stage stage;
     private World world;
-
     private Skin glassSkin, skin;
-
     private TextButton goBackButton, loginButton, registerButton;
     private Window areaT;
     private Label nameTitleLabel, passTitleLabel, failLabel;
@@ -34,17 +32,13 @@ public class LoginScreen extends BaseScreen {
     private ImageClampToEdge backgroundImage;
     private Texture backgroundTexture;
 
-
     public LoginScreen(MainGame game) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
-
-
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
         this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
-
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/loginBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
@@ -60,25 +54,17 @@ public class LoginScreen extends BaseScreen {
         nameTextField = new TextField("", glassSkin);
         passTextField = new TextField("", glassSkin);
 
-
-
         // Tamaño de la fuente
         goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
         loginButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.28f);
         registerButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.28f);
-
         nameTitleLabel.setFontScale(Constants.FONT_SIZE * 0.35f);
         passTitleLabel.setFontScale(Constants.FONT_SIZE * 0.35f);
         failLabel.setFontScale(Constants.FONT_SIZE * 0.6f);
-
-
         TextField.TextFieldStyle textFieldStyle = nameTextField.getStyle();
         textFieldStyle.font.getData().setScale(Constants.FONT_SIZE * 0.33f);
         nameTextField.setStyle(textFieldStyle);
         passTextField.setStyle(textFieldStyle);
-
-
-
 
         //funcionalidades
         goBackButton.addCaptureListener(new ChangeListener() {
@@ -102,7 +88,6 @@ public class LoginScreen extends BaseScreen {
                     LoginScreen.this.game.getSoundFactory().playDeSelect();
                     LoginScreen.this.game.setLoginFailed(true);
                     LoginScreen.this.game.showLoginScreen();
-
                 }
             }
         });
@@ -112,7 +97,6 @@ public class LoginScreen extends BaseScreen {
                 LoginScreen.this.game.getSoundFactory().playDeSelect();
             }
         });
-
 
         //Tamaños de los elementos
         goBackButton.setSize(Constants.DEVICE_WIDTH * 0.15f, Constants.DEVICE_HEIGHT *0.10f);
@@ -125,12 +109,10 @@ public class LoginScreen extends BaseScreen {
         nameTextField.setSize(Constants.DEVICE_WIDTH *0.38f, Constants.DEVICE_HEIGHT * 0.1f);
         passTextField.setSize(Constants.DEVICE_WIDTH *0.38f, Constants.DEVICE_HEIGHT * 0.1f);
 
-
         //posiciones de los elementos
         goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
         nameTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.7f);
         areaT.setPosition(Constants.DEVICE_WIDTH * 0.25f, Constants.DEVICE_HEIGHT * 0.10f);
-
         passTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.45f);
         nameTextField.setPosition(Constants.DEVICE_WIDTH * 0.31f, Constants.DEVICE_HEIGHT * 0.575f);
         passTextField.setPosition(Constants.DEVICE_WIDTH * 0.31f, Constants.DEVICE_HEIGHT * 0.325f);
@@ -154,7 +136,6 @@ public class LoginScreen extends BaseScreen {
         //Se añaden los elementos
         stage.addActor(backgroundImage);
         stage.addActor(goBackButton);
-
         stage.addActor(areaT);
         stage.addActor(nameTitleLabel);
         stage.addActor(passTitleLabel);
@@ -163,19 +144,12 @@ public class LoginScreen extends BaseScreen {
         stage.addActor(loginButton);
         stage.addActor(registerButton);
         stage.addActor(failLabel);
-
-
-
-
     }
-
 
     @Override
     public void show() {
         stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
         Gdx.input.setInputProcessor(stage);
-
-
     }
 
     @Override
@@ -196,12 +170,7 @@ public class LoginScreen extends BaseScreen {
         //movimiento del mundo
         stage.act();
         world.step(delta, 6, 2);
-
-
-
-
         stage.draw();
-
     }
 
     @Override
@@ -209,16 +178,10 @@ public class LoginScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
-
-
-    }
-    public void disableAll(boolean enableDisable){
-
-    }
-    public void actions(int actionIndex){
-
     }
 
+    public void disableAll(boolean enableDisable){}
+    public void actions(int actionIndex){}
     public Label getFailLabel() {
         return failLabel;
     }

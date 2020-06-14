@@ -17,17 +17,11 @@ public class PreLoadingScreen extends BaseScreen {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
-
-
-
-
     }
 
     @Override
     public void show() {
         stage.setDebugAll(true); // On true se renderizan los bordes verdes de los actores e imágenes
-
-
     }
 
     @Override
@@ -35,7 +29,6 @@ public class PreLoadingScreen extends BaseScreen {
         stage.clear();
         world.dispose();
     }
-
 
     @Override
     public void render(float delta) {
@@ -49,9 +42,7 @@ public class PreLoadingScreen extends BaseScreen {
         if (game.getMiniAssetManager().update()){
             game.showLoadingScreen();
         }
-
         stage.draw();
-
     }
 
     @Override
@@ -59,12 +50,7 @@ public class PreLoadingScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
-
     }
-    public void disableAll(boolean enableDisable){
-
-    }
-    public void actions(int actionIndex){
-
-    }
+    public void disableAll(boolean enableDisable){}
+    public void actions(int actionIndex){}
 }

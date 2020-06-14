@@ -23,8 +23,6 @@ public class TipoRecurso {
     public final static int PIG       = 11;
     public final static int CHICKEN   = 12;
 
-
-
     public TipoRecurso(int id, String nombre, Tipo tipo, int precioMaximo, int precioMinimo, int resourceindex) {
         this.id = id;
         this.nombre = nombre;
@@ -35,7 +33,6 @@ public class TipoRecurso {
     }
 
     public enum Tipo { MATERIAL, HERRAMIENTA, ANIMAL}; // a revisar mas tarde
-
 
     public int getId() {
         return id;

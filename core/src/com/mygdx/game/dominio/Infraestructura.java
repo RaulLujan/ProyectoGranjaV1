@@ -4,19 +4,14 @@ import java.util.List;
 
 public class Infraestructura {
 
-
     public static final int STORAGE = 0;
     public static final int FIELD = 1;
-
-
 
     private int id;
     private String nombre, descripcion ;
     private int mantenimientoSemanal, puntuacion;
     private List<Espacio> espacios;
     private List<TipoAccion> accionesDisponibles;
-
-
 
     public int getId() {
         return id;

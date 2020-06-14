@@ -10,5 +10,4 @@ public class TipoAccion {
     private HashMap<Integer, TipoRecurso> cantidadesInvertidas;
     private HashMap<Integer, TipoRecurso> cantidadesObtenidas;
 
-
 }

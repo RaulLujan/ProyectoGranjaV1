@@ -50,7 +50,6 @@ public class DialogFactory {
                 Constants.DEVICE_HEIGHT /2 + Constants.DEVICE_HEIGHT * (height/2) - Constants.DEVICE_HEIGHT* 0.1f);
         stage.addActor(titleLabel);
 
-
         final Label textLabel = new Label(messaje, skin, "big-blue");
         textLabel.setFontScale(Constants.FONT_SIZE* 0.2f);
         textLabel.setSize(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.08f);
@@ -58,9 +57,6 @@ public class DialogFactory {
         textLabel.setPosition(Constants.DEVICE_WIDTH / 2 - Constants.DEVICE_WIDTH * 0.05f,
                 Constants.DEVICE_HEIGHT /2 + Constants.DEVICE_HEIGHT * (height/2) - Constants.DEVICE_HEIGHT* 0.2f);
         stage.addActor(textLabel);
-
-
-
 
         //funcionalities
         textButton.addCaptureListener(new ChangeListener() {
@@ -76,7 +72,6 @@ public class DialogFactory {
             }
         });
     }
-
 
     public static void showOkCancelDialog(final BaseScreen screen,
                                           Stage stage,
@@ -135,9 +130,6 @@ public class DialogFactory {
                 Constants.DEVICE_HEIGHT /2 + Constants.DEVICE_HEIGHT * (height/2) - Constants.DEVICE_HEIGHT* 0.2f);
         stage.addActor(textLabel);
 
-
-
-
         //funcionalities
         okButton.addCaptureListener(new ChangeListener() {
             @Override
@@ -169,5 +161,4 @@ public class DialogFactory {
             }
         });
     }
-
 }

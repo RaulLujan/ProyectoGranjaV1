@@ -6,7 +6,6 @@ import java.util.GregorianCalendar;
 
 public class FieldController {
 
-
     private Campo field;
     private int production = 0;
     private long totalGrowDurationInMillis;
@@ -16,7 +15,6 @@ public class FieldController {
     private final long POTATO_GROW_MILLIS =  10 * 60 * 1000;
     //private final long STRAWBERRY_GROW_MILLIS =  (long)(1.2f * 24 * 60 * 60 *1000);
     private final long STRAWBERRY_GROW_MILLIS =  60 * 1000;
-
 
     public FieldController(Campo field){
         this.field = field;
@@ -32,7 +30,6 @@ public class FieldController {
         this.production = 0;
         field.setPlantedResourceType(null);
         field.setTimeFieldWasPlanted(null);
-
     }
 
     public void plant(int resourceType, GregorianCalendar gregorianCalendar){
@@ -66,14 +63,11 @@ public class FieldController {
             if(resourceType == TipoRecurso.CORN) this.totalGrowDurationInMillis = CORN_GROW_MILLIS;
             else if(resourceType == TipoRecurso.POTATO) this.totalGrowDurationInMillis = POTATO_GROW_MILLIS;
             else if(resourceType == TipoRecurso.STRAWBERRY) this.totalGrowDurationInMillis = STRAWBERRY_GROW_MILLIS;
-
         }
-
     }
     public long getRestingTime(){
         long timeTranscurredInMillis = new GregorianCalendar().getTimeInMillis() -field.getTimeFieldWasPlanted().getTimeInMillis();
         long timeBetWeenInMillis     = totalGrowDurationInMillis - timeTranscurredInMillis;
-
         if (timeBetWeenInMillis > 0 )return timeBetWeenInMillis;
         else return 0;
     }
@@ -82,7 +76,6 @@ public class FieldController {
       int percent = (int)( ((totalGrowDurationInMillis - getRestingTime()) * 100) / totalGrowDurationInMillis);
       if (percent <= 100) return percent;
       else return 100;
-
     }
 
     public void controlField(){
@@ -95,18 +88,17 @@ public class FieldController {
         }
     }
 
-
-
     public void growToStage2(){
         this.field.setNeedsManure(true);
         this.field.setStage(2);
-
     }
+
     public void growToStage3(){
         this.field.setNeedsWater(true);
         this.field.setNeedsHerbizide(true);
         this.field.setStage(3);
     }
+
     public void growToStage4(){
         this.field.setStage(4);
     }
@@ -115,15 +107,17 @@ public class FieldController {
         this.field.setNeedsWater(false);
         this.production += 295;
     }
+
     public void manureToField(){
         this.field.setNeedsManure(false);
         this.production += 340;
-
     }
+
     public void herbicideToField(){
         this.field.setNeedsHerbizide(false);
         this.production += 180;
     }
+
     public int getWaterQuantity(int resourceType){
         int neededWater = 0;
         if(resourceType == TipoRecurso.CORN) neededWater = 1000;
@@ -131,6 +125,7 @@ public class FieldController {
         else if(resourceType == TipoRecurso.POTATO) neededWater = 2500;
         return neededWater;
     }
+
     public int getManureQuantity(int resourceType){
         int neededManure = 0;
         if(resourceType == TipoRecurso.CORN) neededManure = 100;
@@ -138,6 +133,7 @@ public class FieldController {
         else if(resourceType == TipoRecurso.POTATO) neededManure = 200;
         return neededManure;
     }
+
     public int getHerbicideQuantity(int resourceType){
         int neededHerbicide = 0;
         if(resourceType == TipoRecurso.CORN) neededHerbicide = 100;
@@ -161,7 +157,6 @@ public class FieldController {
     public void setTotalGrowDurationInMillis(long totalGrowDurationInMillis) {
         this.totalGrowDurationInMillis = totalGrowDurationInMillis;
     }
-
 
     public Campo getField() {
         return field;

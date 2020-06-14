@@ -29,7 +29,6 @@ public class DomainMocker {
         }
 
         user.getGranja().setPrecios(precios);
-
         ArrayList<Espacio> espacios = new ArrayList<>();
 
         espacios.add(TipoRecurso.MONEY,new Espacio(TipoRecurso.MONEY, null,150000, resources.get(TipoRecurso.MONEY), null));
@@ -47,7 +46,6 @@ public class DomainMocker {
         espacios.add(TipoRecurso.CHICKEN,new Espacio(TipoRecurso.CHICKEN, 5,0, resources.get(TipoRecurso.CHICKEN), null));
 
         user.getGranja().setInfraestructuras(new ArrayList<Infraestructura>());
-
         Estructura almacen = new Estructura();
         espacios.get(TipoRecurso.COW).setAnimales(new ArrayList<Animal>());
         espacios.get(TipoRecurso.PIG).setAnimales(new ArrayList<Animal>());
@@ -56,11 +54,8 @@ public class DomainMocker {
         almacen.setEspacios(espacios);
         user.getGranja().getInfraestructuras().add(Infraestructura.STORAGE, almacen);
         user.getGranja().getInfraestructuras().add(Infraestructura.FIELD, new Campo());
-
-
         return user;
     }
-
 
     public static ArrayList<TipoRecurso> getAllResorurcesList(){
         ArrayList<TipoRecurso> recursos = new ArrayList<>();
@@ -77,8 +72,6 @@ public class DomainMocker {
         recursos.add(TipoRecurso.COW,new TipoRecurso(TipoRecurso.COW, "Vaca",               TipoRecurso.Tipo.MATERIAL, 1000,500, TipoRecurso.COW));
         recursos.add(TipoRecurso.PIG,new TipoRecurso(TipoRecurso.PIG, "Cerdo",              TipoRecurso.Tipo.MATERIAL, 750,350, TipoRecurso.PIG));
         recursos.add(TipoRecurso.CHICKEN,new TipoRecurso(TipoRecurso.CHICKEN, "Gallina",        TipoRecurso.Tipo.MATERIAL, 500,150, TipoRecurso.CHICKEN));
-
         return recursos;
     }
-
 }

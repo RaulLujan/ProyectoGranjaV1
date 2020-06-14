@@ -9,7 +9,6 @@ import com.mygdx.game.Constants;
 public class ImageRepeart extends Image {
 
     public ImageRepeart(Texture texture, int x, int y, int width, int height, float scale){
-
         texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         TextureRegion imgTextureRegion = new TextureRegion(texture);
         imgTextureRegion.setRegion(0,0,texture.getWidth()*width,texture.getHeight()*height);

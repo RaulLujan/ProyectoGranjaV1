@@ -7,13 +7,9 @@ public abstract class BaseScreen implements Screen {
 
     protected MainGame game;
 
-
-
     public BaseScreen(MainGame game) {
-
         this.game = game;
     }
-
 
     @Override
     public void show() {
@@ -51,14 +47,10 @@ public abstract class BaseScreen implements Screen {
         // This method is invoked when the game closes.
     }
 
-
     public abstract void disableAll(boolean enableDisable);
     public abstract void actions(int actionIndex);
-
     public MainGame getGame() {
         return game;
     }
-
-
 }
 

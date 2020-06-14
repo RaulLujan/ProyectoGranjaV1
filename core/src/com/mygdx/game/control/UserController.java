@@ -9,11 +9,9 @@ public class UserController {
     private float timeFromLastRead;
     private UserDao userDao;
 
-
     public UserController(Usuario user) {
         this.user = user;
         this.userDao = new UserDao();
-
     }
 
     public void saveUser(){
@@ -28,6 +26,5 @@ public class UserController {
         Usuario usuario =userDao.readUser(login, pass, fieldController);
         this.user = usuario;
         return usuario;
-        // return user;
     }
  }

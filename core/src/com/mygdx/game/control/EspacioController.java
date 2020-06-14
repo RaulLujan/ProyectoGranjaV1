@@ -9,17 +9,12 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class EspacioController {
-
-
     private List<Espacio> espacios;
-
     public EspacioController(List<Espacio> espacios) {
         this.espacios = espacios;
     }
 
-
     public boolean put(int reourceIndex, int quantity){
-
         int ocupation = espacios.get(reourceIndex).getOcupacionAactual();
         int capacidad = 0;
         boolean unlimited = false;

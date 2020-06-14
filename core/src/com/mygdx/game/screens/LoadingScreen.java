@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 
 public class LoadingScreen extends BaseScreen {
-
-
     private Stage stage;
     private World world;
     private SpiningIconActor tractorActor;
@@ -28,7 +26,6 @@ public class LoadingScreen extends BaseScreen {
     private Label chargingLabel;
     private Skin skin;
     private ProgressBar progressBar;
-
 
     public LoadingScreen(MainGame game) {
         super(game);
@@ -39,19 +36,12 @@ public class LoadingScreen extends BaseScreen {
     @Override
     public void show() {
         stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
-
         this.skin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
-
-
         tractorTextures = new ArrayList<>();
         for (int i = 0; i < 16; i++) {
             String tractor = String.format("Textures/tractor/Tractor%d.png", i);
-
             tractorTextures.add((Texture) game.getMiniAssetManager().get(tractor));
-
         }
-
-
         tractorActor = new SpiningIconActor(world, tractorTextures, new Vector2(
                                                             Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER / 2,
                                                             Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER / 2) );
@@ -66,9 +56,6 @@ public class LoadingScreen extends BaseScreen {
         chargingLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.15f);
         chargingLabel.setAlignment(Align.center);
         stage.addActor(chargingLabel);
-
-
-
     }
 
     @Override
@@ -76,7 +63,6 @@ public class LoadingScreen extends BaseScreen {
         stage.clear();
         world.dispose();
     }
-
 
     @Override
     public void render(float delta) {
@@ -88,7 +74,6 @@ public class LoadingScreen extends BaseScreen {
         stage.act();
         world.step(delta, 6, 2);
 
-
        if (game.getAssetManager().update()){
            game.finishLoading();
            game.showMenuScreen();
@@ -97,11 +82,7 @@ public class LoadingScreen extends BaseScreen {
             chargingLabel.setText(String.format("Loading: %s%s", progress,"%"));
             progressBar.setValue(progress);
        }
-
         stage.draw();
-
-
-
     }
 
     @Override
@@ -110,12 +91,8 @@ public class LoadingScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
-
     }
-    public void disableAll(boolean enableDisable){
 
-    }
-    public void actions(int actionIndex){
-
-    }
+    public void disableAll(boolean enableDisable){}
+    public void actions(int actionIndex){}
 }

@@ -14,7 +14,6 @@ public class SoundFactory {
     private float musicVolume, effectsVolume;
     private boolean music, effects;
 
-
     public SoundFactory(MainGame game, Preferences preferences) {
 
         this.road = game.getAssetManager().get("Sounds/roadnoise.wav");
@@ -84,8 +83,6 @@ public class SoundFactory {
         if (effects) dog.play(effectsVolume);
     }
 
-
-
     public void playRDNSound(){
         int i = (int) (Math.random() * RNDAmbientSounds.length);
         if (effects) RNDAmbientSounds[i].play(effectsVolume);
@@ -100,8 +97,8 @@ public class SoundFactory {
         }else{
             introMusic.stop();
         }
-
     }
+
     public void playGameMusic(){
         introMusic.stop();
         if (music){
@@ -111,22 +108,18 @@ public class SoundFactory {
         }else{
             gameMusic.stop();
         }
-
     }
 
     public void stopGameMusic(){ gameMusic.stop();}
     public void stopIntroMusic(){ introMusic.stop();}
-
     public void playRoadSound() {
         if (effects)road.loop(effectsVolume);
     }
     public void stopRoadSound()        { road.stop();    }
-
     public void playStepSound()        {
         if (effects) step.loop(effectsVolume);
     }
     public void stopStepSound()        { step.stop();    }
-
     public void stopAll(){
         road.stop();
         step.stop();
@@ -135,40 +128,28 @@ public class SoundFactory {
         }
     }
 
-
-
-
-
     // GETTERS & SEETERS
-
     public float getMusicVolume() {
         return musicVolume;
     }
-
     public void setMusicVolume(float musicVolume) {
         this.musicVolume = musicVolume;
     }
-
     public boolean isMusic() {
         return music;
     }
-
     public void setMusic(boolean music) {
         this.music = music;
     }
-
     public boolean isEffects() {
         return effects;
     }
-
     public void setEffects(boolean effects) {
         this.effects = effects;
     }
-
     public float getEffectsVolume() {
         return effectsVolume;
     }
-
     public void setEffectsVolume(float effectsVolume) {
         this.effectsVolume = effectsVolume;
     }

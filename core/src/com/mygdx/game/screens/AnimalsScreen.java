@@ -36,12 +36,9 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class AnimalsScreen extends BaseScreen{
-
     private Stage stage;
     private World world;
-
     private Skin skin, glassSkin, holoSkin;
-
     private TextButton goBackButton, cowsButton, pigsButton, chickenButton, buyButton, sellButton;
     private Window areaB, table, tabletop;
     private Label fundsLabel, capacityLabel, advertLabel, nameHeadLabel, typeHeadLabel, dateHeadLabel;
@@ -62,7 +59,6 @@ public class AnimalsScreen extends BaseScreen{
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
-
         this.selectedAnimalType = animalType;
         espacioController = new EspacioController(this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios());
         animals = (ArrayList<Animal>)this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(this.selectedAnimalType).getAnimales();
@@ -73,11 +69,9 @@ public class AnimalsScreen extends BaseScreen{
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
         this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
         this.holoSkin = new Skin(Gdx.files.internal("skins.holo/uiskin.json"));
-
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/animalBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
-
         int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
 
         // inicialización de los elementos
@@ -97,11 +91,9 @@ public class AnimalsScreen extends BaseScreen{
         nameHeadLabel = new Label("Nombre", glassSkin, "big-white");
         typeHeadLabel = new Label("Tipo", glassSkin, "big-white");
         dateHeadLabel = new Label("Fecha nacimiento", glassSkin, "big-white");
-
         rows = new Label[3][5];
         checkBoxes = new CheckBox[rows[0].length];
         buttons = new TextButton[rows[0].length];
-
 
         // Tamaño de la fuente
         goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
@@ -175,7 +167,6 @@ public class AnimalsScreen extends BaseScreen{
                             0.38f,
                             3,
                             null);
-
                 }else{
                     DialogFactory.showOkDialog(AnimalsScreen.this, stage,
                             "Espacio insuficiente",
@@ -199,8 +190,6 @@ public class AnimalsScreen extends BaseScreen{
                         names = String.format( "%s, %s", names, animals.get(i).getNombre());
                     }
                 }
-
-
                 if(atLeastOneIsChecked){
                     names = names.substring(1);
                     DialogFactory.showOkCancelDialog(AnimalsScreen.this, stage,
@@ -272,21 +261,15 @@ public class AnimalsScreen extends BaseScreen{
         cowsButton.getLabel().setFontScale(cowsButton.getLabel().getFontScaleX() * 0.3f);
         pigsButton.getLabel().setFontScale(pigsButton.getLabel().getFontScaleX() * 0.3f);
         chickenButton.getLabel().setFontScale(chickenButton.getLabel().getFontScaleX() * 0.3f);
-
         sellButton.setColor(Color.PURPLE);
-
-
         pigsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
         cowsButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
         chickenButton.setStyle(StyleFactory.getStyle(StyleFactory.GREY_BLUE_COLOR, StyleFactory.DARK_GREY_BLUE_COLOR));
-
         Button selectedButton;
         if (selectedAnimalType == TipoRecurso.COW) selectedButton = cowsButton;
         else if (selectedAnimalType == TipoRecurso.PIG) selectedButton = pigsButton;
         else selectedButton = chickenButton;
         selectedButton.setStyle(StyleFactory.getStyle(StyleFactory.DARK_GREY_BLUE_COLOR, StyleFactory.GREY_BLUE_COLOR));
-
-
         tabletop.setStyle(StyleFactory.getStyle(StyleFactory.BLUE_COLOR));
         areaB.setColor(1,1,1,0.85f);
         table.setColor(1,1,1,0.09f);
@@ -322,18 +305,15 @@ public class AnimalsScreen extends BaseScreen{
             checkBoxes[i].setPosition(Constants.DEVICE_WIDTH *( 0.10f ), Constants.DEVICE_HEIGHT * (0.365f - i * 0.08f));
             buttons[i].setPosition(Constants.DEVICE_WIDTH *( 0.805f ), Constants.DEVICE_HEIGHT * (0.365f - i * 0.08f));
             buttons[i].setColor(miColor);
-
             final Integer finalI = i;
             checkBoxes[i].addCaptureListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-
                     if(checkBoxes[finalI].isChecked()){
                         AnimalsScreen.this.game.getSoundFactory().playDeSelect();
                     }else{
                         AnimalsScreen.this.game.getSoundFactory().playSelect();
                     }
-                    //swich reproduction code
                 }
             });
 
@@ -371,6 +351,7 @@ public class AnimalsScreen extends BaseScreen{
                 stage.addActor(rows[i][j]);
             }
         }
+
         //datos de la tabla
         fillTableData();
     }
@@ -407,13 +388,10 @@ public class AnimalsScreen extends BaseScreen{
        fundsLabel.setText(String.format("Fondos: %s", recursos));
     }
 
-
     @Override
     public void show() {
         stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
         Gdx.input.setInputProcessor(stage);
-
-        //se añaden funciones a cada botón
     }
 
     @Override
@@ -422,7 +400,6 @@ public class AnimalsScreen extends BaseScreen{
         stage.clear();
         world.dispose();
     }
-
 
     @Override
     public void render(float delta) {
@@ -465,7 +442,6 @@ public class AnimalsScreen extends BaseScreen{
     }
 
     public void actions(int actionIndex){
-
         switch (actionIndex){
             case 1:
                 //Sacrificar animal
@@ -473,7 +449,6 @@ public class AnimalsScreen extends BaseScreen{
                     if(espacioController.put(TipoRecurso.MEAT, meatKgInSacrifice)){
                         Animal animal = animals.get(animalToSacrifice);
                         this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(this.selectedAnimalType).getAnimales().remove(animal);
-
                         fillTableData();
                     }
                     else {

@@ -14,7 +14,6 @@ public class Usuario {
     private HashMap<GregorianCalendar, TipoAccion> acciones;
     private Granja granja;
 
-
     public Usuario(int id, String nombre, String login ) {
         this.id = id;
         this.nombre = nombre;

@@ -54,8 +54,6 @@ public class FieldScreen extends BaseScreen {
     private float acumulatedDElta;
     private boolean firstTimeToGet;
 
-
-
     public FieldScreen(MainGame game) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
@@ -64,35 +62,24 @@ public class FieldScreen extends BaseScreen {
         this.fieldController = this.game.getFieldController();
         espacioController = new EspacioController(this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios());
         firstTimeToGet = true;
-
         int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
-
-
-
-
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
         this.glassySkim = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
-
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/fieldBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
 
-
-
         // inicialización de los elementos
         goBackButton = new TextButton("Volver", glassySkim, "big");
         plantButton= new TextButton("Plantar", glassySkim, "big");
-
         waterButton = new Button(skin,"new_custom");
         manureButton = new Button(skin,"new_custom");
         herbicideButton = new Button(skin,"new_custom");
-
         areaL = new Window("", skin, "dialog");
         areaB = new Window("", skin,"dialog");
         areaR = new Window("", skin,"dialog");
-
         fundsLabel = new Label(String.format("Fondos: %s", recursos),     glassySkim, "big");
         estateTileLabel = new Label("Estado: ",                         glassySkim, "big");
         estateLabel = new Label("",                                     glassySkim, "big-gold");
@@ -112,14 +99,11 @@ public class FieldScreen extends BaseScreen {
         waterQuantitylabel = new Label("",                              glassySkim, "big");
         manureQuantityLabel = new Label("",                             glassySkim, "big");
         herbizideQuantityLabel = new Label("",                          glassySkim, "big");
-
         typeSelectioSP = new SelectBox<>(glassySkim);
-
 
         // Tamaño de la fuente
         goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
         plantButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.25f);
-
         Label[] labels = { fundsLabel, estateTileLabel, estateLabel, timeTitleLabel, timeLabel, infoTypeTipleLabel, infotypeLabel ,
                             levelTitleLabel, levelLabel, waterTitleLabel, waterLabel, manureTitleLabel, manureLabel, grassTitleLabel,
                             grassLabel, addLabel, waterQuantitylabel, manureQuantityLabel, herbizideQuantityLabel};
@@ -139,7 +123,6 @@ public class FieldScreen extends BaseScreen {
                 FieldScreen.this.game.showGameScreen();
             }
         });
-
         plantButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -157,7 +140,6 @@ public class FieldScreen extends BaseScreen {
                         null);
             }
         });
-
         waterButton.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -182,6 +164,7 @@ public class FieldScreen extends BaseScreen {
                         String.format("Esta accion consumira %s\nlitros de abono\n¿Estas seguro?",
                                 fieldController.getManureQuantity(field.getPlantedResourceType()) ),
                         0.4f,
+
                         0.4f,
                         3, null);
             }
@@ -204,7 +187,6 @@ public class FieldScreen extends BaseScreen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 FieldScreen.this.game.getSoundFactory().playSelect3();
-
             }
         });
 
@@ -217,16 +199,11 @@ public class FieldScreen extends BaseScreen {
         waterButton.setSize(Constants.DEVICE_WIDTH * 0.04f, Constants.DEVICE_WIDTH *0.04f);
         manureButton.setSize(Constants.DEVICE_WIDTH * 0.04f, Constants.DEVICE_WIDTH *0.04f);
         herbicideButton.setSize(Constants.DEVICE_WIDTH * 0.04f, Constants.DEVICE_WIDTH *0.04f);
-
-
         fundsLabel.setSize(Constants.DEVICE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
-
         areaL.setSize(Constants.DEVICE_WIDTH *0.45f, Constants.DEVICE_HEIGHT * 0.3f);
         areaR.setSize(Constants.DEVICE_WIDTH *0.45f, Constants.DEVICE_HEIGHT * 0.3f);
         areaB.setSize(Constants.DEVICE_WIDTH *0.8f, Constants.DEVICE_HEIGHT * 0.5f);
         typeSelectioSP.setSize(Constants.DEVICE_WIDTH * 0.25f, Constants.DEVICE_HEIGHT * 0.08f);
-
-
 
         //posiciones de los elementos
         goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
@@ -240,7 +217,6 @@ public class FieldScreen extends BaseScreen {
         areaB.setPosition(Constants.DEVICE_WIDTH * 0.10f, Constants.DEVICE_HEIGHT * 0.03f);
         typeSelectioSP.setPosition(Constants.DEVICE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.71f);
         plantButton.setPosition(Constants.DEVICE_WIDTH * 0.7f, Constants.DEVICE_HEIGHT * 0.61f);
-
         infoTypeTipleLabel.setPosition(Constants.DEVICE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.44f);
         infotypeLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.44f);
         levelTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.34f);
@@ -251,12 +227,10 @@ public class FieldScreen extends BaseScreen {
         manureLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.14f);
         grassTitleLabel.setPosition(Constants.DEVICE_WIDTH * 0.18f, Constants.DEVICE_HEIGHT * 0.04f);
         grassLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.04f);
-
         addLabel.setPosition(Constants.DEVICE_WIDTH * 0.6f, Constants.DEVICE_HEIGHT * 0.42f);
         waterQuantitylabel.setPosition(Constants.DEVICE_WIDTH * 0.57f, Constants.DEVICE_HEIGHT * 0.28f);
         manureQuantityLabel.setPosition(Constants.DEVICE_WIDTH * 0.57f, Constants.DEVICE_HEIGHT * 0.19f);
         herbizideQuantityLabel.setPosition(Constants.DEVICE_WIDTH * 0.57f, Constants.DEVICE_HEIGHT * 0.1f);
-
         waterButton.setPosition(Constants.DEVICE_WIDTH * 0.79f, Constants.DEVICE_HEIGHT * 0.28f);
         manureButton.setPosition(Constants.DEVICE_WIDTH * 0.79f, Constants.DEVICE_HEIGHT * 0.19f);
         herbicideButton.setPosition(Constants.DEVICE_WIDTH * 0.79f, Constants.DEVICE_HEIGHT * 0.1f);
@@ -265,12 +239,10 @@ public class FieldScreen extends BaseScreen {
         areaR.setTouchable(Touchable.disabled);
         areaL.setTouchable(Touchable.disabled);
         areaB.setTouchable(Touchable.disabled);
-
         goBackButton.setColor(Color.GREEN);
         estateTileLabel.setAlignment(Align.right);
         timeTitleLabel.setAlignment(Align.right);
         typeSelectioSP.setItems("Patata", "Maiz", "Fresa");
-
         typeSelectioSP.setAlignment(Align.center);
         infoTypeTipleLabel.setAlignment(Align.right);
         levelTitleLabel.setAlignment(Align.right);
@@ -286,8 +258,6 @@ public class FieldScreen extends BaseScreen {
         areaB.setColor(1,1,1,0.85f);
         setTextsAndStates();
 
-
-
         //Se añaden los elementos
         stage.addActor(backgroundImage);
         stage.addActor(goBackButton);
@@ -296,22 +266,18 @@ public class FieldScreen extends BaseScreen {
         stage.addActor(areaL);
         stage.addActor(typeSelectioSP);
         stage.addActor(plantButton);
-
         for (Label label: labels){
             stage.addActor(label);
         }
         stage.addActor(waterButton);
         stage.addActor(manureButton);
         stage.addActor(herbicideButton);
-
     }
-
 
     @Override
     public void show() {
         stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
         Gdx.input.setInputProcessor(stage);
-
     }
 
     @Override
@@ -321,7 +287,6 @@ public class FieldScreen extends BaseScreen {
         world.dispose();
     }
 
-
     @Override
     public void render(float delta) {
         //limpieza de la pantalla
@@ -330,7 +295,6 @@ public class FieldScreen extends BaseScreen {
         acumulatedDElta += delta;
         //movimiento del mundo
         if (field.isPlanted()) {
-
             timeLabel.setText(millisToString(totalRestTime - (timePassedSinceLastActualization + (long)(acumulatedDElta * 1000))));
             levelLabel.setText(String.format("%s%s", this.getCompletedPercent(), "%"));
             if (field.getStage() == 1 && getCompletedPercent() > 33){
@@ -352,11 +316,6 @@ public class FieldScreen extends BaseScreen {
         stage.draw();
         stage.act();
         world.step(delta, 6, 2);
-
-
-
-
-
     }
 
     @Override
@@ -364,24 +323,18 @@ public class FieldScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
-
     }
 
     public int getCompletedPercent(){
         int percent = (int)( ((totalGrowDurationInMillis - (totalRestTime - (long)(acumulatedDElta * 1000))) * 100) / totalGrowDurationInMillis);
         if (percent <= 100) return percent;
         else return 100;
-
     }
-
-
-
 
     private String millisToString(long millis){
         int days, hours, minutes, seconds;
         if (millis > 0){
             long restingMillis = millis;
-
             days = (int) (restingMillis/ (24 * 60 * 60 * 1000));
             restingMillis = restingMillis -  ( days * 24 * 60 * 60 * 1000);
             hours = (int) (restingMillis / (60 * 60 * 1000));
@@ -395,11 +348,8 @@ public class FieldScreen extends BaseScreen {
             minutes = 0;
             seconds = 0;
         }
-
         return String.format("%sd %sh %sm %ss", days, hours, minutes, seconds);
     }
-
-
 
     public void disableAll(boolean enableDisable){
         goBackButton.setDisabled(enableDisable);
@@ -410,6 +360,7 @@ public class FieldScreen extends BaseScreen {
         herbicideButton.setDisabled(enableDisable);
         if (!enableDisable)setTextsAndStates();
     }
+
     public void setTextsAndStates(){
         if (field.isPlanted()){
             totalGrowDurationInMillis = fieldController.getTotalGrowDurationInMillis();
@@ -419,9 +370,6 @@ public class FieldScreen extends BaseScreen {
             totalRestTime = fieldController.getRestingTime();
             timePassedSinceLastActualization = 0;
             levelLabel.setText(fieldController.getCompletedPercent());
-
-
-
             infotypeLabel.setText(DomainMocker.getAllResorurcesList().get(field.getPlantedResourceType()).getNombre());
             int quantity;
             if (field.isNeedsWater()) {
@@ -459,7 +407,6 @@ public class FieldScreen extends BaseScreen {
                 manureButton.setDisabled(true);
                 herbicideButton.setDisabled(true);
             }
-
         }else {
             infotypeLabel.setText("Ninguno");
             estateLabel.setText( "Sin uso");
@@ -476,7 +423,6 @@ public class FieldScreen extends BaseScreen {
             waterButton.setDisabled(true);
             manureButton.setDisabled(true);
             herbicideButton.setDisabled(true);
-
         }
         acumulatedDElta = 0;
     }
@@ -491,13 +437,11 @@ public class FieldScreen extends BaseScreen {
                 if (typeSelectioSP.getList().getSelected().equals("Patata")) selectedCrop = TipoRecurso.POTATO;
                 else if (typeSelectioSP.getList().getSelected().equals("Fresa")) selectedCrop = TipoRecurso.STRAWBERRY;
                 else selectedCrop = TipoRecurso.CORN;
-
                 if(espacioController.put(selectedCrop, -500)){
                     //panting stuff
                     fieldController.plant(selectedCrop);
                     timePassedSinceLastActualization = 0;
                     totalGrowDurationInMillis = fieldController.getTotalGrowDurationInMillis();
-
                 }else{
                     String crop = typeSelectioSP.getList().getSelected();
                     DialogFactory.showOkDialog(this, stage,
@@ -567,11 +511,8 @@ public class FieldScreen extends BaseScreen {
                             0.5f,
                             0.4f);
                 }
-
                 break;
-
             default:
-
         }
         this.setTextsAndStates();
         this.game.getUserController().saveUser();

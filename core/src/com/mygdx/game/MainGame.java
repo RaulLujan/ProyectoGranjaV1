@@ -26,7 +26,6 @@ import com.mygdx.game.control.UserController;
 import com.mygdx.game.factories.SoundFactory;
 
 public class MainGame extends Game {
-
 	private Preferences preferences;
 	public final String PREFERENCES = "FarmerDayPreferences";
     public final String LOGIN_KEY = "loginKey";
@@ -36,34 +35,24 @@ public class MainGame extends Game {
     public final String MUSIC_VOLUME_KEY = "musicVolumeKey";
     public final String EFFECTS_VOLUME_KEY = "effectsVolumeKey";
     private boolean userLogged, loginFailed;
-
 	private SoundFactory soundFactory;
 	private AssetManager miniAssetManager, assetManager;
-
 	private Screen gameScreen, loadingScreen, preloadingScreen, menuScreen, loginScreen, fieldScreen,
 		shopScreen, storageScreen, animalsScreen, optionScreen;
-
 	private Usuario usuario;
 	private UserController userController;
 	private FieldController fieldController;
 
-
-
-	
 	@Override
 	public void create () {
-
         usuario = DomainMocker.getMockedUser();
         fieldController = new FieldController(new Campo());
         userController = new UserController(usuario);
-
 		miniAssetManager = new AssetManager();
 		assetManager = new AssetManager();
 		loginFailed = false;
 
-		//texture for loading
-
-
+		//textures for loading
 		for (int i = 0; i < 16; i++) {
 			String tractor = String.format("Textures/tractor/Tractor%d.png", i);
 			miniAssetManager.load(tractor, Texture.class);
@@ -101,7 +90,6 @@ public class MainGame extends Game {
 		assetManager.load("Textures/decorations/rotengrass1.png", Texture.class);
 		assetManager.load("Textures/decorations/rotengrass2.png", Texture.class);
 		assetManager.load("Textures/decorations/rotengrass3.png", Texture.class);
-
 		assetManager.load("Textures/BackGrounds/menuBack.png", Texture.class);
 		assetManager.load("Textures/BackGrounds/animalBack.jpg", Texture.class);
 		assetManager.load("Textures/BackGrounds/fieldBack.jpg", Texture.class);
@@ -109,7 +97,6 @@ public class MainGame extends Game {
 		assetManager.load("Textures/BackGrounds/optionBack.jpg", Texture.class);
 		assetManager.load("Textures/BackGrounds/shopBack.jpg", Texture.class);
 		assetManager.load("Textures/BackGrounds/storageBack.jpg", Texture.class);
-
 		assetManager.load("Textures/Buildings/Barn.png", Texture.class);
 		assetManager.load("Textures/Buildings/ChickenCoop.png", Texture.class);
 		assetManager.load("Textures/Buildings/House.png", Texture.class);
@@ -157,15 +144,12 @@ public class MainGame extends Game {
         assetManager.load("Textures/Dialog/DialogCoin2.png", Texture.class);
         assetManager.load("Textures/Dialog/DialogCoin3.png", Texture.class);
         assetManager.load("Textures/Dialog/DialogCoin4.png", Texture.class);
-
         for (int i = 0; i < 21; i++) {
             String farmer = String.format("Textures/Farmer/Farmer%d.png", i);
             assetManager.load(farmer, Texture.class);
 			String dog = String.format("Textures/Dog/Dog%d.png", i);
 			assetManager.load(dog, Texture.class);
         }
-
-
 
         //Sounds
 		assetManager.load("Sounds/roadnoise.wav", Sound.class);
@@ -193,34 +177,23 @@ public class MainGame extends Game {
 		assetManager.load("Sounds/dog.wav", Sound.class);
 		assetManager.load("Sounds/carHorn.mp3", Sound.class);
 		assetManager.load("Sounds/man.wav", Sound.class);
-
 		//Music
 		assetManager.load("Sounds/Music/game.mp3", Music.class);
 		assetManager.load("Sounds/Music/intro.mp3", Music.class);
-
 		this.preloadingScreen = new PreLoadingScreen(this);
 		this.setScreen(preloadingScreen);
-
-
-
-
 	}
 
 	public void finishLoading() {
 		this.actualizePreferences();
 		this.soundFactory = new SoundFactory(this, Gdx.app.getPreferences(PREFERENCES));
-
-
 		if ( validate(preferences.getString(LOGIN_KEY, ""), preferences.getString(PASS_KEY,"")) ){
 			this.usuario = userController.getAndSetUser(preferences.getString(LOGIN_KEY), preferences.getString(PASS_KEY) , fieldController);
 			this.userLogged = true;
 		}else{
 			this.userLogged = false;
 		}
-		//this.fieldController = new FieldController((Campo)usuario.getGranja().getInfraestructuras().get(Infraestructura.FIELD));
-		//FIELDCONTROLER FROM DAO
 	}
-
 
 	public void showAnimalsScreen(int animalType){
 		this.animalsScreen = new AnimalsScreen(this, animalType);
@@ -279,9 +252,7 @@ public class MainGame extends Game {
         preferences.putBoolean(EFFECTS_KEY, this.soundFactory.isEffects());
         preferences.putFloat(MUSIC_VOLUME_KEY, this.soundFactory.getMusicVolume());
         preferences.putFloat(EFFECTS_VOLUME_KEY, this.soundFactory.getEffectsVolume());
-
         preferences.flush();
-
     }
 
 	//Obtiene las preferencias
@@ -289,78 +260,57 @@ public class MainGame extends Game {
 		preferences = Gdx.app.getPreferences(PREFERENCES);
 	}
 
-
 	public boolean validate (String login, String pass){
-
 	    return (userController.validateUser(login, pass));
-
     }
-
 	public Screen getGameScreen() {
 		return gameScreen;
 	}
-
 	public Screen getLoadingScreen() {
 		return loadingScreen;
 	}
-
 	public Screen getPreloadingScreen() {
 		return preloadingScreen;
 	}
-
 	public Screen getMenuScreen() {
 		return menuScreen;
 	}
-
 	public Screen getLoginScreen() {
 		return loginScreen;
 	}
-
 	public Screen getFieldScreen() {
 		return fieldScreen;
 	}
-
 	public Screen getShopScreen() {
 		return shopScreen;
 	}
-
 	public Screen getStorageScreen() {
 		return storageScreen;
 	}
-
 	public Screen getAnimalsScreen() {
 		return animalsScreen;
 	}
-
 	public SoundFactory getSoundFactory() {
 		return soundFactory;
 	}
-
-
 	public AssetManager getAssetManager() {
 		return assetManager;
 	}
-
 	public Screen getOptionScreen() {
 		return optionScreen;
 	}
-
 	public boolean isUserLogged() {
 		return userLogged;
 	}
-
 	public void setUserLogged(boolean userLogged) {
 		this.userLogged = userLogged;
 	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
-
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
 	public UserController getUserController() {
 		return userController;
 	}
@@ -395,6 +345,5 @@ public class MainGame extends Game {
 
 	public void setUser(String login, String pass) {
 		this.usuario = userController.getAndSetUser(login, pass, fieldController);
-
 	}
 }

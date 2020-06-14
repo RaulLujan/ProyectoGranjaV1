@@ -30,9 +30,7 @@ import java.util.ArrayList;
 public class ShopScreen extends BaseScreen {
     private Stage stage;
     private World world;
-
     private Skin skin, glassSkin;
-
     private TextButton goBackButton;
     private Window areaT, areaB;
     private Label fundsLabel, resourceNameHeadLabel, pricesHeadLabel, quantityHeadLabel;
@@ -46,13 +44,10 @@ public class ShopScreen extends BaseScreen {
     private ImageClampToEdge backgroundImage;
     private Texture backgroundTexture;
 
-
-
     public ShopScreen(MainGame game) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
-
         espacioController = new EspacioController(this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios());
         prices = (ArrayList<Precio>)this.game.getUsuario().getGranja().getPrecios();
         int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
@@ -60,7 +55,6 @@ public class ShopScreen extends BaseScreen {
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
         this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
-
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/shopBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
@@ -99,7 +93,6 @@ public class ShopScreen extends BaseScreen {
         areaT.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.08f);
         areaB.setSize(Constants.DEVICE_WIDTH *0.9f, Constants.DEVICE_HEIGHT * 0.72f);
         fundsLabel.setSize(Constants.DEVICE_WIDTH *0.4f, Constants.DEVICE_HEIGHT * 0.10f);
-
         resourceNameHeadLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
         pricesHeadLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
         quantityHeadLabel.setSize(Constants.DEVICE_WIDTH *0.15f, Constants.DEVICE_HEIGHT * 0.08f);
@@ -109,7 +102,6 @@ public class ShopScreen extends BaseScreen {
         fundsLabel.setPosition(Constants.DEVICE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
         areaT.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.75f);
         areaB.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.03f);
-
         resourceNameHeadLabel.setPosition(Constants.DEVICE_WIDTH * 0.09f, Constants.DEVICE_HEIGHT * 0.75f);
         pricesHeadLabel.setPosition(Constants.DEVICE_WIDTH * 0.24f, Constants.DEVICE_HEIGHT * 0.75f);
         quantityHeadLabel.setPosition(Constants.DEVICE_WIDTH * 0.4f, Constants.DEVICE_HEIGHT * 0.75f);
@@ -125,7 +117,6 @@ public class ShopScreen extends BaseScreen {
         //Se añaden los elementos
         stage.addActor(backgroundImage);
         stage.addActor(goBackButton);
-
         stage.addActor(areaB);
         stage.addActor(areaT);
         stage.addActor(fundsLabel);
@@ -133,15 +124,12 @@ public class ShopScreen extends BaseScreen {
         stage.addActor(pricesHeadLabel);
         stage.addActor(quantityHeadLabel);
 
-
        //ESPACIOS
         espacios = (ArrayList<Espacio>)this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios();
-
 
         //datos de la tabla
         for(int i = 0; i< rows.length;i++){
             for(int j = 0; j< rows[i].length;j++){
-
                 if (i == 0){
                     rows[i][j] = new Label(prices.get(j+1).getTipoRecurso().getNombre(),glassSkin,"big");
                 }else if (i == 1){
@@ -152,14 +140,11 @@ public class ShopScreen extends BaseScreen {
                 }else{
                     rows[i][j] = new Label(String.format("%s",espacios.get(j+1).getOcupacionAactual()) ,glassSkin,"big");
                 }
-
-
                 rows[i][j].setFontScale(Constants.FONT_SIZE * 0.22f);
                 rows[i][j].setAlignment(Align.center);
                 rows[i][j].setSize(Constants.DEVICE_WIDTH * 0.11f, Constants.DEVICE_HEIGHT * 0.08f);
                 rows[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.09f + i * 0.15f ), Constants.DEVICE_HEIGHT * (0.03f + j * 0.08f));
                 stage.addActor(rows[i][j]);
-
             }
         }
         //botones de añadir-restar
@@ -206,7 +191,6 @@ public class ShopScreen extends BaseScreen {
             quantityLabels[i].setSize(Constants.DEVICE_WIDTH * 0.04f, Constants.DEVICE_HEIGHT * 0.08f);
             quantityLabels[i].setPosition(Constants.DEVICE_WIDTH * 0.59f, Constants.DEVICE_HEIGHT * (0.025f +i * 0.08f));
             stage.addActor(quantityLabels[i]);
-
         }
 
         //botones de Comprar vender
@@ -221,9 +205,7 @@ public class ShopScreen extends BaseScreen {
                     actionButton[i][j] = new TextButton(text ,glassSkin, "small");
                     actionButton[i][j].setColor(Color.PURPLE);
                 }
-
                 actionButton[i][j].getLabel().setFontScale(Constants.FONT_SIZE * 0.6f);
-
                 actionButton[i][j].setSize(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.06f);
                 actionButton[i][j].setPosition(Constants.DEVICE_WIDTH *( 0.71f + i * 0.125f ), Constants.DEVICE_HEIGHT * (0.036f + j * 0.08f));
 
@@ -250,8 +232,6 @@ public class ShopScreen extends BaseScreen {
                         ShopScreen.this.game.getUserController().saveUser();
                     }
                 });
-
-
                 stage.addActor(actionButton[i][j]);
             }
         }
@@ -264,18 +244,10 @@ public class ShopScreen extends BaseScreen {
         else label.setText(0);
     }
 
-
-
-
     @Override
     public void show() {
         stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
         Gdx.input.setInputProcessor(stage);
-
-        //se añaden funciones a cada botón
-
-
-
     }
 
     @Override
@@ -284,7 +256,6 @@ public class ShopScreen extends BaseScreen {
         stage.clear();
         world.dispose();
     }
-
 
     @Override
     public void render(float delta) {
@@ -295,12 +266,7 @@ public class ShopScreen extends BaseScreen {
         //movimiento del mundo
         stage.act();
         world.step(delta, 6, 2);
-
-
-
-
         stage.draw();
-
     }
 
     @Override
@@ -308,8 +274,8 @@ public class ShopScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
-
     }
+
     public void disableAll(boolean enableDisable){
         goBackButton.setDisabled(enableDisable);
         for (int i = 0; i < 9; i++){
@@ -319,7 +285,6 @@ public class ShopScreen extends BaseScreen {
             actionButton[1][i].setDisabled(enableDisable);
         }
     }
-    public void actions(int actionIndex){
 
-    }
+    public void actions(int actionIndex){}
 }

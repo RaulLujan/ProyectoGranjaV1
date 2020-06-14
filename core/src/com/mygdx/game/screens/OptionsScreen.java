@@ -26,9 +26,7 @@ import com.mygdx.game.MainGame;
 public class OptionsScreen extends BaseScreen {
     private Stage stage;
     private World world;
-
     private Skin skin, glassSkin;
-
     private TextButton goBackButton, goMenuButton, addNeighbour, closeSession;
     private Window area1, area2, area3;
     private Label idLabel, userLabel, farmNameTitleLabel, farmNameLabel, musicVolumeLabel, effectsVolumeLabel, musicLabel, effectsLabel;
@@ -39,20 +37,16 @@ public class OptionsScreen extends BaseScreen {
     private ImageClampToEdge backgroundImage;
     private Texture backgroundTexture;
 
-
     public OptionsScreen(MainGame game) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
-
-
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
         this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
 
         // inicialización de los elementos
-
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/optionBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
@@ -60,10 +54,8 @@ public class OptionsScreen extends BaseScreen {
         goMenuButton = new TextButton("Menu", glassSkin, "big");
         addNeighbour = new TextButton("Buscar vecino", glassSkin, "big");
         closeSession = new TextButton("Cerrar sesion", glassSkin, "big");
-
         idLabel = new Label(String.format("Id: 00000%s", this.game.getUsuario().getId()), glassSkin, "big");
         userLabel = new Label(String.format("%s %s", this.game.getUsuario().getNombre(), this.game.getUsuario().getApellidos() ), glassSkin, "big");
-
         farmNameTitleLabel = new Label("Nombre de la granja:", glassSkin, "big");
         musicVolumeLabel = new Label("Volumen", glassSkin, "big");
         effectsVolumeLabel = new Label("Volumen", glassSkin, "big");
@@ -73,14 +65,10 @@ public class OptionsScreen extends BaseScreen {
         area1 = new Window("", skin,"dialog");
         area2 = new Window("", skin,"dialog");
         area3 = new Window("", skin,"dialog");
-
-
         effectsCheckBox = new Button(skin,"switch_inverse");
         onStyle = effectsCheckBox.getStyle();
         musicCheckBox = new Button(skin,"switch");
         offStyle = musicCheckBox.getStyle();
-
-
         musicVolumeSlider = new Slider(0,1,0.01f, false, glassSkin,"default-horizontal");
         effectsVolumeSlider = new Slider(0,1,0.01f, false, glassSkin,"default-horizontal");
         neighbourTextField = new TextField("", glassSkin);
@@ -90,7 +78,6 @@ public class OptionsScreen extends BaseScreen {
         addNeighbour.getLabel().setFontScale(Constants.FONT_SIZE * 0.225f);
         goMenuButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
         goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
-
         idLabel.setFontScale(Constants.FONT_SIZE * 0.25f);
         userLabel.setFontScale(Constants.FONT_SIZE * 0.25f);
         farmNameTitleLabel.setFontScale(Constants.FONT_SIZE * 0.25f);
@@ -99,7 +86,6 @@ public class OptionsScreen extends BaseScreen {
         effectsVolumeLabel.setFontScale(Constants.FONT_SIZE* 0.25f);
         musicLabel.setFontScale(Constants.FONT_SIZE * 0.25f);
         effectsLabel.setFontScale(Constants.FONT_SIZE*  0.25f);
-
         TextField.TextFieldStyle textFieldStyle = neighbourTextField.getStyle();
         textFieldStyle.font.getData().setScale(Constants.FONT_SIZE * 0.33f);
         neighbourTextField.setStyle(textFieldStyle);
@@ -145,7 +131,6 @@ public class OptionsScreen extends BaseScreen {
                 //save preference
             }
         });
-
         musicVolumeSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -183,9 +168,7 @@ public class OptionsScreen extends BaseScreen {
         effectsVolumeSlider.setSize(Constants.DEVICE_WIDTH *0.5f, Constants.DEVICE_HEIGHT * 0.08f);
         neighbourTextField.setSize(Constants.DEVICE_WIDTH *0.625f, Constants.DEVICE_HEIGHT * 0.08f);
 
-
         //posiciones de los elementos
-
         area1.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.68f);
         area2.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.48f);
         area3.setPosition(Constants.DEVICE_WIDTH * 0.05f, Constants.DEVICE_HEIGHT * 0.185f);
@@ -201,15 +184,11 @@ public class OptionsScreen extends BaseScreen {
         effectsVolumeLabel.setPosition(Constants.DEVICE_WIDTH * 0.3f, Constants.DEVICE_HEIGHT * 0.2475f);
         musicVolumeSlider.setPosition(Constants.DEVICE_WIDTH * 0.42f, Constants.DEVICE_HEIGHT * 0.3375f);
         effectsVolumeSlider.setPosition(Constants.DEVICE_WIDTH * 0.42f, Constants.DEVICE_HEIGHT * 0.2475f);
-
         musicLabel.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.3375f);
         effectsLabel.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.2475f);
         musicCheckBox.setPosition(Constants.DEVICE_WIDTH * 0.20f, Constants.DEVICE_HEIGHT * 0.3513f);
         effectsCheckBox.setPosition(Constants.DEVICE_WIDTH * 0.2f, Constants.DEVICE_HEIGHT * 0.2613f);
         neighbourTextField.setPosition(Constants.DEVICE_WIDTH * 0.1f, Constants.DEVICE_HEIGHT * 0.535f);
-
-
-
 
         //estados
         goBackButton.setColor(Color.GREEN);
@@ -221,16 +200,11 @@ public class OptionsScreen extends BaseScreen {
         area1.setColor(1,1,1,0.9f);
         area2.setColor(1,1,1,0.9f);
         area3.setColor(1,1,1,0.9f);
-
         neighbourTextField.setMessageText(" Id usuario");
         if (!this.game.isUserLogged()){
             idLabel.setText("");
             userLabel.setText("");
-
         }
-
-
-
 
         //Se añaden los elementos
         stage.addActor(backgroundImage);
@@ -254,9 +228,7 @@ public class OptionsScreen extends BaseScreen {
         stage.addActor(musicVolumeSlider);
         stage.addActor(effectsVolumeSlider);
         stage.addActor(neighbourTextField);
-
     }
-
 
     @Override
     public void show() {
@@ -268,8 +240,6 @@ public class OptionsScreen extends BaseScreen {
         if (!this.game.getSoundFactory().isEffects()) effectsCheckBox.setStyle(offStyle);
         musicVolumeSlider.setValue(this.game.getSoundFactory().getMusicVolume());
         effectsVolumeSlider.setValue(this.game.getSoundFactory().getEffectsVolume());
-
-
     }
 
     @Override
@@ -280,7 +250,6 @@ public class OptionsScreen extends BaseScreen {
         world.dispose();
     }
 
-
     @Override
     public void render(float delta) {
         //limpieza de la pantalla
@@ -290,12 +259,7 @@ public class OptionsScreen extends BaseScreen {
         //movimiento del mundo
         stage.act();
         world.step(delta, 6, 2);
-
-
-
-
         stage.draw();
-
     }
 
     @Override
@@ -305,10 +269,6 @@ public class OptionsScreen extends BaseScreen {
         world.dispose();
 
     }
-    public void disableAll(boolean enableDisable){
-
-    }
-    public void actions(int actionIndex){
-
-    }
+    public void disableAll(boolean enableDisable){}
+    public void actions(int actionIndex){}
 }

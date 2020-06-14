@@ -31,10 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameScreen extends BaseScreen{
-
     private Stage stage;
     private World world;
-
     //actors
     private HomeActor homeActor;
     private FieldActor fieldActor;
@@ -46,9 +44,6 @@ public class GameScreen extends BaseScreen{
     private DogActor dogActor;
     private PulseActor chickenPulseActor, pigPulseActor, cowPulseActor,
             homePulseActor, storagePulseActor, fieldPulseActor, shopPulseActor ;
-
-
-
     //Textures
     private Texture  barnTexture, chickenCoopTexture, houseTexture, pigstyTexture, shopTexture, storeTexture,
         bushTexture, groundTexture, tree1Texture, tree2Texture, tree3Texture,roadTexture, truck1Texture, truck2Texture,
@@ -57,17 +52,13 @@ public class GameScreen extends BaseScreen{
         rottenGrass3Texture, bush2Texture, woodPathTexture1, woodPathTexture2, woodPathTexture3 ;
     private ArrayList<Texture> farmerTextures , dogTextures, chikenTextures, fieldTextures, pigTextures, cowTextures,
             homeTextures, shopTextures, storageTextures, fieldPulseTextures;
-
     //Images
     private ImageRepeart grondImage;
     //private ImageVerticalRepeat roadImage;
     private ImageClampToEdge roadImage, woodRoad;
-
     private List<ImageClampToEdge> trees, decorations, roads;
-
     //Game Parameters
     private float timeToBeat, timeSinceLastRNDSound, timeSinceLastFieldControl;
-
 
     public GameScreen(MainGame game) {
         super(game);
@@ -75,7 +66,6 @@ public class GameScreen extends BaseScreen{
         this.world = new World(new Vector2(0, -10), true);
         this.timeSinceLastRNDSound = 0;
         this.timeSinceLastFieldControl = 0;
-
     }
     @Override
     public void show() {
@@ -85,7 +75,6 @@ public class GameScreen extends BaseScreen{
         //Cargamos texturas
         truck1Texture = game.getAssetManager().get("Textures/Truck1.png");
         truck2Texture = game.getAssetManager().get("Textures/Truck2.png");
-
         barnTexture = game.getAssetManager().get("Textures/Buildings/Barn.png");
         chickenCoopTexture = game.getAssetManager().get("Textures/Buildings/ChickenCoop.png");
         houseTexture = game.getAssetManager().get("Textures/Buildings/House.png");
@@ -117,9 +106,6 @@ public class GameScreen extends BaseScreen{
         woodPathTexture1 = game.getAssetManager().get("Textures/decorations/WoodPath.png");
         woodPathTexture2 = game.getAssetManager().get("Textures/decorations/WoodPath2.png");
         woodPathTexture3 = game.getAssetManager().get("Textures/decorations/WoodPath3.png");
-
-
-
         farmerTextures = new ArrayList<>(21);
         dogTextures = new ArrayList<>(21);
         chikenTextures = new ArrayList<>(7);
@@ -130,7 +116,6 @@ public class GameScreen extends BaseScreen{
         storageTextures = new ArrayList<>();
         shopTextures = new ArrayList<>();
         fieldPulseTextures = new ArrayList<>();
-
         for (int i = 0; i < 21; i++) {
             String farmer = String.format("Textures/Farmer/Farmer%d.png",i);
             farmerTextures.add((Texture) game.getAssetManager().get(farmer));
@@ -233,11 +218,8 @@ public class GameScreen extends BaseScreen{
         storagePulseActor = new PulseActor(world, storageTextures, new Vector2(26.6f, 9f), true );
         fieldPulseActor = new PulseActor(world, fieldPulseTextures, new Vector2(18.9f, 7.45f), true );
         shopPulseActor = new PulseActor(world, shopTextures, new Vector2(25.85f, 4.75f), false );
-
-
         grondImage = new ImageRepeart(groundTexture,-20,-10,60,40, 2f);
         roadImage = new ImageClampToEdge(roadTexture,19.25f,-3,3.5f,25f);
-
         trees = new ArrayList<>();
         decorations = new ArrayList<>();
         roads = new ArrayList<>();
@@ -293,10 +275,6 @@ public class GameScreen extends BaseScreen{
         roads.add(new ImageClampToEdge(woodPathTexture2, 25.8f, 11.7f, 0.8f, 0.8f));
         roads.add(new ImageClampToEdge(woodPathTexture2, 26.6f, 11.7f, 0.8f, 0.8f));
 
-
-
-
-
         stage.addActor(grondImage);
         stage.addActor(roadImage);
         stage.addActor(fieldActor);
@@ -311,13 +289,8 @@ public class GameScreen extends BaseScreen{
         stage.addActor(chickenBuildingActor);
         stage.addActor(pigsBuildingActor);
         stage.addActor(cowsBuildingActor);
-
         stage.addActor(truckActor);
-
-
-
         stage.addActor(shopActor);
-
         stage.addActor(dogActor); //It is important to implement before StorageActor
         stage.addActor(storageActor);
         for (ImageClampToEdge bush: decorations) {
@@ -333,7 +306,6 @@ public class GameScreen extends BaseScreen{
         stage.addActor(shopPulseActor);
 
         this.game.getSoundFactory().playGameMusic();
-
         storageActor.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y,
@@ -342,9 +314,7 @@ public class GameScreen extends BaseScreen{
                 game.getSoundFactory().playPickUp();
                 GameScreen.this.game.showStorageScreen();
                 game.getSoundFactory().stopAll();
-
             }
-
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 boolean touchdown=false;
@@ -352,7 +322,6 @@ public class GameScreen extends BaseScreen{
                 return true;
             }
         });
-
         cowsBuildingActor.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y,
@@ -364,7 +333,6 @@ public class GameScreen extends BaseScreen{
                 //do your stuff
                 //it will work when finger is released..
             }
-
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 boolean touchdown=false;
@@ -383,7 +351,6 @@ public class GameScreen extends BaseScreen{
                 //do your stuff
                 //it will work when finger is released..
             }
-
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 boolean touchdown=false;
@@ -421,7 +388,6 @@ public class GameScreen extends BaseScreen{
                 //do your stuff
                 //it will work when finger is released..
             }
-
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 boolean touchdown=false;
@@ -440,7 +406,6 @@ public class GameScreen extends BaseScreen{
                 //do your stuff
                 //it will work when finger is released..
             }
-
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 boolean touchdown=false;
@@ -459,7 +424,6 @@ public class GameScreen extends BaseScreen{
                 //do your stuff
                 //it will work when finger is released..
             }
-
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 boolean touchdown=false;
@@ -478,7 +442,6 @@ public class GameScreen extends BaseScreen{
                 //do your stuff
                 //it will work when finger is released..
             }
-
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 boolean touchdown=false;
@@ -486,8 +449,6 @@ public class GameScreen extends BaseScreen{
                 return true;
             }
         });
-
-
         farmerActor.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y,
@@ -495,14 +456,11 @@ public class GameScreen extends BaseScreen{
                 boolean touchdown=true;
                 farmerActor.setTimeToBeat(0);
                 farmerActor.setJustTouched(true);
-
             }
-
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 boolean touchdown=false;
                 //do your stuff it will work when u touched your actor
-
                 return true;
             }
         });
@@ -513,40 +471,29 @@ public class GameScreen extends BaseScreen{
                 boolean touchdown=true;
                 dogActor.setTimeToBeat(0);
                 dogActor.setJustTouched(true);
-
             }
-
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 boolean touchdown=false;
                 //do your stuff it will work when u touched your actor
-
                 return true;
             }
         });
-
         truckActor.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y,
                                 int pointer, int button) {
                 boolean touchdown=true;
                 truckActor.setJustTouched(true);
-
-
             }
-
             public boolean touchDown(InputEvent event, float x, float y,
                                      int pointer, int button) {
                 boolean touchdown=false;
                 //do your stuff it will work when u touched your actor
-
                 return true;
             }
         });
-
-
         this.timeToBeat = (float) (Math.random() * 10) + 2;
-
     }
 
     @Override
@@ -554,7 +501,6 @@ public class GameScreen extends BaseScreen{
         stage.clear();
         world.dispose();
     }
-
 
     @Override
     public void render(float delta) {
@@ -573,12 +519,9 @@ public class GameScreen extends BaseScreen{
         if (timeSinceLastFieldControl > 1){
             this.game.getFieldController().controlField();
         }
-
-
         //movimiento del mundo
         stage.act();
         world.step(delta, 6, 2);
-
         stage.draw();
 
     }
@@ -605,30 +548,23 @@ public class GameScreen extends BaseScreen{
             chikenTextures.get(i).dispose();
             pigTextures.get(i).dispose();
             cowTextures.get(i).dispose();
-            //homeTextures.get(i).dispose();
-            //shopTextures.get(i).dispose();
-            //storageTextures.get(i).dispose();
-            //fieldDialogTextures.get(i).dispose();
+            homeTextures.get(i).dispose();
+            shopTextures.get(i).dispose();
+            storageTextures.get(i).dispose();
+            fieldPulseTextures.get(i).dispose();
         }
-
         BaseActor[] allActors = { homeActor, fieldActor, shopActor, chickenBuildingActor, pigsBuildingActor, cowsBuildingActor,
                 storageActor, farmerActor, truckActor, dogActor, chickenPulseActor, pigPulseActor, cowPulseActor,
                 homePulseActor, storagePulseActor, fieldPulseActor, shopPulseActor };
         for (BaseActor actor : allActors){
             actor.detach();
         }
-
-
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
-
     }
     public void disableAll(boolean enableDisable){
-
     }
     public void actions(int actionIndex){
-
     }
-
 }

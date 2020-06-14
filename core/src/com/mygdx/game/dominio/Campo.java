@@ -15,7 +15,6 @@ public class Campo extends Infraestructura {
         this.needsManure = false;
         this.needsWater = false;
         this.stage = 0;
-
     }
 
     //GETTERS & SETTERS

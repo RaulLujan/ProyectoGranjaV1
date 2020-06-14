@@ -24,9 +24,7 @@ import com.mygdx.game.MainGame;
 public class StorageScreen extends BaseScreen {
     private Stage stage;
     private World world;
-
     private Skin skin, glassSkin;
-
     private TextButton goBackButton, button1, button2, button3, button4;
     private Window area1, area2, area3, area4;
     private Label fundsLabel;
@@ -37,22 +35,15 @@ public class StorageScreen extends BaseScreen {
     private ImageClampToEdge backgroundImage;
     private Texture backgroundTexture;
 
-
-
-
     public StorageScreen(MainGame game) {
         super(game);
         this.stage = new Stage(new FitViewport(Constants.DEVICE_WIDTH, Constants.DEVICE_HEIGHT));
         this.world = new World(new Vector2(0, 0), true);
-
         int recursos= this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(0).getOcupacionAactual();
-
-
 
         // apariencias de los skins
         this.skin = new Skin(Gdx.files.internal("skins/skin/skin-composer-ui.json"));
         this.glassSkin = new Skin(Gdx.files.internal("skins.glassy/glassy-ui.json"));
-
         backgroundTexture = game.getAssetManager().get("Textures/BackGrounds/storageBack.jpg");
         backgroundImage = new ImageClampToEdge(backgroundTexture, 0,0, Constants.DEVICE_WIDTH / Constants.PIXELS_IN_METER,
                 Constants.DEVICE_HEIGHT / Constants.PIXELS_IN_METER);
@@ -97,10 +88,6 @@ public class StorageScreen extends BaseScreen {
         resourcesLabel3 = new Label("Abono, Herbicida",glassSkin, "big-blue");
         resourcesLabel4 = new Label("Maiz, Fresas, Patatas",glassSkin, "big-blue");
 
-
-
-
-
         // Tamaño de la fuente
         goBackButton.getLabel().setFontScale(Constants.FONT_SIZE * 0.35f);
         button1.getLabel().setFontScale(Constants.FONT_SIZE * 0.3f);
@@ -128,8 +115,6 @@ public class StorageScreen extends BaseScreen {
         resourcesLabel2.setFontScale(Constants.FONT_SIZE * 0.2f);
         resourcesLabel3.setFontScale(Constants.FONT_SIZE * 0.2f);
         resourcesLabel4.setFontScale(Constants.FONT_SIZE * 0.2f);
-
-
 
         //funcionalidades
         goBackButton.addCaptureListener(new ChangeListener() {
@@ -208,9 +193,6 @@ public class StorageScreen extends BaseScreen {
         resourcesLabel3.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
         resourcesLabel4.setSize(Constants.DEVICE_WIDTH *0.2f, Constants.DEVICE_HEIGHT * 0.08f);
 
-
-
-
         //posiciones de los elementos
         goBackButton.setPosition(Constants.DEVICE_WIDTH * 0.83f, Constants.DEVICE_HEIGHT * 0.87f);
         fundsLabel.setPosition(Constants.DEVICE_WIDTH * 0.03f, Constants.DEVICE_HEIGHT * 0.87f);
@@ -243,8 +225,6 @@ public class StorageScreen extends BaseScreen {
         resourcesLabel3.setPosition(Constants.DEVICE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.26f);
         resourcesLabel4.setPosition(Constants.DEVICE_WIDTH * 0.47f, Constants.DEVICE_HEIGHT * 0.05f);
 
-
-
         //estados
         area1.setTouchable(Touchable.disabled);
         area2.setTouchable(Touchable.disabled);
@@ -256,11 +236,9 @@ public class StorageScreen extends BaseScreen {
         area3.setColor(1,1,1,0.9f);
         area4.setColor(1,1,1,0.9f);
 
-
         //Se añaden los elementos
         stage.addActor(backgroundImage);
         stage.addActor(goBackButton);
-
         stage.addActor(area1);
         stage.addActor(area2);
         stage.addActor(area3);
@@ -269,7 +247,6 @@ public class StorageScreen extends BaseScreen {
         stage.addActor(button3);
         stage.addActor(button2);
         stage.addActor(button4);
-
         stage.addActor(fundsLabel);
         stage.addActor(depositNameLabel1);
         stage.addActor(depositNameLabel2);
@@ -291,20 +268,12 @@ public class StorageScreen extends BaseScreen {
         stage.addActor(resourcesLabel2);
         stage.addActor(resourcesLabel3);
         stage.addActor(resourcesLabel4);
-
-
     }
-
 
     @Override
     public void show() {
         stage.setDebugAll(false); // On true se renderizan los bordes verdes de los actores e imágenes
         Gdx.input.setInputProcessor(stage);
-
-        //se añaden funciones a cada botón
-
-
-
     }
 
     @Override
@@ -313,7 +282,6 @@ public class StorageScreen extends BaseScreen {
         stage.clear();
         world.dispose();
     }
-
 
     @Override
     public void render(float delta) {
@@ -324,12 +292,7 @@ public class StorageScreen extends BaseScreen {
         //movimiento del mundo
         stage.act();
         world.step(delta, 6, 2);
-
-
-
-
         stage.draw();
-
     }
 
     @Override
@@ -337,16 +300,16 @@ public class StorageScreen extends BaseScreen {
         stage.getBatch().dispose();
         stage.dispose();
         world.dispose();
-
     }
+
     public void disableAll(boolean enableDisable){
         goBackButton.setDisabled(enableDisable);
         button1.setDisabled(enableDisable);
         button2.setDisabled(enableDisable);
         button3.setDisabled(enableDisable);
         button4.setDisabled(enableDisable);
-
     }
+
     public void actions(int actionIndex){
         int resources = this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.MONEY).getOcupacionAactual();
         if (resources < 100000){
@@ -378,11 +341,8 @@ public class StorageScreen extends BaseScreen {
                 this.game.getUsuario().getGranja().getInfraestructuras().get(0).getEspacios().get(TipoRecurso.POTATO).setCapacidadMaxima(capacity + 6000);
                 break;
             default:
-
         }
         this.game.getUserController().saveUser();
         this.game.showStorageScreen();
     }
-
-
 }
