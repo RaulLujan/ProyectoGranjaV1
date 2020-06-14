@@ -23,13 +23,13 @@ import java.util.GregorianCalendar;
 
 public class UserDao {
 
-    final static String ip = "25.90.160.61";
-    //final static String ip = "localhost";
-    final static String port = "3306";
-    final static String dataBase = "BGranja";
-    final static String user = "root";
-    final static String pass = "";
-    final static String DBpass = "";
+    private final static String ip = "25.90.160.61";
+    //private final static String ip = "localhost";
+    private final static String port = "3306";
+    private final static String dataBase = "BGranja";
+    private final static String user = "root";
+    private final static String pass = "";
+    private final static String DBpass = "";
     private Usuario supportUsuario;
 
     public UserDao(){
