@@ -16,8 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.game.Constants;
+import com.mygdx.game.control.FieldController;
+import com.mygdx.game.dominio.Campo;
+import com.mygdx.game.dominio.Infraestructura;
 import com.mygdx.game.images.ImageClampToEdge;
 import com.mygdx.game.MainGame;
 
@@ -80,6 +84,7 @@ public class LoginScreen extends BaseScreen {
                 if(LoginScreen.this.game.validate(nameTextField.getText(), passTextField.getText())){
                     LoginScreen.this.game.setUser(nameTextField.getText(), passTextField.getText());
                     LoginScreen.this.game.getUserController().getAndSetUser(nameTextField.getText(), passTextField.getText(), LoginScreen.this.game.getFieldController());
+                    LoginScreen.this.game.setFieldController(new FieldController((Campo)LoginScreen.this.game.getUsuario().getGranja().getInfraestructuras().get(Infraestructura.FIELD)));
                     LoginScreen.this.game.getSoundFactory().playPickUp();
                     LoginScreen.this.game.setUserLogged(true);
                     LoginScreen.this.game.saveUserPreferences(nameTextField.getText(), passTextField.getText());

@@ -189,6 +189,7 @@ public class MainGame extends Game {
 		this.soundFactory = new SoundFactory(this, Gdx.app.getPreferences(PREFERENCES));
 		if ( validate(preferences.getString(LOGIN_KEY, ""), preferences.getString(PASS_KEY,"")) ){
 			this.usuario = userController.getAndSetUser(preferences.getString(LOGIN_KEY), preferences.getString(PASS_KEY) , fieldController);
+			this.fieldController = new FieldController((Campo)usuario.getGranja().getInfraestructuras().get(Infraestructura.FIELD));
 			this.userLogged = true;
 		}else{
 			this.userLogged = false;

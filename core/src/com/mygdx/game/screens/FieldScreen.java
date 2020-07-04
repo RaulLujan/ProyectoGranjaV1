@@ -303,7 +303,7 @@ public class FieldScreen extends BaseScreen {
             }else if (field.getStage() == 2 && getCompletedPercent() > 66){
                 fieldController.controlField();
                 setTextsAndStates();
-            }else if (field.getStage() == 3 && getCompletedPercent() == 100){
+            }else if (field.getStage() == 3 && getCompletedPercent() == 99){
                 fieldController.controlField();
                 setTextsAndStates();
             }else if (field.getStage() == 4){
@@ -326,7 +326,13 @@ public class FieldScreen extends BaseScreen {
     }
 
     public int getCompletedPercent(){
-        int percent = (int)( ((totalGrowDurationInMillis - (totalRestTime - (long)(acumulatedDElta * 1000))) * 100) / totalGrowDurationInMillis);
+        int percent;
+        try{
+            percent = (int)( ((totalGrowDurationInMillis - (totalRestTime - (long)(acumulatedDElta * 1000))) * 100) / totalGrowDurationInMillis);
+        }catch (Exception e){
+            percent = 100;
+        }
+
         if (percent <= 100) return percent;
         else return 100;
     }
@@ -428,7 +434,6 @@ public class FieldScreen extends BaseScreen {
     }
 
     public void actions(int actionIndex){
-
         switch (actionIndex) {
             case 1:
                 //plant action

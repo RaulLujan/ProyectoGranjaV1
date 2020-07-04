@@ -18,6 +18,8 @@ public class FieldController {
 
     public FieldController(Campo field){
         this.field = field;
+        this.production = 750;
+
     }
 
     public void setStage0(){
@@ -27,7 +29,7 @@ public class FieldController {
         field.setNeedsManure(false);
         field.setNeedsWater(false);
         field.setStage(0);
-        this.production = 0;
+        this.production = 750;
         field.setPlantedResourceType(null);
         field.setTimeFieldWasPlanted(null);
     }
@@ -73,7 +75,12 @@ public class FieldController {
     }
 
     public int getCompletedPercent(){
-      int percent = (int)( ((totalGrowDurationInMillis - getRestingTime()) * 100) / totalGrowDurationInMillis);
+        int percent;
+        try {
+            percent = (int) (((totalGrowDurationInMillis - getRestingTime()) * 100) / totalGrowDurationInMillis);
+        }catch (Exception e){
+            percent = 100;
+        }
       if (percent <= 100) return percent;
       else return 100;
     }

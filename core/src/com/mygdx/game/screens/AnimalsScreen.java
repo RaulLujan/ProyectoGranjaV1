@@ -496,7 +496,7 @@ public class AnimalsScreen extends BaseScreen{
                 ArrayList<Animal> animalsToRemove = new ArrayList<>();
                 for (int i = 0; i < rows[0].length; i++){
                     if (checkBoxes[i].isChecked()){
-                        totalPrice += DomainMocker.getAllResorurcesList().get(selectedAnimalType).getPrecioMinimo() * 1f;
+                        totalPrice += (int)(prices.get(selectedAnimalType).getPrecio());
                         Animal animalToShell = animals.get(i);
                         animalsToRemove.add(animalToShell);
                     }
